@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[mathscr]{eucal}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{import}
+
+\usepackage{biblatex}
+\addbibresource{Bibliography/Thesis_Bibliography.bib}
+
+\newcommand{\sthat}{\,|\,}
+\newcommand{\stp}[1]{\st\left(#1\right)}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{\prescript{*}{}{\mathbb{N}}}
+
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+
+\newcommand{\del}{\partial}
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\st}{st}
+\DeclareMathOperator{\inx}{inx}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{corollary}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+
+
+\begin{document}
+
+\begin{enumerate}
+    \item \textbf{Ultrafilters, Ultrapowers, $\hreals$}. A definition of an ultrafilter, and the proof that one exists on $\nats$. The ultrapower construction of $\hreals$, inlcuding the extension of any function or relation. The definition of internal sets and functions.
+    \item \textbf{First-Order Logic \& Transfer}. A definition of our language on $\reals$, including set symbols (sort of new). The proof of the alteration of \L o\'s' theorem (also sort of new).
+    \item \textbf{Structure of $\hreals$}. Introduction of basic terms such as infinitesimal, appreciable, and unbounded. Standard parts and infinite closeness. Density of the hyperrationals, archimedian property, things like that. Maybe saturation (intuitive explanation). Likely light on proofs, since I don't have any new work here.
+    \item \textbf{Differentiation}. One of the motivations of nonstandard analysis is its intuitiveness, and that is demonstrated here. Proof of the chain rule, because it's short. Maybe some thoughts on partial derivatives and the care you have to take there, restricting the derivative to the reals and re-extending it.
+    \item \textbf{Hyperfinite Sums}. A treatment of series, including the proof of the ratio test. $\exp$ as a hyperfinite sum, and the proof that it is its own derivative. Lots of new stuff, but I'm not sure if it's any good.
+    \item \textbf{Integration}. Integrals as hyperfinite sums. Maybe some of the technical worries about the ends of partitions worked out (which would be new), although that sounds a bit dull and like it would take more space than it really should. 
+    \item \textbf{Topology}. Questionable inclusion. Maybe some proofs that the topologies Goldblatt defines are \textit{actually} topologies, if possible.
+\end{enumerate}
+
+\import{Ch01/}{Ultrapowers}
+\import{Ch02/}{FOL_Transfer}
+\import{Ch03/}{Differentiation}
+\import{Ch04/}{Hyperfinite_Sums}
+
+
+\nocite{*}
+%\printbibliography
+
+\end{document}

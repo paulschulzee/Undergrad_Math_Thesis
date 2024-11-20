@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[leqno]{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[margin=0.75in]{geometry}
+
+\usepackage{biblatex}
+\addbibresource{Wk05_Bibliography.bib}
+
+\newcommand{\st}[1]{\mathrm{st}(#1)}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{\prescript{*}{}{\mathbb{N}}}
+
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+
+\newcommand{\del}{\partial}
+
+\newtheorem*{exercise}{Exercise}
+
+\title{Week 5 Reflection}
+\author{Paul Schulze}
+\date{October 1st, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{Definitions}
+\begin{itemize}
+    \item A hyperreal $x$ is called \textit{infinitesimal} if it is smaller than every positive real number but larger than every negative real number, i.e. if $|x| < r$ for any $r \in \reals^+$. $0$ is the only real infinitesimal. The set of infinitesimals is denoted $\mathbb{I}$.
+    \item A hyperreal $x$ is called \textit{limited} if it is larger than some real number and smaller than some real number, i.e. if $|x| < r$ for some $r \in \reals^+$. The set of limited hyperreals is denoted $\mathbb{L}$.
+    \item A hyperreal $x$ is called \textit{positive unlimited} if it is larger than every real number, and \textit{negative unlimited} if it is smaller than every real number. A number that is positive or negative unlimited is called \textit{unlimited}. We use $\hreals_\infty$ to denote the unlimited hyperreals, $\hnats_\infty$ to denote the unlimited hypernaturals, etc.
+    \item Two hyperreals $x$ and $y$ are \textit{infinitely close}, denoted $x \simeq y$, if their difference $x - y$ is infinitesimal.
+    \item Two hyperreals $x$ and $y$ are \textit{of limited distance apart}, denoted $x \sim y$, if their difference $x - y$ is limited.
+    \item The \textit{halo} of $x$ is $\hal{x} \coloneq \{y \in \hreals | x \simeq y\}$. $\hal{0} = \mathbb{I}$.
+    \item The \textit{galaxy} of $x$ is $\gal{x} \coloneq \{y \in \hreals | x \sim y\}$. $\gal{0} = \mathbb{L}$.
+\end{itemize}
+
+\section*{$\hreals$ is a Quotient Ring}
+
+Goldblatt kept calling $\hreals$ a quotient ring of $\reals^\infty$, and at first I thought this was just because we were forming equivalence classes on a ring. But no---let $S \coloneq \{x \in \reals^\infty | \{n \in \nats | x_n = 0\} \in \mathcal{F}\}\}$ for some ultrafilter $\mathcal{F}$ on $\nats$. Then $S$ is an ideal: if $x, y \in S$, then $\{n \in \nats | (x-y)_n = 0\} = \{n \in \nats | x_n - y_n = 0\} \supset \{n \in \nats | x_n = 0\} \cap \{n \in \nats | y_n = 0\}$. Since $\{n \in \nats | x_n = 0\}$ and $\{n \in \nats | y_n = 0\} \in \mathcal{F}$, their intersection is in $\mathcal{F}$, and so any superset of that intersection is in $\mathcal{F}$, and so $x - y \in S$. Similarly, if $x \in S$ and $y \in \reals^\infty$, then $\{n \in \nats | x_n y_n = 0\} \supset \{n \in \nats | x_n = 0\} \in \mathcal{F}$, so $yx = xy \in S$. We then define $\hreals = \reals^\infty / S$.
+
+This is nifty because, if we let $[x]$ denote the equivalence class of $x \in \reals^\infty$, we now know that $[x] + [y] = [x+y]$, for instance. We still have to prove $\hreals$ is a field, but that's simple enough.
+
+Speaking of quotient rings, $\mathbb{L} / \mathbb{I} = \reals$. Now if only we can find a way to posit $\hreals$ without first constructing $\reals$, we'll have the most roundabout way of constructing the reals possible.
+
+\section*{My Favorite Exercises this Week}
+\begin{exercise}[4.2.1 \cite{goldblatt1998}]
+Show that none of the sets $\nats$, $\mathbb{Z}$, $\mathbb{Q}$, $\reals$, and indeed no infinite subset of $\reals$ is exactly the extension of any relation on the reals. In other words, for any infinite $S \subset \reals$, show $\hr{S} \not\subset \reals$ (recall if $S$ is finite, $\hr{S} = S$).
+\end{exercise}
+
+I like this exercise because the ultrapower construction actually lets us construct some $x \in \hr{S} - \reals$. If $S$ is infinite, we can take distinct $s_1, s_2, s_3, \ldots \in S$ forever. Then we just let $x = [(s_1, s_2, s_3, \ldots)]$. For any $r \in \reals$, we know $(s_1, s_2, \ldots)$ and $(r, r, r, \ldots)$ cannot be in the same equivalence class because $\{n \in \nats | s_n = r\}$ has at most one element in it (as each $s_n$ is distinct). So $x \neq r$ for any $r \in \reals$. But $x \in \hr{S}$ since $\{n \in \nats | s_n \in S\} = \nats \in \mathcal{F}$ for any ultrafilter $\mathcal{F}$ on $\nats$. So $x \in \hr{S} - \reals$.
+
+Without this construction, I think this exercise has to be a lot messier. In the case of unbounded $S$, it's easy---we simply transfer $(\forall x \in \reals)(\exists s \in S)(|s| > x)$ to get $(\forall x \in \reals)(\exists s \in \hr{S})(|s| > x)$, let $x$ be positive unlimited, and then we get an unlimited $s \in \hr{S}$, so $s \notin \reals$. 
+
+In the case of bounded $S$, I think you need to start using results from Chapter 6. Let $s: \nats \to S$ be such that $s(1), s(2), \ldots$ are pairwise distinct. Since $S$ is bounded, this sequence is bounded, and so has a convergent subsequence, call it $t$. Say $t$ converges to $L$. If there is an $n \in \nats$ such that $t(n) = L$, we instead take the trailing subsequence starting from $n+1$---recall the $t(n)$s are distinct, so $t(m) \neq L$ for any $m > n$. 
+
+We now have a sequence $t$ that satisfies $(\forall n \in \nats)(t(n) \in S - \{L\})$. We also know $t$ converges to $L$, so we can take any $N \in \hnats_\infty$ and know $t(N) \simeq L$ (by results in Chapter 6). We know, by transfer, that $t(N) \in \hr{S} - \{L\}$, so $t(N) \neq L$. Since $L\in \reals$, $t(N) \simeq L$, and $t(N) \neq L$, we conclude $t(N) \notin \reals$. But $t(N) \in \hr{S}$. So we conclude $\hr{S} \not\subset\reals$.
+
+This exercise appears before the transfer principle even appears, however, so this non-construction approach would normally be impossible at this point.
+
+
+\section*{Notes \& Progress}
+
+I was wrong at lunch last week---the uniqueness of the hyperreals isn't a consequence of the Axiom of Choice, but rather is a consequence of the Continuum Hypothesis, of all things. See page 33 of Goldblatt. I'm definitely going to have to look up that proof at some point.
+
+The logical language used in Goldblatt allows for undefined terms, which is interesting. Goldblatt skips the details of a proof of transfer, but I assume it would at least cause some technical problems there, although it could be less of a big deal than I think. It certainly is nice to be able to use, e.g., $\tan$ as a function symbol and not have to justify being able to bootstrap it from $\sin$ and $\cos$.
+
+I managed to make it to page 81---this is a busy week for me (I take the LSAT on Saturday), so I'm fine with that, it'll just mean more reading next week. Most of what I've been reading are nonstandard accounts of Real Analysis I proofs, which are interesting, but I don't think recounting them really demonstrates my understanding. Results about sequences and nonstandard definitions of things like convergence, Cauchy-ness, limits superior and inferior, etc. will be TeX'd up as useful (I used some today, but really only for an alternate proof, which I will probalby only include if the sufficient background about sequences and stuff is viable to include for some other reason).
+
+\section*{Goals}
+\begin{itemize}
+    \item Read the rest of Chapter 7, Chapter 8, and Chapter 9 in Goldblatt. This is differnetiation and integration, but Chapter 8 includes stuff about Taylor Series which should be new and interesting nonstandardly. If Chapter 9 takes the same approach to integration as Henle \& Kleinberg, I'll also shoot for reading Chapter 10, on the Topology of the Reals.
+    \item Do at least 3 exercises, including one ``hard'' exercise, per chapter read.
+    \item Find a proof that the Continuum Hypothesis implies the hyperreals, imagined as an ultrapower of the reals, are unique. Reading and understanding it will be for later, maybe the week after if doable.
+    \item Goldblatt claims to owe his terminology to a school of nonstandard analysis pioneered by George Reeb, and some of his work is listed in the bibliography. Reeb died in the 90's, but maybe I can find something by somebody who's carrying on that work? I'd at least like to poke around the citations and see if it leads anywhere contemporary.
+\end{itemize}
+
+\nocite{henle1979}
+\printbibliography[title={Books}]
+
+\end{document}

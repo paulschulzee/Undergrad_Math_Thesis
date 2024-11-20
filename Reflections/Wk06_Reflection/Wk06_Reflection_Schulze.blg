@@ -1,0 +1,15 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[10] Config.pm:311> INFO - Logfile is 'Wk06_Reflection_Schulze.blg'
+[158] biber-MSWIN64:340> INFO - === 
+[232] Biber.pm:420> INFO - Reading 'Wk06_Reflection_Schulze.bcf'
+[312] Biber.pm:994> INFO - Found 1 citekeys in bib section 0
+[322] Biber.pm:4463> INFO - Processing section 0
+[341] Biber.pm:4654> INFO - Looking for bibtex file 'Wk06_Bibliography.bib' for section 0
+[399] bibtex.pm:1713> INFO - LaTeX decoding ...
+[414] bibtex.pm:1519> INFO - Found BibTeX data source 'Wk06_Bibliography.bib'
+[459] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[460] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[460] Biber.pm:4283> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[460] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[485] bbl.pm:676> INFO - Writing 'Wk06_Reflection_Schulze.bbl' with encoding 'UTF-8'
+[486] bbl.pm:779> INFO - Output to Wk06_Reflection_Schulze.bbl

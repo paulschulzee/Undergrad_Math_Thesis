@@ -1,0 +1,69 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{hamkins2024}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=d6e139e04e1ed1547b7e0315915d6822}{%
+           family={Hamkins},
+           familyi={H\bibinitperiod},
+           given={Joel\bibnamedelima David},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {arXiv.org}%
+      }
+      \strng{namehash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{fullhash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{fullhashraw}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{bibnamehash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{authorbibnamehash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{authornamehash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{authorfullhash}{d6e139e04e1ed1547b7e0315915d6822}
+      \strng{authorfullhashraw}{d6e139e04e1ed1547b7e0315915d6822}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{I describe a simple historical thought experiment showing how we might have come to view the continuum hypothesis as a fundamental axiom, one necessary for mathematics, indispensable even for calculus.}
+      \field{day}{2}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{How the Continuum Hypothesis Could Have Been a Fundamental Axiom}
+      \field{urlday}{9}
+      \field{urlmonth}{10}
+      \field{urlyear}{2024}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb C:\Users\paul\Zotero\storage\7JDTDRG9\Hamkins - 2024 - How the continuum hypothesis could have been a fundamental axiom.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2407.02463v2
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2407.02463v2
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -1,0 +1,241 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[leqno]{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[margin=0.75in]{geometry}
+
+\usepackage{biblatex}
+\addbibresource{Wk09_Bibliography.bib}
+
+\newcommand{\st}[1]{\mathrm{st}(#1)}
+
+\newcommand{\sthat}{\,|\,}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{\prescript{*}{}{\mathbb{N}}}
+
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+
+\newcommand{\del}{\partial}
+
+\DeclareMathOperator{\dom}{dom}
+
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{thm}{Theorem}
+
+\title{Week 9 Reflection}
+\author{Paul Schulze}
+\date{October 29nd, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Our language $\mathcal{L}_\mathcal{S}$}
+We will define a mathematical language $\mathcal{L}_\mathcal{S}$ on a given set $S$.
+\subsection{Symbols}
+Our language will contain the following symbols:
+\begin{itemize}
+    \item A constant symbol $\dot x$ for each $x \in S$.
+    \item A countable number of variables $v_1, v_2, v_3, \ldots$.
+    \item A relation symbol $\dot R_n$ for any $n$-ary relation $R_n$ on $S$, that is, any $R_n \subseteq S^n$. A $1$-ary relation symbol is also called a \textit{set symbol}.
+    \item A function symbol $\dot f_n$ for any $n$-place function $f_n$ on $S$, that is, any $f_n : S^n \to S$.
+    \item The logical connectives $\land$, $\lor$, and $\neg$.
+    \item Parentheses $($ and $)$.
+    \item The universal quantifier symbol $\forall$.
+\end{itemize}
+
+\subsection{Terms}
+The terms of our language are defined recusively, as follows:
+\begin{itemize}
+    \item Any single constant symbol $\dot x$ is a term.
+    \item Any single variable $v_n$ is a term.
+    \item If $\dot f_n$ is an $n$-place function symbol, and $t_1, t_2, \ldots, t_n$ are terms, then $\dot f_n (t_1, t_2, \ldots, t_n)$ is a term.
+\end{itemize}
+A \textit{closed} term is a term that contains no variables.
+
+\subsection{Well-Formed Formulae}
+The well-formed formulae (wffs) of our language are defined recursively, as follows:
+\begin{itemize}
+    \item If $\dot R_n$ is an $n$-ary relation symbol, and $t_1, \ldots, t_n$ are terms, then $\dot R_n(t_1, \ldots, t_n)$ is a wff. This type of wff is called an \textit{atomic formula}
+    \item If $\varphi$ and $\psi$ are wffs, then so are $(\varphi \land \psi)$, $(\varphi \lor \psi)$, and $\neg \varphi$. 
+    \item If $\varphi$ is a wff and $v_n$ is a variable, then $(\forall v_n) \varphi$ is a wff wffs.
+\end{itemize}
+
+\subsection{Bound and Free Variables}
+An occurance of a variable $v_n$ that occurs in a wff $\varphi$ is called \textit{bound} if it is in the scope of a quantifier $\forall v_n$, and \textit{free} otherwise. For instance, in the wff $(P(v_1) \lor (\forall v_1) (Q(v_1) \land Q(v_2)))$, the first occurance of $v_1$ is free, while the second is bound. The occurance of $v_2$ is also free, since it's not in the scope of $(\forall v_2)$. A wff with no free variables is called a \textit{sentence}.
+
+\subsection{Replacement Notation}
+If $\varphi$ is a wff that is not a sentence, we write $\varphi(v_1, v_2, \ldots, v_n)$ to indicate that $v_1, \ldots, v_n$ are all the variables that occur freely in $\varphi$. Then $\varphi(\dot x_1, \ldots, \dot x_n)$ is the sentence we get by replacing each free occurance of $v_i$ by the constant symbol $\dot x_i$. 
+
+Similarly, we write $\varphi(v_1, \ldots, v_n, \dot A_1, \ldots, \dot A_m)$ to indicate that $v_1, \ldots, v_n$ are all the variables that occur freely in $\varphi$, and $A_1, \ldots, A_m$ are all the set symbols that occur in $\varphi$. We then write $\varphi(\dot x_1, \ldots, \dot x_n, \dot B_1, \ldots, \dot B_m)$ to mean the sentence we get by replacing $v_i$ by $\dot x_i$ and $\dot A_i$ by $\dot B_i$.
+
+\subsection{Simplifications and Abbreviations}
+\begin{itemize}
+    \item We will omit outer parentheses and other parentheses not necessary to understand a wff, as in $\dot P(v_1) \lor \dot Q(v_1)$. We will also sometimes use $[$ and $]$ in place of $($ and $)$, respectively.
+    \item We will write $x \in \dot A$ to mean $A(x)$.
+    \item We will write $\varphi \to \psi$ to mean $\neg \varphi \lor \psi$.
+    \item We will write $(\exists x) \varphi$ to mean $\neg (\forall x) \neg \varphi$.
+    \item We will write $(\forall x \in \dot A)\varphi$ to mean $(\forall x)(x \in \dot A \to \varphi)$, and similarly for $\exists$.
+    \item We will frequently omit the dots from constant, function, relation, and set symbols, using $x$ to denote the constant symbol associated with $x \in S$.
+\end{itemize}
+
+\section{Truth in $\mathcal{L}_\mathcal{S}$}
+\subsection{$s$ functions}
+Let $s: V \to S$, where $V$ is the set of variables. We then define $\bar s : T \to S$, where $T$ is the set of terms, by:
+\begin{itemize}
+    \item $\bar s(v_n) = s(v_n)$ for any variable $v_n$.
+    \item $\bar s(\dot x) = x$ for any constant symbol $\dot x$.
+    \item $\bar s(\dot f_n(t_1, \ldots, t_n)) = f_n(\bar s(t_1), \ldots, \bar s(t_n))$.
+\end{itemize}
+
+\subsection{$s$-satisfaction}
+We say that $s: V \to S$ either satisfies or doesn't satisfy any wff $\varphi$, defined recursively by:
+\begin{itemize}
+    \item $s$ satisfies an atomic formula $R_n(t_1, \ldots, t_n)$ if $(\bar s(t_1), \ldots, \bar s(t_n)) \in R_n$.
+    \item $s$ satisfies $\neg \varphi$ if it doesn't satisfy $\varphi$.
+    \item $s$ satisfies $\varphi \lor \psi$ if it satisfies $\varphi$ or $\psi$.
+    \item $s$ satisfies $\varphi \land \psi$ if it satisfies $\varphi$ and $\psi$.
+    \item $s$ satisfies $(\forall v_n) \varphi$ if every $t: V \to S$ such that $t(v_i) = s(v_i)$ for all $i \neq n$ satisfies $\varphi$.
+\end{itemize}
+
+\subsection{Truth and Falsity}
+If $\varphi$ is a sentence, it is easy to see that it is either satisfied by every $s: V \to S$ or not satisfied by every $s$. If it is satisfied by every $s$, we say that $\varphi$ is \textit{true}, and otherwise we say it is \textit{false}.
+
+\section{$\mathcal{L}_\mathfrak{R}$, $\mathcal{L}_{\hr{\mathfrak{R}}}$, and Transfer}
+Let $\mathcal{L}_\mathfrak{R}$ be defined as our language on $\reals$, and $\mathcal{L}_{\hr{\mathfrak{R}}}$ as our language on $\hreals$.
+
+\subsection{$\ast$ transforms}
+The $\ast$ transform of a term $t$ is defined recursively, as follows:
+\begin{itemize}
+    \item If $v_n$ is a variable, $\hr{v_n} = v_n$.
+    \item If $x$ is a constant symbol, $\hr{x} = [(x, x, x, \ldots)]$.
+    \item $\hr{(f_n(t_1, t_2, \ldots, t_n))} = \hr{f_n}(\hr{t_1}, \hr{t_2}, \ldots, \hr{t_n})$, where $\hr{f_n}$ is the extension of $f_n$.
+\end{itemize}
+
+If $\varphi$ is a wff of $\mathcal{L}_\mathfrak{R}$, let $\hr{\varphi}$ denote the wff of $\mathcal{L}_{\hr{\mathfrak{R}}}$ obtained by replacing each relation symbol $R_n$ by $\hr{R_n}$ and each term $t$ by $\hr{t}$.
+
+\subsection{Transfer Principle}
+
+\begin{thm}[Transfer Principle]
+    Let $\varphi(v_1, \ldots, v_k, A_1, \ldots, A_m)$ be a wff of $\mathcal{L}_\mathfrak{R}$. Then 
+    \[\hr\varphi([x^1_n], [x^2_n], \ldots, [x^k_n], [A^1_n], \ldots, [A^m_n]) \iff [[\varphi(x^1_n, \ldots, x^k_n, A^1_n, \ldots, A^m_n)]] \in \mathcal{F}\]
+    Where $[[P(n)]] = \{n \in \nats \,|\, P(n)\}$.
+\end{thm}
+
+\begin{proof}
+    First, say $\hr{t}([x^1_n], \ldots, [x^k_n])$ is any closed term of $\mathcal{L}_{\hr{\mathfrak R}}$, containing constant symbols $[x^1_n], \ldots, [x^k_n]$. Let $t_n$ denote $t(x^1_n, \ldots, x^k_n)$. Then we easily see $\hr{t} = [t_n]$ by a simple induction on the definition of terms, as by definition $\hr{(f_k(t^1, \ldots, t^k))} = \hr{f_k}(\hr{t^1}, \ldots, \hr{t^n}) = \hr{f_k}([t^1_n], \ldots, [t^k_n]) = [f_k(t^1_n, \ldots, t^k_n)]$.
+
+    Now, we prove the theorem by induction on wffs. For a wff $\hr\varphi([x^1_n], [x^2_n], \ldots, [x^k_n], [A^1_n], \ldots, [A^m_n])$, let $\varphi_n$ denote $\varphi(x^1_n, \ldots, x^k_n, A^1_n, \ldots, A^m_n)$.
+    
+    \begin{itemize}
+        \item $\hr{t} \in [A_n]$ iff $[t_n] \in [A_n]$ iff $[[t_n \in A_n]] \in \mathcal{F}$ by the definition of $[A_n]$.
+        
+        \item $\hr{R_k}(t^1, \ldots, t^k)$ iff $(t^1, \ldots, t^k) \in \hr{R_k}$ iff $([t^1_n], \ldots, [t^k_n]) \in \hr{R_k}$ iff $[[(t^1_n, \ldots, t^k_n) \in R_k]] \in \mathcal{F}$ iff $[[R_k(t^1_n, \ldots, t^k_n)]] \in \mathcal{F}$.
+        
+        \item $\hr{(\varphi \land \psi)}$ iff $\hr{\varphi} \land \hr{\psi}$ iff ($[[\varphi_n]] \in \mathcal {F}$ and $[[\psi_n]] \in \mathcal{F}$) iff $[[\varphi_n]] \cap [[\psi_n]] \in \mathcal{F}$ iff $[[\varphi_n \land \psi_n]] \in \mathcal{F}$.
+        
+        \item $\hr{(\varphi \lor \psi)}$ iff $\hr{\varphi} \lor \hr{\psi}$ iff ($[[\varphi_n]] \in \mathcal {F}$ or $[[\psi_n]] \in \mathcal{F}$) iff $[[\varphi_n]] \cup [[\psi_n]] \in \mathcal{F}$ iff $[[\varphi_n \lor \psi_n]] \in \mathcal{F}$. Note $[[\varphi_n]] \cup [[\psi_n]] \in \mathcal{F}$ implies $[[\varphi_n]]$ or $[[\psi_n]] \in \mathcal{F}$ because, in general, if $A \cup B \in \mathcal{F}$ and $A \notin \mathcal{F}$, then $A^c \in \mathcal{F}$ and so $A^c \cap (A \cup B) \subseteq B \in \mathcal{F}$.
+        
+        \item $\hr{(\neg \varphi)}$ iff $\neg \hr{\varphi}$ iff $[[\varphi_n]] \notin \mathcal{F}$ iff $[[\varphi_n]]^c = [[\neg \varphi_n]] \in \mathcal{F}$.
+        
+        \item $\hr{(\forall v_i)\varphi(v_i)}$ iff $(\forall v_i)\hr{\varphi}(v_i)$ iff $\hr{\varphi}([x_n])$ for every $[x_n]$ iff $[[\varphi_n(x_n)]] \in \mathcal{F}$ for every sequence $\langle x_n \rangle$. Now, clearly if $[[(\forall v_i)\varphi_n(v_i)]] \in \mathcal{F}$, then $[[(\forall v_i)\varphi_n(v_i)]] \subseteq [[\varphi_n(x_n)]]$ implies $[[\varphi_n(x_n)]] \in \mathcal{F}$ for any sequence $\langle x_n \rangle$. Conversely, if $[[(\forall v_i)\varphi_n(v_i)]] \notin \mathcal{F}$, then for each $n \in [[\neg(\forall v_i)\varphi_n(v_i)]] \in \mathcal{F}$ we can find $x_n$ such that $\neg \varphi_n(x_n)$, and letting $x_n$ take an arbitrary value for $n \in [[(\forall v_i)\varphi_n(v_i)]]$ we get $[[\varphi_n(x_n)]] = [[(\forall v_i)\varphi_n(v_i)]] \notin \mathcal{F}$. So $[[\varphi_n(x_n)]] \in \mathcal{F}$ for every sequence $\langle x_n \rangle$ iff $[[(\forall v_i)\varphi_n(v_i)]] \in \mathcal{F}$, so $\hr{(\forall v_i)\varphi(v_i)}$ iff $[[(\forall v_i)\varphi_n(v_i)]] \in \mathcal{F}$.
+    \end{itemize}
+\end{proof}
+
+This result, omitting set symbols and generalizing to any language $\mathcal{L}_\mathcal{S}$, is called \textbf{\L o\'s' theorem}. Note, as a special case, that if $\varphi$ is a sentence, then $\varphi$ is true iff $\hr{\varphi}$ is true.
+
+\section{Universes \& Nonstandard Frameworks}
+\subsection{Universes}
+\begin{itemize}
+    \item A set $A$ is \textit{transitive} if $x \in y \in A$ implies $x \in A$, i.e. if $y \in A$ implies $y \subseteq A$ for any set $y$.
+
+    \item A set $A$ is \textit{strongly transitive} if for any set $x \in A$, there exists a transitive $y \in A$ such that $x \subseteq y \subseteq A$. Note this implies $x \subseteq A$, so $A$ is transitive.
+
+    \item A \textit{universe} $\mathbb{U}$ is a set that is strongly transitive, closed under unions (i.e. $A, B \in \mathbb{U}$ implies $A \cup B \in \mathbb{U}$), closed under power sets (i.e. $A \in \mathbb{U}$ implies $\mathcal P(A) \in \mathbb{U}$), and closed under pairing (i.e. $a, b \in \mathbb{U}$ implies $\{a, b\} \in \mathbb{U}$).
+    
+    \item A universe $\mathbb{U}$ is called a \textit{universe over} $\mathbb{X}$ if $\mathbb{X} \in \mathbb{U}$ and the elements of $\mathbb{X}$ aren't considered as sets, i.e. $(\forall x \in \mathbb{X})(x \neq \emptyset \land (\forall y \in \mathbb{U}) (y \notin x))$.
+\end{itemize}
+
+\subsection{$\mathcal{L}_\mathbb{U}$}
+\subsubsection{Terms}
+\begin{itemize}
+    \item Each variable $v_1, v_2, \ldots$ is a term.
+    \item Each element of $\mathbb{U}$ is a constant term.
+    \item If $t_1, \ldots, t_m$ are terms, then $\langle t_1, \ldots, t_m \rangle$ is a term (an $m$-tuple).
+    \item If $t$ and $s$ are terms, then $t(s)$ is a \textit{funciton-value} term.
+\end{itemize}
+
+A closed term is \textit{defined} if it names an element of $\mathbb{U}$. This is more rigorously defined recursively: all constants are defined, tuples $\langle t_1, \ldots, t_m \rangle$ are defined when all their components $t_1, \ldots, t_m$ are defined, and $t(s)$ is defined when $t$ names a function and $s$ names an element of that function's domain. 
+
+\subsubsection{Wffs}
+Atomic formulae take the form $t = s$ or $t \in s$ for terms $t$ and $s$. Note $f(t) = s$ and $\langle t, s \rangle \in f$ have the same meaning.
+
+Other wffs are defined inductively as for $\mathcal{L}_\mathfrak{R}$, with the exception that in the case of the universal quantifier the rule is that if $\varphi$ is a wff then $(\forall v_i \in t) \varphi$ is a wff for any variable $v_i$ and any term $t$ that does not contain $v_i$.
+
+\subsection{Nonstandard Frameworks}
+Let $\ast: \mathbb{U} \to \mathbb{U}'$ be a mapping between two universes. Write $\ast(a) = \hr{a}$. Then, for any term $t$, write $\hr{t}$ to mean the term obtained by replacing every constant $a$ in $t$ by $\hr{a}$. Then, for any wff $\varphi$, write $\hr{\varphi}$ to mean the wff obtained by replacing every term $t$ in $\varphi$ by $\hr{t}$.
+
+A \textit{nonstandard framework} on $\mathbb{X}$ is a universe $\mathbb{U}$ over $\mathbb{X}$ and a function $\ast : \mathbb{U} \to \mathbb{U}'$ such that: \begin{itemize}
+\item $\hr{a} = a$ for all $a \in \mathbb{X}$.
+\item $\hr{\emptyset} = \emptyset$.
+\item Every $\mathcal{L}_\mathbb{U}$ sentence $\varphi$ is true iff $\hr{\varphi}$ is true.
+\end{itemize}
+
+\subsection{Standard \& Internal entities}
+An element $b \in \mathbb{U}'$ is \textit{standard} if $b = \hr{a}$ for some $a \in \mathbb{U}$. It is \textit{internal} if $b \in \hr{a}$ for some $a \in \mathbb{U}$.
+
+\begin{exercise}[13.9.3]
+    Prove that standard sets are uniquely determined by their standard members.
+\end{exercise}
+
+Say $A = \hr{C}$ and $B = \hr{D}$. If $A \neq B$, then $C \neq D$. Let $x \in C - D$ (the proof is similar if $x \in D - C$). Then $x \in C$, so by transfer $\hr{x} \in \hr{C}$, and $x \notin D$, so by transfer $\hr{x} \notin \hr{D}$, so $\hr{x} \in A - B$ is a standard element that's in $A$ but not $B$. So if $A$ and $B$ are different sets, they have different standard members---so if $A$ and $B$ have the same standard members, $A = B$.
+
+\begin{exercise}[13.8.1, partial]
+    Verify the following: If a funciton $f: A \to B$ belongs to $\mathbb{U}$, then $\hr{f}$ is a function from $\hr{A}$ to $\hr{B}$, with $\hr{(f(a))} = \hr{f}(\hr{a})$ for all $a \in A$. Also, $f$ is injective/surjective iff $\hr{f}$ is.
+\end{exercise}
+
+The fact that $f: A \to B$ is represented by the statement 
+\begin{multline*}
+    \underbrace{(\forall x \in f)(\exists a \in A)(\exists b \in B)(x = \langle a, b \rangle)}_{\text{$f$ is a set of pairs $\langle a, b\rangle$}} \land
+    \underbrace{(\forall a \in A)(\exists b \in B)(\langle a, b\rangle \in f)}_{\text{for every $a$, $f(a)$ is defined}} \land \\ 
+    \underbrace{\neg(\exists a \in A)(\exists b \in B)(\exists c \in B)(b \neq c \land \langle a, b \rangle \in f \land \langle a, c \rangle \in f)}_{\text{$f(a)$ is unique}}
+\end{multline*}
+
+The transfer of this says that $\hr{f}: \hr{A} \to \hr{B}$. Similarly, for any $a \in A$, if we let $b = f(a)$, we have $\langle a, b \rangle \in f$, and so by transfer $\langle \hr{a}, \hr{b} \rangle \in \hr{f}$, where $\hr{b} = \hr{(f(a))}$. So $\hr{f}(\hr{a}) = \hr{(f(a))}$.
+
+$f$ is injective if $(\forall a \in A)(\forall a' \in A)(a \neq a' \to f(a) \neq f(a'))$, and it is surjective if $(\forall b \in B)(\exists a \in A)(f(a) = b)$, both of which straightforwardly transfer to say that $\hr{f}$ is injective and surjective, respectively.
+
+\begin{exercise}[13.13.2]
+    Show that $\mathcal P(A)$ is in bijective correspondence with the set of all functions $f: A \to \{0, 1\}$. Adapt this to show that $\hr{\mathcal{P}}(A)$ is in bijective correspondence with the set of all \textit{internal} functions $f: \hr{A} \to \{0, 1\}$.
+\end{exercise}
+
+Let $b: \mathcal P(A) \to \{0, 1\}^A$ be defined by $[b(S)](a) = 1$ if $a \in S$, and $[b(S)](a) = 1$ if $a \notin S$. Clearly if $S \neq T$ then we can choose $x \in S - T$ (or $x \in T - S$) and have $[b(S)](x) \neq [b(T)](x)$, implying $b(S) \neq b(T)$, so $b$ is injective. Further, if $f: A \to \{0, 1\}$, we can take $S = \{a \in A \,|\, f(a) = 1\}$, and then we have $[b(s)](a) = f(a)$ for all $a \in A$, so $b(s) = f$, so $b$ is surjective.
+
+Now, $\hr{b}: \hr{\mathcal{P}}(A) \to \{0, 1\}^{\hr{A}}$ (note $\hr{\{0, 1\}} = \{0, 1\}$), which is bijective by exercise 13.8.1, so we're done.
+
+\section{Notes \& Goals}
+\subsection{Notes}
+Chapter 13 is insane. We're way off the rails. As far as I can tell, we don't get back on track (i.e. we don't start talking about how any of this relates to ultrafilters) until section 14.3, where an ultrafilter is used to create an ``enlargement'' of a universe (which is in turn used to create a nonstandard framework in which $\hr{\mathbb{X}} - \mathbb{X} \neq \emptyset$). It is very, very cool though, since you're in some sense doing a higher-order logic (since you can quantify over subsets and functions and things).
+
+Perhaps writing out all the stuff about the language before reading chapter 13 was a mistake, given how some of the quirks of the language start to make more sense in the context of universes (why it allows for undefined terms, why it requires all quantifiers to be bounded, etc.). I also wasn't sure how to cleanly integrate set symbols, since Goldblatt makes absolutely no effort to. I play a little loosey-goosey with notation in a few places, too, in a way I hope isn't too confusing. I'm also torn how much of a stickler to be about separating \textit{symbols} from the underlying constants, relations, etc.---in Mathematical Logic it felt very important, but I think being less strict about it here makes sense since I have less time to explain (Goldblatt identifies constant symbols with the constants they represent, for instance).
+
+I've written some stuff down about integrals, but haven't TeXed it if only because I don't want to have to TeX all the stuff about hyperfinite sums. Alas, TeX it I shall.
+
+\subsection{Goals for Next Week}
+\begin{itemize}
+    \item Read Chapters 13.14---14 (pp. 176-189) in Goldblatt. I'm starting to think this might be mostly for fun at this point. Do a few exercises.
+    \item TeX up the hyperfinite sums definition of integration, explain how it's basically the same.
+    \item Sit down and make a list of everything I want to include in my thesis, and make sure I have enough exercises and new stuff to feel like I'm not just writing a book report.
+\end{itemize}
+
+\nocite{goldblatt1998}
+\printbibliography[title={Things I'm Looking At}]
+
+\end{document}

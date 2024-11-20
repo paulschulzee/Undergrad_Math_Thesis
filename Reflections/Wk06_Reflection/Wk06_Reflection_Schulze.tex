@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[leqno]{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[margin=0.75in]{geometry}
+
+\usepackage{biblatex}
+\addbibresource{Wk06_Bibliography.bib}
+
+\newcommand{\st}[1]{\mathrm{st}(#1)}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{\prescript{*}{}{\mathbb{N}}}
+
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+
+\newcommand{\del}{\partial}
+
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{thm}{Theorem}
+
+\title{Week 6 Reflection}
+\author{Paul Schulze}
+\date{October 8th, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{Definitions}
+I'm not sure how many of these I'll actually use, but I figure it will be nice to have the TeX'd if I need them and I can use this as a reference for later.
+\subsection*{Calculus}
+\begin{itemize}
+    \item Let f(x) be a function. The \textit{increment in f} corresponding to a change $\Delta x$ in $x$ is $\Delta f = f(x + \Delta x) - f(x)$. More accurately we would write $\Delta f(x, \Delta x)$ since this depends on our choice of $x$ and $\Delta x$. Note that $f'(x) = \st{\frac{\Delta f}{\Delta x}}$.
+    \item Similarly, the \textit{differential in f} is $df = f'(x)\Delta x$. This is the change along the tangent line tangent to $f$ at $x$ when you move $\Delta x$ along it. If we let $\epsilon = \frac{\Delta f}{\Delta x} - f'(x)$, we find $\Delta f - df = \epsilon\Delta x$, so that $\Delta f - df$ is infinitely smaller than $\Delta x$ (as $\epsilon$ is infinitesimal).
+    \item If $f$ is a function bounded on $[a, b]$ and $P = \{x_0, x_1, \ldots, x_n\}$ a partition on $[a, b]$, let $M_i$ and $m_i$ be the supremum and infimum respectively of $f$ on $[x_{i-1}, x_i]$, and $\Delta x_i = x_i - x_{i-1}$. Then we get:
+    \begin{itemize}
+        \item The upper Reimann sum $U_a^b(f, P) \coloneq \sum_{i=1}^n M_i\Delta x_i$
+        \item The lower Reimann sum $L_a^b(f, P) \coloneq \sum_{i=1}^n m_i\Delta x_i$
+        \item The ordinary Riemann sum $S_a^b(f, P) \coloneq \sum_{i=1}^n f(x_{i-1})\Delta x_i$ (the $S$ so obviously stands for ``standard,'' but it's called ``ordinary''\dots\ not sure what to think about that).
+    \end{itemize}
+    \item For any positive real $\Delta x$, let $P_{\Delta x} = \{a, a+\frac{b-a}{\Delta x}, a + 2\frac{b-a}{\Delta x}, \ldots, a + n\frac{b-a}{\Delta x}, b\}$. Now, for any positive real $\Delta x$, let $U_a^b(f, \Delta x) \coloneq U_a^b(f, P_{\Delta x})$, and similarly for $L_a^b(f, \Delta x)$ and $S_a^b(f, \Delta x)$.
+    \item The \textit{Riemann integral of $f$ on $[a, b]$} is $\int_a^b f(x)dx = \st{S_a^b(f, \Delta x)}$ for any positive infinitesimal $\Delta x$, when this is well-defined. 
+\end{itemize}
+
+\subsection*{Topology}
+\begin{itemize}
+    \item If $A \subseteq$ and $r \in \reals$,
+    \begin{itemize}
+        \item $r$ is \textit{interior} to $A$ if for any hyperreal $x \simeq r$ we have $x \in \hr{A}$, i.e. if $\hal{r} \subseteq \hr{A}$. A is \textit{open} if all of its points are interior.
+        \item $r$ is a \textit{limit point} of $A$ if there is some hyperreal $x \neq r \simeq x \in \hr{A}$, i.e. if $\hal{r} \cap \hr{A}$ isn't $\emptyset$ or $\{r\}$.
+        \item $r$ is a \textit{closure point} of $A$ if there is some hyperreal $x \simeq r$ such that $x \in \hr{A}$, i.e. if $\hal{r} \cap \hr{A}$ is nonempty, i.e. if $r$ is in $A$ or a limit point of $A$. A is \textit{closed} if it  contains all of its closure points (equivalently, if it contains all of its limit points).
+    \end{itemize}
+    \item A subset $A \subseteq \reals$ is \textit{compact} if for any open cover $\mathcal{C}$ (that is, for any collection $\mathcal{C}$ of open sets such that $A \subseteq \cup \mathcal{C}$), some finite subset of $\mathcal{C}$ is an open cover of $A$.
+    \item A \textit{real-radius neighborhood of $r$ in $\hreals$} is an interval $(r - \epsilon, r + \epsilon)$ for some $\epsilon \in \reals^+$.
+    \item A subset of $\hreals$ is \textit{real-open} if it is the union of real-radius neighborhoods. Note the collection of real-open subsets is \textit{not} a toplogy on $\hreals$.
+    \item For $r \in \hreals$ and $\epsilon \in \reals^+$, define $((r - \epsilon, r + epsilon)) \coloneq \{x \in \hreals \,|\, x \in (r-\epsilon, r+\epsilon) \land (x \not\simeq r-\epsilon) \land (x\not\simeq r+\epsilon)\} = \{x \in \hreals \,|\, \hal{x} \subseteq (r-\epsilon, r+\epsilon)\}$. These sets are called \textit{S-neighborhoods}.
+    \item A subset of $\hreals$ is \textit{S-open} if it is the union of S-neighborhoods. The collection of S-open subsets \textit{is} a topology on $\hreals$.
+    \item A subset of $\hreals$ is \textit{interval open} if it is the union of intervals of the form $(a, b)$, where $a, b \in \hreals$. The collection of interval open subsets is also a topology on $\hreals$.
+\end{itemize}
+
+I've included the toplogical definition of compactness because it generalizes, but in the reals we have a nice nonstandard statement that's equivalent:
+\begin{thm}[Robinson's Compactness Criterion]
+    A subset $A \subseteq \reals$ is compact iff every element $x \in \hr{A}$ is infinitely close to some $r \in A$---in other words, if $\hr{A} \subseteq \cup\{\hal{r} \,|\, r \in A\}$.
+\end{thm}
+
+To see how this is useful, consider:
+\begin{thm}[Heine-Borel]
+    A set $A \subseteq \reals$ is compact iff it is closed and bounded
+\end{thm}
+\begin{proof}
+If $A$ is unbounded, then we have $\forall y \exists x (x > y \land x \in A)$. Transferring this to the hyperreals and taking any positive unlimited $y$, we get a positive unlimited $x \in \hr{A}$, which is clearly not infinitely close to anything in $A$.
+
+Similarly, if $A$ isn't closed, then it fails to contain some limit point $r \notin A$. Since $r$ is a limit point, we know there is a hyperreal $x \simeq r$ with $x \in \hr{A}$. Since $\st{x} = r$, $x$ isn't infinitely close to any other real number, so $x$ isn't infinitely close to any real number in $A$.
+
+So if $A$ isn't closed or isn't bounded, it's not compact. Now, assume $A$ isn't compact. Then there is some hyperreal $x \in \hr{A}$ such $x$ is not infintely close to any $r \in A$. Assume, also, that $A$ is bounded---so $\forall y (y \in A \rightarrow |y| < b)$ for some $b \in \reals$. By transfer, $|x| < b$, so $x$ is limited. Since $x \simeq \st{x}$, and by our assumption that $x$ isn't infinitely close to any element of $A$, we find that $\st{x} \notin A$. But we have $x \in \hal{\st{x}} \cap \hr{A}$, so $\st{x}$ is a closure point of $A$. So since $\st{x}$ isn't in $A$, we find $A$ isn't closed. We conclude that if $A$ isn't compact, it must be either not closed or not bounded (or both).
+\end{proof}
+
+This is a nice easy proof, but of course this obscures the work of proving Robinson's Compactness Criterion, which is nontrivial. 
+
+\section*{My Favorite Exercises This Week}
+\begin{exercise}[10.2.3]
+    Show that \[\hr{\left(\bigcap_{n \in \nats}\left(-\frac{1}{n}, \frac{1}{n}\right)\right)} \neq \bigcap_{n \in \nats}\hr{\left(-\frac{1}{n}, \frac{1}{n}\right)}\]
+\end{exercise}
+This exercise is pretty easy---$\bigcap_{n \in \nats} (-\frac{1}{n}, \frac{1}{n}) = \{0\}$, and $\hr\{0\} = \{0\}$, but for any positive infinitesimal $\delta$ we know $\delta \in \hr{\left(-\frac{1}{n}, \frac{1}{n}\right)}$ and so $\delta \in \bigcap_{n \in \nats}\hr{\left(-\frac{1}{n}, \frac{1}{n}\right)}$ but $\delta \notin \{0\}$. But it's an unintuitive result, and also the reason why an arbitrary intersection of open sets isn't necessarily open (because a real number in the intersection might have its halo in the extension of each individual set being intersected, but not the in the extension of the intersection of all the sets, as is the case with $0$ here).
+
+\begin{exercise}[10.5.2]
+    Let $A$ be an open subset of $\reals$. Suppose $A$ is the union of a sequence $\langle A_n \,|\, n \in \nats \rangle$ of pairwise disjoint open intervals in $\reals$, with the length of $A_n$ being less than $\frac{1}{n}$. Use transfer to show that some element of $\hr{A}$ is infinitely clsoe to something not in $\hr{A}$. Deduce that $\hr{A}$ is not S-open.
+\end{exercise}
+We have to be careful about what we transfer here---our mathematical language doesn't have the symbols to natively express a sequence of intervals. The easiest way to do this, I think, is by an indicator function---define $f: \nats \times \reals \to \{0, 1\}$ by $f(n, r) = 1$ if $1 \in A_n$ and $0$ otherwise. Then the sentence $(\forall x \in \reals) \left(x \in A \leftrightarrow \\\exists (n \in \nats) (f(n, x) = 1)\right)$ transfers, so $f$ is also an indicator for $\hr{A}$. Take a positive unlimited $N \in \hnats$. By transfer on $(\forall n \in \nats) (\exists a, b \in \reals) \left((\forall y \in \reals) [f(n, y) = 1 \leftrightarrow a < y < b] \land |a-b| = \frac{1}{n}\right)$, we conclude that $A_N$ is an interval of length $\frac{1}{N}$. Since each of the $A_i$s (in the reals) are pairwise disjoint open intervals, none of them can contain each others endpoints, a fact we can represent by $(\forall a \in \reals) \left([(\exists n \in \nats) (\exists b \in \reals) (\forall y \in \reals) (f(n, y) = 1 \leftrightarrow a < y < b)] \rightarrow (\forall m \in \nats) f(m, a) = 0\right)$ (this is only for left endpoints, but that's all we need). Then, take the left endpoint $y$ of $A_N$ and some hyperreal $x \in A_N$. We find $|x - y| < \frac{1}{N}$, so that $x \simeq y$, but $y \notin \hr{A}$ and $x \in \hr{A}$.
+
+Now, notice that a hyperreal $x$ is in an S-neighborhood $((r - \epsilon, r + \epsilon))$ iff $\hal{x} \subseteq (r - \epsilon, r + \epsilon)$. But if $x \simeq y$, then $\hal{x} = \hal{y}$, so $y$ is also in the S-neighborhood $((r - \epsilon, r + \epsilon))$. So if $x$ is in an S-open set, it must be in some S-neighborhood that makes up that S-open set, hence any $y \simeq x$ is also in that S-neighborhood and also in the S-open set. So if $T$ is S-open, $x \in T$, and $x \simeq y$, then $y \in T$.
+
+But we've shown that $x \in \hr{A}$, $x \simeq y$, and $y \notin \hr{A}$. So we conclude $\hr{A}$ is not S-open.
+
+\section*{Notes \& Progress}
+I read the rest of chapter 7, along with chapters 7, 8, 9, and 10. Chapters 8 and 9 were not very instructive, mostly being a review of Henle and Kleinberg, so I was happy to cover some new ground.
+
+I looked around for a proof of the uniqueness of the hyperreals given the Continuum Hypothesis, but couldn't find anything more than a few outlines on Math Overflow that kept talking about types and saturation and a bunch of things that I don't think are even in Goldblatt. Something about how $\hreals$ has cardinality $\mathbf{c}$, and you can prove it's $\aleph_1$ saturated, so if $\aleph_1 = \mathbf{c}$ then it's saturated---I don't know. I did find this cool article that makes a historical argument that the Continuum Hypothesis could have been seen as one of the fundamental axioms of mathematics, but now never will be, which I might check out but I doubt is relevant \cite{hamkins2024}.
+
+It seems like chapters 11 and 12 are about ``internal'' constructions like the ideas of S-open and interval-open sets, constructions that are made on the hyperreals. I'm very excited for that, it think it will be interesting. Chapter 13 generalizes everything beyond just the reals and hyperreals--chapters 11 and 12 seem to be required reading for chapter 13, and chapter 13 is required for everything past it, so for now I'm just going to keep plucking away at the book. 
+
+\section*{Goals (for 10/24)}
+\begin{itemize}
+    \item Read chapters 11 and 12 of Goldblatt. 3 exercises, at least 1 hard, from each.
+\end{itemize}
+
+\printbibliography[title={Things I'm Looking At}]
+
+
+\end{document}

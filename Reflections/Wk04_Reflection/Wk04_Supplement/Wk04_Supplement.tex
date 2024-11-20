@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[leqno]{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[margin=0.75in]{geometry}
+
+\newcommand{\st}[1]{\mathrm{st}#1}
+\newcommand{\hrs}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+\newcommand{\del}{\partial}
+
+\title{Week 4 Supplement: What I Threw Out}
+
+\begin{document}
+
+\section*{What I Threw Out}
+
+\begin{align*}
+    \frac{\del}{\del x} \frac{\del}{\del y} f(x, y) &= \st{\left(\frac{\frac{\del}{\del y} f(x + dx, y) - \frac{\del}{\del y} f(x, y)}{dx}\right)} \\
+    \mbox{(This doesn't exist)} &= \st{\left(\frac{\st{\left(\frac{f(x+dx, y+dy) - f(x+dx, y)}{dy}\right)} - \st{\left(\frac{f(x, y+dy)- f(x, y)}{dy}\right)}}{dx}\right)} \\
+    \mbox{(This probably doesn't either)} &= \st{\left(\frac{f(x+dx,y+dy)-f(x+dx,y)-f(x,y+dy)+f(x,y)}{dxdy}\right)} \\
+    \mbox{(This still doesn't)} &= \st{\left(\frac{\st{\left(\frac{f(x+dx, y+dy) - f(x, y+dy)}{dx}\right)} - \st{\left(\frac{f(x+dx, y)- f(x, y)}{dx}\right)}}{dy}\right)} \\
+    &= \st{\left(\frac{\frac{\del}{\del x} f(x, x+dy) - \frac{\del}{\del x} f(x, y)}{dy}\right)} \\
+    &= \frac{\del}{\del y} \frac{\del}{\del x} f(x, y)
+    \end{align*}
+    
+    Note that we can shift the scope of $\st{}$ around because $\st(x+y) = \st x + \st y$, $\st (x - y) = \st x - \st y$, $\st (xy) = \st x \st y$, and $\st (x/y) = \st x / \st y$ (proofs are fairly trivial). (WEEK 4 NOTE: Excecpt this is wrong because $\st (x/y) = \st (x) / \st (y)$ only when $y \not\approx 0$, because division by $0$ is undefined. And in any case $x/y$ has to be finite in order for $\st (x/y)$ to exist). This is easy---too easy. This equality shouldn't hold when the second partial derivatives aren't continuous. Take
+    
+    \[ f(x, y) = \begin{cases}
+    \frac{xy(x^2-y^2)}{x^2+y^2} & \mbox{for } (x, y) \neq (0, 0) \\
+    0 & \mbox {for } (x, y) = (0, 0)
+    \end{cases} \]
+    
+    Standardly, this function has $\frac{\del}{\del x} \frac{\del f}{\del y} = 1$ and $\frac{\del}{\del y} \frac{\del f}{\del x} = -1$. If we use the approach above, we find that
+    
+    
+    \begin{align*}
+    \frac{\del}{\del x}\frac{\del f}{\del y} &= \st{\left( \frac{\frac{\del}{\del y} f(dx, 0) - \frac{\del}{\del y} f(0, 0)}{dx} \right)}
+    \end{align*}
+    
+    Note that $f(0, y) = f(x, 0) = 0$ for any $x, y$. Now, $\frac{\del}{\del y} f(0, 0) = \st{\left(\frac{f(0, dy) - f(0, 0)}{dy}\right)} = 0$ and $\frac{\del}{\del y} f(dx, 0) = \st{\left(\frac{f(dx, dy) - f(dx, 0)}{dy}\right)} = \st{\left(\frac{dxdy(dx^2-dy^2)}{dy(dx^2+dy^2)}\right)}=\st{\left(\frac{dx(dx^2-dy^2)}{dx^2+dy^2}\right)}$. So
+    
+    \begin{align*}
+    \st{\left( \frac{\frac{\del}{\del y} f(dx, 0) - \frac{\del}{\del y} f(0, 0)}{dx} \right)} &= \st{\left(\frac{dx^2-dy^2}{dx^2+dy^2}\right)}
+    \end{align*}
+    
+    Which clearly depends on our choice of $dx$ and $dy$, suggesting the second partial doesn't exist here.
+
+    \textbf{\textit{Week 4 Note:}} This doesn't seem like a lot but it's so many \LaTeX symbols it took me a while. I probably should have triple-checked this before TeXing it. Lesson learned. At least I noticed something was wrong in that we proved ``too much.''
+
+    Also, I should note: I took that example of a function that doesn't have symmetrical second partials from Wikipedia, which claims it's ``due to Peano.'' I assume that if I wanted to actually use it, I'd have to find some sort of scholarly source for that claim? Would I even need to cite where the function came from, if it's considered common knowledge? Obviously I can't claim to have come up with it, which seems like what I'm tacitly doing by not citing, but I'm not sure the exact procedure.
+
+\end{document}

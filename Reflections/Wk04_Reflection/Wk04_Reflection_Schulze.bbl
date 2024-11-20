@@ -1,0 +1,264 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{bell2008}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=0a0478ee16443ab4f2fc08164756daa7}{%
+           family={Bell},
+           familyi={B\bibinitperiod},
+           given={John\bibnamedelima L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{0a0478ee16443ab4f2fc08164756daa7}
+      \strng{fullhash}{0a0478ee16443ab4f2fc08164756daa7}
+      \strng{fullhashraw}{0a0478ee16443ab4f2fc08164756daa7}
+      \strng{bibnamehash}{0a0478ee16443ab4f2fc08164756daa7}
+      \strng{authorbibnamehash}{0a0478ee16443ab4f2fc08164756daa7}
+      \strng{authornamehash}{0a0478ee16443ab4f2fc08164756daa7}
+      \strng{authorfullhash}{0a0478ee16443ab4f2fc08164756daa7}
+      \strng{authorfullhashraw}{0a0478ee16443ab4f2fc08164756daa7}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{One of the most remarkable recent occurrences in mathematics is the refounding, on a rigorous basis, of the idea of infinitesimal quantity, a notion which played an important role in the early development of the calculus and mathematical analysis. In this new edition basic calculus, together with some of its applications to simple physical problems, are presented through the use of a straightforward, rigorous, axiomatically formulated concept of 'zero-square', or 'nilpotent' infinitesimal - that is, a quantity so small that its square and all higher powers can be set, literally, to zero. The systematic employment of these infinitesimals reduces the differential calculus to simple algebra and, at the same time, restores to use the “infinitesimal” methods figuring in traditional applications of the calculus to physical problems - a number of which are discussed in this book. This edition also contains an expanded historical and philosophical introduction.}
+      \field{edition}{2}
+      \field{isbn}{978-0-521-88718-2}
+      \field{title}{A {{Primer}} of {{Infinitesimal Analysis}}}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{year}{2008}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{doi}
+      \verb 10.1017/CBO9780511619625
+      \endverb
+      \verb{file}
+      \verb C:\Users\paul\Zotero\storage\WRMWJ22L\B0EF33F73CAF97C180897D2FD0AD1B6E.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cambridge.org/core/books/primer-of-infinitesimal-analysis/B0EF33F73CAF97C180897D2FD0AD1B6E
+      \endverb
+      \verb{url}
+      \verb https://www.cambridge.org/core/books/primer-of-infinitesimal-analysis/B0EF33F73CAF97C180897D2FD0AD1B6E
+      \endverb
+    \endentry
+    \entry{culli2014}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=eefb1119ddae1eb8adf5df51b18ace94}{%
+           family={Culli},
+           familyi={C\bibinitperiod},
+           given={Gj},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Rochester, NY}%
+      }
+      \strng{namehash}{eefb1119ddae1eb8adf5df51b18ace94}
+      \strng{fullhash}{eefb1119ddae1eb8adf5df51b18ace94}
+      \strng{fullhashraw}{eefb1119ddae1eb8adf5df51b18ace94}
+      \strng{bibnamehash}{eefb1119ddae1eb8adf5df51b18ace94}
+      \strng{authorbibnamehash}{eefb1119ddae1eb8adf5df51b18ace94}
+      \strng{authornamehash}{eefb1119ddae1eb8adf5df51b18ace94}
+      \strng{authorfullhash}{eefb1119ddae1eb8adf5df51b18ace94}
+      \strng{authorfullhashraw}{eefb1119ddae1eb8adf5df51b18ace94}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Using the framework of Non-Standard Analysis the author finds the Euler-Lagrange equation for functionals and discuss the necessary conditions of an extremum for a given functional as compared to classical variational calculus treatment. Some results related to the variational functional and its uniqueness are presented under the light of nonstandard mathematical theory. Lemmas that lead to the necessary conditions of extremum problem are proved. They also can stand as results on their own. Part of reasoning used in the paper consists of attenuating assertions to a point at which principle of transfer becomes applicable. Some relations are established between nonstandard definitions and the parallel classical ones.}
+      \field{day}{29}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{number}{2511961}
+      \field{pubstate}{prepublished}
+      \field{title}{A {{Nonstandard Characterization}} of {{Functional Extrema}}}
+      \field{type}{SSRN Scholarly Paper}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.2139/ssrn.2511961
+      \endverb
+      \verb{file}
+      \verb C:\Users\paul\Zotero\storage\I9W55LU5\Culli - 2014 - A Nonstandard Characterization of Functional Extre.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://papers.ssrn.com/abstract=2511961
+      \endverb
+      \verb{url}
+      \verb https://papers.ssrn.com/abstract=2511961
+      \endverb
+      \keyw{differentiable functional,extremum,functional,infinitesimal,linear space,Nonstandard analysis,variational functional}
+    \endentry
+    \entry{goldblatt1998}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=605f14b2a5c387a9fd5377749cc00b69}{%
+           family={Goldblatt},
+           familyi={G\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{fullhash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{fullhashraw}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{bibnamehash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{authorbibnamehash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{authornamehash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{authorfullhash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{authorfullhashraw}{605f14b2a5c387a9fd5377749cc00b69}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-4612-6841-3 978-1-4612-0615-6}
+      \field{series}{Graduate {{Texts}} in {{Mathematics}}}
+      \field{title}{Lectures on the {{Hyperreals}}}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{volume}{188}
+      \field{year}{1998}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-1-4612-0615-6
+      \endverb
+      \verb{file}
+      \verb C:\Users\paul\Zotero\storage\BJB7UTCL\Goldblatt - 1998 - Lectures on the Hyperreals.pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.1007/978-1-4612-0615-6
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/978-1-4612-0615-6
+      \endverb
+      \keyw{Boolean algebra,calculus,construction,differential equation,eXist,functional,Lebesgue measure,measure,measure theory,proof,real analysis,Riemann integral,tool,topology,ultrapower}
+    \endentry
+    \entry{henle1979}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=47cc93fa90768eb9145ec9c495db71da}{%
+           family={Henle},
+           familyi={H\bibinitperiod},
+           given={James\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=7f05d04c0a2d566c201d292895a4cd76}{%
+           family={Kleinberg},
+           familyi={K\bibinitperiod},
+           given={Eugene\bibnamedelima M.},
+           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, Mass}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{e50d71314f2172162ef57040eaca9751}
+      \strng{fullhash}{e50d71314f2172162ef57040eaca9751}
+      \strng{fullhashraw}{e50d71314f2172162ef57040eaca9751}
+      \strng{bibnamehash}{e50d71314f2172162ef57040eaca9751}
+      \strng{authorbibnamehash}{e50d71314f2172162ef57040eaca9751}
+      \strng{authornamehash}{e50d71314f2172162ef57040eaca9751}
+      \strng{authorfullhash}{e50d71314f2172162ef57040eaca9751}
+      \strng{authorfullhashraw}{e50d71314f2172162ef57040eaca9751}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-262-08097-2}
+      \field{pagetotal}{135}
+      \field{title}{Infinitesimal Calculus}
+      \field{year}{1979}
+      \field{dateera}{ce}
+      \keyw{Calculus}
+    \endentry
+    \entry{palmgren1998}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=46538b49a01f68b719cc0401fca886bf}{%
+           family={Palmgren},
+           familyi={P\bibinitperiod},
+           given={Erik},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{46538b49a01f68b719cc0401fca886bf}
+      \strng{fullhash}{46538b49a01f68b719cc0401fca886bf}
+      \strng{fullhashraw}{46538b49a01f68b719cc0401fca886bf}
+      \strng{bibnamehash}{46538b49a01f68b719cc0401fca886bf}
+      \strng{authorbibnamehash}{46538b49a01f68b719cc0401fca886bf}
+      \strng{authornamehash}{46538b49a01f68b719cc0401fca886bf}
+      \strng{authorfullhash}{46538b49a01f68b719cc0401fca886bf}
+      \strng{authorfullhashraw}{46538b49a01f68b719cc0401fca886bf}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We develop a constructive version of nonstandard analysis, extending Bishop's constructive analysis with infinitesimal methods. A full transfer principle and a strong idealisation principle are obtained by using a sheaf-theoretic construction due to I. Moerdijk. The construction is, in a precise sense, a reduced power with variable filter structure. We avoid the nonconstructive standard part map by the use of nonstandard hulls. This leads to an infinitesimal analysis which includes nonconstructive theorems such as the Heine–Borel theorem, the Cauchy–Peano existence theorem for ordinary differential equations and the exact intermediate-value theorem, while it at the same time provides constructive results for concrete statements. A nonstandard measure theory which is considerably simpler than that of Bishop and Cheng is developed within this context.}
+      \field{issn}{1079-8986, 1943-5894}
+      \field{journaltitle}{Bulletin of Symbolic Logic}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{3}
+      \field{title}{Developments in {{Constructive Nonstandard Analysis}}}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{volume}{4}
+      \field{year}{1998}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \field{pages}{233\bibrangedash 272}
+      \range{pages}{40}
+      \verb{doi}
+      \verb 10.2307/421031
+      \endverb
+      \verb{file}
+      \verb C:\Users\paul\Zotero\storage\U67IZDB3\Palmgren - 1998 - Developments in Constructive Nonstandard Analysis.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cambridge.org/core/journals/bulletin-of-symbolic-logic/article/abs/developments-in-constructive-nonstandard-analysis/FB03487B918130E3F603F7681DA34FA6
+      \endverb
+      \verb{url}
+      \verb https://www.cambridge.org/core/journals/bulletin-of-symbolic-logic/article/abs/developments-in-constructive-nonstandard-analysis/FB03487B918130E3F603F7681DA34FA6
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

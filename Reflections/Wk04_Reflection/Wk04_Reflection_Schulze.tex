@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[leqno]{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[margin=0.75in]{geometry}
+
+\usepackage{biblatex}
+\addbibresource{Wk04_Bibliography.bib}
+
+\newcommand{\st}[1]{\mathrm{st}(#1)}
+\newcommand{\hrs}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+\newcommand{\del}{\partial}
+
+\title{Week 4 Reflection}
+\author{Paul Schulze}
+\date{September 24th, 2024}
+
+\begin{document}
+
+\maketitle
+
+Last time I denoted the standard part of $r$ by $\prescript{\circ}{}{r}$, but I'm starting to sour on that notation so $\st{r}$ will be used going forward. Fortunately I handled all that with a custom $\backslash$st command, so it should be easy enough to update.
+
+Now, second partial derivatives. Let's assume that, for single-variable $f(x)$, we have the equivalence between the standard derivative $\hat{f}'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}$ and the nonstandard derivative $f'(a) = \st{\frac{f(a + dx) - f(a)}{dx}}$ for any infinitesimal $dx$. That is, $f'(a) = \hat{f}'(a)$ for all $a$.
+
+We'll aim modestly and say that our goal is to prove that the standard and nonstandard definitions of $f_{xy}(a, b)$ are equivalent on the reals. Nonstandardly, we define $f_{x}(a,b) = \st{\frac{\hr f(a+dx,b)-\hr f(a,b)}{dx}}$ for any infinitesimal $dx$ (where $\hr f$ denotes the extension of $f$ into the hyperreals) and $f_{xy}(a,b) = \st{\frac{\hr f_x(a,b+dy)-\hr f_x(a,b)}{dy}}$ for any infinitesimal $dy$. Standardly, we define $\hat f_x(a,b) = \lim_{x \to a} \frac{f(x, b) - f(a, b)}{x - a}$ and $\hat f_{xy}(a,b) = \lim_{y \to b} \frac{\hat f_x(a, y) - \hat f_x(a, b)}{y - b}$.
+
+Note that we define $\hr f_x : \hrs \to \hrs$ as the extension of $f_x : \mathbb{R} \to \mathbb{R}$, so that if $f_x$ and $\hat f_x$ agree on all real values than they agree on all hyperreal values.
+
+First, we'll show that $f_x(a,b) = \hat f_x(a, b)$ for all real $a$ and $b$. To do this, we define $g_b(x) = f(x, b)$. Note that 
+\[f_x(a,b) = \st{\frac{\hr f(a+dx,b)-\hr f(a,b)}{dx}} = \st{\frac{\hr g_b(a+dx)-\hr g_b(a)}{dx}} = g_b'(a)\]
+and
+\[\hat f_x(a,b) = \lim_{x \to a} \frac{f(x, b) - f(a, b)}{x - a} = \lim_{x \to a} \frac{g_b(x) - g_b(a)}{x - a} = \hat g_b'(a)\]
+
+We already assumed $g_b'(a) = \hat g_b'(a)$ on $\mathbb{R}$ (as $g$ is a single-valued function on the reals), so we conclude that for any real $a$ and $b$, $f_x(a,b) = \hat f_x(a,b)$. So for any $a$ and $b$ in the reals, we can define $h_a(y) = f_x(a, y) = \hat f_x(a,y)$ and find that
+\[f_{xy}(a,b) = \st{\frac{\hr f_x(a, b+dy) - \hr f_x(a, b)}{dy}} = \st{\frac{\hr h_a(b+dy) - \hr h_a(b)}{dy}} = h_a'(b)\]
+and
+\[\hat f_{xy}(a,b) = \lim_{y\to b} \frac{\hat f_x(a, y) - \hat f_x(a, b)}{y - b} = \lim_{y\to b} \frac{h_a(y) - h_a(b)}{y-b} = \hat h_a'(b)\]
+
+As before, $h_a'(b) = \hat h_a'(b)$ and so $f_{xy}(a, b) = \hat f_{xy}(a, b)$.
+
+This isn't too bad. I think I didn't go for this the first time because I was drawn by the allure of the nonstandard---this proof very much treats differentiation as an operator on functions, rather than a fraction of two infinitesimals.
+
+In other news, I found this cool paper about a nonstandard approach to functionals \cite{culli2014}. I don't actually know if it's cool, I haven't read it closely, but look! I have Biblatex working! It's integrated with Zotero and everything! And I've managed to rig it so that I can press one button and it all just compiles! This took an embarassingly long amount of time.
+
+The first three chapters of Goldblatt \cite{goldblatt1998} (I'm just having fun with it working) went about as you'd expect---rigorous treatment of the transfer principle is next. The treatment in Henle and Kleinberg \cite{henle1979} gave the broad strokes---I suspect Goldblatt will spend more time on the details of Mathematical Logic, which I can confidently skim. I did, this week, learn a lot more about filters and their properties in general, though.
+
+Let $S$ be a set. A \textit{filter} $\mathcal F$ on $S$ is a collection of subsets of $S$ (that is, $\mathcal F \subseteq \mathcal P (S)$) such that for any two subsets $A$ and $B$ of $S$, \begin{enumerate}
+    \item If $A$ and $B$ are in $\mathcal F$, then $A \cap B \in \mathcal F$
+    \item If $A \in \mathcal F$ and $A \subseteq B$, then $B \in \mathcal F$
+\end{enumerate}
+
+A filter $\mathcal F$ on $S$ is an \textit{ultrafilter} if, additionally, for any $A \subseteq S$, either $A$ or $A^c$ is in $\mathcal F$.
+
+If $B \subseteq S$, the \textit{principal filter} $\mathcal F^B$ on $S$ is $\{A \subseteq S | A \supseteq B\}$. My favorite exercise I did was to show that an ultrafilter on a finite set must be principal: say $S$ is finite, and $\mathcal F$ is an ultrafilter on $S$. Since $S$ is finite, so is $\mathcal P(S)$, thus so is $\mathcal F \subseteq \mathcal P(S)$. So we can know $\cap \mathcal F \in \mathcal F$, since for any $A$, $B \in \mathcal F$ we have $A \cap B \in \mathcal F$ and $\cap \mathcal F$ is a finite intersection. By the second property of filters, we now know $\{A \subseteq S | A \supseteq \cap \mathcal F\} \subseteq \mathcal F$. But also, since every element of $\cap \mathcal F$ is in every element of $\mathcal F$, we find $\cap \mathcal F \subseteq T$ for any $T \in \mathcal F$, and so $\mathcal F \subseteq \{A \subseteq S | A \supseteq \cap \mathcal F\}$. So by double inclusion, we find $\mathcal F = \{A \subseteq S | A \supseteq \cap \mathcal F\} = \mathcal F^{\cap \mathcal F}$.
+
+Okay, time for goals. \begin{enumerate}
+    \item Skim chapters 4 and 5 of Goldblatt, on the transfer principle and properties of the hyperreals. This is mostly important for terminological reasons (``halo" and ``galaxy," for instance). 
+    \item Read chapters 6 and 7 of Goldblatt, on sequences/series and continuity respectively. If I get really into chapter 6 and have to stop at page 81, when the \textit{completely} new section of chapter 7 starts, I'll forgive myself.
+    \item Do one exercise each from chapters 4 and 5, and three each from chapters 6 and 7. Ideally, one ``hard'' exercise per chapter.
+\end{enumerate}
+
+I found this introductory book that includes a section on ``Multivariate Calculus and Applications,'' and it has problems about finding the area of a parallelipiped in an ellipse and such, Calc III stuff \cite{bell2008}. That's exciting, but skimming through it's impenetrable for now. I figure after I do a little bit more Goldblatt I'll see if I can't figure out the author's terminology---something about ``Microaffinity'' (which I think just means functions ``look'' affine on an infinitesimal scale).
+
+I also need to figure out where I'm actually going. I'm going to want to at least skim chapters 8 and 9, about differentiation and integration, and read chapter 10, about the topology of the reals. Chapter 13 is called ``Universes and Frameworks,'' and it seems really interesting, but I suspect from the introduction chapters 11 and 12 are prerequisite. 
+
+I do need to pick up the pace if I'm going to get through chapter 13 in a reasonable time to have time to do other things with my thesis, although honestly I don't regret having to wait for the interlibrary loan to go through because having the simpler, handwavier Henle and Kleinberg treatment of some of this stuff before the Goldblatt treatment is definitely helping my intuition. 
+
+\nocite{palmgren1998}
+
+\printbibliography[title={Things I'm Looking At, If Only Briefly}]
+
+\end{document}

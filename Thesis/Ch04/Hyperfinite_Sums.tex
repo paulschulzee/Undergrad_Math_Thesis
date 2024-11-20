@@ -1,0 +1,78 @@
+\section{Hyperfinite Sums}
+\subsection{Hyperfinite Sets}
+\begin{defn}
+    An internal set $A = [A_n]$ is \textit{hyperfinite} if every $A_n$ is finite.
+\end{defn}
+
+The hyperfinite sets are ``internally finite.'' They share a lot of properties with finite sets.
+
+\begin{thm}\label{HyperfiniteTransfer}
+    If $\varphi(A)$ holds for every finite $A \subseteq \reals$, then $\hr{\varphi}(X)$ holds for every hyperfinite $X \subseteq \hreals$.
+\end{thm}
+
+\begin{proof}
+    Say $X = [A_n]$, with each $A_n$ finite. Then $[[\varphi(A_n)]] = \nats$, and so by transfer $\hr{\varphi}(X)$.
+\end{proof}
+
+This lets us easily get a lot of nice properties about hyperfinite sets. For instance, $(\exists x \in A)(\forall y \in A) (x \geq y)$ ensures that every hyperfinite set has a maximum element.
+
+\subsection{Hyperfinite Sums}
+For any finite set $A_n$ and function $f_n: \reals \to \reals$, we can easily define the sum $\sum_{x \in A_n} f(x)$. This is, after all, just a sum of a finite collection of numbers. Using this, however, we can easily extend our summation to hyperfinite sets:
+
+\begin{defn}
+    If $A = [A_n]$ is a hyperfinite set, and $f = [f_n]$ is an internal function, we define the \textit{hyperfinite sum}
+    \[\sum_{x \in [A_n]} f(x) = \left[\ \ \sum_{\mathclap{x \in A_n}} f_n(x) \:\right]\] %Why won't this space properly?
+\end{defn}
+
+We'll see this general form used later for integration, but for now we will focus on the type of hyperfinite sums that corresponds to series in standard calculus. Fist, some notation. Let $\{0\ldots n\}$ denote $\{0, 1, 2, \ldots, n\}$ for any $n \in \nats$. Then, let $\mathscr{N} = [\langle 0, 1, 2, \ldots \rangle]$, and let $\{0\ldots\mathscr{N}\}$ denote $[\{0\ldots n\}]$.
+
+For a sequence $a_i: \nats \to \reals$, we have $\sum_{i \in \{0\ldots n\}} a_i = \sum_{i = 0}^n a_i$. So we denote $\sum_{i \in \{0\ldots \mathscr{N}\}} a_i = \sum_{i = 0}^\mathscr{N} a_i = \left[\sum_{i=0}^n a_i\right]$.
+
+\begin{thm}[Geometric Series]\label{GeometricSeries}
+    Let $0 < r < 1$. Then 
+    \[ \sum_{i = 0}^\mathcal{N} r^i \simeq \frac{1}{1-r} \]
+\end{thm}
+
+\begin{proof}
+    Let $S = \sum_{i = 0}^\mathcal{N} r^i$. Recall $\sum_{i = 0}^\mathcal{N} r^i = [\sum_{i = 0}^n r^i] = [\langle 1, 1 + r, 1 + r + r^2, \ldots \rangle]$. Then $r \cdot S = [\langle r, r + r^2, r + r^2 + r^3, \ldots \rangle]$, so $1 + r \cdot S = [\langle 1 + r, 1 + r + r^2, 1 + r + r^2 + r^3, \ldots \rangle]$. We conclude that $(1 + r \cdot S) - S = [\langle r, r^2, r^3, \ldots \rangle] \simeq 0$ (recall $0 < r < 1$). So we have $S \simeq 1 + r \cdot S$, and so $S \cdot (1 - r) \simeq 1$, and so since $1 - r$ is appreciable $S \simeq \frac{1}{1-r}$. 
+\end{proof}
+
+\begin{corollary}\label{LessThanGeometricSeries}
+    For any $n \in \nats$, we have
+    \[ \sum_{i = 0}^n r^i \leq \frac{1}{1-r} \]
+\end{corollary}
+
+\begin{proof}
+    Let $f(n) = \sum_{i = 0}^n r^i$. Then the extension $f(\mathscr{N}) = [\sum_{i \in \{0\ldots n\}} r^i] = \sum_{i \in [\{0\ldots n\}]} r^i = \sum_{i = 0}^\mathscr{N} r^i$.
+
+    Since $0 < r^i$, we have in the reals $(\forall m \in \nats)(\forall n \in \nats)(n < m \to f(n) < f(m))$. If we transfer this to the hyperreals and plug in $\mathcal{N}$ for $m$, we get $(\forall n \in \hnats)(n < \mathcal{N} \to f(n) < f(\mathcal N))$. Any $n \in \nats$ is in the hypernaturals and less than $\mathcal{N}$, and so for any $n \in \nats$ we have $f(n) < f(\mathcal{N}) \simeq \frac{1}{1-r}$. Since both $f(n)$ and $\frac{1}{1-r}$ are real, this implies $f(n) \leq \frac{1}{1-r}$.
+\end{proof}
+
+\begin{thm}[Absolute Convergence Implies Convergence]\label{AbsoluteConvergenceImpliesConvergence}
+    If $\sum_{i = 0}^\mathcal{N} |a_i|$ is bounded, then $\sum_{i = 0}^\mathcal{N} a_i$ is bounded.
+\end{thm}
+
+\begin{proof}
+    Say $\sum_{i = 0}^\mathcal{N} |a_i| < R$ for some real $R$. For any $n \in \nats$, we have $\left|\sum_{i = 0}^n a_i\right| \leq \sum_{i = 0}^n |a_i| < R$, and so $\left|\sum_{i = 0}^\mathcal{N} a_i\right| = \left|[\sum_{i=0}^n a_i]\right| < R$.
+\end{proof}
+
+\begin{thm}[Ratio Test]\label{RatioTest}
+    Let $a_i: \nats \to \reals$ be a sequence. If for every unbounded $M \in \hnats$ we have $\left|\stp{\frac{a_{M+1}}{a_M}}\right| = L$ for some $L < 1$, then $\sum_{i=0}^\mathcal{N} a_i$ is bounded.
+\end{thm}
+
+\begin{proof}
+    Assume that $a_i \geq 0$---if not, apply the theorem to $|a_i|$ and use \ref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unbounded hypernatural $M$.
+
+    Take any unbounded $N \in \hnats$. For any $M \in \hnats$, if $N \leq M$, then $M$ is also unbounded, and so $\frac{a_{M+1}}{a_M} < r$. So we have the sentence
+    \[ (\exists n \in \hnats)(\forall m \in \hnats)(n \leq m \to \frac{a_{m+1}}{a_m} < r) \]
+    If we transfer this over to the reals, we find that there is some natural number $n$ such that for any natural $m \geq n$ we have $\frac{a_{m+1}}{a_m} < r$. Then clearly, for any $m > n$, we have 
+    \begin{align*}
+    \sum_{i = 0}^m a_i &= \sum_{i = 0}^n a_i + \sum_{i = n+1}^m a_i \\
+        &\leq \sum_{i = 0}^n a_i + \sum_{i = n+1}^m a_n \cdot r^{i - n} \\
+        &\leq \sum_{i = 0}^n a_i + a_n \cdot \sum_{i = 1}^{m-n}  r^{i} \leq \sum_{i = 0}^n a_i + a_n \cdot \frac{r}{1-r}
+    \end{align*}
+    Where that last inequality comes from \ref{LessThanGeometricSeries}.
+
+    So, we find that there is some $n$ such that for any $m \geq n$, we have $\sum_{i = 0}^m a_i \leq \sum_{i = 0}^n a_i + a_n \cdot \frac{r}{1-r}$. We conclude that $\sum_{i = 0}^\mathcal{N} a_i \leq \sum_{i = 0}^n a_i + a_n \cdot \frac{r}{1-r}$, and hence that $\sum_{i = 0}^\mathcal{N} a_i$ is bounded.
+
+\end{proof}

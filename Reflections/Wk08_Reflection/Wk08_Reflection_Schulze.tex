@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[leqno]{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[margin=0.75in]{geometry}
+
+\usepackage{biblatex}
+\addbibresource{Wk08_Bibliography.bib}
+
+\newcommand{\st}[1]{\mathrm{st}(#1)}
+
+\newcommand{\sthat}{\,|\,}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{\prescript{*}{}{\mathbb{N}}}
+
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+
+\newcommand{\del}{\partial}
+
+\DeclareMathOperator{\dom}{dom}
+
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{thm}{Theorem}
+
+\title{Week 8 Reflection}
+\author{Paul Schulze}
+\date{October 22nd, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{Internal Sets}
+We define \textit{internal sets} on $\hreals$ much like we do the hyperreal numbers themselves. If we have a sequence $\langle A_n \rangle$ of subsets of $\reals$, then we define the internal subset $A = [\langle A_n \rangle] = [A_n] \subseteq \hreals$ by letting \[[r_n] \in [A_n] \text{ iff } \{n \in \nats \,|\, r_n \in A_n\} \in \mathcal{F}\]
+
+It's tempting to then say $A = B$ exactly when $J = \{n \in \nats \sthat A_n = B_n\} \in \mathcal{F}$, but we already have a definition for equality on sets (namely, when they have the same elements). Fortunately, the property of having $J \in \mathcal{F}$ is equivalent to having $A = B$. First, say $J \in \mathcal{F}$. WLOG, let $[r_n] \in A$. Then $\{n \in \nats \sthat r_n \in A_n\} \cap J \subseteq \{n \in \nats \sthat r_n \in B_n\}$, so since the former two are in $\mathcal{F}$ we find the latter is by the closure properties of $\mathcal{F}$, and hence $[r_n] \in B$. Conversely, suppose $J \notin \mathcal{F}$. Since $J^c = \{n \in \nats \sthat A \not\subseteq B\} \cup \{n \in \nats \sthat B \not\subseteq A\}$, and $J^c \notin \mathcal{F}$, say WLOG that $I = \{n \in \nats \sthat A \not\subseteq B\} \in \mathcal{F}$. Then we construct $[s_n]$ by letting $s_n \in A_n - B_n$ for $n \in I$, and arbitrary elsewhere. We then have that $[s_n] \in A$, as $\{n \in \nats \sthat s_n \in A_n\} \supseteq I$, but $[s_n] \notin B$, showing $A \neq B$. 
+
+\section*{Assorted Properties of Internal Sets}
+Chapter 11 is just a lot of facts about Internal Sets. Various important results, included here without proof, include:
+\textbf{IMPORTANT NOTE TO FUTURE SELF:} These are mostly word-for-word, keep that in mind when citing
+\begin{itemize}
+    \item Internal sets are closed under finite set unions, intersections, and differences.
+    \item The extension of any subset of the reals is internal. If $A \subseteq \reals$, then $[\langle A, A, \ldots \rangle] = \hr{A}$
+    \item Any hyperreal interval $(a, b)$ is internal, with $([a_n], [b_n]) = [(a_n, b_n)]$. Similarly, $[a, b]$, $[a, b)$, etc. are internal.
+    \item Any finite set of hyperreals is internal, with $\{[r_n^1], \ldots, [r_n^k]\} = [\{r_n^1, \ldots, r_n^k\}]$
+    \item (Internal Least Number Principle, 11.3.1) Any nonempty internal subset of $\hnats$ has a least member
+    \item (Internal Induction, 11.3.2) If $X$ is an internal subset of $\hnats$ that contains $1$ and has the property that $x \in X \to (x+1) \in X$, then $X = \hnats$
+    \item (Overflow Principle, 11.4.1) If $X$ is an internal subset of $\hnats$, and there is some $k \in \nats$ such $n \in X$ for every natural $n \geq k$, then there is an unlimited $K \in \hnats$ such that $n \in X$ for every hyperrnatural $k \leq n \leq K$.
+    \item (Underflow Princple, 11.8.1) If $X$ is an internal subset of of $\hnats$, and there is some $K \in \hnats - \nats$ such that $H \in X$ for every unlimited hyperrnatural $H \leq K$, then there is some $k \in \nats$ such that $n \in X$ for every natural $n \geq k$.
+    \item (Order-Completeness, 11.5.1) If a nonempty internal subset of $\hreals$ is bounded above/below, it has a least upper/greatest lower bound in $\hreals$.
+    \item (Internal Set Transfer Principle, p.133) If $\varphi(A)$ is true whenever $A$ is taken as an arbitrary subset of $\reals$, then $\hr\varphi(X)$ is true whenever $X$ is taken as an arbitrary internal subset of $\hreals$ (\textit{this is not proven in the book}).
+    \item (Internal Set Definition Principle, 11.7.1) If $\varphi(x_0, x_1, \ldots, x_n, A_1, \ldots, A_k)$ is a formula of our language for the real numbers (\textit{plus the idea of ``subset symbols'' $A_1, \ldots, A_k$ that is introduced without comment}), then the set $\{b \in \hreals \sthat \hr\varphi(b, c_1, \ldots, c_n, X_1, \ldots, X_k)\}$ is internal for any hyperreals $c_1, \ldots c_n$ and any internal sets $X_1, \ldots, X_k$.
+\end{itemize}
+
+\section*{Countable Saturation of Internal Sets}
+\begin{thm}[Countable Saturation; 11.10.1]
+    The intersection of a decreasing sequence $X^1 \supseteq X^2 \supseteq \cdots \supseteq X^k \supset \cdots$ of nonempty internal sets is always nonempty.
+\end{thm}
+
+The proof of this is technical, but the basic idea is simple enough. Say $X^k = [A_n^k]$. Let
+\begin{multline*} 
+    J^k = \{n \in \nats \sthat A_n^1 \supseteq \cdots \supseteq A_n^k \neq \emptyset\} \\ = \{n \in \nats \sthat A_n^1 \supseteq A_n^2\} \cap \{n \in \nats \sthat A_n^2 \supseteq A_n^3\} \cap \cdots \cap \{n \in \nats \sthat A_n^{k-1} \supseteq A_n^k\} \cap \{n \in \nats \sthat A_n^k \neq \emptyset\}
+\end{multline*}
+This is a finite intersection of sets in $\mathcal{F}$, and so is in $\mathcal{F}$. Note also that $J^1 \supseteq J^2 \supseteq \cdots$. Then you define $[r_n]$ by taking $r_n$ from $A_n^k$ for the largest $k$ such that $n \in J^k$ (or from $J^n$ if there is no largest). By the properties of $J^k$, $r_n \in A_n^m$ for any $m \leq k$. Then, for any $k$, you have $r_n \in A_n^k$ for all of $J^k \cap \{k, k+1, \ldots\} \in \mathcal{F}$, so $r_n \in A_n^k$ for $\mathcal{F}$-almost all $n$, so $[r_n] \in X^k$ for all $k$. So $[r_n] \in \cap_{n \in \nats} X_n$.
+
+It's probably not wise for me to give saturation this much attention over everything else, but it leads to a result I find really puzzling. Say we have a sequence $\langle \epsilon_n \rangle$ of infinitesimals. Then, we can define $X_n = [\epsilon_1, 1) \cap [\epsilon_2, \frac{1}{2}) \cap \cdots \cap [\epsilon_n, \frac{1}{n})$. Each of these sets is internal as they are finite intersections of hyperreal intervals (which are internal), and they are nonempty as $\max\{\epsilon_1, \ldots, \epsilon_n\} \in X_n$, so there must be some $r \in \cap_{n \in \nats} X_n$. Note $r \geq \epsilon_n$ for every $n$, but also $r < \frac{1}{n}$ for every $n$, so $r$ must be an infinitesimal upper bound for $\langle \epsilon_n \rangle$. This is strange, because the infinitesimals do not have an infinitesimal upper bound, but this result implies any sequence of infinitesimals must have an infitesimal upper bound. 
+
+\section*{Internal Functions}
+Internal functions work like internal sets. If $\langle f_n \rangle$ is a sequence of functions $f_n: A_n \to \reals$, then we define $f = [f_n]: [A_n] \to \hreals$ by $[f_n]([r_n]) = [f_n(r_n)]$. Note that this is defined because if $[r_n] \in [A_n]$ then $r_n \in A_n$ for $\mathcal{F}$-almost all $n$, so $f_n(r_n)$ is defined for $\mathcal{F}$-almost all $n$. Similarly, if $[r_n] = [s_n]$, then $r_n = s_n$ $\mathcal{F}$-almost everywhere, so $f_n(r_n) = f_n(s_n)$ $\mathcal{F}$-almost everywhere, so $[f_n]([r_n])=[f_n]([s_n])$.
+
+It can also be shown that $[f_n] = [g_n]$ iff $\{n \in \nats \sthat f_n = g_n\} \in \mathcal{F}$.
+
+\section*{Assorted Exercises}
+\begin{exercise}[12.2.1]
+    If $f = [f_n]$ is an internal function, and $A = [A_n]$ is any internal subset of $\dom f$, then the image set $f(A) = \{f(a) \sthat a \in A\}$ is the internal set $[f_n(A_n)]$.
+\end{exercise}
+Let $[s_n] \in f(A)$, and let $[r_n] \in \dom f$ such that $f([r_n]) = s$. Then $\{n \in \nats \sthat r_n \in A_n\}$ and $\{n \in \nats \sthat f_n(r_n) = s_n\}$ are in $\mathcal{F}$, so their intersection is in $\mathcal{F}$. Since said intersection is a subset of $\{n \in \nats \sthat s_n \in f_n(A_n)\}$, we conclude $[s_n] \in [f_n(A_n)]$. So $f(A) \subseteq [f_n(A_n)]$.
+
+Now, let $[r_n] \in [f_n(A_n)]$, so $J = \{n \in \nats \sthat r_n \in f_n(A_n)\} \in \mathcal{F}$. Define $[s_n]$ by choosing $s_n \in A_n$ and $f_n(s_n) = r_n$ for $n \in J$ (Axiom of Choice), and setting $s_n$ arbitrarily elsewhere. Then, for $n \in J$, we have $s_n \in A_n$, so as $J \in \mathcal{F}$ we find $[s_n] \in A$. Then, for $n \in J$ we have $f_n(s_n) = r_n$, so $f([s_n]) = [r_n]$, so $[r_n] \in f(A)$. So $[f_n(A_n)] \subseteq f(A)$, and by double inclusion $f(A) = [f_n(A_n)]$.
+
+\begin{exercise}[12.2.7]
+    Let $f$ be an internal funciton such that $f(x) \simeq 0$ whenever $f(x)$ is defined. Show that the range of of $f$ has an infinitesimal least upper bound.
+\end{exercise}
+
+By the definition of of an internal function, $\dom f$ is internal. So by 12.2.1, the range $f(\dom f)$ of $f$ is internal. So by order completenss, it has a least upper bound. This least upper bound cannot be any non-infinitesimal negative number, as non-infinitesimal negative numbers are less than every infinitesimal. For any positive appreciable number $r$, we have $\frac{r}{2}$ as another positive appreciable number that is also an upper bound of $f(\dom f)$, so no positive apprecaible number can be the least upper bound. So, the least upper bound of $f(\dom f)$ has to be larger than any appreciable negative number but smaller than any positive appreciable number, and so must be infinitesimal.
+
+\begin{exercise}[11.10.2.3]
+    If $\{X_n \sthat n \in \nats\}$ is a collection of internal sets, $X$ is internal, and $\cap_{n \in \nats} X_n \subseteq X$, then $\cap_{n \leq k} X_n \subseteq X$.
+\end{exercise}
+
+Suppose not. Then $X - \cap_{n \leq k} X_n$ is nonempty for every $k$, and is clearly decreasing as $k$ is increases. Taking the intersection across all $k$'s, we would (by saturation) find an element of $\cap_{k \in \nats}\left(X - \cap_{n \leq k} X_n\right) = X - \cap_{n \in \nats} X_n$, contradicting $\cap_{n \in \nats} X_n \subseteq X$. 
+
+\section*{Notes \& Progress}
+
+That's part III of the book done. It reminds me of Precalculus, a lot of sort-of-but-not-obviously connected concepts that I assume will be brought to bear later. I didn't TeX much about hyperfinite sums, because I'm still letting the idea percolate---doing integrals with hyperfinite sums seems\dots actually mostly notationally different from the method, but it's more explicit about how the extension of the $S$ function is actually just the hyperreal that's the equivalence class of a sequence of Reimann sums, which makes the idea a lot more intuitive.
+
+I hope the sketch of the proof for saturation isn't too convoluted. Goldblatt specifically says it's hard to get an intuitive picture of that proof, so maybe I'm oversimplifying too much, but it didn't seem that bad to me. I also wish the exercises were harder---I suppose when the content is this hard, just basic manipulation of concepts is good to do, but I hope I get more of a chance to show off later. Alternatively, I'm thinking about giving a technical treatment to the internal set transfer \& definition principles. Goldblatt explains why the latter is true, but doesn't do a formal proof. He also introduces the idea of ``set symbols,'' which were formally treated as shorthand for one-place predicates but now seem to be\dots slightly different, at least, since they're representing internal sets rather than just subsets of $\reals$ and their extensions. It seems like you'd use \L o\'s' Theorem, which Goldblatt also doesn't prove, so maybe I'll try to work out the proof for that too, even if all the technical details would take quite a while.
+
+A question: I know the Thesis should be about 15 pages, but are we allowed to go over? I could include so much stuff, I'm starting to think about how I'm going to pare down to an appropriate amount.
+
+\section*{Goals}
+\begin{itemize}
+    \item Read chapters 13.1-13.13 (pp. 157-176) in Goldblatt. 3 exercises, at least 1 hard.
+    \item Have on paper a sketch of the proof of \L o\'s' theorem and/or the internal set transfer principle.
+    \item Try to TeX out a way to explain nonstandard integration in a way that uses the intuitive insight of hyperfinite summation without going through all the techincal details of what it means to be hyperfinite.
+\end{itemize}
+
+\nocite{goldblatt1998}
+\printbibliography[title={Things I'm Looking At}]
+
+\end{document}

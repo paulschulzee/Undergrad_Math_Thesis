@@ -1,0 +1,114 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{goldblatt1998}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=605f14b2a5c387a9fd5377749cc00b69}{%
+           family={Goldblatt},
+           familyi={G\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{fullhash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{fullhashraw}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{bibnamehash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{authorbibnamehash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{authornamehash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{authorfullhash}{605f14b2a5c387a9fd5377749cc00b69}
+      \strng{authorfullhashraw}{605f14b2a5c387a9fd5377749cc00b69}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-4612-6841-3 978-1-4612-0615-6}
+      \field{series}{Graduate {{Texts}} in {{Mathematics}}}
+      \field{title}{Lectures on the {{Hyperreals}}}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{volume}{188}
+      \field{year}{1998}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-1-4612-0615-6
+      \endverb
+      \verb{file}
+      \verb C:\Users\paul\Zotero\storage\BJB7UTCL\Goldblatt - 1998 - Lectures on the Hyperreals.pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.1007/978-1-4612-0615-6
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/978-1-4612-0615-6
+      \endverb
+      \keyw{Boolean algebra,calculus,construction,differential equation,eXist,functional,Lebesgue measure,measure,measure theory,proof,real analysis,Riemann integral,tool,topology,ultrapower}
+    \endentry
+    \entry{henle1979}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=47cc93fa90768eb9145ec9c495db71da}{%
+           family={Henle},
+           familyi={H\bibinitperiod},
+           given={James\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=7f05d04c0a2d566c201d292895a4cd76}{%
+           family={Kleinberg},
+           familyi={K\bibinitperiod},
+           given={Eugene\bibnamedelima M.},
+           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, Mass}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{e50d71314f2172162ef57040eaca9751}
+      \strng{fullhash}{e50d71314f2172162ef57040eaca9751}
+      \strng{fullhashraw}{e50d71314f2172162ef57040eaca9751}
+      \strng{bibnamehash}{e50d71314f2172162ef57040eaca9751}
+      \strng{authorbibnamehash}{e50d71314f2172162ef57040eaca9751}
+      \strng{authornamehash}{e50d71314f2172162ef57040eaca9751}
+      \strng{authorfullhash}{e50d71314f2172162ef57040eaca9751}
+      \strng{authorfullhashraw}{e50d71314f2172162ef57040eaca9751}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-262-08097-2}
+      \field{pagetotal}{135}
+      \field{title}{Infinitesimal Calculus}
+      \field{year}{1979}
+      \field{dateera}{ce}
+      \true{nocite}
+      \keyw{Calculus}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

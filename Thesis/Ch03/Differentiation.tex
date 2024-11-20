@@ -1,0 +1,34 @@
+\section{Differentiation}
+\subsection{Definition}
+One of the primary motivations for infinitesimal calculus is that it allows use to access the more intuitive, less roundabout conceptualizations of derivatives and integrals. Unlike integrals, which still take some work to define nonstandardly, the nonstandard derivative is almost exactly what we would first guess it to be.
+
+Let $\Delta x$ be a nonzero infinitesimal, and let $\Delta f (x, \Delta x) = f(x + \Delta x) - f(x)$. Intuitively, $\Delta x$ is an infinitesimal change in $x$, and $\Delta f$ is the corresponding change in $f$ caused by ``moving'' $\Delta x$ along the $x$-axis. Then we have:
+
+\[ f'(x) = \frac{\Delta f(x, \Delta x)}{\Delta x} \]
+One small problem: we'd like $f'$ to be a real-valued function on the reals. Luckily, we have a tool to do that:
+
+\[ f'(x) = \stp{\frac{\Delta f(x, \Delta x)}{\Delta x}} \]
+And we have our definition. Well, this might also not be well-defined: we get around \textit{that} problem by definition. We only consider $f'(x)$ to exist when $\stp{\frac{\Delta f(x, \Delta x)}{\Delta x}}$ is the same for \textit{any} nonzero infinitesimal $\Delta x$. In this case, we say that $f$ is \textit{differentiable} at $x$.
+
+\begin{defn}
+    Given a function $f: \reals \to \reals$ and a real number $x$, we say that $f$ is \textit{differnetiable} at $x$ if there is some constant $f'(x)$ such that, for any nonzero infinitesimal $\Delta x$,
+    \[f'(x) = \stp{\frac{f(x + \Delta x) - f(x)}{\Delta x}}\]
+\end{defn}
+
+\subsection{Simple Proofs Using Infinitesimals}
+A number of proofs of basic calculus results can be easily accomplished by infinitesimals. Perhaps most striking is the chain rule.
+
+\begin{thm}[Chain Rule]\label{ChainRule}
+    Given differentiable functions $f, g: \reals \to \reals$, 
+    \[(f \circ g)'(x) = f'(g(x)) \cdot g'(x)\]
+\end{thm}
+
+\begin{proof}
+    Let $\Delta x$ be any nonzero infinitesimal, and let $\Delta g = g(x + \Delta x) - g(x)$. If $\Delta g = 0$, then $g(x + \Delta x) = g(x)$, so $(f \circ g)'(x) = \stp{\frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} = 0$ and clearly $g'(x) = \stp{\Delta g / \Delta x} = 0$, so we are done. If $\Delta g \neq 0$, then since $g'(x) = \stp{\Delta g / \Delta x}$ is defined, we conclude $\Delta g / \Delta x$ is bounded and (since $\Delta x$ is infinitesimal) that $\Delta g$ is infinitesimal. Thus
+\begin{align*}
+    (f \circ g)'(x) &= \stp{\frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} \\
+        &= \stp{\frac{f(g(x) + \Delta g) - f(g(x))}{\Delta g} \cdot \frac{\Delta g}{\Delta x}} \\
+        &= \stp{\frac{f(g(x) + \Delta g) - f(g(x))}{\Delta g}} \cdot \stp{\frac{\Delta g}{\Delta x}} \\
+        &= f'(g(x)) \cdot g'(x)
+\end{align*}
+\end{proof}

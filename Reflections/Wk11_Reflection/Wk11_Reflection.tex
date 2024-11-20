@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[margin=0.75in]{geometry}
+
+\usepackage{tikz}
+
+\usepackage{biblatex}
+\addbibresource{Wk10_Bibliography.bib}
+
+\newcommand{\sthat}{\,|\,}
+\newcommand{\stp}[1]{\st\left(#1\right)}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{\prescript{*}{}{\mathbb{N}}}
+
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+
+\newcommand{\del}{\partial}
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\st}{st}
+\DeclareMathOperator{\inx}{inx}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+
+\title{Week 11 Reflection}
+\author{Paul Schulze}
+\date{November 12th, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Ratio Test}
+\begin{thm}
+    Let $N = [\langle 1, 2, 3, \ldots \rangle]$, and let $\{1\ldots N\} = [\{1, 2, \ldots, n\}]$. Let $a_i: \nats \to \reals$ be a sequence. If for any unbounded $M \in \hnats$ we have $\left|\stp{\frac{a_{M+1}}{a_M}}\right| = L$ for some $L < 1$, then $\sum_{i \in \{1\ldots N\}} a_i$ is bounded.
+\end{thm}
+
+\begin{lemma}
+    Let $r \in \reals$ such that $0 < r < 1$. Then $\sum_{i \in \{1\ldots n\}} r^i \leq \frac{r}{1-r}$.
+\end{lemma}
+\begin{proof}[Proof of Lemma]
+    Let $f(n) = \sum_{i \in \{1\ldots n\}} r^i$. Then $f(N) = \left[\sum_{i \in \{1\ldots n\}} r^i\right] = \sum_{i \in [\{1\ldots n\}]} r^i = \sum_{i \in \{1\ldots N\}} r^i$. Since $0 < r^i$, we have in the reals that $(\forall m \in \nats)(\forall n \in \nats)(n < m \to f(n) > f(m))$. By transfer, this is true in the hyperreals, and so $f(n) < f(N)$ for any $n \in \nats$.
+
+    We have $f(N) = [\langle r, r + r^2, r + r^2 + r^3, \ldots \rangle]$, and so $r \cdot f(N) = [\langle r^2, r^2 + r^3, r^2 + r^3 + r^4, \ldots \rangle]$, and so $r + r \cdot f(N) = r \cdot f(N) = [\langle r + r^2, r + r^2 + r^3, r + r^2 + r^3 + r^4, \ldots \rangle]$. We conclude $\left(r + r\cdot f(n)\right) - f(N) = [\langle r^2, r^3, r^4, \ldots \rangle]$, and hence that $\left(r + r\cdot f(N)\right) - f(N) \simeq 0$, so $f(N) \simeq r + r \cdot f(N)$. We conclude $f(N) \cdot (1 - r) \simeq r$, so since $(1 - r)$ is appreciable we have $f(N) \simeq \frac{r}{1 - r}$.
+
+    We conclude $f(n) \leq \frac{r}{1 - r}$. As a bonus, we have $\sum_{i \in \{1\ldots N\}} r^i \simeq \frac{r}{1-r}$.
+\end{proof}
+
+\begin{lemma}
+    If $\sum_{i \in \{1\ldots N\}} |a_i|$ is bounded, so is $\sum_{i \in \{1\ldots N\}} a_i$
+\end{lemma}
+\begin{proof}[Proof of Lemma]
+    Say $\sum_{i \in \{1\ldots N\}} |a_i| < R$. For any $n \in \nats$, we have $\left|\sum_{i \in \{1 \ldots n\}} a_i\right| \leq \sum_{i \in \{1 \ldots n\}} |a_i| < R$. So $\left|\sum_{i \in \{1 \ldots N\}} a_i\right| < R$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem]
+    Assume for now that $a_i \geq 0$. If not, apply the theorem to $|a_i|$ and use the second lemma. Additionally, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$.
+    
+    Say we have some $n \in \nats$ such that $\frac{a_{m+1}}{a_m} < r$ for all $m \geq n$. Then clearly, for any $k > n$, we have 
+    \begin{align*}
+    \sum_{i \in \{1\ldots k\}} a_i &= \sum_{i = 1}^n a_i + \sum_{i = n+1}^k a_i  \\
+        &\leq \sum_{i = 1}^n a_i + \sum_{i = n+1}^k a_n \cdot r^{i - n} \\
+        &\leq \sum_{i = 1}^n a_i + a_n \cdot \sum_{i = 1}^{k-n}  r^{i} \leq \sum_{i \in \{1\ldots n\}} a_i + a_n \cdot \frac{r}{1-r}
+    \end{align*}
+    Where that last inequality comes from the first lemma. 
+
+    If we again let $f(n) = \sum_{i \in \{1\ldots n\}} a_i$, we can write this statement as
+    \begin{equation} \label{eqn:ratio.test.1}
+        (\exists n \in \nats)(\forall m \in \nats)\left(n \leq m \to \frac{a_{m+1}}{a_m} < r\right) \to (\forall k \in \nats)\left(k > n \to f(k) \leq f(n) + a_n\cdot\frac{r}{1-r}\right) 
+    \end{equation}
+
+    Now, take $N \in \hnats$. For any $M \in \hnats$, if $N \leq M$ then $M$ is unbounded, and so $\frac{a_{M+1}}{a_M} < r$. Hence, in the hyperreals, $(\exists N \in \hnats)(\forall M \in \hnats)\left(N \leq M \to \frac{a_{M+1}}{a_M} < r\right)$. By transfer, this is true in the reals, so that $(\exists n \in \nats)(\forall m \in \nats)\left(n \leq m \to \frac{a_{m+1}}{a_m} < r\right)$. By \ref{eqn:ratio.test.1}, we have $(\forall k \in \nats)\left(k > n \to f(k) \leq f(n) + a_n\cdot\frac{r}{1-r}\right)$. Hence, by transfer, we have $(\forall K \in \nats)\left(K > n \to f(k) \leq f(n) + a_n\cdot\frac{r}{1-r}\right)$. Since $N \in \nats$ and $N > n$, we conclude $f(N) \leq f(n) + a_n\cdot\frac{r}{1-r}$, and thus that $f(N)$ is bounded.
+\end{proof}
+
+\subsection{$\exp$ Exists}
+Take $x \in \reals$. Let $a_i = \frac{x^i}{i!}$. For any unbounded $N \in \hnats$, we have $\frac{a_{N+1}}{a_N} = \frac{x^{(N+1)} / (N+1)!}{x^N / N!} = \frac{x^{(N+1)} \cdot N!}{x^N \cdot (N+1)!} = \frac{x}{N+1} \simeq 0$. So for any unbounded $N \in \hnats$, $\left|\stp{\frac{a_{N+1}}{a_N}}\right| = 0 < 1$. By the ratio test, then, $\inx(x)$ is bounded for any real $x$, and so it makes sense to consider $\exp: \reals \to \reals$.
+
+\section{Contents}
+\begin{enumerate}
+    \item \textbf{Ultrafilters, Ultrapowers, $\hreals$}. A definition of an ultrafilter, and the proof that one exists on $\nats$. The ultrapower construction of $\hreals$, inlcuding the extension of any function or relation. The definition of internal sets and functions.
+    \item \textbf{First-Order Logic \& Transfer}. A definition of our language on $\reals$, including set symbols (sort of new). The proof of the alteration of \L o\'s' theorem (also sort of new).
+    \item \textbf{Structure of $\hreals$}. Introduction of basic terms such as infinitesimal, appreciable, and unbounded. Standard parts and infinite closeness. Density of the hyperrationals, archimedian property, things like that. Maybe saturation (intuitive explanation). Likely light on proofs, since I don't have any new work here.
+    \item \textbf{Differentiation}. One of the motivations of nonstandard analysis is its intuitiveness, and that is demonstrated here. Proof of the chain rule, because it's short. Maybe some thoughts on partial derivatives and the care you have to take there, restricting the derivative to the reals and re-extending it.
+    \item \textbf{Hyperfinite Sums}. A treatment of series, including the proof of the ratio test. $\exp$ as a hyperfinite sum, and the proof that it is its own derivative. Lots of new stuff, but I'm not sure if it's any good.
+    \item \textbf{Integration}. Integrals as hyperfinite sums. Maybe some of the technical worries about the ends of partitions worked out (which would be new), although that sounds a bit dull and like it would take more space than it really should. 
+    \item \textbf{Topology}. Questionable inclusion. Maybe some proofs that the topologies Goldblatt defines are \textit{actually} topologies, if possible.
+\end{enumerate}
+
+At best, this means I should average\dots\ three pages per section. Not ideal. The work on hyperfinite sums is the bulk of the new material, given Goldblatt has 2 pages about them. I can sprinkle exercises in throughout.
+
+\section{Goals}
+Write sections 1, 2, and 3. Section 2 is basically done in week 9's reflection, and section 3 is mostly done spread through the reflections. Section 1 will be mostly new typing.
+
+\end{document}

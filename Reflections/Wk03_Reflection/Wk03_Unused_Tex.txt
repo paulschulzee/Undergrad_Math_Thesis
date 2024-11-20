@@ -1,0 +1,32 @@
+\begin{align*}
+\frac{\del}{\del x} \frac{\del}{\del y} f(x, y) &= \st{\left(\frac{\frac{\del}{\del y} f(x + dx, y) - \frac{\del}{\del y} f(x, y)}{dx}\right)} \\
+&= \st{\left(\frac{\st{\left(\frac{f(x+dx, y+dy) - f(x+dx, y)}{dy}\right)} - \st{\left(\frac{f(x, y+dy)- f(x, y)}{dy}\right)}}{dx}\right)} \\
+&= \st{\left(\frac{f(x+dx,y+dy)-f(x+dx,y)-f(x,y+dy)+f(x,y)}{dxdy}\right)} \\
+&= \st{\left(\frac{\st{\left(\frac{f(x+dx, y+dy) - f(x, y+dy)}{dx}\right)} - \st{\left(\frac{f(x+dx, y)- f(x, y)}{dx}\right)}}{dy}\right)} \\
+&= \st{\left(\frac{\frac{\del}{\del x} f(x, x+dy) - \frac{\del}{\del x} f(x, y)}{dy}\right)} \\
+&= \frac{\del}{\del y} \frac{\del}{\del x} f(x, y)
+\end{align*}
+
+Note that we can shift the scope of $\st{}$ around because $\st(x+y) = \st x + \st y$, $\st (x - y) = \st x - \st y$, $\st (xy) = \st x \st y$, and $\st (x/y) = \st x / \st y$ (proofs are fairly trivial). This is easy---too easy. This equality shouldn't hold when the second partial derivatives aren't continuous. Take
+
+\[ f(x, y) = \begin{cases}
+\frac{xy(x^2-y^2)}{x^2+y^2} & \mbox{for } (x, y) \neq (0, 0) \\
+0 & \mbox {for } (x, y) = (0, 0)
+\end{cases} \]
+
+Standardly, this function has $\frac{\del}{\del x} \frac{\del f}{\del y} = 1$ and $\frac{\del}{\del y} \frac{\del f}{\del x} = -1$\footnotemark. If we use the approach above, we find that
+
+\footnotetext{Okay, now's a good time to ask, what exactly do I need a source for in this case? I'm using Wikipedia, which is... not great, for sure, but this particular counterexample does work. Wikipedia says this example is due to Peano, but the sources it gives are textbooks from at least 50 years ago, so how would I go about finding a better source for that claim?}
+
+
+\begin{align*}
+\frac{\del}{\del x}\frac{\del f}{\del y} &= \st{\left( \frac{\frac{\del}{\del y} f(dx, 0) - \frac{\del}{\del y} f(0, 0)}{dx} \right)}
+\end{align*}
+
+Now, $\frac{\del}{\del y} f(0, 0) = \st{\frac{f(0, dy) - f(0, 0)}{dy}} = 0$ and $\frac{\del}{\del y} f(dx, 0) = \st{\frac{f(dx, dy) - f(dx, 0)}{dy}} = \st{\frac{dxdy(dx^2-dy^2)}{dy(dx^2+dy^2)}}=\st{\frac{dx(dx^2-dy^2)}{dx^2+dy^2}}$. So
+
+\begin{align*}
+\st{\left( \frac{\frac{\del}{\del y} f(dx, 0) - \frac{\del}{\del y} f(0, 0)}{dx} \right)} &= \st{\left(\frac{dx^2-dy^2}{dx^2+dy^2}\right)}
+\end{align*}
+
+Which clearly depends on our choice of $dx$ and $dy$, suggesting the second partial doesn't exist here.

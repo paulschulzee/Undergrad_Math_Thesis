@@ -1,0 +1,17 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[0] Config.pm:311> INFO - Logfile is 'Wk04_Reflection_Schulze.blg'
+[79] biber-MSWIN64:340> INFO - === 
+[110] Biber.pm:420> INFO - Reading 'Wk04_Reflection_Schulze.bcf'
+[188] Biber.pm:994> INFO - Found 5 citekeys in bib section 0
+[197] Biber.pm:4463> INFO - Processing section 0
+[205] Biber.pm:4654> INFO - Looking for bibtex file 'Wk04_Bibliography.bib' for section 0
+[267] bibtex.pm:1713> INFO - LaTeX decoding ...
+[284] bibtex.pm:1519> INFO - Found BibTeX data source 'Wk04_Bibliography.bib'
+[340] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[340] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[340] Biber.pm:4283> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[340] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[346] bbl.pm:676> INFO - Writing 'Wk04_Reflection_Schulze.bbl' with encoding 'UTF-8'
+[348] bbl.pm:779> INFO - Output to Wk04_Reflection_Schulze.bbl
+[349] Biber.pm:131> WARN - ISBN '978-1-4612-6841-3 978-1-4612-0615-6' in entry 'goldblatt1998' is invalid - run biber with '--validate_datamodel' for details.
+[349] Biber.pm:133> INFO - WARNINGS: 1

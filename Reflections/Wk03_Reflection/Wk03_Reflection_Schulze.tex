@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[leqno]{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[margin=0.75in]{geometry}
+
+\newcommand{\st}[1]{\prescript{\circ}{}{#1}}
+\newcommand{\hr}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\del}{\partial}
+
+\title{Week 3 Reflection}
+\author{Paul Schulze}
+\date{September 17th, 2024}
+
+\begin{document}
+
+\maketitle
+
+The techincal details of a nonstandard proof of the fundamental theorem of calculus are interesting, but I don't think repeating them on the page would be enlightening. Similarly, I did some basic work around double integrals, and it was mostly just a lot messier than the single integral case but otherwise a pretty straightforward generalization.
+
+Repeated partial derivatives are another story, however. Single-dimensionally, we say that if $\left(\frac{\Delta f}{\Delta x}\right)_b = \\ \frac{f(b+\Delta x) - f(b)}{\Delta x}$ has the same standard part for every infinitesimal $\Delta x$, then $f'(b)= \st{\frac{\Delta f}{\Delta x}}$.
+
+Multidimensionally, then, it seems like we'd want to say that for $f(x_1, x_2, \ldots, x_n)$, we have 
+
+\[\left(\frac{\partial f}{\partial x_i}\right)_{(b_1, \ldots, b_n)} = f_{x_i}(b_1, \ldots, b_n) = \st{\left(\frac{f(b_1, \ldots, b_i + \Delta x, \ldots, b_n) - f(b_1, \ldots, b_i, \ldots, b_n)}{\Delta x}\right)}\]
+
+Where this is the same for every infinitesimal $\Delta x$. If we want to do repeated partial differentiation, though, we run into a problem. Using $dx$ and $dy$ for infinitesimals, we might be tempted to write, for $f(x,y)$,
+
+\begin{align*}
+\left(\frac{\del f_y}{\del x}\right)_{(a, b)} = f_{yx}(a, b) &= \st{\left(\frac{f_y(a + dx, b) - f_y(a, b)}{dx}\right)} \\
+&= \st{\left(\frac{\st{\left(\frac{f(a+dx, b+dy) - f(a+dx, b)}{dy}\right)} - \st{\left(\frac{f(a,b+dy)-f(a,b)}{dy}\right)}}{dx}\right)}
+\end{align*}
+
+This reveals the problem. Since $f_y(a,b) = \st{\left(\frac{f(a,b+dy)-f(a,b)}{dy}\right)}$, it is \textit{always} real, even if $a$ and/or $b$ are nonreal hyperreals. So $f_y(a+dx,b)-f_y(b)$ is real, so $\frac{f_y(a+dx,b)-f_y(a,b)}{dx}$ is always either $0$ or infinite.
+
+Instead, let $f_y': \hr^2 \to \hr$ be defined by $f_y' = \st{\left(\frac{f(a,b+dy)-f(a,b)}{dy}\right)}$. Next, let $S$ denote all the functions from $\hr^2 \to \hr$ such that for any finite input, the output is also finite. Let $G: S \to (\mathbb{R}^2 \to \mathbb{R})$ be the restriction of a function to the reals, so that $(G(f))(x) = \st f(x)$ for any real $x$. Then we let $H: (\mathbb{R}^2 \to \mathbb{R}) \to S$ be the function that takes a function $f: \mathbb{R}^2 \to \mathbb{R}$ and returns the function $\dot{f}: \hr^2 \to \hr$ that corresponds to the same function symbol in our mathematical language. 
+
+We can then define $f_y = H(G(f_y'))$. In other words, we take $f_y'$, restrict it to the reals, and then take the function on the hyperreals that uses the same function symbol as that restriction. This seems like it should work, but I'm not even sure how or what I would go about proving to show that it does "work." I guess I could use this to define the second partials and then prove that's equivalent to the standard way, which I suppose is a next step.
+
+I spent a lot of time this week doing a long write-up of the problem with this easy proof of Schwarz's theorem that I mistakenly came up with, but then I realized that the error I found was preceded by this one, which is more both more grievous and easier to understand. Surely this must be addressed somewhere else, but I can't easily find it---I'll do some more looking. I got my second book yesterday (Monday), and it has a very brief section on partial derivatives, but nothing that addresses this. (That section is also, for now, mostly Greek to me, which doesn't help).
+
+Goals for next week:
+\begin{enumerate}
+    \item Read chapters 1-3 of Goldblatt. Chapter 1 is history, and 2-3 cover the ultrapower construction of the hyperreals (while saying things like "filter" and "ultrapower").
+    \item Do at least one exercise from each set of exercises (there's one at the end of chapter 2 and three throughout chapter 3).
+    \item Either find something about nonstandard second partials or figure out whether my approach gives second partials equal to the standard appraoch (or at least get more of an idea than "probably maybe")
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

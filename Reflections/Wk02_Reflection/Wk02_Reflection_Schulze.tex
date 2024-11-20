@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[leqno]{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[margin=0.75in]{geometry}
+
+\newcommand{\st}[1]{\prescript{\circ}{}{#1}}
+
+\title{Week 2 Reflection}
+\author{Paul Schulze}
+\date{September 10th, 2024}
+
+\begin{document}
+
+\maketitle
+
+A lot less to talk about this week. I did, as was my goal, read chapters 5 and 6 of Henle and Kleinberg. In short: nonstandardly, a function $f$ is continuous iff for any $p, q \in \mathbb{R}^*$ (where $\mathbb{R}^*$ is the hyperreals), $p \approx q \implies f(p) \approx f(q)$.
+
+This lets us prove things like the Intermediate Value Theorem easily. Say $f$ is continuous on $[a, b]$, and $f(a) \leq c \leq f(b)$. We can divide $[a, b]$ into $n$ pieces for any $n \in \mathbb{N}$, letting $x_i = a+i\frac{b-a}{n}$, and we know that there has to be some $m$ such that $x_m \leq c \leq x_{m+1}$ (since $x_0 \leq c$, if this weren't true we'd have $f(b) = x_n < c$, which is false). In other words, if $I(n)$ means $n$ is an integer, the sentence
+
+\[\forall n \left[(I(n) \land n > 0) \rightarrow \exists m \left(I(m) \land 0 \leq m \leq n \land f\left(a+m\frac{b-a}{n}\right) \leq c \land f\left(a+(m+1)\frac{b-a}{n}\right) \geq c\right)\right]\]
+
+is true in $\mathbb{R}$, and so true in $\mathbb{R}^*$. So we pick an infinite hyperinteger $N$, and this sentences implies the existence of another hyperinteger $M$ such that
+
+\[ f\left(a+M\frac{b-a}{N}\right) \leq c \leq f\left(a+(M+1)\frac{b-a}{N}\right)\]
+
+But we also have $a+(M+1)\frac{b-a}{N} - a+M\frac{b-a}{N} = \frac{b-a}{N} \approx 0$ (as $b-a$ is real and $N$ is infinite), so $a+(M+1)\frac{b-a}{N} \approx a+M\frac{b-a}{N}$. So let $x_M = \st{(a+M\frac{b-a}{N})}$ (where $\st{x}$ indicates the standard part of $x$). Since $f$ is continuous, $f(x_M) \approx f\left(a+m\frac{b-a}{n}\right) \approx f\left(a+(m+1)\frac{b-a}{n}\right)$. Since $c$ is real, this implies that $f(x_M) \leq c \leq f(x_M)$, so $f(x_M) = c$.
+
+That might be a bit basic to include in my thesis, but I figure it's good practice \LaTeX ing these sorts of problems (I love the \textbackslash LaTeX command). I've got a macro for the $\st{}$ and everything.
+
+The exercises I did were all fairly basic---this textbook is hypothetically appealing to those with only a high school math background, I suppose---but that other book should arrive later this week. If it doesn't, I'm going to talk to the library about it, and order it from Amazon if it won't be here for another couple weeks or so. 
+
+The nonstadard treatment of integration is not as easy as the nonstandard treatment of differentiation is---Henle and Kleinberg go through $S_a^b f(x) \Delta x = \sum_{i=1}^n f(x_i)\Delta x + f(b)q$, where $x_i = a + i\Delta x$, $n = \max\{i | x_i \leq b\}$, and $q = b - x_n$---more intuitively, $S_a^b f(x) \Delta x$ is the area under $f(x)$ on $[a, b]$ approximated by rectangles of width $\Delta x$. If you treat this as a function of $\Delta x$, you can prove statements about it in the reals, and then import those to the hyperreals and apply them to when you plug positive infinitesimal values $dx$ into the equation. Then you just define $\int_a^b f(x) dx = \st{\left(S_a^b f(x)dx\right)}$, when that does depend on your choice of $dx$ as long as $0 < dx \approx 0$.
+
+Now that I think of it, if the goal of this book is to teach calculus for the first time, it's already baffling that it does integration before differentiation---doing integration first is totally a mathematician thing that I already firmly believe doesn't make sense, but the fact this is infinitesimal calculus only makes this even more baffling because differentiation is so baffling on the infinitesimal approach.
+
+In any case, one last brief thing: I was pondering whether you could add quantifiers over functions to your language and still be able to transfer statements between the reals and the hyperreals, but you can't. I'm sure this has been proven before, but I didn't consult anything so I'm still going to write out my thoughts just to make sure they're right.
+
+First, you can't add quantifiers over relations. This is because 
+
+\[\exists R [\exists x Rx \land \exists y \neg Ry \land \forall x \forall y (Rx \rightarrow (\neg Ry \rightarrow x > y + 1))]\]
+is true in $\mathbb{R}^*$---let $R$ be the set of positive infinite numbers, for instance---but isn't true in $\mathbb{R}$. $\exists x Rx \land \exists y \neg Ry$ implies $R$ is nonempty and not $\mathbb{R}$, so pick any $y \notin R$. Every $x \in R$ satisfies $x > y + 1$, so $R$ has a lower bound, so since we're in $\mathbb{R}$ $R$ has a greatest lower bound $z$. But $z - 0.5$ isn't in $R$ (as $z$ is a lower bound), so every $x \in R$ satisfies $x > (z - 0.5) + 1 = z + 0.5$, so $z + 0.5$ is a lower bound on $R$. But $z + 0.5 > z$, the greatest lower bound, a contradiction.
+
+It's then easy enough to see you can't quantify over functions, since then you could backdoor in quantification over relations. In our case,
+
+\[ \exists f [\forall x (f(x) = 0 \lor f(x) = 1) \land \exists x f(x) = 1 \land \exists y f(y) = 0 \land \forall x \forall y (f(x) = 1 \rightarrow (f(y) = 0 \rightarrow x > y + 1))]\]
+is true in $\mathbb{R}^*$, for example with $f(x) = 1$ if $x$ is positive and infinite and $f(x) = 0$ otherwise, but can't be true in $\mathbb{R}$ or we could take $\{x | f(x) = 1\}$ and get the kind of set we proved is impossible above.
+
+This isn't that hard, but it took me a weirdly long time to realize I could just work with relations and then functions would follow, so I was thinking a lot about how there's a bunch of functions in the hyperreals that don't have symbols in our language because they send all the real numbers to the same places as typical functions but send the nonstandard hyperreals all over the place.
+
+Goals for next time: I want to read chapters 7 \& 8 of Henle and Kleinberg, covering differential calculus and the Fundamental Theorem, just to brush up and see how they prove the Fundamental Theorem of Calculus. Chapters 9 \& 10 are about Taylor series, so I'm going to skip those in favor of chapter 11, on the topology of the real line, because I glanced at it and it seems like they use nonstandard definitions of "compact" and things like that which could be interesting. I also want to check my understanding by generalizing to higher dimensions, so I'm going to try to prove that if $f$ has continuous second partials on $\mathbb{R}^n$ then $\frac{\partial}{\partial x_i} \frac{\partial}{\partial x_j} f(x_1, \ldots, x_n) = \frac{\partial}{\partial x_j} \frac{\partial}{\partial x_i} f(x_1, \ldots, x_n)$ (Wikipedia says this is a special case of Schwarz's theorem). I will also try to define double-integration for functions of two variables. I have no idea how hard this will be, but if I tell you I'm setting this as a goal then it will force me to put pencil to paper and actually work with this material which will hopefully get my brian moving.
+
+If the Goldblatt book comes, I may read the first chapter or two of that instead of chapter 11 of Henle and Kleinberg.
+
+In short, my goals are: \begin{itemize}
+    \item Read chapters 7 \& 8 of Henle and Kleinberg and do 3 exercises.
+    \item Read chapter 11 of Henle and Kleinberg, or else chapter 1 of Goldblatt, and do 3 exercises.
+    \item Generalize nonstandard derivatives to higher dimensions, and prove the easiest case of Schwarz's theorem.
+    \item Figure out a way to define double-integration nonstandardly.
+\end{itemize}
+
+(Again, the last two are just to keep myself accountable for actually putting pencil to paper at some point, I have no idea how helpful or hard they will be in and of themselves.)
+
+\end{document}

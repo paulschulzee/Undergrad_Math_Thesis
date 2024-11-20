@@ -1,0 +1,208 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[margin=0.75in]{geometry}
+
+\usepackage{tikz}
+
+\usepackage{biblatex}
+\addbibresource{Wk10_Bibliography.bib}
+
+\newcommand{\sthat}{\,|\,}
+\newcommand{\stp}[1]{\st\left(#1\right)}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{\prescript{*}{}{\mathbb{N}}}
+
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+
+\newcommand{\del}{\partial}
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\st}{st}
+\DeclareMathOperator{\inx}{inx}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+
+\title{Week 10 Reflection}
+\author{Paul Schulze}
+\date{November 5th, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{General Results about Limits}
+\begin{thm}
+    $\lim_{x \to h} f(x) = L$ iff $\st(f(\gamma)) = L$ for all $\gamma \simeq h$
+\end{thm}
+\begin{proof}
+    If $\lim_{x \to h} f(x) = L$, then for every $\epsilon > 0$ there is a $\delta > 0$ such that $(\forall x)(|x - h| < \delta \to |f(x) - L| < \epsilon)$. Transferring this, we notice that $|\gamma - h| < \delta \to |f(\gamma) - L| < \epsilon$. But $|\gamma - h| < \delta$ for every real $\delta > 0$, and so $|f(\gamma) - L| < \epsilon$ for every real $\epsilon > 0$. Hence $f(\gamma) \simeq L$.
+
+    Next, say any $\gamma \simeq h$ satisfies $f(\gamma) \simeq L$ (equivalently, $\st(f(\gamma)) = L$). Then, for any $\epsilon > 0$, we can take any positive infinitesmal $\theta$ and have $(\forall x)(|x - h| < \theta \to |f(x) - L| < \epsilon)$, since if $|x - h| < \theta$ we have $x \simeq h$ and so $f(x) \simeq L$. Thus, in the hyperreals we have $(\exists \delta > 0)(\forall x)(|x - h| < \delta \to |f(x) - L| < \epsilon)$, and we can then transfer that statement to the reals. Since this is true for any real $\epsilon > 0$, we find $\lim_{x \to h} f(x) = L$.
+\end{proof}
+
+\section{Integration as Hyperfinite Sums}
+\subsection{Hyperfinite Sums}
+
+\begin{defn}
+    An internal set $A = [A_n]$ is \textit{hyperfinite} if $A_n$ is finite for all $n$.
+\end{defn}
+
+Since $\hr{\varphi}(A)$ iff $[[\varphi(A_n)]] \in \mathcal{F}$, we can transfer a lot of properties of finite sets to hyperfinite ones. In particular, if $\varphi(X)$ for any finite set $X$, then $\hr{\varphi}(A)$ for any hyperfinite set $A$. For instance, every hyperfinite set has a maximum element by $\varphi(X) = (\exists x \in X)(\forall y \in X)(y \leq x)$.
+
+\begin{defn}
+    If $A = [A_n]$ is hyperfinite and $f: \reals \to \reals$, we define the \textit{hyperfinite sum}
+    \[\sum_{\mathclap{x \in [A_n]}} \hr{f}(x) = \left[\ \ \sum_{\mathclap{x \in A_n}} f(x) \:\right]\]
+\end{defn}
+
+Note that $\sum_{x \in A_n} f(x)$ is just the sum of a finite number of real numbers.
+
+\subsection{Integration}
+Now, let $f: [a, b] \to \reals$ be an integrable function. To take $\int_a^b f(x)dx$, we want to divide $[a, b]$ into infinitely many segments of infinitesimal width, and then add up the area of the rectangles above or below those segments. Hyperfinite sums give us a way to do this.
+
+To divide $[a, b]$ into infinitely many segments of infinitesimal width, we will construct a hyperfinite partition where the segments are of infinitesimal width $dx > 0$. Say $dx = [\langle \Delta x_1, \Delta x_2, \ldots \rangle]$. Let $P_n \cup \{b\}$ be partition of $[a, b]$ into segments of width $\Delta x_n$ (plus a final``remainder'' segment of length $\leq \Delta x_n$). So
+\[P_n = \left\{a + k\Delta x_n \sthat 0 \leq k < \frac{b-a}{\Delta x_n},\ k \in \nats\right\}\]
+Let $N_n$ denote $|P_n| = \frac{b-a}{\Delta x_n}$, and let $r_n$ denote the length of the ``remainder'' segment $r_n = b - (a + k(N_n-1))$. Notice $r_n \leq \Delta x_n$. Then, the left Riemann sum of $f$ on $[a, b]$ with partition $P_n \cup \{b\}$ is 
+\[S_a^b (f, \Delta x_n) = \sum_{\mathclap{x \in P_n}} f(x) \Delta x_n \:-\: f\big(a+k(N_n-1)\big)(\Delta x_n - r_n)\]
+Intuitively, we would hope that the integral $\int_a^b f(x)dx$ is the sum of the infinitely many rectangles of infinitesimal width 
+\[\sum_{x \in P}f(x)dx = \left[\ \ \sum_{\mathclap{x \in P_n}} f(x)\Delta x_n\:\right]\]
+as well as the extension 
+\[\hr{S_a^b} (f, dx) \coloneq \left[\ \:\sum_{\mathclap{x \in P_n}} f(x) \Delta x_n \:-\: f\big(a+k(N_n-1)\big)(\Delta x_n - r_n)\right]\]
+The difference between these two hyperreals is $[f\big(a+k(N_n-1)\big)(\Delta x_n - r_n)] = [f\big(a+k(N_n-1)\big)][(\Delta x_n - r_n)]$. Since $f$ is integrable on $[a, b]$, it is bounded, and so $[f\big(a+k(N_n-1)\big)]$ is bounded. Meanwhile, $[\Delta x_n]$ and $[r_n]$ are infinitesimal, so $[\Delta x_n - r_n] = [\Delta x_n] - [r_n]$ is infinitesimal. Since the product of an infinitesimal and a bounded number is infinitesimal, we get that $[f\big(a+k(N_n-1)\big)][(\Delta x_n - r_n)]$ is infinitesimal, so
+\[\hr{S_a^b} (f, dx) \simeq \sum_{x \in P}f(x)dx\]
+and so
+\[\int_a^b f(x)dx = \st\left(\hr{S_a^b} (f, dx)\right) = \st\left(\sum_{x \in P}f(x)dx\right)\]
+
+In our hyperfinite sum, we neglected to account for the last interval perhaps being shorter than $dx$, but as we see here the difference it would make is infinitesimal and so can safely be ignored.
+
+\subsection{Improper Integrals}
+Say $f: [a, b) \to \reals$ is integrable on every interval $[a, c]$ for $a < c < b$. Standardly, we take the \textit{improper integral} (where defined) to be
+\[\int_a^b f(x)dx \coloneq \lim_{c \to b} \int_a^c f(x)dx\]
+By an easy modification of the theorem in section 1, we have that
+\[\int_a^b f(x)dx = \stp{\hr{\int_a^\gamma f(x)dx}}\]
+Where $b \simeq \gamma < b$ and $\hr{\int_a^t f(x)dx}$ indicates the extension $\hr{g}(t)$ of $g(t) = \int_a^t f(x)dx$. Similarly, we have
+\[\int_a^\infty f(x)dx = \stp{\hr{\int_a^\kappa f(x)dx}}\]
+Where $\kappa$ is a positive unbounded hyperreal. To be clear, there is no guarantee that these standard parts exist, or that they are the same across all potential $\gamma$'s or $\kappa$'s---in those cases, the improper integral is undefined.
+
+\begin{example}
+    Say we want to evaluate $\int_0^1 \frac{1}{\sqrt{x}} dx$. 
+\end{example}
+
+\section{Exponentiation}
+
+Let $e_n: \reals \to \reals$ be the function $e_n(x) = \sum_{k \in \{0, 1, 2, \ldots, n\}} \frac{x^k}{k!} = 1 + x + \frac{x^2}{2} + \frac{x^3}{3!} + \cdots$ We define the internal function $\inx = [e_n]$ by $[e_n]([x_n]) = [e_n(x_n)]$. Note that for any real number $x$, we have $\inx(x) = [e_n(x)] = [\sum_{k \in \{0, 1, \ldots, n\}} \frac{x^k}{k!}] = \sum_{k \in \mathbf{N}} \frac{x^k}{k!}$, where $\mathbf{N}$ is the hyperfinite set $[\langle \{0, 1\}, \{0, 1, 2\}, \ldots \rangle]$. 
+
+Let $\exp: \reals \to \reals$ be $\exp(x) = \st(\inx(x))$. Then we have its extension $\hr{\exp}([x_n]) = [\st(\inx(x_n))]$. It's worth being careful here: we may be tempted to expand this to $[\st([e_n](x_n))] = [\st([e_n(x_n)])]$, but this is mixing indices. The proper expansion, using $[x_k]_k$ to denote $[\langle x_1, x_2, \ldots \rangle]$, is $\hr{\exp}([x_n]_n) = [\st([e_k(x_n)]_k)]_n$, by which we mean $[\st([e_k([\langle x_n, x_n, x_n, \ldots \rangle])]_k)]_n$.
+
+\subsection{Derivative of $\exp$}
+
+Let $\delta = [\delta_n]$ be a nonzero infinitesimal. We want to evaluate
+\[\frac{d}{dx}\exp(x) = \stp{\frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta}}\]
+Consider
+\begin{align*}
+    \frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta} &= \frac{[\exp(x + \delta_n)] - [\exp(x)]}{[\delta_n]} \\
+    &= \left[\frac{\exp(x + \delta_n) - \exp(x)}{\delta_n}\right]
+\end{align*}
+Peeling back another layer,
+\begin{align*}
+    \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} &\simeq \frac{\inx(x+\delta_n)-\inx(x)}{\delta_n} \\
+    &= \frac{[e_k(x+\delta_n)]_k - [e_k(x)]_k}{\delta_n} \\
+    &= \left[\frac{e_k(x+\delta_n) - e_k(x)}{\delta_n}\right]_k
+\end{align*}
+Now, we know
+\begin{align*}
+    e_k(x + \delta_n) &= 1 + x + \delta_n + \frac{x^2 + 2x\delta_n + \delta_n^2}{2} + \frac{x^3 + 3x^2\delta_n + \delta_n^2 \cdot (\ldots)}{3\cdot 2!} + \frac{x^4 + 4x^3\delta_n + \delta_n^2 \cdot (\ldots)}{4\cdot 3!}\\
+    &= e_k(x) + \delta_n e_{k-1}(x) + \delta_n^2 \cdot (\ldots)
+\end{align*}
+So
+\[ \frac{e_k(x+\delta_n) - e_k(x)}{\delta_n} = e_{k-1}(x) + \delta_n \cdot (\ldots) \]
+And so
+\begin{align*}
+    \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} &\simeq \left[\frac{e_k(x+\delta_n) - e_k(x)}{\delta_n}\right]_k \\
+    &= [e_{k-1}(x)]_k + \delta_n \cdot [(\ldots)]_k
+\end{align*}
+We will assume, for now, that $[e_{k-1}(x)] \simeq \inx(x)$. Then we have
+\[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \simeq \inx(x) + \delta_n \cdot R_n \]
+But the left side of this is real, and so must be equal to the standard part of the right side
+\[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} = \stp{\inx(x) + \delta_n \cdot R_n} = \st(\inx(x)) + \st(\delta_n \cdot R_n) = \exp(x) + \st(\delta_n R_n) \]
+And after all that, we have
+\begin{align*}
+    \frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta} &= \left[\frac{\exp(x + \delta_n) - \exp(x)}{\delta_n}\right] \\
+    &= [\exp(x) + \delta_n \st(R_n)] = \exp(x) + [\delta_n] \st(R_n)
+\end{align*}
+And so, assuming for now that $[\delta_n \st(R_n)]$ is infinitesimal, we finally have
+\begin{align*}
+    \frac{d}{dx}\exp(x) &= \stp{\frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta}} \\
+    &= \stp{\exp(x) + [\delta_n] \st(R)} \\
+    &= \exp(x)
+\end{align*}
+\pagebreak
+
+\subsection{Lemmas for 3.1}
+\begin{lemma}
+    $[e_{n-1}(x)] \simeq \inx(x)$
+\end{lemma}
+\begin{proof}
+    We want to show that $\inx(x) - [e_{n-1}(x)] \simeq 0$, i.e. that $[e_n(x) - e_{n-1}(x)] \simeq 0$, i.e. that $\left[\frac{x^n}{n!}\right] \simeq 0$, which is true for any choice of $x$ by the same reasoning that shows $\lim_{n \to \infty} \frac{x^n}{n!} = 0$.
+\end{proof}
+
+\begin{lemma}
+    Given an infitesimal $\delta = [\delta_n]$, define $R_n = [(e_k(x + \delta_n) - e_k(x) - \delta_n e_{k-1}(x)) / \delta_n]_k$. Show that $[\st(R_n)]_n$ is infinitesimal.
+\end{lemma}
+We have changed notation here slightly, so that what we are now calling $R_n$ we were before calling $\delta_n R_n$.
+\begin{proof}
+    Let $R_n = [R_n^k]_k$ (that's an upper index, not an exponent). We'll assume that both $x$ and $\delta_n$ are positive---if not, we can just as easily replace $R_n^k$ by $|R_n^k|$, $x$ by $|x|$, and $\delta_n$ by $|\delta_n$ and still get a proof that $[|R_n|]$ is infinitesimal, which will suffice. From 3.1, we have 
+    \[ R_n^k = \frac{\delta_n}{2} + \frac{3x\delta_n + \delta_n^2}{3!} + \frac{6x^2\delta_n + 4x\delta_n^2 + \delta_n^3}{4!} + \cdots + \frac{1}{k!}\sum_{q=0}^{k-2}\binom{k}{q}x^q\delta_n^{(k-1-q)}\]
+    In index notation,
+    \begin{align*}
+        R_n^k &= \sum_{i=2}^k \sum_{q=0}^{i-2}\binom{i}{q}\frac{x^q\delta_n^{(i-1-q)}}{i!} \\
+        &= \sum_{i=2}^k \sum_{q=0}^{i-2}\frac{x^q\delta_n^{(i-1-q)}}{(i-q)!q!} \\
+        &= \delta_n \sum_{i=2}^k \sum_{q=0}^{i-2} \frac{x^{q}\delta_n^{(i-2-q)}}{(i-q)!q!} \\
+        &= \delta_n \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{x^{q}\delta_n^{(i-2-q)}}{(i-q)!q!} \\
+        &\leq \delta_n \sum_{q=0}^{k-2} \sum_{p=0}^{k-2-q} \frac{x^q\delta_n^p}{2q!} \\
+        &\leq \delta_n \sum_{q=0}^{k-2} \frac{x^q}{2q!(1-\delta_n)} = \frac{\delta_n}{(1-\delta_n)}\sum_{q=0}^{k-2} \frac{x^q}{2q!}
+    \end{align*}
+    Note that the geometric series $\sum_{p=0}^{k-2-q} a\delta_n^p \leq \frac{a}{1 - \delta_n}$, a fact I am using from Calc II. We know $\sum_0^\infty \frac{x^q}{2q!}$ converges in the standard definition by the ratio test (also Calc II), and so we know there is some upper bound $B$ such that $\sum_{q=0}^{k-2} \frac{x^q}{2q!} < B$ for all $k$.
+
+    Now, take any positive real number $r$. $\delta = [\delta_n]$ is infinitesimal, so $\frac{\delta}{1 - \delta} = \left[\frac{\delta_n}{1-\delta_n}\right]$ is too. So $\left[\frac{\delta_n}{1-\delta_n}\right] < r/B$, and so $\frac{\delta_n}{1-\delta_n} < r/B$ for $\mathcal{F}$-almost all $n$. When $\frac{\delta_n}{1-\delta_n} < r/B$, we have $R_n^k \leq \frac{\delta_n}{1-\delta_n} \cdot B \leq \frac{r}{B} \cdot B = r$ for all $k$, and so $[R_n^k]_k \leq r$.
+
+    So, given any positive real number $r$, we know that for $\mathcal{F}$-almost all $n$, we have $[R_n^k]_k \leq r$, so $\st(R_n) \leq r$. So for any positive real number $r$, we have $[\st(R_n)]_n \leq r$, and hence $[\st(R_n)]_n$ is infinitesimal.
+\end{proof}
+
+How did this happen. I thought this would be easy. I guess I have to talk about geometric series and the ratio test next week. I don't even know if there \textit{is} a nonstandard proof of the ratio test.
+
+\section{Notes \& Goals}
+\subsection{Notes}
+This wasn't supposed to happen. I spend so much time on exponentiation. It was supposed to be a quick detour.
+
+Anyways, unless I've made a critical error and it's all nonsense this is definitely going in, if only because it's all original work. Defining $\exp$ in terms of hyperfinite summation is a cool idea, I think. I do still have to prove that that\dots is bounded, and hence has a standard part, for all real inputs. Actaully, if I do that properly then I won't have to bring it up in the middle of the lemma.
+
+I also spent a lot of time this week worrying about the ``remainder'' section in integration, before I realized that I \textit{can} assume that if $f$ is integrable on $[a, b]$ it is bounded. I forgot that improper integrals weren't real integrals. Whoops.
+
+\subsection{Goals}
+\begin{itemize}
+    \item \textit{Actually for real} sit down and list everything that's going in the thesis. 
+    \item Figure out if I can prove the properties of geometric series and the ratio test nonstandardly.
+    \item Read Chapters 13.14---14 (pp. 176-189) in Goldblatt. This is almost certianly not going to be concluded, but dang it, I wanna make sure I've read it by the end of the semester anyways.
+\end{itemize}
+
+\nocite{goldblatt1998}
+\printbibliography[title={Things I'm Looking At}]
+
+
+
+
+\end{document}

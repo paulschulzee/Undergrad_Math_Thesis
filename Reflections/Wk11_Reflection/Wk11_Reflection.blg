@@ -1,0 +1,9 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[0] Config.pm:311> INFO - Logfile is 'Wk11_Reflection.blg'
+[85] biber-MSWIN64:340> INFO - === 
+[121] Biber.pm:420> INFO - Reading 'Wk11_Reflection.bcf'
+[202] Biber.pm:994> INFO - Found 0 citekeys in bib section 0
+[212] bbl.pm:676> INFO - Writing 'Wk11_Reflection.bbl' with encoding 'UTF-8'
+[212] bbl.pm:779> INFO - Output to Wk11_Reflection.bbl
+[212] Biber.pm:131> WARN - The file 'Wk11_Reflection.bcf' does not contain any citations!
+[212] Biber.pm:133> INFO - WARNINGS: 1
