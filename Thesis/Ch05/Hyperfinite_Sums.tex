@@ -64,7 +64,7 @@ For a sequence $a_i: \nats \to \reals$, we have $\sum_{i \in \{0\ldots n\}} a_i 
     Assume that $a_i \geq 0$---if not, apply the theorem to $|a_i|$ and use \ref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unbounded hypernatural $M$.
 
     Take any unbounded $N \in \hnats$. For any $M \in \hnats$, if $N \leq M$, then $M$ is also unbounded, and so $\frac{a_{M+1}}{a_M} < r$. So we have the sentence
-    \[ (\exists n \in \hnats)(\forall m \in \hnats)(n \leq m \to \frac{a_{m+1}}{a_m} < r) \]
+    \[ (\exists n \in \hnats)(\forall m \in \hnats)\left(n \leq m \to \frac{a_{m+1}}{a_m} < r\right) \]
     If we transfer this over to the reals, we find that there is some natural number $n$ such that for any natural $m \geq n$ we have $\frac{a_{m+1}}{a_m} < r$. Then clearly, for any $m > n$, we have 
     \begin{align*}
     \sum_{i = 0}^m a_i &= \sum_{i = 0}^n a_i + \sum_{i = n+1}^m a_i \\
