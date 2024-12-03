@@ -74,5 +74,74 @@ For a sequence $a_i: \nats \to \reals$, we have $\sum_{i \in \{0\ldots n\}} a_i 
     Where that last inequality comes from \ref{LessThanGeometricSeries}.
 
     So, we find that there is some $n$ such that for any $m \geq n$, we have $\sum_{i = 0}^m a_i \leq \sum_{i = 0}^n a_i + a_n \cdot \frac{r}{1-r}$. We conclude that $\sum_{i = 0}^\mathcal{N} a_i \leq \sum_{i = 0}^n a_i + a_n \cdot \frac{r}{1-r}$, and hence that $\sum_{i = 0}^\mathcal{N} a_i$ is bounded.
-
 \end{proof}
+
+\subsection{The $\exp$ function}
+We can define the exponential function \[\exp(x) = \stp{\sum_{i=0}^\mathcal{N} \frac{x^i}{i!}}\]
+
+For convenience, we will write $e_k(x) = \sum_{i=0}^k \frac{x^i}{i!}$, and we will write $\inx(x)$ to denote the internal function $[e_k](x)$. Note that we have
+
+\[\stp{\inx(x)} = \stp{[e_k](x)} = \stp{[e_k(x)]} = \stp{\left[\sum_{i=0}^k\frac{x^i}{i!}\right]} = \stp{\sum_{i=0}^\mathcal{N} \frac{x^i}{i!}} = \exp(x) \]
+
+\begin{thm}
+    For any real $x$, $\exp(x)$ exists.
+\end{thm}
+
+\begin{proof}
+    We use the ratio test (\ref{RatioTest}) to prove that $\sum_{i=0}^\mathcal{N} \frac{x^i}{i!}$ is bounded, and so has a standard part. Let $M$ be an unbounded hypernatural. Then 
+    \[
+        \frac{x^{M+1}}{(M+1)!} \  / \  \frac{x^M}{M!} = \frac{x^{M+1}M!}{x^M (M+1)!} 
+        = \frac{x}{M+1}
+    \]
+    Since $x$ is real and $M+1$ is unbounded, $\frac{x}{M+1}$ is infinitesimal, and hence has standard part $0$. Since $0 < 1$, and since this holds for any unbounded hypernnatural, the conditions of \ref{RatioTest} are met and we are done.
+\end{proof}
+
+We now want to prove that $\exp'(x) = \exp(x)$. This will involve two lemmas, which I will assume during the proof and prove after the fact.
+
+\begin{thm}
+    For any real $x$, $\exp'(x) = \exp(x)$.
+\end{thm}
+
+\begin{proof}
+    Let $\delta = [\delta_n]$ be a nonzero infinitesimal. We want to evaluate
+    \[ \exp'(x) = \stp{\frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta}} \]
+    Consider
+    \[ \frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta} = \frac{[\exp(x+\delta_n)]_n - [\exp(x)]_n}{[\delta_n]_n} = \left[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \right]_n \]
+    Peeling back another layer, and remembering $\inx(x) = [e_k(x)]_k$,
+    \begin{align*}
+    \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} &\simeq \frac{\inx(x + \delta n) - \inx(x)}{\delta n} \\
+    &= \left[ \frac{e_k(x + \delta_n) - e_k(x)}{\delta_n} \right]_k
+    \end{align*}
+    Now, let $R_n^k = \frac{1}{\delta_n}(e_k(x + \delta_n) - e_k(x) - \delta_n e_{k-1}(x))$ (that's an upper index, not an exponent). Then 
+    \[ \frac{e_k(x+\delta_n) - e_k(x)}{\delta_n} = e_{k-1}(x) + R_n^k \]
+    So, we have 
+    \begin{align*}
+    \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} &\simeq \left[ \frac{e_k(x + \delta_n) - e_k(x)}{\delta_n} \right]_k \\
+    &= [e_{k-1}(x)]_k + [R_n^k]_k
+    \end{align*}
+    By our as-yet unproven lemma \ref{expDerivProofLemma1}, $[e_{k-1}(x)]_k \simeq \inx(x)$. So
+    \[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \simeq \inx(x) + [R_n^k]_k \]
+    But the left side of this is real, and so must be the standard part of the right side
+    \[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} = \stp{\inx(x) + [R_n^k]_k} = \exp(x) + \stp{[R_n^k]_k} \]
+    So after all that, we have 
+    \begin{align*}
+    \frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta} &= \left[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \right]_n \\
+        &= [\exp(x) + \stp{[R_n^k]_k}]_n = \exp(x) + [\stp{[R_n^k]_k}]_n
+    \end{align*}
+    By our as-yet unproven lemma \ref{expDerivProofLemma2}, $[\stp{[R_n^k]_k}]_n$ is infinitesimal, and so
+    \begin{align*}
+    \exp'(x) &= \stp{\frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta}} \\
+    &= \stp{\exp(x) + [\stp{[R_n^k]_k}]_n} = \exp(x)
+    \end{align*}
+\end{proof}
+
+\begin{lemma}\label{expDerivProofLemma1}
+    $[e_{n-1}(x)] \simeq \inx(x)$
+\end{lemma}
+\begin{proof}
+    We want to show that $\inx(x) - [e_{n-1}(x)] \simeq 0$, i.e. that $[e_n(x) - e_{n-1}(x)] \simeq 0$, i.e. that $[\frac{x^n}{n!}] \simeq 0$. Take any real $r > 0$.  
+\end{proof}
+
+\begin{lemma}\label{expDerivProofLemma2}
+    
+\end{lemma}
