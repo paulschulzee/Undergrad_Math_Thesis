@@ -8,7 +8,7 @@ Let $\Delta x$ be a nonzero infinitesimal, and let $\Delta f (x, \Delta x) = f(x
 One small problem: we'd like $f'$ to be a real-valued function on the reals. Luckily, we have a tool to do that:
 
 \[ f'(x) = \stp{\frac{\Delta f(x, \Delta x)}{\Delta x}} \]
-And we have our definition. Well, this might also not be well-defined: we get around \textit{that} problem by definition. We only consider $f'(x)$ to exist when $\stp{\frac{\Delta f(x, \Delta x)}{\Delta x}}$ is the same for \textit{any} nonzero infinitesimal $\Delta x$. In this case, we say that $f$ is \textit{differentiable} at $x$.
+And we have our definition. Well, this might also not be well-defined: we get around \textit{that} problem by definition. We only consider $f'(x)$ to exist when $\stp{\frac{\Delta f(x, \Delta x)}{\Delta x}}$ is the same for \textit{any} nonzero infinitesimal $\Delta x$. In this case, we say that $f$ is \textit{differentiable} at $x$. Note that this definition of differentiability and the derivative is equivalent to the standard definition: see Thm 8.1.1 in \cite{goldblatt1998}.               
 
 \begin{defn}
     Given a function $f: \reals \to \reals$ and a real number $x$, we say that $f$ is \textit{differnetiable} at $x$ if there is some constant $f'(x)$ such that, for any nonzero infinitesimal $\Delta x$,
@@ -23,7 +23,7 @@ A number of proofs of basic calculus results can be easily accomplished by infin
     \[(f \circ g)'(x) = f'(g(x)) \cdot g'(x)\]
 \end{thm}
 
-\begin{proof}
+\begin{proof}[Proof by Goldblatt]
     Let $\Delta x$ be any nonzero infinitesimal, and let $\Delta g = g(x + \Delta x) - g(x)$. If $\Delta g = 0$, then $g(x + \Delta x) = g(x)$, so $(f \circ g)'(x) = \stp{\frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} = 0$ and clearly $g'(x) = \stp{\Delta g / \Delta x} = 0$, so we are done. If $\Delta g \neq 0$, then since $g'(x) = \stp{\Delta g / \Delta x}$ is defined, we conclude $\Delta g / \Delta x$ is bounded and (since $\Delta x$ is infinitesimal) that $\Delta g$ is infinitesimal. Thus
 \begin{align*}
     (f \circ g)'(x) &= \stp{\frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} \\
@@ -32,3 +32,32 @@ A number of proofs of basic calculus results can be easily accomplished by infin
         &= f'(g(x)) \cdot g'(x)
 \end{align*}
 \end{proof}
+
+\subsection{Partial Derivatives}
+Goldblatt doesn't talk about partial derivatives, but we can easily enough extend our infinitesimal definition of derivative.
+
+\begin{defn}
+    If $f: \reals^n \to \reals$, then we define
+    \[f_{x_k}(b_1, b_2, \ldots, b_n) = \stp{\frac{f(b_1, \ldots, b_k + \Delta x, \ldots, b_n) - f(b_1, \ldots, b_k, \ldots, b_n)}{\Delta x}} \]
+    for any infinitesimal $\Delta x$. This is only defined when it doesn't depend on our choice of $\Delta x$.
+\end{defn}
+
+This gets complicated when we want to deal with repeated partial derivatives. Say $f: \reals^2 \to reals$, and denote the inputs of $f$ by $f(x, y)$. Then we might want to write
+
+\begin{align*}
+    f_{yx}(a, b) &= \stp{\frac{f_y(a + \Delta x, b) - f_y(a, b)}{\Delta x}} \\
+        &= \stp{\frac{\stp{\frac{f(a + \Delta x, b + \Delta y) - f(a + \Delta x, b)}{\Delta y}} - \stp{\frac{f(a, b + \Delta y) - f(a, b)}{\Delta y}}}{\Delta x}}
+\end{align*}
+
+which would allow us to easily get $f_{yx}(a, b)= f_{xy}(a, b)$. However, this isn't right. Firstly, the numerator is the difference of two real numbers, and so is real, which would mean $f_{yx}(a, b)$ is either $0$ or undefined (as a real divided by an infinitesimal is either $0$ or unbounded). The mistake here is that $f_y(a + \Delta x, b) \neq \stp{\frac{f(a + \Delta x, b + \Delta y) - f(a + \Delta x)}{\Delta y}}$. Since in this case $f_y$ is taking a nonreal input, we have to use the extension $\hr{f_y}(a + \Delta x, b)$. If $\Delta x = [\Delta x_n]$, then this is $[f_y(a + \Delta x_n, b)] = \left[\stp{\frac{f(a + \Delta x_n, b + \Delta y) - f(a + \Delta x_n, b)}{\Delta y}}\right]$. This is the equivalence class of a sequence of real numbers, but it needn't be a real number itself.
+
+\begin{thm}
+    Let $f: \reals^n \to \reals$. Let $\hat{f}_{x_k}$ denote the standard definition of the partial derivative, namely
+    \[ hat{f}_{x_k}(b_1, \ldots, b_n) = \lim_{h \to 0} \frac{f(b_1, \ldots, b_k + h, \ldots, b_n) - f(b_1, \ldots, b_k, \ldots, b_n)}{h} \]
+    Then $\hat{f}_{x_k}(b_1, \ldots, b_n)$ exists iff $f_{x_k}(b_1, \ldots, b_n)$ does, and if they both exist $\hat{f}_{x_k}(b_1, \ldots, b_n) = f_{x_k}(b_1, \ldots, b_n)$.
+\end{thm}
+
+\begin{proof}
+    Let $g: \reals \to \reals$ be defined by $g(x) = f(b_1, \ldots, b_{k-1}, x, b_{k+1}, \ldots, b_n)$. Let $\hat{g}'(x)$ denote the standard derivative of $g$ and $g'(x)$ denote the nonstandard derivative of $g$. Clearly $\hat{g}'(x) = \hat{f}_{x_k}(x)$ and $g'(x) = f_{x_k}(x)$, and by Thm 8.1.1 in \cite{goldblatt1998} we have $\hat{g}'(b_k)$ is defined iff $g'(b_k)$, and $\hat{g}'(b_k) = g'(b_k)$ if both exist, so we are done.
+\end{proof}
+

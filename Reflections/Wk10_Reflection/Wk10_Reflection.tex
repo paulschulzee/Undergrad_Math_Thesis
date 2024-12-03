@@ -103,7 +103,7 @@ Where $\kappa$ is a positive unbounded hyperreal. To be clear, there is no guara
 
 \section{Exponentiation}
 
-Let $e_n: \reals \to \reals$ be the function $e_n(x) = \sum_{k \in \{0, 1, 2, \ldots, n\}} \frac{x^k}{k!} = 1 + x + \frac{x^2}{2} + \frac{x^3}{3!} + \cdots$ We define the internal function $\inx = [e_n]$ by $[e_n]([x_n]) = [e_n(x_n)]$. Note that for any real number $x$, we have $\inx(x) = [e_n(x)] = [\sum_{k \in \{0, 1, \ldots, n\}} \frac{x^k}{k!}] = \sum_{k \in \mathbf{N}} \frac{x^k}{k!}$, where $\mathbf{N}$ is the hyperfinite set $[\langle \{0, 1\}, \{0, 1, 2\}, \ldots \rangle]$. 
+Let $e_n: \reals \to \reals$ be the function $e_n(x) = \sum_{k \in \{0, 1, 2, \ldots, n\}} \frac{x^k}{k!} = 1 + x + \frac{x^2}{2} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!}$ We define the internal function $\inx = [e_n]$ by $[e_n]([x_n]) = [e_n(x_n)]$. Note that for any real number $x$, we have $\inx(x) = [e_n(x)] = [\sum_{k \in \{0, 1, \ldots, n\}} \frac{x^k}{k!}] = \sum_{k \in \mathbf{N}} \frac{x^k}{k!}$, where $\mathbf{N}$ is the hyperfinite set $[\langle \{0, 1\}, \{0, 1, 2\}, \ldots \rangle]$. 
 
 Let $\exp: \reals \to \reals$ be $\exp(x) = \st(\inx(x))$. Then we have its extension $\hr{\exp}([x_n]) = [\st(\inx(x_n))]$. It's worth being careful here: we may be tempted to expand this to $[\st([e_n](x_n))] = [\st([e_n(x_n)])]$, but this is mixing indices. The proper expansion, using $[x_k]_k$ to denote $[\langle x_1, x_2, \ldots \rangle]$, is $\hr{\exp}([x_n]_n) = [\st([e_k(x_n)]_k)]_n$, by which we mean $[\st([e_k([\langle x_n, x_n, x_n, \ldots \rangle])]_k)]_n$.
 
@@ -124,7 +124,7 @@ Peeling back another layer,
 \end{align*}
 Now, we know
 \begin{align*}
-    e_k(x + \delta_n) &= 1 + x + \delta_n + \frac{x^2 + 2x\delta_n + \delta_n^2}{2} + \frac{x^3 + 3x^2\delta_n + \delta_n^2 \cdot (\ldots)}{3\cdot 2!} + \frac{x^4 + 4x^3\delta_n + \delta_n^2 \cdot (\ldots)}{4\cdot 3!}\\
+    e_k(x + \delta_n) &= 1 + x + \delta_n + \frac{x^2 + 2x\delta_n + \delta_n^2}{2} + \frac{x^3 + 3x^2\delta_n + \delta_n^2 \cdot (\ldots)}{3\cdot 2!} + \cdots + \frac{x^k + kx^{k-1}\delta_n + \delta_n^2(\cdots)}{k!}\\
     &= e_k(x) + \delta_n e_{k-1}(x) + \delta_n^2 \cdot (\ldots)
 \end{align*}
 So
