@@ -83,7 +83,7 @@ For convenience, we will write $e_k(x) = \sum_{i=0}^k \frac{x^i}{i!}$, and we wi
 
 \[\stp{\inx(x)} = \stp{[e_k](x)} = \stp{[e_k(x)]} = \stp{\left[\sum_{i=0}^k\frac{x^i}{i!}\right]} = \stp{\sum_{i=0}^\mathcal{N} \frac{x^i}{i!}} = \exp(x) \]
 
-\begin{thm}
+\begin{thm}\label{expExists}
     For any real $x$, $\exp(x)$ exists.
 \end{thm}
 
@@ -139,9 +139,42 @@ We now want to prove that $\exp'(x) = \exp(x)$. This will involve two lemmas, wh
     $[e_{n-1}(x)] \simeq \inx(x)$
 \end{lemma}
 \begin{proof}
-    We want to show that $\inx(x) - [e_{n-1}(x)] \simeq 0$, i.e. that $[e_n(x) - e_{n-1}(x)] \simeq 0$, i.e. that $[\frac{x^n}{n!}] \simeq 0$. Take any real $r > 0$.  
+    We want to show that $\inx(x) - [e_{n-1}(x)] \simeq 0$, i.e. that $[e_n(x) - e_{n-1}(x)] \simeq 0$, i.e. that $[\frac{x^n}{n!}] \simeq 0$. Note this is true iff $|[\frac{x^n}{n!}]| = [\frac{|x|^n}{n!}] \simeq 0$, so we can show that this is true for all positive $x$ and be done. If $[\frac{x^n}{n!}] \geq r$ for some positive real $r$, then we'd have $\frac{x^n}{n!} \geq r$ for $\mathcal{F}$-almost all $n$, hence for infinitely many $n$. Then clearly $\sum_{i = 0}^\mathcal{N} \frac{x^n}{n!}$ would be unbounded, and so $\exp(x)$ would be undefined---but we know by \ref{expExists} that this is false, and so our assumption that $\frac{x^n}{n!} \geq r$ must be false, hence $\frac{x^n}{n!} < r$ for any positive real $r$, and we are done.
 \end{proof}
 
 \begin{lemma}\label{expDerivProofLemma2}
-    
+    Let $R_n^k = \frac{1}{\delta_n}(e_k(x + \delta_n) - e_k(x) - \delta_n e_{k-1}(x))$. Then $[\stp{[R_n^k]_k}]_n$ is infinitesimal.
 \end{lemma}
+
+\begin{proof}
+    First, we will find a more explicit formula for $R_n^k$. We have
+    \[e_k(x + \delta_n) = 1 + x + \delta_n + \frac{x^2 + 2x\delta_n + \delta_n^2}{2!} + \cdots + \frac{x^k + kx^{k-1}\delta_n + \cdots + \delta_n^k}{k!} \]
+    and so
+    \begin{align*}
+    e_k(x + \delta_n) - e_k(x) &= \delta_n + \frac{2x\delta_n + \delta_n^2}{2!} + \frac{3x^2\delta_n + 3x\delta_n^2 + \delta_n^3}{3!} + \cdots + \frac{kx^{k-1}\delta_n + \cdots + \delta_n^k}{k!} \\
+        &= \delta_n\left(1 + \frac{2x}{2!} + \frac{3x^2}{3!} + \cdots + \frac{kx^{k-1}}{k!}\right) + \frac{\delta_n^2}{2!} + \frac{3x\delta_n^2 + \delta_n^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n^2 + \cdots + \delta_n^k}{k!} \\
+        &= \delta_n e_{k-1}(x) + \delta_n\left(\frac{\delta_n}{2!} + \frac{3x\delta_n + \delta_n^2}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n + \cdots + \delta_n^{k-1}}{k!}\right)
+    \end{align*}
+    So we find that 
+    \[R_n^k = \frac{\delta_n}{2!} + \frac{3x\delta_n + \delta_n^2}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n + \cdots + \delta_n^{k-1}}{k!} = \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q \delta_n^{(i-1-q)}}{i!}\]
+    Using the fact that $\binom{i}{q} = \frac{i!}{q!(i-q!)}$, we have
+    \begin{align*}
+    R_n^k &= \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q \delta_n^{(i-1-q)}}{i!} \\
+        &= \sum_{i=2}^k \sum_{q=0}^{i-2}\frac{x^q\delta_n^{(i-1-q)}}{(i-q)!q!} \\
+        &= \delta_n \sum_{i=2}^k \sum_{q=0}^{i-2} \frac{x^{q}\delta_n^{(i-2-q)}}{(i-q)!q!} \\
+        &= \delta_n \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{x^{q}\delta_n^{(i-2-q)}}{(i-q)!q!}
+    \end{align*}
+    Note then that
+    \[ |R_n^k| = |\delta_n| \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^q |\delta_n|^{(i-2-q)}}{(i-q)!q!} \]
+    Now, note that $i - q \geq 2$ in every term, and so $(i-q)! \geq 2$ and hence $\frac{|x|^q |\delta_n|^{(i-2-q)}}{(i-q)!q!} \leq \frac{|x|^q |\delta_n|^{(i-2-q)}}{2q!}$. Combining this move with a change of index, setting $p = i - 2 - q$, we have
+    \[ |R_n^k| \leq |\delta_n|\sum_{q=0}^{k-2} \sum_{p=0}^{k-2-q} \frac{|x|^q |\delta_n|^p}{2q!} = |\delta_n| \sum_{q=0}^{k-2} \left(\frac{|x|^q}{2q!} \cdot \sum_{p=0}^{k-2-q} |\delta_n|^p \right) \]
+    By \ref{LessThanGeometricSeries}, assuming $|\delta_n| < 1$ (as $[\delta_n]$ is infinitesimal), we then have
+    \[ |R_n^k| \leq |\delta_n|  \sum_{q=0}^{k-2}\left(\frac{|x|^q}{2q!} \cdot \frac{1}{1-|\delta_n|}\right) = \frac{|\delta_n|}{1-|\delta_n|} \sum_{q=0}^{k-2} \frac{|x|^q}{2q!} = \frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{e_{k-2}(|x|)}{2}\]
+    Now, for any $n$, we have
+    \[ |\stp{[R_n^k]_k}| = \stp{[|R_n^k|]_k} \leq \stp{\left[\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{e_{k-2}(|x|)}{2}\right]_k} = \stp{\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{[e_{k-2}(|x|)]_k}{2}} = \frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{\exp(|x|)}{2} \]
+    (I am using here that $[e_{k-2}(x)] \simeq \inx(x)$, which is an easy extension of the reasoning in \ref{expDerivProofLemma1}). 
+
+    Now, we want to show that $[\stp{[R_n^k]_k}]_n$ is infinitesimal, which is true iff $\left|[\stp{[R_n^k]_k}]_n\right|$ is infinitesimal. Then
+    \[\left|[\stp{[R_n^k]_k}]_n\right| = [|\stp{[R_n^k]_k}|]_n \leq \left[\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{\exp(|x|)}{2}\right]_n = \frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}\] 
+    Since $|\delta|$ is a positive infinitesimal, $1 - |\delta|$ is appreciable. Similarly, $\frac{\exp(|x|)}{2}$ is positive and apprecaible. Hence, $\frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}$ is a positive infinitesimal. Since $0 \leq \left|[\stp{[R_n^k]_k}]_n\right| \leq \frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}$, we conclude $\left|[\stp{[R_n^k]_k}]_n\right|$ is infinitesimal, hence $[\stp{[R_n^k]_k}]_n$ is infinitesimal.
+\end{proof}
