@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[margin=0.75in]{geometry}
+
+\newcommand{\sthat}{\,|\,}
+\newcommand{\stp}[1]{\st\left(#1\right)}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{\prescript{*}{}{\mathbb{R}}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{\prescript{*}{}{\mathbb{N}}}
+
+\newcommand{\hr}[1]{\prescript{*}{}{#1}}
+
+\newcommand{\del}{\partial}
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\st}{st}
+\DeclareMathOperator{\inx}{inx}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+
+\title{Week 13 Reflection}
+\author{Paul Schulze}
+\date{December 3rd, 2024}
+
+\begin{document}
+
+\maketitle
+
+Not much to declare, progress-wise. I managed to get chapter 5 done, which is the one I had the most to figure out in. Unfortunatley I didn't manage to figure out any shortenings or simplifications that make sense, although I did move more of the reasoning from the main proof that $\exp$ is its own derivative into the big lemma. I'm considering cutting the lemma entirely, and just integrating that into the proof---that would leave me with an absolutely massive proof, but it would demystify the move during the proof. Alternatively I might move the lemma before the proof, but there it would seem somewhat arbitrary. Finally I might just talk about the formula for $R_n^k$ and why it \textit{looks} like it should be negligible before the main proof, and then actually \textit{do} the proof afterwards. I think that last one would be best.
+
+Sections 2 and 3 should be mostly copy/paste, so I'm not worried about those. I'm really reconsidering section 6. I don't actually have much to talk about, unless I want to do some stuff with improper integrals. I'm starting to consider including the topology section \textit{instead}, given it doesn't make much sense to define integrals just to never use them. The sort of reasoning about how the function extension and the hyperfinite sum are the same is in some sense ``softly included'' in section 5, where I write $\inx$ as both a hyperfinite sum and an internal function.
+
+The thesis is only 5.5 pages so far, though, and I've written 1/3rd of the chapters, so I have plenty of room. Now I just have to write faster.
+
+\end{document}
