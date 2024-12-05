@@ -34,7 +34,7 @@ A number of proofs of basic calculus results can be easily accomplished by infin
 \end{proof}
 
 \subsection{Partial Derivatives}
-Goldblatt doesn't talk about partial derivatives, but we can easily enough extend our infinitesimal definition of derivative.
+This section is all individual work without the guidance of any texts.
 
 \begin{defn}
     If $f: \reals^n \to \reals$, then we define
@@ -61,3 +61,151 @@ which would allow us to easily get $f_{yx}(a, b)= f_{xy}(a, b)$. However, this i
     Let $g: \reals \to \reals$ be defined by $g(x) = f(b_1, \ldots, b_{k-1}, x, b_{k+1}, \ldots, b_n)$. Let $\hat{g}'(x)$ denote the standard derivative of $g$ and $g'(x)$ denote the nonstandard derivative of $g$. Clearly $\hat{g}'(x) = \hat{f}_{x_k}(x)$ and $g'(x) = f_{x_k}(x)$, and by Thm 8.1.1 in \cite{goldblatt1998} we have $\hat{g}'(b_k)$ is defined iff $g'(b_k)$, and $\hat{g}'(b_k) = g'(b_k)$ if both exist, so we are done.
 \end{proof}
 
+\subsection{Series NOTE TO FUTURE SELF: TALK ABOUT CAUCHY CRITERION}
+The definitions in this section are thanks to Goldblatt, and most of the results are exercises.
+
+Let $a_n: \nats \to \reals$. We can define $s_n: \nats \to \reals$ by 
+\[ s_n = \sum_{i=0}^n a_i \]
+Now, for any unbounded $N \in \hnats$, we can define
+\[ \sum_{i=0}^N a_i = \hr{s_N} \]
+Finally, if for any unbounded $N, M \in \hnats$ we have $\sum_{i=0}^N a_i \simeq \sum_{i=0}^M a_i$, then we say $\sum_{i=0}^\infty a_i$ \textit{converges} and define
+\[ \sum_{i=0}^\infty a_i = \stp{\sum_{i=0}^N a_i} \] 
+
+When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}^{m-1} a_i$. This gives the expected result when using finite naturals, but also extends to unbounded hypernaturals. Then $\sum_{i=0}^\infty a_i$ converges when $\sum_{i=M+1}^N a_i \simeq 0$ for any unbounded $N, M \in \hnats$ such that $N > M$.
+
+\begin{thm}[Geometric Series]\label{GeometricSeries}
+    Let $0 < r < 1$. Then 
+    \[ \sum_{i = 0}^\infty r^i = \frac{1}{1-r} \]
+\end{thm}
+
+\begin{proof}[Proof (exercise 6.7 in \cite{goldblatt1998})]
+    By difference of powers, we know that $1 - r^{n+1} = (1 + r + r^2 + \cdots + r^n)(1-r)$. So, we conclude that $\sum_{i=0}^n r^i = \frac{1-r^{n+1}}{1-r}$. Hence, by transfer, for any unbounded $N \in \hnats$ we have $\sum_{i=0}^N r^i = \frac{1-r^{N+1}}{1-r}$. 
+
+    Consider $r^{N}$. If $\stp{r^N} > 0$, then as $0 < r < 1$, we have $r^{N+1} = r \cdot r^N \simeq r\cdot \stp{r^N} < \stp{r^N}$. Hence, in $\hreals$, $(\exists M \in \hnats)(r^M < \stp{r^N})$. By transfer, $(\exists m \in \nats)(r^m < \stp{r^N})$. But $r^m$ is real, so $r^m < r^N$, even though $0 < r < 1$ and $m < N$. This is a contradiction, so we find $\stp{r^N} \leq 0$, and since $0 < r < 1$ we conclude $\stp{r^N} = 0$. Hence, 
+    \[\sum_{i=0}^\infty r^i = \stp{\sum_{i=0}^N r^i} = \stp{\frac{1-r^{N+1}}{1-r}} = \frac{1}{1-r} \]
+\end{proof}
+
+\begin{thm}[Absolute Convergence Implies Convergence]\label{AbsoluteConvergenceImpliesConvergence}
+    If $\sum_{i = 0}^\infty |a_i|$ converges, then $\sum_{i = 0}^\infty a_i$ converges.
+\end{thm}
+
+\begin{proof}
+    Take any two unbounded $N, M \in \hnats$, say $N > M$. In $\reals$, the triangle inequality implies \[(\forall n \in \nats)(\forall m \in \nats)\left(n > m \to \left|\sum_{i = m + 1}^n a_i \right| \leq \sum_{i = m + 1}^n  |a_i|\right)\]
+    and so this is true in $\hreals$ too. So, we have 
+    \[0 < \left|\sum_{i=M+1}^N a_i\right| \leq \sum_{i=M+1}^N |a_i| \simeq 0\]
+    since $\sum_{i=0}^\infty |a_i|$ converges. This implies $\sum_{i=M+1}^N a_i \simeq 0$, so $\sum_{i=0}^\infty a_i$ converges.
+\end{proof}
+
+\begin{thm}[Ratio Test]\label{RatioTest}
+    Let $a_i: \nats \to \reals$ be a sequence. If for every unbounded $M \in \hnats$ we have $\left|\stp{\frac{a_{M+1}}{a_M}}\right| = L$ for some $L < 1$, then $\sum_{i=0}^\infty a_i$ converges.
+\end{thm}
+
+\begin{proof}[Proof (exercise 6.8 in \cite{goldblatt1998})]
+    Assume that $a_i \geq 0$---if not, apply the theorem to $|a_i|$ and use \ref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unbounded hypernatural $M$.
+
+    Take any unbounded $N \in \hnats$. For any $M \in \hnats$, if $N \leq M$, then $M$ is also unbounded, and so $\frac{a_{M+1}}{a_M} < r$. So we have the sentence
+    \[ (\exists k \in \hnats)(\forall m \in \hnats)\left(n \leq m \to \frac{a_{m+1}}{a_m} < r\right) \]
+    If we transfer this to the reals, we find a $k \in \nats$ such that for any $m \geq k$ we have $\frac{a_{m+1}}{a_m} < r$. We will show that for any $n \in \nats$, $a_{k+n} \leq r^n a_k$. As our base case, $a_k = r^0 a_k$. Next, if $a_{k+n} \leq r^n a_k$, then since $k+n \geq k$ we know $\frac{a_{k+n+1}}{a_{k+n}} < r$ and so $a_{k+n+1} < r \cdot r^n a_k = r^{n+1}a_k$.
+
+    Now, in the reals, for any $n, m \in \nats$ with $n \geq m$, we have 
+    \[ \sum_{i=k+m}{k+n} a_i \leq \sum_{i=k+m}{k+n} r^{i-k} a_k = \left(\sum_{i=m}^n r^i\right) a_k \]
+    Transferring this to the hyperreals, if we have two unbounded $N, M \in \hnats$ with $N > M$, we get
+    \[ \sum_{i=M+1}^N a_i = \sum_{i=k+(M+1-k)}^{k+(N-k)} a_i \leq \left(\sum_{i=M+1-k}^{N-k} r^i \right) a_k \]
+    Note that $M=1-k$ and $N-k$ are both unboudned hyperreals, and so $\sum_{i=M+1-k}^{N-k} r^i$ is infinitesimal by \ref{GeometricSeries} (as $\sum_{i=0}^{N-k} r^i \simeq \sum_{i=0}^{M+1-k} \simeq \frac{1}{1-r}$). Since $a_k$ is appreciable, this means the product is infinitesimal, hence $\sum_{i=M+1}^N a_i$ is infinitesimal, hence $\sum_{i=0}^\infty a_i$ converges.
+\end{proof}
+
+\subsection{The $\exp$ function}
+This entire section is individual work without the guidance of any texts. We define the exponential function \[\exp(x) = \sum_{i=0}^\infty \frac{x^i}{i!}\]
+
+For convenience, we will write $e_k(x) = \sum_{i=0}^k \frac{x^i}{i!}$, and we will write $\inx(x)$ to denote the internal function $[e_k](x)$. Note that if let $N$ denote the unbounded hyperreal $N = [n]$, we have
+
+\[\stp{\inx(x)} = \stp{[e_k](x)} = \stp{[e_k(x)]} = \stp{\left[\sum_{i=0}^k\frac{x^i}{i!}\right]} = \stp{\sum_{i=0}^N \frac{x^i}{i!}} = \exp(x) \]
+
+\begin{thm}\label{expExists}
+    For any real $x$, $\exp(x)$ exists.
+\end{thm}
+
+\begin{proof}
+    We use the ratio test (\ref{RatioTest}) to prove that $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges. Let $M$ be an unbounded hypernatural. Then 
+    \[
+        \frac{x^{M+1}}{(M+1)!} \  / \  \frac{x^M}{M!} = \frac{x^{M+1}M!}{x^M (M+1)!} 
+        = \frac{x}{M+1}
+    \]
+    Since $x$ is real and $M+1$ is unbounded, $\frac{x}{M+1}$ is infinitesimal, and hence has standard part $0$. Since $0 < 1$, and since this holds for any unbounded hypernnatural, the conditions of \ref{RatioTest} are met and we are done.
+\end{proof}
+
+We now want to prove that $\exp'(x) = \exp(x)$. This will involve a lemma, which I will assume during the proof and prove after the fact.
+
+\begin{thm}
+    For any real $x$, $\exp'(x) = \exp(x)$.
+\end{thm}
+
+\begin{proof}
+    Let $\delta = [\delta_n]$ be a nonzero infinitesimal. We want to evaluate
+    \[ \exp'(x) = \stp{\frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta}} \]
+    Consider
+    \[ \frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta} = \frac{[\exp(x+\delta_n)]_n - [\exp(x)]_n}{[\delta_n]_n} = \left[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \right]_n \]
+    Peeling back another layer, and remembering $\inx(x) = [e_k(x)]_k$,
+    \begin{align*}
+    \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} &\simeq \frac{\inx(x + \delta_n) - \inx(x)}{\delta n} \\
+    &= \left[ \frac{e_k(x + \delta_n) - e_k(x)}{\delta_n} \right]_k
+    \end{align*}
+    Now, let $R_n^k = \frac{1}{\delta_n}(e_k(x + \delta_n) - e_k(x) - \delta_n e_{k-1}(x))$ (that's an upper index, not an exponent). Then 
+    \[ \frac{e_k(x+\delta_n) - e_k(x)}{\delta_n} = e_{k-1}(x) + R_n^k \]
+    So, we have 
+    \begin{align*}
+    \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} &\simeq \left[ \frac{e_k(x + \delta_n) - e_k(x)}{\delta_n} \right]_k \\
+    &= [e_{k-1}(x)]_k + [R_n^k]_k
+    \end{align*}
+    Note that while $e_{-1}$ is not defined, this only affects the first term of our series, which is irrelevant to the equivalent class we are specifying---let $e_{-1}(x) = e_0(x)$, or whatever you'd like. Now, let $K$ be the unbounded hypernatural $K = [\langle 0, 0, 1, 2, 3, \ldots \rangle]$. Then $[e_{k-1}(x)]_k = \sum_{i=0}^K \frac{x^i}{i!}$. Since $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges, we have $\sum_{i=0}^K \frac{x^i}{i!} \simeq \inx(x)$. So
+    \[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \simeq \inx(x) + [R_n^k]_k \]
+    But the left side of this is real, and so must be the standard part of the right side
+    \[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} = \stp{\inx(x) + [R_n^k]_k} = \exp(x) + \stp{[R_n^k]_k} \]
+    So after all that, we have 
+    \begin{align*}
+    \frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta} &= \left[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \right]_n \\
+        &= [\exp(x) + \stp{[R_n^k]_k}]_n = \exp(x) + [\stp{[R_n^k]_k}]_n
+    \end{align*}
+    By our as-yet unproven lemma \ref{expDerivProofLemma}, $[\stp{[R_n^k]_k}]_n$ is infinitesimal, and so
+    \begin{align*}
+    \exp'(x) &= \stp{\frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta}} \\
+    &= \stp{\exp(x) + [\stp{[R_n^k]_k}]_n} = \exp(x)
+    \end{align*}
+\end{proof}
+
+\begin{lemma}\label{expDerivProofLemma}
+    Let $R_n^k = \frac{1}{\delta_n}(e_k(x + \delta_n) - e_k(x) - \delta_n e_{k-1}(x))$. Then $[\stp{[R_n^k]_k}]_n$ is infinitesimal.
+\end{lemma}
+
+\begin{proof}
+    First, we will find a more explicit formula for $R_n^k$. We have
+    \[e_k(x + \delta_n) = 1 + x + \delta_n + \frac{x^2 + 2x\delta_n + \delta_n^2}{2!} + \cdots + \frac{x^k + kx^{k-1}\delta_n + \cdots + \delta_n^k}{k!} \]
+    and so
+    \begin{align*}
+    e_k(x + \delta_n) - e_k(x) &= \delta_n + \frac{2x\delta_n + \delta_n^2}{2!} + \frac{3x^2\delta_n + 3x\delta_n^2 + \delta_n^3}{3!} + \cdots + \frac{kx^{k-1}\delta_n + \cdots + \delta_n^k}{k!} \\
+        &= \delta_n\left(1 + \frac{2x}{2!} + \frac{3x^2}{3!} + \cdots + \frac{kx^{k-1}}{k!}\right) + \frac{\delta_n^2}{2!} + \frac{3x\delta_n^2 + \delta_n^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n^2 + \cdots + \delta_n^k}{k!} \\
+        &= \delta_n e_{k-1}(x) + \delta_n\left(\frac{\delta_n}{2!} + \frac{3x\delta_n + \delta_n^2}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n + \cdots + \delta_n^{k-1}}{k!}\right)
+    \end{align*}
+    So we find that 
+    \[R_n^k = \frac{\delta_n}{2!} + \frac{3x\delta_n + \delta_n^2}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n + \cdots + \delta_n^{k-1}}{k!} = \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q \delta_n^{(i-1-q)}}{i!}\]
+    Using the fact that $\binom{i}{q} = \frac{i!}{q!(i-q!)}$, we have
+    \begin{align*}
+    R_n^k &= \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q \delta_n^{(i-1-q)}}{i!} \\
+        &= \sum_{i=2}^k \sum_{q=0}^{i-2}\frac{x^q\delta_n^{(i-1-q)}}{(i-q)!q!} \\
+        &= \delta_n \sum_{i=2}^k \sum_{q=0}^{i-2} \frac{x^{q}\delta_n^{(i-2-q)}}{(i-q)!q!} \\
+        &= \delta_n \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{x^{q}\delta_n^{(i-2-q)}}{(i-q)!q!}
+    \end{align*}
+    Note then that
+    \[ |R_n^k| = |\delta_n| \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^q |\delta_n|^{(i-2-q)}}{(i-q)!q!} \]
+    Now, note that $i - q \geq 2$ in every term, and so $(i-q)! \geq 2$ and hence $\frac{|x|^q |\delta_n|^{(i-2-q)}}{(i-q)!q!} \leq \frac{|x|^q |\delta_n|^{(i-2-q)}}{2q!}$. Combining this move with a change of index, setting $p = i - 2 - q$, we have
+    \[ |R_n^k| \leq |\delta_n|\sum_{q=0}^{k-2} \sum_{p=0}^{k-2-q} \frac{|x|^q |\delta_n|^p}{2q!} = |\delta_n| \sum_{q=0}^{k-2} \left(\frac{|x|^q}{2q!} \cdot \sum_{p=0}^{k-2-q} |\delta_n|^p \right) \]
+    By \ref{GeometricSeries}, assuming $|\delta_n| < 1$ (as $[\delta_n]$ is infinitesimal), we then have
+    \[ |R_n^k| \leq |\delta_n|  \sum_{q=0}^{k-2}\left(\frac{|x|^q}{2q!} \cdot \frac{1}{1-|\delta_n|}\right) = \frac{|\delta_n|}{1-|\delta_n|} \sum_{q=0}^{k-2} \frac{|x|^q}{2q!} = \frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{e_{k-2}(|x|)}{2}\]
+    Now, for any $n$, we have
+    \[ |\stp{[R_n^k]_k}| = \stp{[|R_n^k|]_k} \leq \stp{\left[\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{e_{k-2}(|x|)}{2}\right]_k} = \stp{\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{[e_{k-2}(|x|)]_k}{2}} = \frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{\exp(|x|)}{2} \]
+    Note that $\stp{[e_{k-2}(|x|)]_k} = \stp{\sum_{i=0}^K \frac{|x|^i}{i!}} = \exp(|x|)$, where $K = [\langle 0, 0, 0, 1, 2, 3, \ldots \rangle]$ is an unbounded hypernatural. 
+
+    Now, we want to show that $[\stp{[R_n^k]_k}]_n$ is infinitesimal, which is true iff $\left|[\stp{[R_n^k]_k}]_n\right|$ is infinitesimal. Then
+    \[\left|[\stp{[R_n^k]_k}]_n\right| = [|\stp{[R_n^k]_k}|]_n \leq \left[\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{\exp(|x|)}{2}\right]_n = \frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}\] 
+    Since $|\delta|$ is a positive infinitesimal, $1 - |\delta|$ is appreciable. Similarly, $\frac{\exp(|x|)}{2}$ is positive and apprecaible. Hence, $\frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}$ is a positive infinitesimal. Since $0 \leq \left|[\stp{[R_n^k]_k}]_n\right| \leq \frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}$, we conclude $\left|[\stp{[R_n^k]_k}]_n\right|$ is infinitesimal, hence $[\stp{[R_n^k]_k}]_n$ is infinitesimal.
+\end{proof}
