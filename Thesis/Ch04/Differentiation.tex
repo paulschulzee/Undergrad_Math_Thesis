@@ -108,7 +108,7 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
     If we transfer this to the reals, we find a $k \in \nats$ such that for any $m \geq k$ we have $\frac{a_{m+1}}{a_m} < r$. We will show that for any $n \in \nats$, $a_{k+n} \leq r^n a_k$. As our base case, $a_k = r^0 a_k$. Next, if $a_{k+n} \leq r^n a_k$, then since $k+n \geq k$ we know $\frac{a_{k+n+1}}{a_{k+n}} < r$ and so $a_{k+n+1} < r \cdot r^n a_k = r^{n+1}a_k$.
 
     Now, in the reals, for any $n, m \in \nats$ with $n \geq m$, we have 
-    \[ \sum_{i=k+m}{k+n} a_i \leq \sum_{i=k+m}{k+n} r^{i-k} a_k = \left(\sum_{i=m}^n r^i\right) a_k \]
+    \[ \sum_{i=k+m}^{k+n} a_i \leq \sum_{i=k+m}^{k+n} r^{i-k} a_k = \left(\sum_{i=m}^n r^i\right) a_k \]
     Transferring this to the hyperreals, if we have two unbounded $N, M \in \hnats$ with $N > M$, we get
     \[ \sum_{i=M+1}^N a_i = \sum_{i=k+(M+1-k)}^{k+(N-k)} a_i \leq \left(\sum_{i=M+1-k}^{N-k} r^i \right) a_k \]
     Note that $M=1-k$ and $N-k$ are both unboudned hyperreals, and so $\sum_{i=M+1-k}^{N-k} r^i$ is infinitesimal by \ref{GeometricSeries} (as $\sum_{i=0}^{N-k} r^i \simeq \sum_{i=0}^{M+1-k} \simeq \frac{1}{1-r}$). Since $a_k$ is appreciable, this means the product is infinitesimal, hence $\sum_{i=M+1}^N a_i$ is infinitesimal, hence $\sum_{i=0}^\infty a_i$ converges.
