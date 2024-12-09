@@ -86,17 +86,21 @@
     We let $[r]$ denote the equivalence class of $r$ under $\equiv$. This can also be written as $[\langle r_n \rangle]$, or abbreviated as $[r_n]$. We then define the \textit{hyperreals} $\hreals = \{[r] \sthat r \in \reals^\nats\}$. Note that $\hreals$ in some sense contains $\reals$: we can identify any real number $a$ with he hyperreal $[\langle a, a, a, \ldots \rangle]$. 
 }
 \block{Hyperreal extensions}{
-    We define addition on the hyperreals $[r] + [s] = [r \oplus s]$, and we define multiplication similarly. Furthermore, we can extend any function $f: \reals \to \reals$ to the hyperreals by letting $\hr{f}([r_n]) = [f(r_n)]$. For instance, if $f(x) = x^2$ and $[r] = [\langle 1, 1/2, 1/3, \ldots \rangle]$, then $\hr{f}([r]) = [\langle 1, 1/4, 1/9, 1/16, \ldots \rangle]$. Better yet, we can extend any $k$-ary relation $R_k$ by saying that for any $[r^1], [r^2], [r^3], \ldots, [r^k] \in \hreals$ (that's an upper index, not an exponent), we have $\hr{R_k}([r^1], [r^2], \ldots, [r^k])$ if $[[R_k(r^1_n, r^2_n, \ldots, r^k_n)]] \in \mathcal{F}$. In particular, $[r] < [s]$ if $[[r_n < s_n]] \in \mathcal{F}$. Doing this for $1$-ary relations lets us extend any set to the hyperreals. For instance, $[r] \in \hnats$ if $[[r_n \in \nats]] \in \mathcal{F}$. We must, of course, prove that all of these extensions are well-defined and do not depend on the representative we choose for $[\langle r_n \rangle]$, but this follows from the properties of $\mathcal{F}$.
+    We define addition on the hyperreals $[r] + [s] = [r \oplus s]$, and we define multiplication similarly. Furthermore, we can extend any function $f: \reals \to \reals$ to the hyperreals by letting $\hr{f}([r_n]) = [f(r_n)]$. For instance, if $f(x) = x^2$ and $[r] = [\langle 1, 1/2, 1/3, \ldots \rangle]$, then $\hr{f}([r]) = [\langle 1, 1/4, 1/9, 1/16, \ldots \rangle]$. 
+    
+    Better yet, we can extend any $k$-ary relation $R_k$ by saying that for any $[r^1], [r^2], [r^3], \ldots, [r^k] \in \hreals$ (that's an upper index, not an exponent), we have $\hr{R_k}([r^1], [r^2], \ldots, [r^k])$ if $[[R_k(r^1_n, r^2_n, \ldots, r^k_n)]] \in \mathcal{F}$. In particular, $[r] < [s]$ if $[[r_n < s_n]] \in \mathcal{F}$. Doing this for $1$-ary relations lets us extend any set to the hyperreals. For instance, $[r] \in \hnats$ if $[[r_n \in \nats]] \in \mathcal{F}$. $\hnats$ are called the \textit{hypernaturals}. 
+
+    We must, of course, prove that all of these extensions are well-defined and do not depend on the representative we choose for $[\langle r_n \rangle]$, but this follows from the properties of $\mathcal{F}$.
 }
 
 \block{Transfer}{
     We construct a mathematical language with the following symbols:
     \begin{itemize}
         \item $\land$ (and), $\lor$ (or), $\to$ (if-then), and $\neg$ (not)
+        \item $\forall$ (for all) and $\exists$ (there exists)
         \item a symbol $c$ for every $c \in \reals$
         \item a symbol $f$ for every function $f: \reals \to \reals$
-        \item a symbol $R_k$ for every $k$-ary relation on the $\reals$ (including $=$)
-        \item $\forall$ (for all) and $\exists$ (there exists)
+        \item a symbol $R_k$ for every $k$-ary relation $R_k \subseteq \reals^k$ (including $=$)
     \end{itemize}
     Any sentence in this language about the reals we can ``reinterpret'' as being about the hyperreals. For instance, say $f: \reals \to \reals$. If we want to say that for every real number $x$, there is a natural number larger than $f(x)$, we write:
     \[ (\forall x \in \reals)(\exists y \in \nats)(f(x) < y) \]
@@ -132,14 +136,40 @@
 	        &= \frac{f(g(x) + \Delta g) - f(g(x))}{\Delta g} \cdot \frac{\Delta g}{\Delta x} \\ 
 	        &\simeq f'(g(x))\cdot g'(x)
         \end{align*}
-        So $(f \circ g)'(x) \simeq f'(g(x)) \cdot g'(x)$. But since both of these numbers are real, they must be identical. In the case where $\Delta g = 0$, we clearly have $f(g(x) + \Delta g) - f(g(x)) = 0$ and so we still get $(f \circ g)'(x) = 0$.
+        So $(f \circ g)'(x) \simeq f'(g(x)) \cdot g'(x)$. But since both of these numbers are real, they must be identical. In the case where $\Delta g = 0$, we clearly have $f(g(x) + \Delta g) - f(g(x)) = 0$ and so we get $(f \circ g)'(x) = 0$ and $\Delta g / \Delta x = 0$ so $f'(g(x)) \cdot g'(x) = 0$.
     \end{proof}
 }
+\block{Series}{
+    Let $a: \nats \to \reals$ be a sequence $a_i$. We then define a funciton $s: \nats \to \reals$ by $s(n) = \sum_{i=0}^n a_i$. We can then extend that function $s: \hnats \to \hreals$, and take an unbounded $N \in \hnats$ to find $s(N)$, which we might denote $\sum_{i=0}^N a_i$. We can then define
+    \[ \sum_{i=0}^\infty a_i = \stp{s(N)} \]
+    for any unbounded $N \in \hnats$. As with derviatives, this may not be well-defined, in which case we leave it undefined and say $\sum_{i=0}^\infty a_i$ \textit{diverges}. When $\sum_{i=0}^\infty a_i$ is defined, we say it \textit{converges}. This agrees with the standard definition.
+}
 
-    \column{0.32}
-    \block{Comparison}{
-        
-    }
+\column{0.32}
+\block{$\exp$}{
+    As with the standard approach, we can define
+    \[ \exp(x) = \sum_{i=0}^\infty \frac{x^i}{i!} \]
+    Let's go ahead and define an analogous $2$-place function
+    \[ e(x, k) =\sum_{i=0}^k \frac{x^i}{i!} \]
+    We then find that $\exp(x) \simeq e(x, N)$ for any unbounded $N \in \hnats$. Now, note that 
+    \begin{align*}
+    e(x + \delta, k) &= 1 + x + \delta + \frac{x^2 + 2x\delta + \delta^2}{2!} + \cdots + \frac{x^k + kx^{k-1}\delta + \cdots + \delta^k}{k!} \\
+        &= \left(1 + x + \frac{x^2}{2!} + \cdots\right) + \delta\left(1 + \frac{2x}{2} + \frac{3x^2}{3!} + \cdots + \frac{kx^{k-1}}{k!}\right) + \delta^2(\ldots)  \\
+        &= e(x, k) + \delta e(x, k-1) + \delta^2 (\ldots)
+    \end{align*}
+    Let's denote the remainder $\delta^2 (\ldots)$ by $R_k$. With some work, it can be shown that $|R_k| < \frac{|\delta|^2}{1 - |\delta|} \cdot \frac{\exp(|x|)}{2}$. So we have
+    \[ (\forall \delta \in \reals)(\forall k \in \nats) \left(\left|\frac{e(x + \delta, k) - e(x, k) - \delta \cdot e(x, k-1)}{\delta}\right| < \frac{|\delta|}{1 - |\delta|} \cdot \frac{\exp(|x|)}{2}\right) \]
+    Now, we can transfer this over to $\hreals$, take $\delta$ to be some nonzero real number, and in place of $k$ write $N$ for some unbounded hypernatural. Then
+    \[ \left| \frac{e(x + \delta, N) - e(x, N)}{\delta} - e(x, N - 1) \right| < \frac{|\delta|}{1 - |\delta|} \cdot \frac{\exp(|x|)}{2} \]
+    Since $e(x, N) \simeq \exp(x)$ for real $x$, and $x + \delta$ is also real, we conclude that in $\reals$, 
+    \[ (\forall \delta \in \reals)\left(\left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right| < \frac{|\delta|}{1 - |\delta|} \cdot \frac{\exp(|x|)}{2}\right) \]
+    We then transfer this back over to $\hreals$ and plug in an infinitesimal $d$ for $\delta$ to get 
+    \[ \left|\frac{\exp(x + d) - \exp(x)}{d} - \exp(x)\right| < \frac{|d|}{1 - |d|} \cdot \frac{\exp(|x|)}{2} \]
+    The right side of this is infinitesimal: $\frac{\exp(|x|)}{2}$ is appreciable and $\frac{|d|}{1-|d|}$ is infinitesimal (as it is an infinitesimal divided by an appreciable number). Hence, the left side of this equation is also infinitesimal, meaning
+    \[ \frac{\exp(x + d) - \exp(x)}{d} \simeq \exp(x) \]
+    Since $\exp(x)$ is real, this means
+    \[ \stp{\frac{\exp(x + d) - \exp(x)}{d}} = \exp'(x) = \exp(x) \]
+}
     
     
     
