@@ -1,0 +1,154 @@
+% HKUST poster template
+% By Ching Ting Leung, Class of 2025 in BEng
+\documentclass[20pt,margin=1in,innermargin=-4.5in,blockverticalspace=-0.25in]{tikzposter}
+\geometry{paperwidth=43in,paperheight=35in}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{uomtheme}
+
+\usepackage{mwe} % for placeholder images
+
+\newcommand{\sthat}{\,|\,}
+\newcommand{\stp}[1]{\st\left(#1\right)}
+
+\newcommand{\hal}[1]{\mathrm{hal}(#1)}
+\newcommand{\gal}[1]{\mathrm{gal}(#1)}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\hreals}{*\mathbb{R}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\hnats}{*\mathbb{N}}
+
+\newcommand{\hr}[1]{*#1}
+
+\newcommand{\del}{\partial}
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\st}{st}
+\DeclareMathOperator{\inx}{inx}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{notation}{Notation}
+
+\addbibresource{refs.bib}
+
+% set theme parameters
+\tikzposterlatexaffectionproofoff
+\usetheme{UoMTheme}
+\usecolorstyle{UoMStyle}
+
+\usepackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault} 
+\usepackage[T1]{fontenc}
+
+
+\title{Infinitesimal Calculus}
+\author{Paul Schulze}
+\institute{Colgate University}
+\titlegraphic{\includegraphics[width=0.06\textwidth]{colgate.jpg}}
+
+% begin document
+\begin{document}
+\maketitle
+\centering
+\begin{columns}
+\column{0.32}
+\block{Ultrafilters}{
+    Let $S$ be a set. If $\mathcal{F} \subseteq \mathcal{P}(S)$, we say that $\mathcal{F}$ is an \textit{ultrafilter} on $S$ if:
+    \begin{itemize}
+        \item For any $A, B \in \mathcal{F}$, we have $A \cap B \in \mathcal{F}$
+        \item If $A \in \mathcal{F}$ and $A \subseteq B \in \mathcal{P}(S)$, then $B \in \mathcal{F}$
+        \item For any $A \subseteq S$, either $A \in \mathcal{F}$ or $A^c \in \mathcal{F}$
+        \item $\mathcal{F}$ is a proper subset of $\mathcal{P}(S)$
+    \end{itemize}
+    We will use $\mathcal{F}$ to denote an arbitrary ultrafilter on $\mathbb{N}$ that is \textit{non-principle}, meaning (in this context) it does not contain any finite sets. Since $\mathcal{F}$ is an ultrafilter, this means any \textit{cofinite set}, i.e. any set whose complement is finite, is in $\mathcal{F}$.
+}
+\block{Ultrapower of $\mathbb{R}$}{
+    Let $\mathbb{R}^\mathbb{N}$ denote the set of sequences of real numbers. We will denote a member $r = \langle r_1, r_2, r_3, \ldots \rangle$ of $\reals^\nats$ by $\langle r_n \rangle$. We can define operations $\oplus$ and $\odot$ on $\reals^\nats$ by $\langle r_n \rangle \oplus \langle s_n \rangle = \langle r_n + s_n \rangle$ and $\langle r_n \rangle \odot \langle s_n \rangle = \langle r_n \cdot s_n \rangle$, giving us a ring $\left(\reals^\nats, \oplus, \odot\right)$.
+
+    We define an equivalence relation $\equiv$ by $\langle r_n \rangle \equiv \langle s_n \rangle$ if $\{n \in \nats \sthat r_n = s_n\} \in \mathcal{F}$. Write $[[r_n = s_n]] = \{n \in \nats \sthat r_n = s_n\}$. Now, $\equiv$ is reflexive, as $[[r_n = r_n]] = \nats$, and $\emptyset \notin \mathcal{F}$ implies $\nats \in \mathcal{F}$. $\equiv$ is symmetric, since $[[r_n = s_n]] = [[s_n = r_n]]$. And $\equiv$ is transitive, since if $[[r_n = s_n]] \in \mathcal{F}$ and $[[s_n = t_n]] \in \mathcal{F}$, we have both $[[r_n = s_n]] \cap [[s_n = t_n]] \in \mathcal{F}$ and $[[r_n = s_n]] \cap [[s_n = t_n]] \subseteq [[r_n = t_n]]$
+
+    We let $[r]$ denote the equivalence class of $r$ under $\equiv$. This can also be written as $[\langle r_n \rangle]$, or abbreviated as $[r_n]$. We then define the \textit{hyperreals} $\hreals = \{[r] \sthat r \in \reals^\nats\}$. Note that $\hreals$ in some sense contains $\reals$: we can identify any real number $a$ with he hyperreal $[\langle a, a, a, \ldots \rangle]$. 
+}
+\block{Hyperreal extensions}{
+    We define addition on the hyperreals $[r] + [s] = [r \oplus s]$, and we define multiplication similarly. Furthermore, we can extend any function $f: \reals \to \reals$ to the hyperreals by letting $\hr{f}([r_n]) = [f(r_n)]$. For instance, if $f(x) = x^2$ and $[r] = [\langle 1, 1/2, 1/3, \ldots \rangle]$, then $\hr{f}([r]) = [\langle 1, 1/4, 1/9, 1/16, \ldots \rangle]$. Better yet, we can extend any $k$-ary relation $R_k$ by saying that for any $[r^1], [r^2], [r^3], \ldots, [r^k] \in \hreals$ (that's an upper index, not an exponent), we have $\hr{R_k}([r^1], [r^2], \ldots, [r^k])$ if $[[R_k(r^1_n, r^2_n, \ldots, r^k_n)]] \in \mathcal{F}$. In particular, $[r] < [s]$ if $[[r_n < s_n]] \in \mathcal{F}$. Doing this for $1$-ary relations lets us extend any set to the hyperreals. For instance, $[r] \in \hnats$ if $[[r_n \in \nats]] \in \mathcal{F}$. We must, of course, prove that all of these extensions are well-defined and do not depend on the representative we choose for $[\langle r_n \rangle]$, but this follows from the properties of $\mathcal{F}$.
+}
+
+\block{Transfer}{
+    We construct a mathematical language with the following symbols:
+    \begin{itemize}
+        \item $\land$ (and), $\lor$ (or), $\to$ (if-then), and $\neg$ (not)
+        \item a symbol $c$ for every $c \in \reals$
+        \item a symbol $f$ for every function $f: \reals \to \reals$
+        \item a symbol $R_k$ for every $k$-ary relation on the $\reals$ (including $=$)
+        \item $\forall$ (for all) and $\exists$ (there exists)
+    \end{itemize}
+    Any sentence in this language about the reals we can ``reinterpret'' as being about the hyperreals. For instance, say $f: \reals \to \reals$. If we want to say that for every real number $x$, there is a natural number larger than $f(x)$, we write:
+    \[ (\forall x \in \reals)(\exists y \in \nats)(f(x) < y) \]
+    To ``reinterpret'' this about the hyperreals, we replace objects with their extensions where possible:
+    \[ (\forall x \in \hreals)(\exists y \in \hnats)(\hr{f}(x) < y) \]
+    \textbf{Transfer Principle:} Any sentence we can write in this language is true in $\reals$ if and only if its ``reinterpretation'' in $\hreals$ is true.
+}
+
+
+\column{0.36}
+\block{Structure of $\hreals$}{
+    We call an element $x \in \hreals$ \textit{infinitesimal} if $|x| < r$ for any $r \in \reals^+$ (here treating $[\langle r, r, \ldots\rangle]$ as $r$). The only infinitesimal real number is $0$, but consider $x = [\langle 1, 1/2, 1/3, 1/4 \ldots\rangle]$. For any $r \in \reals^+$, by the archimedian property there is some $N$ such that $1/N < r$, and so $[[x_n < r]] \subseteq \{n \in \nats \sthat N \leq n\}$. This set is confinite, and so is in $\mathcal{F}$. Hence, $x < r$. However, $[[0 < x_n]] = \nats \in \mathcal{F}$, so $0 < x$. 
+
+    We call an element $x \in \hreals$ \textit{unbounded} if $|x| > r$ for any $r \in \reals^+$. For example, $[\langle 1, 2, 3, 4, \ldots \rangle]$ is unbounded. An element that is not unbounded is \textit{bounded}. An element that is bounded but not infitesimal is \textit{appreciable}.
+
+    If $|x - y|$ is infinitesimal, we say that $x$ and $y$ are \textit{infinitely close} and write $x \simeq y$. So $x$ is infinitesimal iff $x \simeq 0$. If $x$ is bounded, then there is a unique $r \in \reals$ such that $x \simeq r$ called the \textit{standard part} of $x$, denoted $\st(x)$. Note $\simeq$ is a transitive relation, so if $\st(x) = \st(y)$ we have $x \simeq \st(x) = \st(y) \simeq y$ and so $x \simeq y$. Similarly, if $x \simeq y$ then $\st(x) \simeq x \simeq y \simeq \st(y)$, so $\st(x) \simeq \st(y)$. But $\st(x)$ and $\st(y)$ are both real, and so their difference is real. Since $\st(x) \simeq \st(y)$ implies their difference is infinitesimal, and the only real infinitesimal is $0$, their difference must be $0$ and so $\st(x) = \st(y)$. Hence $\st(x) = \st(y)$ iff $x \simeq y$.
+}
+\block{Derivatives}{
+    We want to denote by $f'(x)$ an infinitesimal change in $f(x)$ over an infinitesimal change in $x$. Let $\Delta x$ be a nonzero infinitesimal change in $x$. The corresponding change in $f(x)$ is $f(x + \Delta x) - f(x)$. So we define
+    \[ f'(x) = \stp{\frac{f(x + \Delta x) - f(x)}{\Delta x}} \]
+    Since $\Delta x$ can be any nonzero infinitesimal, this might not be well-defined. If it is, we say that $f$ is \textit{differentiable} at $x$. Otherwise, we say that $f'(x)$ is undefined. This is equivalent to the standard definition
+    \[ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \]
+}
+\block{Simple Proofs with Infinitesimals}{
+    The primary motivation behind infinitesimal calculus is to allow us to prove reuslts in intuitive ways. Take for instance, the Chain Rule: standardly, the proof has an intuitive outline but runs into several techincal issues. Nonstandardly, a rigorous proof is much simpler:
+    \begin{thm}[Chain Rule]
+        If $f, g: \reals \to \reals$ are differentiable, then $(f \circ g)'(x) = f'(g(x)) \cdot g'(x)$.
+    \end{thm}
+    \begin{proof}
+        Let $\Delta x$ be any nonzero infinitesimal, and $\Delta g = g(x + \Delta x) - g(x)$. Since $g'(x) = \st(\Delta g / \Delta x)$ is defined, $\Delta g / \Delta x$ is bounded, and so $\Delta g$ must be infinitesimal (as a non-infinitesimal divided by an infinitesimal is unbounded). If $\Delta g \neq 0$, then
+        \begin{align*}
+        (f \circ g)'(x) &\simeq \frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}  \\
+	        &= \frac{f(g(x) + \Delta g) - f(g(x))}{\Delta g} \cdot \frac{\Delta g}{\Delta x} \\ 
+	        &\simeq f'(g(x))\cdot g'(x)
+        \end{align*}
+        So $(f \circ g)'(x) \simeq f'(g(x)) \cdot g'(x)$. But since both of these numbers are real, they must be identical. In the case where $\Delta g = 0$, we clearly have $f(g(x) + \Delta g) - f(g(x)) = 0$ and so we still get $(f \circ g)'(x) = 0$.
+    \end{proof}
+}
+
+    \column{0.32}
+    \block{Comparison}{
+        
+    }
+    
+    
+    
+\block{References}{
+    \vspace{-1em}
+    \begin{footnotesize}
+    \nocite{*}
+    \printbibliography[heading=none]
+    \end{footnotesize}
+}
+\end{columns}
+\end{document}
