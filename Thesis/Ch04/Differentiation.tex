@@ -134,78 +134,60 @@ For convenience, we will write $e_k(x) = \sum_{i=0}^k \frac{x^i}{i!}$, and we wi
     Since $x$ is real and $M+1$ is unbounded, $\frac{x}{M+1}$ is infinitesimal, and hence has standard part $0$. Since $0 < 1$, and since this holds for any unbounded hypernnatural, the conditions of \ref{RatioTest} are met and we are done.
 \end{proof}
 
-We now want to prove that $\exp'(x) = \exp(x)$. This will involve a lemma, which I will assume during the proof and prove after the fact.
+We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following lemma.
+
+\begin{lemma}\label{expRemainderLemma}
+    Let $R_k = e(x+d, k) - e(x, k) - d \cdot e(x, k-1)$ for some $x, d \in \reals$ with $|d| < 1$ and $k \in \nats$. Then
+    \[ |R_k| < \frac{|d|^2}{1-|d|} \cdot \exp(|x|) \]
+\end{lemma}
+
+\begin{proof}
+    First, we will find a more explicit formula for $R_k$. We have
+    \[e(x + d, k) = 1 + x + d + \frac{x^2 + 2xd + d^2}{2!} + \cdots + \frac{x^k + kx^{k-1}d + \cdots + d^k}{k!} \]
+    and so
+    \begin{align*}
+    e(x + d, k) - e(x, k) &= d + \frac{2xd + d^2}{2!} + \frac{3x^2d + 3xd^2 + d^3}{3!} + \cdots + \frac{kx^{k-1}d + \cdots + d^k}{k!} \\
+        &= d\left(1 + \frac{2x}{2!} + \frac{3x^2}{3!} + \cdots + \frac{kx^{k-1}}{k!}\right) + \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^k}{k!} \\
+        &= d \cdot e(x, k-1) + \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!}
+    \end{align*}
+    So we find that 
+    \[R_k = \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!} = \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q d^{(i-q)}}{i!}\]
+    Using the fact that $\binom{i}{q} = \frac{i!}{q!(i-q!)}$, we have
+    \begin{align*}
+    R_k &= \sum_{i=2}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q d^{(i-q)}}{i!} \\
+        &= \sum_{i=2}^k \sum_{q=0}^{i-2}\frac{x^qd^{(i-q)}}{(i-q)!q!} \\
+        &= \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{x^{q}d^{(i-q)}}{(i-q)!q!}
+    \end{align*}
+    So 
+    \[|R_k| = \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^{q}\cdot |d|^{(i-q)}}{(i-q)!q!}\]
+    Now, $i - q \geq 2$ in every term, and so $(i-q)! \geq 2! \geq 1$ and so $\frac{|x|^q\cdot |d|^{(i-q)}}{(i-q)!q!} \leq \frac{|x|^q\cdot |d|^{(i-q)}}{q!}$. Combining this move with a change of index, setting $p = i - q$, we get
+    \[|R_k| \leq \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^{q}\cdot |d|^{(i-q)}}{q!} = \sum_{q=0}^{k-2}\sum_{p=2}^{k-q} \frac{|x|^{q}\cdot |d|^{p}}{q!} = \sum_{q=0}^{k-2} \left( \frac{|x|^q}{q!} \cdot \sum_{p=2}^{k-q} |d|^{p}\right)\]
+    Since $|d| < 1$, \ref{GeometricSeries} tells us that for any unbounded hypernatural $N$, $\sum_{p=0}^N |d|^p \simeq \frac{1}{1-|d|}$. Since each term of $|d|^p$ is positive, we have 
+    \[\sum_{p=2}^{k-q} |d|^p = \sum_{p=0}^{k-q} |d|^p - \sum_{p=0}^{1} |d|^p \leq \frac{1}{1-|d|} - (1 + |d|) = \frac{1 - 1(1 - |d|) - |d|(1 - |d|)}{1 - |d|} = \frac{1 - 1 + |d| - |d| + |d|^2}{1 - |d|} = \frac{|d|^2}{1 - |d|}\]
+    Then
+    \[|R_k| \leq \sum_{q=0}^{k-2} \left( \frac{|x|^q}{q!} \cdot \frac{|d|^2}{1 - |d|} \right) = \frac{|d|^2}{1 - |d|} \cdot \sum_{q=0}^{k-2} \frac{|x|^q}{q!} \leq \frac{|d|^2}{1 - |d|} \cdot \exp(|x|)\]
+\end{proof}
 
 \begin{thm}
     For any real $x$, $\exp'(x) = \exp(x)$.
 \end{thm}
 
 \begin{proof}
-    Let $\delta = [\delta_n]$ be a nonzero infinitesimal. We want to evaluate
-    \[ \exp'(x) = \stp{\frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta}} \]
-    Consider
-    \[ \frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta} = \frac{[\exp(x+\delta_n)]_n - [\exp(x)]_n}{[\delta_n]_n} = \left[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \right]_n \]
-    Peeling back another layer, and remembering $\inx(x) = [e_k(x)]_k$,
-    \begin{align*}
-    \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} &\simeq \frac{\inx(x + \delta_n) - \inx(x)}{\delta n} \\
-    &= \left[ \frac{e_k(x + \delta_n) - e_k(x)}{\delta_n} \right]_k
-    \end{align*}
-    Now, let $R_n^k = \frac{1}{\delta_n}(e_k(x + \delta_n) - e_k(x) - \delta_n e_{k-1}(x))$ (that's an upper index, not an exponent). Then 
-    \[ \frac{e_k(x+\delta_n) - e_k(x)}{\delta_n} = e_{k-1}(x) + R_n^k \]
-    So, we have 
-    \begin{align*}
-    \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} &\simeq \left[ \frac{e_k(x + \delta_n) - e_k(x)}{\delta_n} \right]_k \\
-    &= [e_{k-1}(x)]_k + [R_n^k]_k
-    \end{align*}
-    Note that while $e_{-1}$ is not defined, this only affects the first term of our series, which is irrelevant to the equivalent class we are specifying---let $e_{-1}(x) = e_0(x)$, or whatever you'd like. Now, let $K$ be the unbounded hypernatural $K = [\langle 0, 0, 1, 2, 3, \ldots \rangle]$. Then $[e_{k-1}(x)]_k = \sum_{i=0}^K \frac{x^i}{i!}$. Since $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges, we have $\sum_{i=0}^K \frac{x^i}{i!} \simeq \inx(x)$. So
-    \[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \simeq \inx(x) + [R_n^k]_k \]
-    But the left side of this is real, and so must be the standard part of the right side
-    \[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} = \stp{\inx(x) + [R_n^k]_k} = \exp(x) + \stp{[R_n^k]_k} \]
-    So after all that, we have 
-    \begin{align*}
-    \frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta} &= \left[ \frac{\exp(x + \delta_n) - \exp(x)}{\delta_n} \right]_n \\
-        &= [\exp(x) + \stp{[R_n^k]_k}]_n = \exp(x) + [\stp{[R_n^k]_k}]_n
-    \end{align*}
-    By our as-yet unproven lemma \ref{expDerivProofLemma}, $[\stp{[R_n^k]_k}]_n$ is infinitesimal, and so
-    \begin{align*}
-    \exp'(x) &= \stp{\frac{\hr{\exp}(x + \delta) - \exp(x)}{\delta}} \\
-    &= \stp{\exp(x) + [\stp{[R_n^k]_k}]_n} = \exp(x)
-    \end{align*}
-\end{proof}
-
-\begin{lemma}\label{expDerivProofLemma}
-    Let $R_n^k = \frac{1}{\delta_n}(e_k(x + \delta_n) - e_k(x) - \delta_n e_{k-1}(x))$. Then $[\stp{[R_n^k]_k}]_n$ is infinitesimal.
-\end{lemma}
-
-\begin{proof}
-    First, we will find a more explicit formula for $R_n^k$. We have
-    \[e_k(x + \delta_n) = 1 + x + \delta_n + \frac{x^2 + 2x\delta_n + \delta_n^2}{2!} + \cdots + \frac{x^k + kx^{k-1}\delta_n + \cdots + \delta_n^k}{k!} \]
+    By \ref{expRemainderLemma}, we have that for any $k \in \nats$ and $x, d \in \reals$ with $|d| < 1$, we have
+    \[ |e(x + d, k) - e(x, k) - d\cdot e(x, k-1)| \leq \frac{|d|^2}{1 - |d|} \cdot \exp(|x|) \]
     and so
+    \[(\forall k \in \nats)\left(\left|\frac{e(x + d, k) - e(x, k)}{d} - e(x, k - 1)\right| \leq \frac{|d|}{1 - |d|} \cdot \exp(|x|)\right)\]
+    We then transfer this statement to $\hreals$, pick an unbounded $N \in \hnats$ to plug in for $k$, and we get
+    \[\left|\frac{e(x + d, N) - e(x, N)}{d} - e(x, N - 1)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|)\]
+    Taking the standard part of both sides (which does nothing to the right side since it's real), we get
     \begin{align*}
-    e_k(x + \delta_n) - e_k(x) &= \delta_n + \frac{2x\delta_n + \delta_n^2}{2!} + \frac{3x^2\delta_n + 3x\delta_n^2 + \delta_n^3}{3!} + \cdots + \frac{kx^{k-1}\delta_n + \cdots + \delta_n^k}{k!} \\
-        &= \delta_n\left(1 + \frac{2x}{2!} + \frac{3x^2}{3!} + \cdots + \frac{kx^{k-1}}{k!}\right) + \frac{\delta_n^2}{2!} + \frac{3x\delta_n^2 + \delta_n^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n^2 + \cdots + \delta_n^k}{k!} \\
-        &= \delta_n e_{k-1}(x) + \delta_n\left(\frac{\delta_n}{2!} + \frac{3x\delta_n + \delta_n^2}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n + \cdots + \delta_n^{k-1}}{k!}\right)
+    \stp{\left|\frac{e(x + d, N) - e(x, N)}{d} - e(x, N - 1)\right|} &= \left|\frac{\stp{e(x + d, N)} - \stp{e(x, N)}}{d} - \stp{e(x, N - 1)}\right| \\
+        &= \left|\frac{\exp(x + d) - \exp(x)}{d} - \exp(x)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|)
     \end{align*}
-    So we find that 
-    \[R_n^k = \frac{\delta_n}{2!} + \frac{3x\delta_n + \delta_n^2}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}\delta_n + \cdots + \delta_n^{k-1}}{k!} = \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q \delta_n^{(i-1-q)}}{i!}\]
-    Using the fact that $\binom{i}{q} = \frac{i!}{q!(i-q!)}$, we have
-    \begin{align*}
-    R_n^k &= \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q \delta_n^{(i-1-q)}}{i!} \\
-        &= \sum_{i=2}^k \sum_{q=0}^{i-2}\frac{x^q\delta_n^{(i-1-q)}}{(i-q)!q!} \\
-        &= \delta_n \sum_{i=2}^k \sum_{q=0}^{i-2} \frac{x^{q}\delta_n^{(i-2-q)}}{(i-q)!q!} \\
-        &= \delta_n \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{x^{q}\delta_n^{(i-2-q)}}{(i-q)!q!}
-    \end{align*}
-    Note then that
-    \[ |R_n^k| = |\delta_n| \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^q |\delta_n|^{(i-2-q)}}{(i-q)!q!} \]
-    Now, note that $i - q \geq 2$ in every term, and so $(i-q)! \geq 2$ and hence $\frac{|x|^q |\delta_n|^{(i-2-q)}}{(i-q)!q!} \leq \frac{|x|^q |\delta_n|^{(i-2-q)}}{2q!}$. Combining this move with a change of index, setting $p = i - 2 - q$, we have
-    \[ |R_n^k| \leq |\delta_n|\sum_{q=0}^{k-2} \sum_{p=0}^{k-2-q} \frac{|x|^q |\delta_n|^p}{2q!} = |\delta_n| \sum_{q=0}^{k-2} \left(\frac{|x|^q}{2q!} \cdot \sum_{p=0}^{k-2-q} |\delta_n|^p \right) \]
-    By \ref{GeometricSeries}, assuming $|\delta_n| < 1$ (as $[\delta_n]$ is infinitesimal), we then have
-    \[ |R_n^k| \leq |\delta_n|  \sum_{q=0}^{k-2}\left(\frac{|x|^q}{2q!} \cdot \frac{1}{1-|\delta_n|}\right) = \frac{|\delta_n|}{1-|\delta_n|} \sum_{q=0}^{k-2} \frac{|x|^q}{2q!} = \frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{e_{k-2}(|x|)}{2}\]
-    Now, for any $n$, we have
-    \[ |\stp{[R_n^k]_k}| = \stp{[|R_n^k|]_k} \leq \stp{\left[\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{e_{k-2}(|x|)}{2}\right]_k} = \stp{\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{[e_{k-2}(|x|)]_k}{2}} = \frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{\exp(|x|)}{2} \]
-    Note that $\stp{[e_{k-2}(|x|)]_k} = \stp{\sum_{i=0}^K \frac{|x|^i}{i!}} = \exp(|x|)$, where $K = [\langle 0, 0, 0, 1, 2, 3, \ldots \rangle]$ is an unbounded hypernatural. 
-
-    Now, we want to show that $[\stp{[R_n^k]_k}]_n$ is infinitesimal, which is true iff $\left|[\stp{[R_n^k]_k}]_n\right|$ is infinitesimal. Then
-    \[\left|[\stp{[R_n^k]_k}]_n\right| = [|\stp{[R_n^k]_k}|]_n \leq \left[\frac{|\delta_n|}{1-|\delta_n|} \cdot \frac{\exp(|x|)}{2}\right]_n = \frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}\] 
-    Since $|\delta|$ is a positive infinitesimal, $1 - |\delta|$ is appreciable. Similarly, $\frac{\exp(|x|)}{2}$ is positive and apprecaible. Hence, $\frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}$ is a positive infinitesimal. Since $0 \leq \left|[\stp{[R_n^k]_k}]_n\right| \leq \frac{|\delta|}{1-|\delta|} \cdot \frac{\exp(|x|)}{2}$, we conclude $\left|[\stp{[R_n^k]_k}]_n\right|$ is infinitesimal, hence $[\stp{[R_n^k]_k}]_n$ is infinitesimal.
+    So we know the following sentence is true in $\reals$
+    \[(\forall d \in \reals)\left(\big(|d| < 1 \land d \neq 0\big) \to \left|\frac{\exp(x + d) - \exp(x)}{d} - \exp(x)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|)\right)\]
+    Now, transfer this to the hyperreals and plug in any nonzero infinitesimal $\delta$ in place of $d$. Now we know
+    \[\left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right| \leq \frac{|\delta|}{1-|\delta|} \cdot \exp(|x|)\]
+    The right side of this is infinitesimal, since $|\delta|$ is infinitesimal while $1 - |\delta|$ and $\exp(|x|)$ are appreciable (the latter by \ref{expExists}). Hence $\left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right|$ is infinitesimal. Hence $\frac{\exp(x + \delta) - \exp(x)}{\delta} \simeq \exp(x)$. Since $\exp(x)$ is real, this implies
+    \[\stp{\frac{\exp(x + \delta) - \exp(x)}{\delta}} = \exp'(x) = \exp(x)\]
 \end{proof}
