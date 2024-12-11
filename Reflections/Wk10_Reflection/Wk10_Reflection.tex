@@ -75,7 +75,7 @@ Now, let $f: [a, b] \to \reals$ be an integrable function. To take $\int_a^b f(x
 
 To divide $[a, b]$ into infinitely many segments of infinitesimal width, we will construct a hyperfinite partition where the segments are of infinitesimal width $dx > 0$. Say $dx = [\langle \Delta x_1, \Delta x_2, \ldots \rangle]$. Let $P_n \cup \{b\}$ be partition of $[a, b]$ into segments of width $\Delta x_n$ (plus a final``remainder'' segment of length $\leq \Delta x_n$). So
 \[P_n = \left\{a + k\Delta x_n \sthat 0 \leq k < \frac{b-a}{\Delta x_n},\ k \in \nats\right\}\]
-Let $N_n$ denote $|P_n| = \frac{b-a}{\Delta x_n}$, and let $r_n$ denote the length of the ``remainder'' segment $r_n = b - (a + k(N_n-1))$. Notice $r_n \leq \Delta x_n$. Then, the left Riemann sum of $f$ on $[a, b]$ with partition $P_n \cup \{b\}$ is 
+Let $N_n$ denote $|P_n| = \frac{b-a}{\Delta x_n}$, and let $r_n$ denote the length of the ``remainder'' segment $r_n = b - (a + \Delta x_n(N_n-1))$. Notice $r_n \leq \Delta x_n$. Then, the left Riemann sum of $f$ on $[a, b]$ with partition $P_n \cup \{b\}$ is 
 \[S_a^b (f, \Delta x_n) = \sum_{\mathclap{x \in P_n}} f(x) \Delta x_n \:-\: f\big(a+k(N_n-1)\big)(\Delta x_n - r_n)\]
 Intuitively, we would hope that the integral $\int_a^b f(x)dx$ is the sum of the infinitely many rectangles of infinitesimal width 
 \[\sum_{x \in P}f(x)dx = \left[\ \ \sum_{\mathclap{x \in P_n}} f(x)\Delta x_n\:\right]\]

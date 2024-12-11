@@ -17,13 +17,57 @@ The hyperfinite sets are ``internally finite.'' They share a lot of properties w
 This lets us easily get a lot of nice properties about hyperfinite sets. For instance, $(\exists x \in A)(\forall y \in A) (x \geq y)$ ensures that every hyperfinite set has a maximum element.
 
 \subsection{Hyperfinite Sums}
-For any finite set $A_n$ and function $f_n: \reals \to \reals$, we can easily define the sum $\sum_{x \in A_n} f(x)$. This is, after all, just a sum of a finite collection of numbers. Using this, however, we can easily extend our summation to hyperfinite sets:
+For any finite set $A_n$ and function $f_n: \reals \to \reals$, we can easily define the sum $\sum_{x \in A_n} f_n(x)$. This is, after all, just a sum of a finite collection of numbers. Using this, however, we can easily extend our summation to hyperfinite sets:
 
 \begin{defn}
     If $A = [A_n]$ is a hyperfinite set, and $f = [f_n]$ is an internal function, we define the \textit{hyperfinite sum}
-    \[\sum_{x \in [A_n]} f(x) = \left[\ \ \sum_{\mathclap{x \in A_n}} f_n(x) \:\right]\] %Why won't this space properly?
+    \[
+    \sum_{x \in [A_n]} f(x) = \left[\ \ \sum_{\mathclap{x \in A_n}} f_n(x) \:\right].
+    \] 
 \end{defn}
 
-We'll see this general form used later for integration, but for now we will focus on the type of hyperfinite sums that corresponds to series in standard calculus. Fist, some notation. Let $\{0\ldots n\}$ denote $\{0, 1, 2, \ldots, n\}$ for any $n \in \nats$. Then, let $\mathscr{N} = [\langle 0, 1, 2, \ldots \rangle]$, and let $\{0\ldots\mathscr{N}\}$ denote $[\{0\ldots n\}]$.
+\subsection{Integrability \& Integrals}
+If $f$ is a function bounded on $[a, b]$ and $P = \{x_0 = a, x_1, \ldots, x_n = b\}$ a partition on $[a, b]$, let $M_i$ and $m_i$ be the supremum and infimum respectively of $f$ on $[x_{i-1}, x_i]$, and $\Delta x_i = x_i - x_{i-1}$. We then define:
+\begin{itemize}
+    \item The upper Reimann sum $U_a^b(f, P) = \sum_{i=1}^n M_i\Delta x_i$
+    \item The lower Reimann sum $L_a^b(f, P) =\sum_{i=1}^n m_i\Delta x_i$
+    \item The ordinary Riemann sum $S_a^b(f, P) = \sum_{i=1}^n f(x_{i-1})\Delta x_i$
+\end{itemize}
+For any positive real $\Delta x$, let $P_{\Delta x} = \{a, a+\frac{b-a}{\Delta x}, a + 2\frac{b-a}{\Delta x}, \ldots, a + n\frac{b-a}{\Delta x}, b\}$. Now, for any positive real $\Delta x$, let $U_a^b(f, \Delta x) = U_a^b(f, P_{\Delta x})$. Similarly for $L_a^b(f, \Delta x)$ and $S_a^b(f, \Delta x)$.
 
-For a sequence $a_i: \nats \to \reals$, we have $\sum_{i \in \{0\ldots n\}} a_i = \sum_{i = 0}^n a_i$. So we denote $\sum_{i \in \{0\ldots \mathscr{N}\}} a_i = \sum_{i = 0}^\mathscr{N} a_i = \left[\sum_{i=0}^n a_i\right]$.
+A function $f: \reals \to \reals$ is \textit{integrable} on $[a, b]$ if $L_a^b(f, \Delta x) \simeq U_a^b(f, \Delta x)$ for every infinitesimal $\Delta x$. This is equivalent to the standard definition of integrability \cite[110]{goldblatt1998}.
+
+If $f$ is integrable on $[a, b]$, then we define $\int_a^b f(x)\ dx = \stp{S_a^b(f, \Delta x)}$ for some positive infinitesimal $\Delta x$.
+
+\begin{lemma}
+    Let $f: \reals \to \reals$ and $[a, b] \subseteq \reals$. Given any two partitions $P_1$ and $P_2$ of $[a, b]$, we find $L_a^b(f, P_1) \leq U_a^b(f, P_2)$.
+\end{lemma}
+
+\begin{proof}[Proof hinted at in \cite{goldblatt1998}]
+    
+\end{proof}
+
+\begin{corollary}\label{lowerSumsLessThanUpperSumsWithNumbers}
+    If $0 < \Delta x_1, \Delta x_2$, then $L_a^b(f, \Delta x_1) \leq U_a^b(f, \Delta x_2)$.
+\end{corollary}
+
+\begin{thm}
+    If $f$ is integrable on $[a, b]$, then $\int_a^b f(x)dx$ is well-defined.
+\end{thm}
+
+\begin{proof}[Proof adapted heavily from \protect{\cite[ch.~9.2]{goldblatt1998}}]
+    The issue here is that $\int_a^b f(x)\ dx = \stp{S_a^b(f, \Delta x)}$ might depend on our choice of positive infintiesimal $\Delta x$. Let $\Delta x_1$ and $\Delta x_2$ be two positive infinitesimals. We want to show that $S_a^b(f, \Delta x_1) \simeq S_a^b(f, \Delta x_2)$.
+
+    Note that in the reals, $(\forall \Delta x)(S_a^b(f, \Delta x) \leq U_a^b(f, \Delta x))$. This is because $\sum_{i=0}^n f(a + (i-1)\frac{b-a}{\Delta x})\Delta x \leq \sum_{i=0}^n M_i \Delta x$, as $M_i$ is a maximum of $f$ on $[a + (i-1)\frac{b-a}{\Delta x},  + i\frac{b-a}{\Delta x}]$ and so $f(a + (i-1)\frac{b-a}{\Delta x}) \leq M_i$. We can transfer this statement to the hyperreals to conclude that $S_a^b(f, \Delta x_1) \leq U_a^b(f, \Delta x_1)$, and by a similar line of reasoning we conclude $L_a^b(f, \Delta x_1) \leq S_a^b(f, \Delta x_1)$. Since $L_a^b(f, \Delta x_1) \simeq U_a^b(f, \Delta x_1)$, this implies $S_a^b(f, \Delta x_1) \simeq U_a^b(f, \Delta x_1)$ as well. All of this equally applies to $\Delta x_2$, of course.
+
+    Let $L_1 = L_a^b(f, \Delta x_1)$, $L_2 = L_a^b(f, \Delta x_2)$, and similarly for $U_1$ and $U_2$. We know by \autoref{lowerSumsLessThanUpperSumsWithNumbers} that $L_1, L_2 \leq U_1, U_2$, and so the possible orderings are $L_1 \leq L_2 \leq U_1 \leq U_2$, $L_1 \leq L_2 \leq U_2 \leq U_1$, or either of those with the indices swapped. In any case, the fact that $L_1 \simeq U_1$ and $L_2 \simeq U_2$ implies $L_1 \simeq L_2 \simeq U_1 \simeq U_2$. But we have $S_a^b(f, \Delta x_1) \simeq U_1 \simeq U_2 \simeq S_a^b(f, \Delta x_2)$, so we are done.
+\end{proof}
+
+\subsection{Integrals as Hyperfinite Sums}
+Now, let $f: [a, b] \to \reals$ be an integrable function. To take $\int_a^b f(x)dx$, we want to divide $[a, b]$ into infinitely many segments of infinitesimal width, and then add up the area of the rectangles above or below those segments. Hyperfinite sums give us a way to do this.
+
+To divide $[a, b]$ into infinitely many segments of infinitesimal width, we will construct a hyperfinite partition where the segments are of infinitesimal width $dx > 0$. Say $dx = [\langle \Delta x_1, \Delta x_2, \ldots \rangle]$. Let $P_n \cup \{b\}$ be partition of $[a, b]$ into segments of width $\Delta x_n$ (plus a final``remainder'' segment of length $\leq \Delta x_n$). So
+\[
+P_n = \left\{a + k\Delta x_n \sthat 0 \leq k < \frac{b-a}{\Delta x_n},\ k \in \nats\right\}.
+\]
+Let $N_n$ denote $|P_n| = \frac{b-a}{\Delta x_n}$, and let $r_n$ denote the length of the ``remainder'' segment $r_n = b - (a + \Delta x_n(N_n-1))$. Notice $r_n \leq \Delta x_n$. Then, the left Riemann sum of $f$ on $[a, b]$ with partition $P_n \cup \{b\}$ is 

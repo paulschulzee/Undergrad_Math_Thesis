@@ -1,18 +1,22 @@
 \section{Differentiation}
 \subsection{Definition}
-One of the primary motivations for infinitesimal calculus is that it allows use to access the more intuitive, less roundabout conceptualizations of derivatives and integrals. Unlike integrals, which still take some work to define nonstandardly, the nonstandard derivative is almost exactly what we would first guess it to be.
+One of the primary motivations for infinitesimal calculus is that it allows us to access the more intuitive, less roundabout conceptualizations of derivatives and integrals. Unlike integrals, which still take some work to define nonstandardly, the nonstandard derivative is almost exactly what we would first guess it to be.
 
 Let $\Delta x$ be a nonzero infinitesimal, and let $\Delta f (x, \Delta x) = f(x + \Delta x) - f(x)$. Intuitively, $\Delta x$ is an infinitesimal change in $x$, and $\Delta f$ is the corresponding change in $f$ caused by ``moving'' $\Delta x$ along the $x$-axis. Then we have:
 
-\[ f'(x) = \frac{\Delta f(x, \Delta x)}{\Delta x} \]
+\[ f'(x) = \frac{\Delta f(x, \Delta x)}{\Delta x}. \]
 One small problem: we'd like $f'$ to be a real-valued function on the reals. Luckily, we have a tool to do that:
 
-\[ f'(x) = \stp{\frac{\Delta f(x, \Delta x)}{\Delta x}} \]
-And we have our definition. Well, this might also not be well-defined: we get around \textit{that} problem by definition. We only consider $f'(x)$ to exist when $\stp{\frac{\Delta f(x, \Delta x)}{\Delta x}}$ is the same for \textit{any} nonzero infinitesimal $\Delta x$. In this case, we say that $f$ is \textit{differentiable} at $x$. Note that this definition of differentiability and the derivative is equivalent to the standard definition: see Thm 8.1.1 in \cite{goldblatt1998}.               
+\[ f'(x) = \stp{\frac{\Delta f(x, \Delta x)}{\Delta x}}. \]
+And we have our definition. Well, this might also not be well-defined: we get around \textit{that} problem by definition. We only consider $f'(x)$ to exist when $\stp{\frac{\Delta f(x, \Delta x)}{\Delta x}}$ is the same for \textit{any} nonzero infinitesimal $\Delta x$. In this case, we say that $f$ is \textit{differentiable} at $x$. Note that this definition of differentiability and the derivative is equivalent to the standard definition.
+
+\begin{thm}[\protect{\cite[8.1.1]{goldblatt1998}}]\label{nonStandardDerivEquivalent}
+    If $f$ is defined at $x \in \reals$, then $\displaystyle{\lim_{h\to 0}} \dfrac{f(x + h) - f(x)}{h} = L$ iff for every nonzero infinitesimal $\epsilon$, $f(x + \epsilon)$ is defined and $\dfrac{f(x + \epsilon) - f(x)}{\epsilon} \simeq L$.
+\end{thm}
 
 \begin{defn}
     Given a function $f: \reals \to \reals$ and a real number $x$, we say that $f$ is \textit{differnetiable} at $x$ if there is some constant $f'(x)$ such that, for any nonzero infinitesimal $\Delta x$,
-    \[f'(x) = \stp{\frac{f(x + \Delta x) - f(x)}{\Delta x}}\]
+    \[f'(x) = \stp{\frac{f(x + \Delta x) - f(x)}{\Delta x}}.\]
 \end{defn}
 
 \subsection{Simple Proofs Using Infinitesimals}
@@ -20,16 +24,16 @@ A number of proofs of basic calculus results can be easily accomplished by infin
 
 \begin{thm}[Chain Rule]\label{ChainRule}
     Given differentiable functions $f, g: \reals \to \reals$, 
-    \[(f \circ g)'(x) = f'(g(x)) \cdot g'(x)\]
+    \[(f \circ g)'(x) = f'(g(x)) \cdot g'(x).\]
 \end{thm}
 
-\begin{proof}[Proof by Goldblatt]
-    Let $\Delta x$ be any nonzero infinitesimal, and let $\Delta g = g(x + \Delta x) - g(x)$. If $\Delta g = 0$, then $g(x + \Delta x) = g(x)$, so $(f \circ g)'(x) = \stp{\frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} = 0$ and clearly $g'(x) = \stp{\Delta g / \Delta x} = 0$, so we are done. If $\Delta g \neq 0$, then since $g'(x) = \stp{\Delta g / \Delta x}$ is defined, we conclude $\Delta g / \Delta x$ is bounded and (since $\Delta x$ is infinitesimal) that $\Delta g$ is infinitesimal. Thus
+\begin{proof}[Proof adapted from \protect{\cite[ch.~8.4]{goldblatt1998}}] 
+    Let $\Delta x$ be any nonzero infinitesimal, and let $\Delta g = g(x + \Delta x) - g(x)$. If $\Delta g = 0$, then $g(x + \Delta x) = g(x)$, so $(f \circ g)'(x) = \stp{\dfrac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} = 0$ and clearly $g'(x) = \stp{\frac{\Delta g}{\Delta x}} = 0$, so we are done. If $\Delta g \neq 0$, then since $g'(x) = \stp{\frac{\Delta g}{\Delta x}}$ is defined, we conclude $\frac{\Delta g}{\Delta x}$ is bounded and (since $\Delta x$ is infinitesimal) that $\Delta g$ is infinitesimal. Thus
 \begin{align*}
     (f \circ g)'(x) &= \stp{\frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} \\
         &= \stp{\frac{f(g(x) + \Delta g) - f(g(x))}{\Delta g} \cdot \frac{\Delta g}{\Delta x}} \\
         &= \stp{\frac{f(g(x) + \Delta g) - f(g(x))}{\Delta g}} \cdot \stp{\frac{\Delta g}{\Delta x}} \\
-        &= f'(g(x)) \cdot g'(x)
+        &= f'(g(x)) \cdot g'(x).
 \end{align*}
 \end{proof}
 
@@ -42,47 +46,58 @@ This section is all individual work without the guidance of any texts.
     for any infinitesimal $\Delta x$. This is only defined when it doesn't depend on our choice of $\Delta x$.
 \end{defn}
 
-This gets complicated when we want to deal with repeated partial derivatives. Say $f: \reals^2 \to reals$, and denote the inputs of $f$ by $f(x, y)$. Then we might want to write
+This gets complicated when we want to deal with repeated partial derivatives. Say $f: \reals^2 \to \reals$, and denote the inputs of $f$ by $f(x, y)$. Then we might want to write
 
 \begin{align*}
     f_{yx}(a, b) &= \stp{\frac{f_y(a + \Delta x, b) - f_y(a, b)}{\Delta x}} \\
-        &= \stp{\frac{\stp{\frac{f(a + \Delta x, b + \Delta y) - f(a + \Delta x, b)}{\Delta y}} - \stp{\frac{f(a, b + \Delta y) - f(a, b)}{\Delta y}}}{\Delta x}}
+        &= \stp{\frac{\stp{\frac{f(a + \Delta x, b + \Delta y) - f(a + \Delta x, b)}{\Delta y}} - \stp{\frac{f(a, b + \Delta y) - f(a, b)}{\Delta y}}}{\Delta x}},
 \end{align*}
-
 which would allow us to easily get $f_{yx}(a, b)= f_{xy}(a, b)$. However, this isn't right. Firstly, the numerator is the difference of two real numbers, and so is real, which would mean $f_{yx}(a, b)$ is either $0$ or undefined (as a real divided by an infinitesimal is either $0$ or unbounded). The mistake here is that $f_y(a + \Delta x, b) \neq \stp{\frac{f(a + \Delta x, b + \Delta y) - f(a + \Delta x)}{\Delta y}}$. Since in this case $f_y$ is taking a nonreal input, we have to use the extension $\hr{f_y}(a + \Delta x, b)$. If $\Delta x = [\Delta x_n]$, then this is $[f_y(a + \Delta x_n, b)] = \left[\stp{\frac{f(a + \Delta x_n, b + \Delta y) - f(a + \Delta x_n, b)}{\Delta y}}\right]$. This is the equivalence class of a sequence of real numbers, but it needn't be a real number itself.
 
 \begin{thm}
     Let $f: \reals^n \to \reals$. Let $\hat{f}_{x_k}$ denote the standard definition of the partial derivative, namely
-    \[ \hat{f}_{x_k}(b_1, \ldots, b_n) = \lim_{h \to 0} \frac{f(b_1, \ldots, b_k + h, \ldots, b_n) - f(b_1, \ldots, b_k, \ldots, b_n)}{h} \]
-    Then $\hat{f}_{x_k}(b_1, \ldots, b_n)$ exists iff $f_{x_k}(b_1, \ldots, b_n)$ does, and if they both exist $\hat{f}_{x_k}(b_1, \ldots, b_n) = f_{x_k}(b_1, \ldots, b_n)$.
+    \[ \hat{f}_{x_k}(b_1, \ldots, b_n) = \lim_{h \to 0} \frac{f(b_1, \ldots, b_k + h, \ldots, b_n) - f(b_1, \ldots, b_k, \ldots, b_n)}{h} .\]
+    Then $\hat{f}_{x_k}(b_1, \ldots, b_n)$ exists iff $f_{x_k}(b_1, \ldots, b_n)$ does. If they both exist, then $\hat{f}_{x_k}(b_1, \ldots, b_n) = f_{x_k}(b_1, \ldots, b_n)$.
 \end{thm}
 
 \begin{proof}
-    Let $g: \reals \to \reals$ be defined by $g(x) = f(b_1, \ldots, b_{k-1}, x, b_{k+1}, \ldots, b_n)$. Let $\hat{g}'(x)$ denote the standard derivative of $g$ and $g'(x)$ denote the nonstandard derivative of $g$. Clearly $\hat{g}'(x) = \hat{f}_{x_k}(x)$ and $g'(x) = f_{x_k}(x)$, and by Thm 8.1.1 in \cite{goldblatt1998} we have $\hat{g}'(b_k)$ is defined iff $g'(b_k)$, and $\hat{g}'(b_k) = g'(b_k)$ if both exist, so we are done.
+    Let $g: \reals \to \reals$ be defined by $g(x) = f(b_1, \ldots, b_{k-1}, x, b_{k+1}, \ldots, b_n)$. Let $\hat{g}'(x)$ denote the standard derivative of $g$ and $g'(x)$ denote the nonstandard derivative of $g$. Clearly $\hat{g}'(x) = \hat{f}_{x_k}(x)$ and $g'(x) = f_{x_k}(x)$, and \autoref{nonStandardDerivEquivalent} we have $\hat{g}'(b_k)$ is defined iff $g'(b_k)$, and $\hat{g}'(b_k) = g'(b_k)$ if both exist, so we are done.
 \end{proof}
 
-\subsection{Series NOTE TO FUTURE SELF: TALK ABOUT CAUCHY CRITERION}
+\subsection{Series}
 The definitions in this section are thanks to Goldblatt, and most of the results are exercises.
 
 Let $a_n: \nats \to \reals$. We can define $s_n: \nats \to \reals$ by 
-\[ s_n = \sum_{i=0}^n a_i \]
+\[ s_n = \sum_{i=0}^n a_i. \]
 Now, for any unbounded $N \in \hnats$, we can define
-\[ \sum_{i=0}^N a_i = \hr{s_N} \]
+\[ \sum_{i=0}^N a_i = \hr{s_N}. \]
 Finally, if for any unbounded $N, M \in \hnats$ we have $\sum_{i=0}^N a_i \simeq \sum_{i=0}^M a_i$, then we say $\sum_{i=0}^\infty a_i$ \textit{converges} and define
-\[ \sum_{i=0}^\infty a_i = \stp{\sum_{i=0}^N a_i} \] 
+\[ \sum_{i=0}^\infty a_i = \stp{\sum_{i=0}^N a_i}. \] 
 
 When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}^{m-1} a_i$. This gives the expected result when using finite naturals, but also extends to unbounded hypernaturals. Then $\sum_{i=0}^\infty a_i$ converges when $\sum_{i=M+1}^N a_i \simeq 0$ for any unbounded $N, M \in \hnats$ such that $N > M$.
 
-\begin{thm}[Geometric Series]\label{GeometricSeries}
-    Let $0 < r < 1$. Then 
-    \[ \sum_{i = 0}^\infty r^i = \frac{1}{1-r} \]
+\begin{thm}[Cauchy Convergence Criterion for Series]
+    If for any unbounded $N, M \in \hnats$, $\sum_{i=0}^N a_i \simeq \sum_{i=0}^M a_i$, then $\sum_{i=0}^\infty a_i$ converges.
 \end{thm}
 
-\begin{proof}[Proof (exercise 6.7 in \cite{goldblatt1998})]
-    By difference of powers, we know that $1 - r^{n+1} = (1 + r + r^2 + \cdots + r^n)(1-r)$. So, we conclude that $\sum_{i=0}^n r^i = \frac{1-r^{n+1}}{1-r}$. Hence, by transfer, for any unbounded $N \in \hnats$ we have $\sum_{i=0}^N r^i = \frac{1-r^{N+1}}{1-r}$. 
+\begin{proof}[Proof adapted from \protect{\cite[thm.~6.5.2]{goldblatt1998}}]
+    The issue here is that $\sum_{i=0}^N a_i$ might be unbounded for all unbounded $N \in \hnats$. Let $s(n) = \sum_{i=0}^N a_i$. 
+    
+    First, assume that (in $\reals$) $\neg (\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. This says the sequence $s(n)$ is not bounded. By trasnfer, this is true in $\hreals$ as well. Take an unbounded $N \in \hnats$. Since $|s(n)|$ has no upper bound in $\hreals$, there is some $M \in \hnats$ such that $|s(N)| \leq 2 \cdot |s(N)| < |s(M)|$. Since $|s(N)| \simeq |s(M)|$, this implies $|s(N)| \simeq 2 \cdot |s(N)|$, implying $|s(N)| \simeq 0$, and so for any unbounded $M \in \hnats$ we have $|s(M)| \simeq |s(N)| \simeq 0$ and so $\sum_{i=0}^\infty a_i = 0$.
 
-    Consider $r^{N}$. If $\stp{r^N} > 0$, then as $0 < r < 1$, we have $r^{N+1} = r \cdot r^N \simeq r\cdot \stp{r^N} < \stp{r^N}$. Hence, in $\hreals$, $(\exists M \in \hnats)(r^M < \stp{r^N})$. By transfer, $(\exists m \in \nats)(r^m < \stp{r^N})$. But $r^m$ is real, so $r^m < r^N$, even though $0 < r < 1$ and $m < N$. This is a contradiction, so we find $\stp{r^N} \leq 0$, and since $0 < r < 1$ we conclude $\stp{r^N} = 0$. Hence, 
-    \[\sum_{i=0}^\infty r^i = \stp{\sum_{i=0}^N r^i} = \stp{\frac{1-r^{N+1}}{1-r}} = \frac{1}{1-r} \]
+    Now, say $(\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. Whatever this $r$ is, call it $b$. Then $(\forall n \in \nats)(|s(n)| < b)$, and so by transfer $(\forall n \in \hnats)(|s(n)| < b)$. So if we take an unbounded $N \in \hnats$, we know $s(N)$ is bounded and hence $\sum_{i=0}^\infty a_i = \stp{s(N)}$.
+\end{proof}
+
+\begin{thm}[Geometric Series]\label{GeometricSeries}
+    Let $0 < r < 1$. Then 
+    \[ \sum_{i = 0}^\infty r^i = \frac{1}{1-r}. \]
+\end{thm}
+
+\begin{proof}[Proof \protect{\cite[ex.~6.7]{goldblatt1998}}]
+    By difference of powers, we know that $1 - r^{n+1} = (1 + r + r^2 + \cdots + r^n)(1-r)$. So, we conclude that $\sum_{i=0}^n r^i = \dfrac{1-r^{n+1}}{1-r}$. Hence, by transfer, for any unbounded $N \in \hnats$ we have $\sum_{i=0}^N r^i = \dfrac{1-r^{N+1}}{1-r}$. 
+
+    Consider $r^{N}$. Assume for a contradiction $\stp{r^N} > 0$. Then as $0 < r < 1$, we have $r^{N+1} = r \cdot r^N \simeq r\cdot \stp{r^N} < \stp{r^N}$. Hence, in $\hreals$, $(\exists M \in \hnats)(r^M < \stp{r^N})$. By transfer, $(\exists m \in \nats)(r^m < \stp{r^N})$. But $r^m$ is real, so $r^m < r^N$, even though $0 < r < 1$ and $m < N$. This is a contradiction, so we find $\stp{r^N} \leq 0$, and since $0 < r < 1$ we conclude $\stp{r^N} = 0$. Hence, 
+    \[\sum_{i=0}^\infty r^i = \stp{\sum_{i=0}^N r^i} = \stp{\frac{1-r^{N+1}}{1-r}} = \frac{1}{1-r}. \]
 \end{proof}
 
 \begin{thm}[Absolute Convergence Implies Convergence]\label{AbsoluteConvergenceImpliesConvergence}
@@ -90,9 +105,9 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
 \end{thm}
 
 \begin{proof}
-    Take any two unbounded $N, M \in \hnats$, say $N > M$. In $\reals$, the triangle inequality implies \[(\forall n \in \nats)(\forall m \in \nats)\left(n > m \to \left|\sum_{i = m + 1}^n a_i \right| \leq \sum_{i = m + 1}^n  |a_i|\right)\]
+    Take any two unbounded $N, M \in \hnats$, say $N > M$. In $\reals$, the triangle inequality implies \[(\forall n \in \nats)(\forall m \in \nats)\left(n > m \to \left|\sum_{i = m + 1}^n a_i \right| \leq \sum_{i = m + 1}^n  |a_i|\right),\]
     and so this is true in $\hreals$ too. So, we have 
-    \[0 < \left|\sum_{i=M+1}^N a_i\right| \leq \sum_{i=M+1}^N |a_i| \simeq 0\]
+    \[0 < \left|\sum_{i=M+1}^N a_i\right| \leq \sum_{i=M+1}^N |a_i| \simeq 0,\]
     since $\sum_{i=0}^\infty |a_i|$ converges. This implies $\sum_{i=M+1}^N a_i \simeq 0$, so $\sum_{i=0}^\infty a_i$ converges.
 \end{proof}
 
@@ -100,72 +115,88 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
     Let $a_i: \nats \to \reals$ be a sequence. If for every unbounded $M \in \hnats$ we have $\left|\stp{\frac{a_{M+1}}{a_M}}\right| = L$ for some $L < 1$, then $\sum_{i=0}^\infty a_i$ converges.
 \end{thm}
 
-\begin{proof}[Proof (exercise 6.8 in \cite{goldblatt1998})]
-    Assume that $a_i \geq 0$---if not, apply the theorem to $|a_i|$ and use \ref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unbounded hypernatural $M$.
+\begin{proof}[Proof \protect{\cite[ex.~6.8]{goldblatt1998}}]
+    Assume that $a_i \geq 0$---if not, apply the theorem to $|a_i|$ and use \autoref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unbounded hypernatural $M$.
 
     Take any unbounded $N \in \hnats$. For any $M \in \hnats$, if $N \leq M$, then $M$ is also unbounded, and so $\frac{a_{M+1}}{a_M} < r$. So we have the sentence
-    \[ (\exists k \in \hnats)(\forall m \in \hnats)\left(n \leq m \to \frac{a_{m+1}}{a_m} < r\right) \]
-    If we transfer this to the reals, we find a $k \in \nats$ such that for any $m \geq k$ we have $\frac{a_{m+1}}{a_m} < r$. We will show that for any $n \in \nats$, $a_{k+n} \leq r^n a_k$. As our base case, $a_k = r^0 a_k$. Next, if $a_{k+n} \leq r^n a_k$, then since $k+n \geq k$ we know $\frac{a_{k+n+1}}{a_{k+n}} < r$ and so $a_{k+n+1} < r \cdot r^n a_k = r^{n+1}a_k$.
+    \[ 
+    (\exists k \in \hnats)(\forall m \in \hnats)\left(n \leq m \to \frac{a_{m+1}}{a_m} < r\right). 
+    \]
+    If we transfer this to the reals, we find a $k \in \nats$ such that for any $m \geq k$ we have $\frac{a_{m+1}}{a_m} < r$. We will show that for any $n \in \nats$, $a_{k+n} \leq r^n a_k$. As our base case, $a_k = r^0 a_k$. Next, if $a_{k+n} \leq r^n a_k$, then since $k+n \geq k$ we know $\dfrac{a_{k+n+1}}{a_{k+n}} < r$ and so $a_{k+n+1} < r \cdot r^n a_k = r^{n+1}a_k$.
 
     Now, in the reals, for any $n, m \in \nats$ with $n \geq m$, we have 
-    \[ \sum_{i=k+m}^{k+n} a_i \leq \sum_{i=k+m}^{k+n} r^{i-k} a_k = \left(\sum_{i=m}^n r^i\right) a_k \]
+    \[ 
+    \sum_{i=k+m}^{k+n} a_i \leq \sum_{i=k+m}^{k+n} r^{i-k} a_k = \left(\sum_{i=m}^n r^i\right) a_k. 
+    \]
     Transferring this to the hyperreals, if we have two unbounded $N, M \in \hnats$ with $N > M$, we get
-    \[ \sum_{i=M+1}^N a_i = \sum_{i=k+(M+1-k)}^{k+(N-k)} a_i \leq \left(\sum_{i=M+1-k}^{N-k} r^i \right) a_k \]
-    Note that $M=1-k$ and $N-k$ are both unboudned hyperreals, and so $\sum_{i=M+1-k}^{N-k} r^i$ is infinitesimal by \ref{GeometricSeries} (as $\sum_{i=0}^{N-k} r^i \simeq \sum_{i=0}^{M+1-k} \simeq \frac{1}{1-r}$). Since $a_k$ is appreciable, this means the product is infinitesimal, hence $\sum_{i=M+1}^N a_i$ is infinitesimal, hence $\sum_{i=0}^\infty a_i$ converges.
+    \[ 
+    \sum_{i=M+1}^N a_i = \sum_{i=k+(M+1-k)}^{k+(N-k)} a_i \leq \left(\sum_{i=M+1-k}^{N-k} r^i \right) a_k. 
+    \]
+    Note that $M=1-k$ and $N-k$ are both unbounded hyperreals, and so $\sum_{i=M+1-k}^{N-k} r^i$ is infinitesimal by \autoref{GeometricSeries} (as $\sum_{i=0}^{N-k} r^i \simeq \sum_{i=0}^{M+1-k} \simeq \frac{1}{1-r}$). Since $a_k$ is appreciable, this means the product is infinitesimal, hence $\sum_{i=M+1}^N a_i$ is infinitesimal, hence $\sum_{i=0}^\infty a_i$ converges.
 \end{proof}
 
 \subsection{The $\exp$ function}
-This entire section is individual work without the guidance of any texts. We define the exponential function \[\exp(x) = \sum_{i=0}^\infty \frac{x^i}{i!}\]
+This entire section is individual work without the guidance of any texts. We define the exponential function \[\exp(x) = \sum_{i=0}^\infty \frac{x^i}{i!}.\]
 
-For convenience, we will write $e_k(x) = \sum_{i=0}^k \frac{x^i}{i!}$, and we will write $\inx(x)$ to denote the internal function $[e_k](x)$. Note that if let $N$ denote the unbounded hyperreal $N = [n]$, we have
-
-\[\stp{\inx(x)} = \stp{[e_k](x)} = \stp{[e_k(x)]} = \stp{\left[\sum_{i=0}^k\frac{x^i}{i!}\right]} = \stp{\sum_{i=0}^N \frac{x^i}{i!}} = \exp(x) \]
+For convenience, we will write $e(x, k) = \sum_{i=0}^k \frac{x^i}{i!}$. For any unbounded $N \in \hnats$, we have $\exp(x) = \stp{e(x, N)}$.
 
 \begin{thm}\label{expExists}
     For any real $x$, $\exp(x)$ exists.
 \end{thm}
 
 \begin{proof}
-    We use the ratio test (\ref{RatioTest}) to prove that $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges. Let $M$ be an unbounded hypernatural. Then 
+    We use the ratio test (\autoref{RatioTest}) to prove that $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges. Let $M$ be an unbounded hypernatural. Then 
     \[
-        \frac{x^{M+1}}{(M+1)!} \  / \  \frac{x^M}{M!} = \frac{x^{M+1}M!}{x^M (M+1)!} 
-        = \frac{x}{M+1}
+        \frac{x^{M+1}}{(M+1)!} \  \div \  \frac{x^M}{M!} = \frac{x^{M+1}M!}{x^M (M+1)!} 
+        = \frac{x}{M+1}.
     \]
-    Since $x$ is real and $M+1$ is unbounded, $\frac{x}{M+1}$ is infinitesimal, and hence has standard part $0$. Since $0 < 1$, and since this holds for any unbounded hypernnatural, the conditions of \ref{RatioTest} are met and we are done.
+    Since $x$ is real and $M+1$ is unbounded, $\frac{x}{M+1}$ is infinitesimal, and hence has standard part $0$. Since $0 < 1$, and since this holds for any unbounded hypernnatural, the conditions of \autoref{RatioTest} are met and we are done.
 \end{proof}
 
 We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following lemma.
 
 \begin{lemma}\label{expRemainderLemma}
     Let $R_k = e(x+d, k) - e(x, k) - d \cdot e(x, k-1)$ for some $x, d \in \reals$ with $|d| < 1$ and $k \in \nats$. Then
-    \[ |R_k| < \frac{|d|^2}{1-|d|} \cdot \exp(|x|) \]
+    \[ |R_k| < \frac{|d|^2}{1-|d|} \cdot \exp(|x|). \]
 \end{lemma}
 
 \begin{proof}
     First, we will find a more explicit formula for $R_k$. We have
-    \[e(x + d, k) = 1 + x + d + \frac{x^2 + 2xd + d^2}{2!} + \cdots + \frac{x^k + kx^{k-1}d + \cdots + d^k}{k!} \]
+    \[
+    e(x + d, k) = 1 + x + d + \frac{x^2 + 2xd + d^2}{2!} + \cdots + \frac{x^k + kx^{k-1}d + \cdots + d^k}{k!}, 
+    \]
     and so
     \begin{align*}
     e(x + d, k) - e(x, k) &= d + \frac{2xd + d^2}{2!} + \frac{3x^2d + 3xd^2 + d^3}{3!} + \cdots + \frac{kx^{k-1}d + \cdots + d^k}{k!} \\
         &= d\left(1 + \frac{2x}{2!} + \frac{3x^2}{3!} + \cdots + \frac{kx^{k-1}}{k!}\right) + \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^k}{k!} \\
-        &= d \cdot e(x, k-1) + \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!}
+        &= d \cdot e(x, k-1) + \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!}.
     \end{align*}
     So we find that 
-    \[R_k = \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!} = \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q d^{(i-q)}}{i!}\]
-    Using the fact that $\binom{i}{q} = \frac{i!}{q!(i-q!)}$, we have
+    \[
+    R_k = \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!} = \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q d^{(i-q)}}{i!}.
+    \]
+    Using the fact that $\binom{i}{q} = \dfrac{i!}{q!(i-q!)}$, we have
     \begin{align*}
     R_k &= \sum_{i=2}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q d^{(i-q)}}{i!} \\
         &= \sum_{i=2}^k \sum_{q=0}^{i-2}\frac{x^qd^{(i-q)}}{(i-q)!q!} \\
-        &= \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{x^{q}d^{(i-q)}}{(i-q)!q!}
+        &= \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{x^{q}d^{(i-q)}}{(i-q)!q!}.
     \end{align*}
     So 
-    \[|R_k| = \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^{q}\cdot |d|^{(i-q)}}{(i-q)!q!}\]
-    Now, $i - q \geq 2$ in every term, and so $(i-q)! \geq 2! \geq 1$ and so $\frac{|x|^q\cdot |d|^{(i-q)}}{(i-q)!q!} \leq \frac{|x|^q\cdot |d|^{(i-q)}}{q!}$. Combining this move with a change of index, setting $p = i - q$, we get
-    \[|R_k| \leq \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^{q}\cdot |d|^{(i-q)}}{q!} = \sum_{q=0}^{k-2}\sum_{p=2}^{k-q} \frac{|x|^{q}\cdot |d|^{p}}{q!} = \sum_{q=0}^{k-2} \left( \frac{|x|^q}{q!} \cdot \sum_{p=2}^{k-q} |d|^{p}\right)\]
-    Since $|d| < 1$, \ref{GeometricSeries} tells us that for any unbounded hypernatural $N$, $\sum_{p=0}^N |d|^p \simeq \frac{1}{1-|d|}$. Since each term of $|d|^p$ is positive, we have 
-    \[\sum_{p=2}^{k-q} |d|^p = \sum_{p=0}^{k-q} |d|^p - \sum_{p=0}^{1} |d|^p \leq \frac{1}{1-|d|} - (1 + |d|) = \frac{1 - 1(1 - |d|) - |d|(1 - |d|)}{1 - |d|} = \frac{1 - 1 + |d| - |d| + |d|^2}{1 - |d|} = \frac{|d|^2}{1 - |d|}\]
+    \[
+    |R_k| = \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^{q}\cdot |d|^{(i-q)}}{(i-q)!q!}.
+    \]
+    Now, $i - q \geq 2$ in every term, and so $(i-q)! \geq 2! \geq 1$ and so $\dfrac{|x|^q\cdot |d|^{(i-q)}}{(i-q)!q!} \leq \dfrac{|x|^q\cdot |d|^{(i-q)}}{q!}$. Combining this move with a change of index, setting $p = i - q$, we get
+    \[
+    |R_k| \leq \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^{q}\cdot |d|^{(i-q)}}{q!} = \sum_{q=0}^{k-2}\sum_{p=2}^{k-q} \frac{|x|^{q}\cdot |d|^{p}}{q!} = \sum_{q=0}^{k-2} \left( \frac{|x|^q}{q!} \cdot \sum_{p=2}^{k-q} |d|^{p}\right).
+    \]
+    Since $|d| < 1$, \autoref{GeometricSeries} tells us that for any unbounded hypernatural $N$, $\sum_{p=0}^N |d|^p \simeq \frac{1}{1-|d|}$. Since each term of $|d|^p$ is positive, we have 
+    \[
+    \sum_{p=2}^{k-q} |d|^p = \sum_{p=0}^{k-q} |d|^p - \sum_{p=0}^{1} |d|^p \leq \frac{1}{1-|d|} - (1 + |d|) = \frac{1 - 1(1 - |d|) - |d|(1 - |d|)}{1 - |d|} = \frac{1 - 1 + |d| - |d| + |d|^2}{1 - |d|} = \frac{|d|^2}{1 - |d|}.
+    \]
     Then
-    \[|R_k| \leq \sum_{q=0}^{k-2} \left( \frac{|x|^q}{q!} \cdot \frac{|d|^2}{1 - |d|} \right) = \frac{|d|^2}{1 - |d|} \cdot \sum_{q=0}^{k-2} \frac{|x|^q}{q!} \leq \frac{|d|^2}{1 - |d|} \cdot \exp(|x|)\]
+    \[
+    |R_k| \leq \sum_{q=0}^{k-2} \left( \frac{|x|^q}{q!} \cdot \frac{|d|^2}{1 - |d|} \right) = \frac{|d|^2}{1 - |d|} \cdot \sum_{q=0}^{k-2} \frac{|x|^q}{q!} \leq \frac{|d|^2}{1 - |d|} \cdot \exp(|x|).
+    \]
 \end{proof}
 
 \begin{thm}
@@ -173,21 +204,33 @@ We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following 
 \end{thm}
 
 \begin{proof}
-    By \ref{expRemainderLemma}, we have that for any $k \in \nats$ and $x, d \in \reals$ with $|d| < 1$, we have
-    \[ |e(x + d, k) - e(x, k) - d\cdot e(x, k-1)| \leq \frac{|d|^2}{1 - |d|} \cdot \exp(|x|) \]
+    By \autoref{expRemainderLemma}, we have that for any $k \in \nats$ and $x, d \in \reals$ with $|d| < 1$, we have
+    \[ 
+    |e(x + d, k) - e(x, k) - d\cdot e(x, k-1)| \leq \frac{|d|^2}{1 - |d|} \cdot \exp(|x|), 
+    \]
     and so
-    \[(\forall k \in \nats)\left(\left|\frac{e(x + d, k) - e(x, k)}{d} - e(x, k - 1)\right| \leq \frac{|d|}{1 - |d|} \cdot \exp(|x|)\right)\]
+    \[
+    (\forall k \in \nats)\left(\left|\frac{e(x + d, k) - e(x, k)}{d} - e(x, k - 1)\right| \leq \frac{|d|}{1 - |d|} \cdot \exp(|x|)\right).
+    \]
     We then transfer this statement to $\hreals$, pick an unbounded $N \in \hnats$ to plug in for $k$, and we get
-    \[\left|\frac{e(x + d, N) - e(x, N)}{d} - e(x, N - 1)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|)\]
+    \[
+    \left|\frac{e(x + d, N) - e(x, N)}{d} - e(x, N - 1)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|).
+    \]
     Taking the standard part of both sides (which does nothing to the right side since it's real), we get
     \begin{align*}
     \stp{\left|\frac{e(x + d, N) - e(x, N)}{d} - e(x, N - 1)\right|} &= \left|\frac{\stp{e(x + d, N)} - \stp{e(x, N)}}{d} - \stp{e(x, N - 1)}\right| \\
-        &= \left|\frac{\exp(x + d) - \exp(x)}{d} - \exp(x)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|)
+        &= \left|\frac{\exp(x + d) - \exp(x)}{d} - \exp(x)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|).
     \end{align*}
     So we know the following sentence is true in $\reals$
-    \[(\forall d \in \reals)\left(\big(|d| < 1 \land d \neq 0\big) \to \left|\frac{\exp(x + d) - \exp(x)}{d} - \exp(x)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|)\right)\]
+    \[
+    (\forall d \in \reals)\left(\big(|d| < 1 \land d \neq 0\big) \to \left|\frac{\exp(x + d) - \exp(x)}{d} - \exp(x)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|)\right).
+    \]
     Now, transfer this to the hyperreals and plug in any nonzero infinitesimal $\delta$ in place of $d$. Now we know
-    \[\left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right| \leq \frac{|\delta|}{1-|\delta|} \cdot \exp(|x|)\]
-    The right side of this is infinitesimal, since $|\delta|$ is infinitesimal while $1 - |\delta|$ and $\exp(|x|)$ are appreciable (the latter by \ref{expExists}). Hence $\left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right|$ is infinitesimal. Hence $\frac{\exp(x + \delta) - \exp(x)}{\delta} \simeq \exp(x)$. Since $\exp(x)$ is real, this implies
-    \[\stp{\frac{\exp(x + \delta) - \exp(x)}{\delta}} = \exp'(x) = \exp(x)\]
+    \[
+    \left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right| \leq \frac{|\delta|}{1-|\delta|} \cdot \exp(|x|).
+    \]
+    The right side of this is infinitesimal, since $|\delta|$ is infinitesimal while $1 - |\delta|$ and $\exp(|x|)$ are appreciable (the latter by \autoref{expExists}). Hence $\left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right|$ is infinitesimal. Hence $\frac{\exp(x + \delta) - \exp(x)}{\delta} \simeq \exp(x)$. Since $\exp(x)$ is real, this implies
+    \[
+    \stp{\frac{\exp(x + \delta) - \exp(x)}{\delta}} = \exp'(x) = \exp(x).
+    \]
 \end{proof}
