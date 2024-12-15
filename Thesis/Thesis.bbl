@@ -48,24 +48,14 @@
       \field{isbn}{978-1-4612-6841-3 978-1-4612-0615-6}
       \field{series}{Graduate {{Texts}} in {{Mathematics}}}
       \field{title}{Lectures on the {{Hyperreals}}}
-      \field{urlday}{25}
-      \field{urlmonth}{9}
-      \field{urlyear}{2024}
       \field{volume}{188}
       \field{year}{1998}
       \field{dateera}{ce}
-      \field{urldateera}{ce}
       \verb{doi}
       \verb 10.1007/978-1-4612-0615-6
       \endverb
       \verb{file}
       \verb C:\Users\paul\Zotero\storage\BJB7UTCL\Goldblatt - 1998 - Lectures on the Hyperreals.pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://link.springer.com/10.1007/978-1-4612-0615-6
-      \endverb
-      \verb{url}
-      \verb http://link.springer.com/10.1007/978-1-4612-0615-6
       \endverb
       \keyw{Boolean algebra,calculus,construction,differential equation,eXist,functional,Lebesgue measure,measure,measure theory,proof,real analysis,Riemann integral,tool,topology,ultrapower}
     \endentry

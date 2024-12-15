@@ -6,11 +6,11 @@
 \usepackage[margin=0.75in]{geometry}
 \usepackage{import}
 
-\usepackage{biblatex}
-\addbibresource{Bibliography/Thesis_Bibliography.bib}
-
 \usepackage{aliascnt}
 \usepackage{hyperref}
+
+\usepackage{biblatex}
+\addbibresource{Bibliography/Thesis_Bibliography.bib}
 
 \newcommand{\sthat}{\,|\,}
 \newcommand{\stp}[1]{\st\left(#1\right)}
@@ -54,6 +54,7 @@
 
 \begin{document}
 
+\iffalse
 \begin{enumerate}
     \item \textbf{Ultrafilters, Ultrapowers, $\hreals$}. A definition of an ultrafilter, and the proof that one exists on $\nats$. The ultrapower construction of $\hreals$, inlcuding the extension of any function or relation. The definition of internal sets and functions.
     \item \textbf{First-Order Logic \& Transfer}. A definition of our language on $\reals$, including set symbols (sort of new). The proof of the alteration of \L o\'s' theorem (also sort of new).
@@ -62,12 +63,13 @@
     \item \textbf{Integration}. Integrals as hyperfinite sums. Maybe some of the technical worries about the ends of partitions worked out (which would be new), although that sounds a bit dull and like it would take more space than it really should. 
     \item \textbf{Topology}. Questionable inclusion. Maybe some proofs that the topologies Goldblatt defines are \textit{actually} topologies, if possible.
 \end{enumerate}
+\fi
 
-\import{Ch01/}{Ultrapowers}
-\import{Ch02/}{FOL_Transfer}
-\import{Ch03/}{Structure_of_starR}
-\import{Ch04/}{Differentiation}
-\import{Ch05/}{Integration}
+\import{Sections/}{Ultrapowers}
+\import{Sections/}{FOL_Transfer}
+\import{Sections/}{Structure_of_starR}
+\import{Sections/}{Differentiation}
+\import{Sections/}{Integration}
 
 \nocite{*}
 \printbibliography
