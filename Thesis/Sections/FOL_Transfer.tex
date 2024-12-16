@@ -1,1 +1,152 @@
 \section{First Order Logic \& Transfer}
+\subsection{The Idea}
+Here is the basic idea behind our project in this chapter. We will define a formal mathematical language, a language of \textit{first-order logic}, that lets us talk about the reals. That language will use the logical symbols $\forall$ (for all), $\exists$ (there exists), $\land$ (and), $\lor$ (or), $\to$ (if-then), and $\neg$ (not), along with a host of symbols used to name the elements of, subsets of, and functions on $\reals$. This language will not be nearly as powerful as English, but the upshot is we will show that any sentence we can write of this language is true in $\reals$ if and only if an analogous sentence is true in $\hreals$. This is the \textit{transfer principle}, and it is the engine that powers infinitesimal calculus. This notably not true of English: ``every natural number is finite'' is true in $\reals$, but ``every hypernatural number is finite'' is \textit{not} true in $\hreals$. Our method, once we have transfer, will be to write down some useful property of $\reals$, transfer it to $\hreals$, prove that something is true about $\hreals$, and then transfer our result back to $\reals$. In this way, we hope to prove things about $\reals$ by going ``through'' $\hreals$.
+
+\subsection{Our language \texorpdfstring{$\mathcal{L}_\mathscr{S}$}{L S}}
+We will define our mathematical language $\mathcal{L}_\mathscr{S}$ on an arbitrary set $S$. In practice, we will mosty be using $\mathcal{L}_\mathfrak{R}$, our language on the real numbers $\reals$, and $\mathcal{L}_{\hr{\mathfrak{R}}}$, our language on the hyperreal numbers $\hreals$.
+
+\subsection{Symbols}
+Our language will, formally, contain the following symbols:
+\begin{itemize}
+    \item The logical connectives $\land$, $\lor$, and $\neg$.
+    \item Parentheses $($ and $)$.
+    \item The universal quantifier symbol $\forall$.
+    \item The set membership symbol $\in$.
+    \item A constant symbol $\dot x$ for each $x \in S$.
+    \item A countable number of variables $v_1, v_2, v_3, \ldots$.
+    \item A relation symbol $\dot R_n$ for any $n$-ary relation $R_n$ on $S$, that is, any $R_n \subseteq S^n$. A $1$-ary relation symbol is also called a \textit{set symbol}.
+    \item A function symbol $\dot f_n$ for any $n$-place function $f_n$ on $S$, that is, any $f_n : S^n \to S$.
+\end{itemize}
+
+\subsection{Terms}
+The \textit{terms} of our language will be the symbols or sequences that refer to an element of $S$. They are defined recursively:
+\begin{itemize}
+    \item Any single constant symbol $\dot x$ is a term.
+    \item Any single variable $v_n$ is a term.
+    \item If $\dot f_n$ is an $n$-place function symbol, and $t_1, t_2, \ldots, t_n$ are terms, then $\dot f_n (t_1, t_2, \ldots, t_n)$ is a term.
+\end{itemize}
+A \textit{closed} term is a term that contains no variables---$\dot f_1 (v_1)$ is a term, and $\dot f_1 (\dot 5)$ is a closed term. The former refers to some element of $S$, the same way that in common mathematical parlance $x$ might refer to an element of $\reals$, but the latter refers to a \textit{specific} moment of $S$, the same way $\pi$ refers to a \textit{specific} element of $\reals$.
+
+\subsection{Well-Formed Formulae}
+Strictly speaking, a \textit{formula} is just a sequence of symbols. Here's a formula: $\dot f_5 (\land, \forall, \dot{17})\to\to\land (()(($. That formula doesn't mean anything. The formulae that \textit{do} mean something are called \textit{well-formed formulae}, or wffs (sometimes pronounced `wiffs') for short. The wffs of our language are defined recursively, as follows:
+\begin{itemize}
+    \item If $\dot R_n$ is an $n$-ary relation symbol, and $t_1, \ldots, t_n$ are terms, then $\dot R_n(t_1, \ldots, t_n)$ is a wff. This type of wff is called an \textit{atomic formula}. 
+    \item If $\varphi$ and $\psi$ are wffs, then so are $(\varphi \land \psi)$, $(\varphi \lor \psi)$, and $\neg \varphi$. 
+    \item If $\varphi$ is a wff and $v_n$ is a variable, then $(\forall v_n) \varphi$ is a wff.
+\end{itemize}
+
+Examples of wffs include ``$\dot f (\dot 5) = \dot 7$'', ``$\dot \leq (\dot 2, \dot 3)$'', and ``$\dot \geq (v_1, \dot +(\dot 2, \dot v_{54}))$''. Note here that we are writing $\dot \leq (a, b)$ in place of $a \dot \leq b$ because our language doesn't allow for infix notation.
+
+\subsection{Bound and Free Variables}
+Consider the wff $(\forall v_1) P(v_1, v_2)$. Is this \textit{true}? Well we can't rightly say---we don't know what $v_2$ is! We need to know what $v_2$ means before we determine whether it's true. We \textit{don't} need any more information what $v_1$ is, because we know it's a stand-in for ``any element'' due to the quantifier $\forall v_1$. Variables like $v_1$ we call ``bound'' (by the quantifier), and variables like $v_2$ we call \textit{free}. 
+
+Formally, an \textit{occurance} of a variable $v_n$ that occurs in a wff $\varphi$ is called boundif it is in the scope of a quantifier $\forall v_n$, and free otherwise. As another example, in the wff $(P(v_1) \lor (\forall v_1) (Q(v_1) \land Q(v_2)))$, the first occurance of $v_1$ is free, while the second is bound. The occurance of $v_2$ is also free, since it's not in the scope of $(\forall v_2)$. A wff with no free variables is called a \textit{sentence}---and since a sentence has no free variables, then we can determine whether it is true false, as will be discussed in \autoref{sec:truthInLS}.
+
+\subsection{Replacement Notation}
+If $\varphi$ is a wff that is not a sentence, we write $\varphi(v_1, v_2, \ldots, v_n)$ to indicate that $v_1, \ldots, v_n$ are all the variables that occur freely in $\varphi$. Then $\varphi(\dot x_1, \ldots, \dot x_n)$ is the sentence we get by replacing each free occurance of $v_i$ by the constant symbol $\dot x_i$. Similarly, if $t$ is a term, we write $t(v_1, \ldots, v_n)$ to indicate $t$ and $t(\dot x_1, \ldots, \dot x_n)$ to indicate the term you get by replacing each occurance of $v_i$ with $\dot x_i$.
+
+Similarly, we write $\varphi(v_1, \ldots, v_n, \dot A_1, \ldots, \dot A_m)$ to indicate that $v_1, \ldots, v_n$ are all the variables that occur freely in $\varphi$, and $A_1, \ldots, A_m$ are all the set symbols that occur in $\varphi$. We then write $\varphi(\dot x_1, \ldots, \dot x_n, \dot B_1, \ldots, \dot B_m)$ to mean the sentence we get by replacing $v_i$ by $\dot x_i$ and $\dot A_i$ by $\dot B_i$.
+
+So if $\varphi(v_1, v_2, \dot A_1) = \dot P(v_1) \land (\forall v_1 \in A_1) (v_1 < v_2)$, then $\varphi(\dot x, \dot y, \dot T) = \dot P(\dot x) \land (\forall v_1 \in T) (v_1 < \dot y)$.
+
+\subsection{An Aside: Abbreviations}
+While we will treat this language, rigorously defined, exactly as it is for the purposes of proofs and the like, when actually writing down sentence of $\mathcal{L}_\mathscr{S}$ we will make use of a number of handy abbreviations and shortcuts:
+\begin{itemize}
+    \item We will omit outer parentheses and other parentheses not necessary to understand a wff, as in $\dot P(v_1) \lor \dot Q(v_1)$. We will also sometimes use $[$ and $]$ in place of $($ and $)$, respectively.
+    \item We will write $x \in \dot A$ to mean $\dot A(x)$.
+    \item We will write $\varphi \to \psi$ to mean $\neg \varphi \lor \psi$. Intuitively, this \textit{means} the same thing: if $\varphi$ implies $\psi$, then either $\varphi$ is false or $\varphi$, and thus $\psi$, are true. Similarly, if $\neg \varphi \lor \psi$, and $\varphi$ is true, then $\psi$ must be true.
+    \item We will write $(\exists v_i) \varphi$ to mean $\neg (\forall v_i) \neg \varphi$. An example for why this makes sense: there exists a number greater than $5$ iff it's \textit{not} true that \textit{every} number is no greater than $5$. If it's not the case that $\neg \varphi$ for every $v_i$, then there must exist some counterexample for which $\varphi$.
+    \item We will write $(\forall v_i \in \dot A)\varphi$ to mean $(\forall x)(x \in \dot A \to \varphi)$, and similarly for $\exists$.
+    \item We will use infix notation for common relations and functions that usually do so, e.g. $\leq$, $\geq$, $=$, $+$, $\cdot$, etc.
+    \item We will usually use a symbol other than $v_i$ as a variable, for instance in $(\forall r \in \nats) (0 \dot \leq r)$.
+    \item We will frequently omit the dots from constant, function, relation, and set symbols, e.g. using $x$ to denote the constant symbol associated with $x \in S$.
+\end{itemize}
+
+Here's an example of a sentence of $\mathcal{L}_\mathscr{S}$ expressing the \textit{Archimedian property} of $\reals$, that for any real number $r$ there is a natural number $N$ such that $r$ is less than $N$.
+\[ (\forall r)(\exists N \in \nats)(r < N) \]
+This can be read in English as follows.
+\[ \underbrace{(\forall r)}_{\text{for any real number $r$,\ }}\underbrace{(\exists N \in \nats)}_{\text{there is a natural number $N$}}\underbrace{r < N}_{\text{(such that $r$ is less than $N$)}} \]
+Without abbreviations, this reads
+\[ (\forall v_1) \neg (\forall v_2) \neg (\dot \nats (v_2) \land \dot <(v_1, v_2)), \]
+which means the same thing but is much harder to parse.
+
+
+\subsection{Truth in \texorpdfstring{$\mathcal{L}_\mathscr{S}$}{L S}}\label{sec:truthInLS}
+Intuitively, it's very easy to see how a sentence might be true or false. A sentence is true just in case it accurately describes the things it is referring to. In order to prove transfer, though, we need a rigorous \textit{mathematical} description of what makes a senetence true or false.
+
+Here's our basic approach. We'll define an $s$ function to be an assignment of all the variables $v_1, v_2, \ldots$ to elements of $S$. We'll then recursively construct a function $\bar s$ that takes any term as its input and outputs what that term corresponds to in $S$. So if $s(v_1) = 2$ and $s(v_2) = 3$, then $\bar s(\text{``}v_1 \dot + v_2 \dot + \dot 4\text{''}) = 9$. We'll then say that an $s$ function \textit{satisfies} a wff if that wff correctly describes $S$ when you interpret the terms using $\bar s$. So if $s_1 (v_1) = 2$ and $s_2(v_1) = 100$, then $s_1$ satisfies the wff ``$v_1 < \dot{50}$'' but $s_2$ does not. A sentence, since it doesn't have any free variables for $s$ to assign, is either satisfied by \textit{every} $s$ or by \textit{no} $s$, in which case we say it is true or false, respectively.
+
+Now, let's do this rigorously. Let $s: V \to S$, where $V$ is the set of variables. Such a function is called an $s$ function. We then recursively define $\bar s : T \to S$, where $T$ is the set of terms, by:
+\begin{itemize}
+    \item $\bar s(v_n) = s(v_n)$ for any variable $v_n$.
+    \item $\bar s(\dot x) = x$ for any constant symbol $\dot x$.
+    \item $\bar s(\dot f_n(t_1, \ldots, t_n)) = f_n(\bar s(t_1), \ldots, \bar s(t_n))$.
+\end{itemize}
+
+So if $s(v_1) = 3$ and $f(x) = x^2$, then $\bar s(\text{``}\dot f(v_1 \dot + \dot 2)\text{''}) = 25$. Note that $\bar s$ outputs $25$ the number, not ``$\dot{25}$'' the symbol.
+
+We say that $s: V \to S$ either satisfies or doesn't satisfy any wff $\varphi$, defined recursively by:
+\begin{itemize}
+    \item $s$ satisfies an atomic formula $\dot R_n(t_1, \ldots, t_n)$ if $(\bar s(t_1), \ldots, \bar s(t_n)) \in R_n$.
+    \item $s$ satisfies $\neg \varphi$ if it doesn't satisfy $\varphi$.
+    \item $s$ satisfies $\varphi \lor \psi$ if it satisfies $\varphi$ or $\psi$.
+    \item $s$ satisfies $\varphi \land \psi$ if it satisfies $\varphi$ and $\psi$.
+    \item $s$ satisfies $(\forall v_n) \varphi$ if every $t: V \to S$ such that $t(v_i) = s(v_i)$ for all $i \neq n$ satisfies $\varphi$.
+\end{itemize}
+So in our example above where $s(v_1) = 3$, $s$ satisfies the wff ``$\dot f(v_1 \dot + \dot 2) \dot \geq \dot{20}$'', but if $s'(v_1) = -2$ then $s'$ does not satisfy that wff.
+
+That last bullet deserves some attention. What we're saying is that $s$ satisfies $(\forall v_n) \varphi$ if you can change $s(v_n)$ to be whatever you'd like in $s$ and still satisfy $\varphi$ no matter what. In other words, $s$ satisfies $(\forall v_n) \varphi$ if for every $x \in S$, you can send $v_n$ to $x$ and still have $s$ satisfy $\varphi$.
+
+If $\varphi$ is a sentence, it is either satisfied by every $s: V \to S$ or not satisfied by every $s$. Intuitively, this is because every variable $v_i$ in $\varphi$ is bound by a quantifier, and so the statisfaction or not of $\varphi$ will depend on whether it is satisfied when $v_i$ takes \textit{any} value---the ``original'' value of $s(v_i)$ won't matter. We'll skip the details of the proof, which is by induciton on wffs. If a sentence $\varphi$ is satisfied by every $s$, we say that it is \textit{true}, and otherwise we say it is \textit{false}.
+
+\subsection{The Transfer Principle}
+Let $\mathcal{L}_\mathfrak{R}$ denote our language as defined on $\reals$, with a constant symbol for every real number, a relation symbol for every $k$-ary relation in $\reals^k$, and a function symbol for every $k$-place function $f: \reals^k \to \reals$. Let $\mathcal{L}_{\hr{\mathfrak{R}}}$ likewise indicate our language as defined on $\hreals$.
+
+Our goal is to show that for any sentence $\varphi$ of $\mathcal{L}_\mathfrak{R}$, the ``corresponding'' sentence of $\mathcal{L}_{\hr{\mathfrak{R}}}$ has the same truth value. First, we need to define the idea of ``corresponding'' sentence. 
+
+Let $\ast$ be a function from the set of terms in $\mathcal{L}_\mathfrak{R}$ to the set of terms in $\mathcal{L}_{\hr{\mathfrak R}}$---the hope being that $\ast(t)$ will be the term ``corresponding'' to $t$. We will denote $\ast(t)$ by $\hr{t}$. We define $\ast$ recursively on terms by:
+\begin{itemize}
+    \item If $v_n$ is a variable, $\hr{v_n} = v_n$.
+    \item If $x$ is a constant symbol, $\hr{x} = [(x, x, x, \ldots)]$.
+    \item $\hr{(f_k(t_1, t_2, \ldots, t_k))} = \hr{f_k}(\hr{t_k}, \hr{t_k}, \ldots, \hr{t_k})$, where $\hr{f_k}$ is the extension of $f_k$.
+\end{itemize}
+
+Now, for any sentence $\varphi$ of $\mathcal{L}_\mathfrak{R}$, the corresponding sentence $\hr{\varphi}$ of $\mathcal{L}_{\hr{\mathfrak R}}$ is obtained by replacing every term $t$ in $\varphi$ by $\hr{t}$ and every relation symbol $R_k$ in $\varphi$ by $\hr{R_k}$ (the symbol corresponding to the extension of the relation $R_k$). For instance, if $\varphi = (\forall r \in \reals)(\exists N \in \nats) (f(r) < N)$, then $\hr{\varphi} = (\forall r \in \hreals)(\exists N \in \hnats) (\hr{f}(r) < N)$. 
+
+We can now state and prove the theorem that will imply the transfer principle.
+
+\begin{thm}[\L o\'s's Theorem]\label{LosTheorem}
+    Let $\varphi(v_1, \ldots, v_k, A_1, \ldots, A_m)$ be a wff of $\mathcal{L}_\mathfrak{R}$. Then 
+    \[\hr\varphi([x^1_n], [x^2_n], \ldots, [x^k_n], [A^1_n], \ldots, [A^m_n]) \iff [[\varphi(x^1_n, \ldots, x^k_n, A^1_n, \ldots, A^m_n)]] \in \mathcal{F}\]
+    Where $[[P(n)]] = \{n \in \nats \,|\, P(n)\}$.
+\end{thm}
+
+\begin{proof}[Proof heavily adapated from \protect{\cite[Appendix~B]{henle1979}}]
+    Every closed term in $\hr{\varphi}([x^1_n], [x^2_n], \ldots, [x^k_n], [A^1_n], \ldots, [A^m_n])$ takes the form $\hr{t}([x^1_n], \ldots, [x^k_n])$ for some term $t(v_{i_1}, \ldots, v_{i_k})$ in $\varphi$. We will show by induction on terms that $\hr{t}([x^1_n], \ldots, [x^k_n]) = [t(x^1_n, x^2_n, \ldots, x^k_n)]$.
+    \begin{itemize}
+        \item If $t$ is a constant term $x$, then $\hr{t} = x = [x, x, \ldots]$.
+        \item If $t$ is a variable $v_i$, then $t(c) = c$ for any constant symbol $c$, and so $\hr{t}([x^1_n]) = [x^1_n] = [t(x^1_n)]$.
+        \item If $t$ is of the form $f_j(t_1, \ldots, t_j)$, then $\hr{t}([x^1_n], \ldots, [x^k_n]) = \hr{f_j}(\hr{t_1}([x^1_n], \ldots, [x^k_n]), \ldots, \hr{t_j}([x^1_n], \ldots, [x^k_n])) = \hr{f_j}([t_1(x^1_n, \ldots, x^k_n)], \ldots, [t_j(x^1_n, \ldots, x^k_n)]) = [f_j(t_1(x^1_n, \ldots, x^k_n), \ldots, t_j(x^1_n, \ldots, x^k_n))] = [t(x^1_n, \ldots, x^k_n)]$.
+    \end{itemize}
+    We will simplify this by writing $\hr{t} = [t_n]$ for any closed term $\hr{t}$ of $\hr{\varphi}$, ommitting the plugging in of constant symbols. Similarly, we will write $\varphi_n = \varphi(x^1_n, \ldots, x^k_n, A^1_n, \ldots, A^m_n)$ and $\hr{\varphi} =  \hr\varphi([x^1_n], [x^2_n], \ldots, [x^k_n], [A^1_n], \ldots, [A^m_n])$. Now we proceed to prove the theorem, that $\hr{\varphi}$ iff $[[\varphi_n]] \in \mathcal{F}$, by induction on wffs. 
+    \begin{itemize}
+        \item In the case of atmoic formulas involving internal sets, $\hr{t} \in [A_n]$ iff $[t_n] \in [A_n]$ iff $[[t_n \in A_n]] \in \mathcal{F}$ by the definition of $[A_n]$.
+
+        \item In the case of other atomic formulas, $\hr{R_k}(\hr{t^1}, \ldots, \hr{t^k})$ iff $(\hr{t^1}, \ldots, \hr{t^k}) \in \hr{R_k}$ iff $([t^1_n], \ldots, [t^k_n]) \in \hr{R_k}$ (by our result about $\hr t$) iff $[[(t^1_n, \ldots, t^k_n) \in R_k]] \in \mathcal{F}$ iff $[[R_k(t^1_n, \ldots, t^k_n)]] \in \mathcal{F}$.
+        
+        \item If $\varphi_n$ is of the form $\psi^1_n \land \psi^2_n$, then $\hr \varphi = \hr{\psi^1} \land \hr{\psi^2}$. Then $\hr{\varphi}$ iff $\hr{\psi^1} \land \hr{\psi^2}$ iff ($[[\psi^1_n]] \in \mathcal {F}$ and $[[\psi^2_n]] \in \mathcal{F}$) iff $[[\psi^1_n]] \cap [[\psi^2_n]] \in \mathcal{F}$ iff $[[\psi^1_n \land \psi^2_n]] = [[\varphi_n]] \in \mathcal{F}$.
+        
+        \item Similarly, if $\varphi_n$ is of the form $\psi^1_n \lor \psi^2_n$, then $\hr \varphi = \hr{\psi^1} \lor \hr{\psi^2}$. Hence $\hr{\varphi}$ iff $\hr{\psi^1} \lor \hr{\psi^2}$ iff ($[[\psi^1_n]] \in \mathcal {F}$ or $[[\psi^2_n]] \in \mathcal{F}$) iff $[[\psi^1_n]] \cup [[\psi^2_n]] \in \mathcal{F}$ iff $[[\psi^1_n \lor \psi^2_n]] = [[\varphi_n]] \in \mathcal{F}$. Note $[[\psi^1_n]] \cup [[\psi^2_n]] \in \mathcal{F}$ implies $[[\psi^1_n]]$ or $[[\psi^2_n]] \in \mathcal{F}$ because, in general, if $A \cup B \in \mathcal{F}$ and $A \notin \mathcal{F}$ then $A^c \in \mathcal{F}$ so $A^c \cap (A \cup B) \subseteq B \in \mathcal{F}$.
+        
+        \item If $\varphi_n = \neg \psi_n$ then $\hr{\varphi} = \neg \hr{\psi}$. So $\hr{\varphi}$ iff $\neg \hr{\psi}$ iff $[[\psi_n]] \notin \mathcal{F}$ iff $[[\psi_n]]^c = [[\varphi_n]] \in \mathcal{F}$.
+        
+        \item If $\varphi_n = (\forall v_i)\psi_n(v_i)$, then $\hr{\varphi} = (\forall v_i) \hr{\psi}(v_i)$. Then $\hr{\varphi}$ iff $(\forall v_i)\hr{\psi}(v_i)$ iff $\hr{\psi}([x_n])$ for every $[x_n]$ iff $[[\psi_n(x_n)]] \in \mathcal{F}$ for every sequence $\langle x_n \rangle$ (by the inductive hypothesis). We want to show that this is true iff $[[\varphi_n]] = [[(\forall v_i)\psi_n(v_i)]] \in \mathcal{F}$. First, if $[[(\forall v_i)\psi_n(v_i)]] \in \mathcal{F}$ then for any sequence $\langle x_n \rangle$ we have $[[(\forall v_i)\psi_n(v_i)]] \subseteq [[\psi_n(x_n)]]$ and so $[[\psi_n(x_n)]] \in \mathcal{F}$. Conversely, if $[[(\forall v_i)\psi_n(v_i)]] \notin \mathcal{F}$, then for each $n \notin [[(\forall v_i)\psi_n(v_i)]]$ we can find $x_n$ such that $\neg \psi_n(x_n)$. If we make a sequence out of these $x_n$, letting $x_n$ take an arbitrary value for $n \in [[(\forall v_i)\psi_n(v_i)]]$, then for any $n \notin [[(\forall v_i)\psi_n(v_i)]]$ we have $\neg \psi_n(x_n)$. So, we get $[[\psi_n(x_n)]] = [[(\forall v_i)\psi_n(v_i)]]$ and so $[[\psi_n(x_n)]] \notin \mathcal{F}$ for some sequence $\langle x_n \rangle$. So $[[\psi_n(x_n)]] \in \mathcal{F}$ for every sequence $\langle x_n \rangle$ iff $[[(\forall v_i)\psi_n(v_i)]] \in \mathcal{F}$. We conclude $\hr{\varphi} = (\forall v_i)\hr \psi(v_i)$ iff $[[(\forall v_i)\psi_n(v_i)]] = [[\varphi_n]] \in \mathcal{F}$.
+    \end{itemize}
+\end{proof}
+
+\begin{corollary}[Transfer Principle]\label{transferPrinciple}
+    If $\varphi$ is a sentence of $\mathcal{L}_\mathfrak{R}$, then
+    \[ \varphi \iff \hr{\varphi}. \]
+\end{corollary}
+
+\L o\'s's theorem is, in actuality, quite a bit more general than \ref{LosTheorem}, applying to any ultrapower rather than just $\hreals$. 

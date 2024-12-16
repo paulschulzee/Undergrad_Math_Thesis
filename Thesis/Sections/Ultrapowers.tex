@@ -35,8 +35,103 @@ Of course, there are some unintuitive things about $\mathcal{F}$: it contains ei
 
     Take $A \subseteq \nats$. We cannot have $A \in \mathcal{F}$ and $A^c \in \mathcal{F}$, for then we'd have $A \cap A^c = \emptyset \in \mathcal{F}$, which is impossible since $\mathcal{F}$ is proper. Now, assume for a contradiciton that $A \notin \mathcal{F}$ and $A^c \notin \mathcal{F}$. We will show that $\mathcal{F}$ can be extended by adding $A$ or $A^c$, showing that $\mathcal{F}$ is not a maximal element of $P$ and obtaining our contradiction. 
 
-    Let $\mathcal{F}'$ be the filter obtained by adding to $\mathcal{F}$ the set $A$, the intersection $A \cap B$ for any $B \in \mathcal{F}$, and any superset of any of those. Note that $A = A \cap \nats$ and $\nats \in \mathcal{F}$. We will show that $\mathcal{F}' \in P$. First, for any $B \in \mathcal{F}$, we have $B \nsubseteq A^c$ (as $A^c \notin \mathcal{F}$) and so $A \cap B \neq \emptyset$, showing $\mathcal{F}'$ is proper. Next, if $X, Y \in \mathcal{F}$, where $A \cap B \subseteq X$ and $A \cap C \subseteq Y$, then $(A \cap B) \cap (A \cap C) = A \cap (B \cap C) \subseteq X \cap Y$, with $B \cap C \in \mathcal{F}$, so $X \cap Y \in \mathcal{F}'$. Similarly, if $X \in \mathcal{F}'$ and $X \subseteq Y$, where $A \cap B \subseteq X$, then $A \cap B \subseteq Y$ and so $Y \in \mathcal{F}'$.   
-
-    
+    Let $\mathcal{F}'$ be the filter obtained by adding to $\mathcal{F}$ the the intersection $A \cap B$ for any $B \in \mathcal{F}$, and any superset of $A \cap B$ (this technique adapted from \cite[Appendix~A]{henle1979}). Note that $A = A \cap \nats$ and $\nats \in \mathcal{F}$, so $A \in \mathcal{F}'$. We will show that $\mathcal{F}' \in P$. First, for any $B \in \mathcal{F}$, we have $B \nsubseteq A^c$ (as $A^c \notin \mathcal{F}$) and so $A \cap B \neq \emptyset$, showing $\mathcal{F}'$ is proper. Next, if $X, Y \in \mathcal{F}' - \mathcal{F}$, where $A \cap B \subseteq X$ and $A \cap C \subseteq Y$, then $(A \cap B) \cap (A \cap C) = A \cap (B \cap C) \subseteq X \cap Y$, with $B \cap C \in \mathcal{F}$, so $X \cap Y \in \mathcal{F}'$. A similar proof shows that for any $X \in \mathcal{F}$ and $Y \in \mathcal{F}' - \mathcal{F}$, $X \cap Y = Y \cap X \in \mathcal{F}'$. Similarly, if $X \in \mathcal{F}'-\mathcal{F}$ and $X \subseteq Y$, where $A \cap B \subseteq X$, then $A \cap B \subseteq Y$ and so $Y \in \mathcal{F}'$. So $\mathcal{F}'$ is a proper filter, hence $\mathcal{F} \subseteq \mathcal{F}' \in P$, violating our assumption that $\mathcal{F}$ is maximal in $(P, \subseteq)$. Hence, our assumption that $A \notin \mathcal{F}$ and $A^c \notin \mathcal{F}$ is incorrect. Since we know from earlier that we can't have $A, A^c \in \mathcal{F}$, we conclude that either $A$ or $A^c$ is in $\mathcal{F}$. Since this holds for any $A \subseteq \nats$, we conclude $\mathcal{F}$ is an ultrafilter on $\nats$.
 \end{proof}
+
+\begin{thm}[\protect{\cite[Exercise~2.5(4)]{goldblatt1998}}]\label{ultrafilterDisjointUnion}
+    Let $\mathcal{F}$ be an ultrafilter and $\{A_1, \ldots, A_n\}$ a finite collection of pairwise disjoint sets such that 
+    \[ A_1 \cup \cdots \cup A_n \in \mathcal{F} \]
+    Then $A_i \in \mathcal{F}$ for \textit{exactly one} $i$ such that $1 \leq i \leq n$.
+\end{thm}
+
+\begin{proof}
+    At most one of the $A_i$'s can be in $\mathcal{F}$, since if $A_i, A_j \in \mathcal{F}$ when $i \neq j$ then we'd have $A_i \cap A_j = \emptyset \in \mathcal{F}$, a contradiction.
+
+    Assume for a contradiction that $A_i \notin \mathcal{F}$ for each $i$. Then $A_i^c \in \mathcal{F}$ for each $i$, and so since $\mathcal{F}$ is closed under finite intersections we find
+    \[ \bigcap_{i=1}^n A_i^c \in \mathcal{F}. \]
+    But then we find
+    \[ \bigcup_{i=1}^n A_i  = \left(\bigcap_{i=1}^n A_i^c\right)^c \notin \mathcal{F}, \]
+    a contradiction.
+\end{proof}
+
+\subsection{The Ultrapower}
+Let $\reals^\nats$ denote the set of sequences in $\reals$. We will denote a member $r = \langle r_1, r_2, r_3, \ldots \rangle$ of $\reals^\nats$ by $\langle r_n \rangle$. We can define operations termwise addition $\oplus$ and termwise multiplication $\odot$ on $\reals^\nats$ by $\langle r_n \rangle \oplus \langle s_n \rangle = \langle r_n + s_n \rangle$ and $\langle r_n \rangle \odot \langle s_n \rangle = \langle r_n \cdot s_n \rangle$, giving us a commutative ring $\left(\reals^\nats, \oplus, \odot\right)$.
+
+Now, let $\equiv$ denote the relation such that $\langle r_n \rangle \equiv \langle s_n \rangle$ iff $\{n \in \nats \sthat r_n = s_n\} \in \mathcal{F}$. We will write $[[r_n = s_n]]$ to denote $\{n \in \nats \sthat r_n = s_n\}$. When $\langle r_n \rangle = \langle s_n \rangle$, we will write that $r_n = s_n$ $\mathcal{F}$-almost everywhere.
+
+\begin{thm}[\protect{\cite[Exercise~3.3(1)]{goldblatt1998}}]
+    $\equiv$ is an equiavlence relation on $\reals^\nats$
+\end{thm}
+
+\begin{proof}
+    Clearly $\equiv$ is reflexive, since $[[r_n = r_n]] = \nats \in \mathcal{F}$ so $\langle r_n \rangle \equiv \langle r_n \rangle$.
+    
+    Similarly, $\equiv$ is symmetric because $[[r_n = s_n]] = [[s_n = r_n]]$, and so $[[r_n = s_n]] \in \mathcal{F}$ iff $[[s_n = r_n]] \in \mathcal{F}$, and so $\langle r_n \rangle \equiv \langle s_n \rangle$ iff $\langle s_n \rangle \equiv \langle r_n \rangle$.
+
+    Finally, $\equiv$ is transitive. Say $\langle r_n \rangle \equiv \langle s_n \rangle \equiv \langle t_n \rangle$. Then $[[r_n = s_n]] \in \mathcal{F}$ and $[[s_n = t_n]] \in \mathcal{F}$. Whenever $r_n = s_n$ and $s_n = t_n$, we have $r_n = t_n$, and so $[[r_n = s_n]] \cap [[s_n = t_n]] \subseteq [[r_n = t_n]]$. Since $\mathcal{F}$ is a filter, this implies $[[r_n = t_n]] \in \mathcal{F}$, and so $\langle r_n \rangle \equiv \langle s_n \rangle$.
+\end{proof}
+
+Now, we will form equivalence classes in $\reals^\nats$ based on this equivalence relation. Note that $[[r_n = s_n]] \in \mathcal{F}$ iff $[[r_n - s_n = 0]] \in \mathcal{F}$, and so if $I = \{\langle r_n \rangle \in \reals^\nats \sthat [[r_n = 0]] \in \mathcal{F}\}$ then $\langle r_n \rangle \equiv \langle s_n \rangle$ iff $\langle r_n \rangle \ominus \langle s_n \rangle \in I$. $I$ is an ideal, because it is closed under subtraction---$[[r_n - s_n = 0]] \supseteq [[r_n = 0]] \cap [[s_n = 0]]$, so if the latter two are in $\mathcal{F}$ so is the former---and for any $\langle r_n \rangle \in \reals^\nats$ and $\langle s_n \rangle \in I$, we have $[[r_n \cdot s_n = 0]] \supseteq [[s_n = 0]] \in \mathcal{F}$ and so $[[r_n \cdot s_n = 0]] \in \mathcal{F}$ and $\langle r_n \rangle \cdot \langle s_n \rangle \in I$. Then, we define the \textit{hyperreals}
+\[ \hreals = \reals^\nats / I. \]
+We denote the equivalence class of an element $r = \langle r_n \rangle$ by $[r]$, $[\langle r_n \rangle]$, or just $[r_n]$ (ommitting the angled brackets).
+
+\subsection{Extensions}\label{sec:extensions}
+
+For any function $f: \reals \to \reals$, we define $\hr{f}: \hreals \to \hreals$ by $\hr{f}([r_n]) = [f(r_n)]$. For example, if $f(x) = x^2$, then $f([\langle 1, 2, 3, \ldots \rangle]) = [\langle 1, 4, 9, 16, \ldots \rangle]$. $\hr{f}$ is well defined, as if $[r_n] = [s_n]$ then $[[r_n = s_n]] \in \mathcal{F}$, and so we have $[[r_n = s_n]] \subseteq [[f(r_n) = f(s_n)]] \in \mathcal{F}$ and so $\langle f(r_n) \rangle \equiv \langle f(s_n) \rangle$, i.e. $\hr{f}([r_n]) = [f(r_n)] = [f(s_n)] = \hr{f}([s_n])$.
+
+Similarly, for any $k$-ary relation on the reals $R_k \subseteq \reals^k$, we define $\hr{R}_k \subseteq \hreals^k$ by setting $\hr{R}_k([r_n^1], [r_n^2], \ldots, [r_n^k])$ if $[[R_k(r_n^1, r_n^2, \ldots, r_n^k)]] \in \mathcal{F}$. This is well defined because if $[s_n^i] = [r_n^i]$ for any $1 \leq i \leq k$, then $[[s_n^i = r_n^i]] \in \mathcal{F}$ for any $i$, and so we find
+\[
+\left([[R_k(r_n^1, \ldots, r_n^k)]] \cap \bigcap_{i = 1}^k [[r_n^i = s_n^i]]\right) \subseteq [[R_k(s_n^1, \ldots, s_n^k)]] \in \mathcal{F}
+\]
+since the right side is a finite intersection.
+
+$1$-ary relations are subsets, and for them we will use $x \in \hr{R}$ in place of $R(x)$. For instance, $[r_n] \in \hnats$ iff $[[r_n \in \nats]] \in \mathcal{F}$. The set $\hnats$ is the set of \textit{hypernaturals}.
+
+We will use symbols such as $<$, $\leq$, $+$, $\cdot$, etc. to refer to their own extensions in the hyperreals. For instance, $[r_n] \leq [s_n]$ iff $[[r_n \leq s_n]] \in \mathcal{F}$, and $[r_n] + [s_n] = [r_n + s_n]$.
+
+A technique we will use frequently is choosing a representative of an equivalence class to meet certain conditions. Say, for instance, we know $[r_n] \in \hnats$. Then $[[r_n \in \nats]] \in \mathcal{F}$. Now, let $s_n = r_n$ for all $n \in [[r_n \in \nats]]$, and $s_n = 0$ elsewhere. Then $[[r_n \in \nats]] \subseteq [[r_n = s_n]] \in \mathcal{F}$, so $[r_n] = [s_n]$, and we have $s_n \in \nats$ for \textit{all} $n$. In other words, whenver a condition is true $\mathcal{F}$-almost everywhere for every member of an equivalence class, we can (usually) pick a member where it is true \textit{actually} everywhere. In proofs, we will say something like ``$[r_n] \in \hnats$, and so we can assume $r_n \in \nats$ for all $n$.''
+
+\subsection{\texorpdfstring{$\reals$}{R} in \texorpdfstring{$\hreals$}{*R}}
+For any real number $b \in \reals$, we have $[b] = [\langle b, b, b, \ldots \rangle] \in \hreals$. If $b, c \in \reals$, then $[b] + [c] = [b + c]$, $[b] \leq [c]$ iff $b \leq c$, etc. In these cases we will usually drop the parenthesis and just write $b \in \hreals$. For instance, we might write $[r_n] < 5$ to indicate $[r_n] < [5]$.
+
+\subsection{Internal Sets \& Functions}
+Not every subset of or function on $\hreals$ is represented by the extension of a subset of or function on $\reals$.
+
+\begin{thm}[\protect{\cite[Theorem~3.9.1]{goldblatt1998}}]
+    Let $S \subseteq \reals$. Then $\hr{S} - \reals \neq \emptyset$.
+\end{thm}
+
+\begin{proof}[Proof by Goldblatt]
+    The theorem here is relying a bit on an abuse of notation, using $\reals$ in the first case to mean the real numbers and in the second case to mean the ``copy'' of the real numbers in $\hreals$.
+
+    Let $s_1, s_2, \ldots \in S$ be a pairwise distinct sequence of elements of $S$. Then clearly $[s_n] \in \hr{S}$ as $[[s_n \in S]] = \nats \in \mathcal{F}$. But for any $x \in \reals$, we find $[[s_n = x]]$ is either $\emptyset$ or a singleton, since the $s_n$ are pairwise distinct. So $[[s_n = x]] \notin \mathcal{F}$, i.e. $[s_n] \neq x$.
+\end{proof}
+
+\begin{thm}[\protect{\cite[Exercise~3.10(1)]{goldblatt1998}}]
+    If $A$ is finite, then $\hr{A} = A$.
+\end{thm}
+
+\begin{proof}
+    Let $[r_n] \in \hr{A}$. Then $[[r_n \in A]] \in \mathcal{F}$, and we have 
+    \[ \bigcup_{b \in A} [[r_n = b]] = [[r_n \in A]] \in \mathcal{F}. \]
+    Note that the $[[r_n = b]]$'s are pairwise disjoint. Then, by \autoref{ultrafilterDisjointUnion}, we know that $[[r_n = b]] \in \mathcal{F}$ for \textit{exactly one} $b$, and so we conclude $[r_n] = b$. So every element of $\hr{A}$ is an element of $A$. Furthermore, for any $b \in A$, we have $[[b \in A]] = \nats \in \mathcal{F}$, and so $b \in \hr{A}$. So by double inclusion, $\hr{A} = A$. 
+\end{proof}
+
+So the extension of any finite subset of $\reals$ is finite, and the extension of any infinite subset contains ``nonstandard'' elements. So if we consider $\nats$ \textit{as a subset of $\hreals$}, we find that it isn't the extension of anything: it's infinite, but it doesn't contain any nonreal elements.
+
+So we can't use extensions to work with every possible subset of (or function on) $\hreals$. What we can do, though, is find ``well-behaved'' subsets or functions that we can extend our methods to. These subsets and functions are called \textit{internal}.
+
+\begin{defn}
+    If $A_1, A_2, A_3, \ldots$ is a sequence of subsets of $\reals$, we define the \textit{internal subset} $A \subseteq \hreals$, denoted $A = [A_n]$, by
+    \[ [r_n] \in [A_n] \text{ iff } [[r_n \in A_n]] \in \mathcal{F}. \]
+\end{defn}
+
+Internal set membership is well-defined, as $[r_n] \in [A_n]$ implies $[[r_n \in A_n]] \in \mathcal{F}$, so if $[r_n] = [s_n]$ then $[[r_n \in A_n]] \cap [[r_n = s_n]] \subseteq [[s_n \in A_n]] \in \mathcal{F}$ and so $[s_n] \in [A_n]$. Any finite set of hyperreals is internal, as if $X = \{[r_n^1], \ldots, [r_n^k]\}$ then $X = [\{r_n^1, \ldots, r_n^k\}]$ \cite[126]{goldblatt1998}. A finite set of hyperreals is only the extension of a set of reals if it is itself also a set of reals, so any finite set of hyperreals that contains non-real elements is internal but not the extension of a set of reals. Internal functions are defined similarly to internal sets:
+
+\begin{defn}
+    If $f_1, f_2, f_3, \ldots$ is a sequence of functions $f_i: \reals \to \reals$, we define the \textit{internal function} $f: \hreals \to \hreals$, denoted $f = [f_n]$, by
+    \[ [f_n]([r_n]) = [f_n(r_n)]. \]
+\end{defn}
+
+
 

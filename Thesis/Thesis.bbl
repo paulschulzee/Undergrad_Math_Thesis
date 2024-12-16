@@ -51,6 +51,7 @@
       \field{volume}{188}
       \field{year}{1998}
       \field{dateera}{ce}
+      \true{nocite}
       \verb{doi}
       \verb 10.1007/978-1-4612-0615-6
       \endverb
