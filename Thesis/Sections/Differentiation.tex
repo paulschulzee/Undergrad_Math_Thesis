@@ -28,7 +28,7 @@ A number of proofs of basic calculus results can be easily accomplished by infin
 \end{thm}
 
 \begin{proof}[Proof adapted from \protect{\cite[ch.~8.4]{goldblatt1998}}] 
-    Let $\Delta x$ be any nonzero infinitesimal, and let $\Delta g = g(x + \Delta x) - g(x)$. If $\Delta g = 0$, then $g(x + \Delta x) = g(x)$, so $(f \circ g)'(x) = \stp{\dfrac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} = 0$ and clearly $g'(x) = \stp{\frac{\Delta g}{\Delta x}} = 0$, so we are done. If $\Delta g \neq 0$, then since $g'(x) = \stp{\frac{\Delta g}{\Delta x}}$ is defined, we conclude $\frac{\Delta g}{\Delta x}$ is bounded and (since $\Delta x$ is infinitesimal) that $\Delta g$ is infinitesimal. Thus
+    Let $\Delta x$ be any nonzero infinitesimal, and let $\Delta g = g(x + \Delta x) - g(x)$. If $\Delta g = 0$, then $g(x + \Delta x) = g(x)$, so $(f \circ g)'(x) = \stp{\dfrac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} = 0$ and clearly $g'(x) = \stp{\frac{\Delta g}{\Delta x}} = 0$, so we are done. If $\Delta g \neq 0$, then since $g'(x) = \stp{\frac{\Delta g}{\Delta x}}$ is defined, we conclude $\frac{\Delta g}{\Delta x}$ is limited and (since $\Delta x$ is infinitesimal) that $\Delta g$ is infinitesimal. Thus
 \begin{align*}
     (f \circ g)'(x) &= \stp{\frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} \\
         &= \stp{\frac{f(g(x) + \Delta g) - f(g(x))}{\Delta g} \cdot \frac{\Delta g}{\Delta x}} \\
@@ -52,7 +52,7 @@ This gets complicated when we want to deal with repeated partial derivatives. Sa
     f_{yx}(a, b) &= \stp{\frac{f_y(a + \Delta x, b) - f_y(a, b)}{\Delta x}} \\
         &= \stp{\frac{\stp{\frac{f(a + \Delta x, b + \Delta y) - f(a + \Delta x, b)}{\Delta y}} - \stp{\frac{f(a, b + \Delta y) - f(a, b)}{\Delta y}}}{\Delta x}},
 \end{align*}
-which would allow us to easily get $f_{yx}(a, b)= f_{xy}(a, b)$. However, this isn't right. Firstly, the numerator is the difference of two real numbers, and so is real, which would mean $f_{yx}(a, b)$ is either $0$ or undefined (as a real divided by an infinitesimal is either $0$ or unbounded). The mistake here is that $f_y(a + \Delta x, b) \neq \stp{\frac{f(a + \Delta x, b + \Delta y) - f(a + \Delta x)}{\Delta y}}$. Since in this case $f_y$ is taking a nonreal input, we have to use the extension $\hr{f_y}(a + \Delta x, b)$. If $\Delta x = [\Delta x_n]$, then this is $[f_y(a + \Delta x_n, b)] = \left[\stp{\frac{f(a + \Delta x_n, b + \Delta y) - f(a + \Delta x_n, b)}{\Delta y}}\right]$. This is the equivalence class of a sequence of real numbers, but it needn't be a real number itself.
+which would allow us to easily get $f_{yx}(a, b)= f_{xy}(a, b)$. However, this isn't right. Firstly, the numerator is the difference of two real numbers, and so is real, which would mean $f_{yx}(a, b)$ is either $0$ or undefined (as a real divided by an infinitesimal is either $0$ or unlimited). The mistake here is that $f_y(a + \Delta x, b) \neq \stp{\frac{f(a + \Delta x, b + \Delta y) - f(a + \Delta x)}{\Delta y}}$. Since in this case $f_y$ is taking a nonreal input, we have to use the extension $\hr{f_y}(a + \Delta x, b)$. If $\Delta x = [\Delta x_n]$, then this is $[f_y(a + \Delta x_n, b)] = \left[\stp{\frac{f(a + \Delta x_n, b + \Delta y) - f(a + \Delta x_n, b)}{\Delta y}}\right]$. This is the equivalence class of a sequence of real numbers, but it needn't be a real number itself.
 
 \begin{thm}
     Let $f: \reals^n \to \reals$. Let $\hat{f}_{x_k}$ denote the standard definition of the partial derivative, namely
@@ -69,23 +69,23 @@ The definitions in this section are thanks to Goldblatt, and most of the results
 
 Let $a_n: \nats \to \reals$. We can define $s_n: \nats \to \reals$ by 
 \[ s_n = \sum_{i=0}^n a_i. \]
-Now, for any unbounded $N \in \hnats$, we can define
+Now, for any unlimited $N \in \hnats$, we can define
 \[ \sum_{i=0}^N a_i = \hr{s_N}. \]
-Finally, if for any unbounded $N, M \in \hnats$ we have $\sum_{i=0}^N a_i \simeq \sum_{i=0}^M a_i$, then we say $\sum_{i=0}^\infty a_i$ \textit{converges} and define
+Finally, if for any unlimited $N, M \in \hnats$ we have $\sum_{i=0}^N a_i \simeq \sum_{i=0}^M a_i$, then we say $\sum_{i=0}^\infty a_i$ \textit{converges} and define
 \[ \sum_{i=0}^\infty a_i = \stp{\sum_{i=0}^N a_i}. \] 
 
-When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}^{m-1} a_i$. This gives the expected result when using finite naturals, but also extends to unbounded hypernaturals. Then $\sum_{i=0}^\infty a_i$ converges when $\sum_{i=M+1}^N a_i \simeq 0$ for any unbounded $N, M \in \hnats$ such that $N > M$.
+When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}^{m-1} a_i$. This gives the expected result when using finite naturals, but also extends to unlimited hypernaturals. Then $\sum_{i=0}^\infty a_i$ converges when $\sum_{i=M+1}^N a_i \simeq 0$ for any unlimited $N, M \in \hnats$ such that $N > M$.
 
 \begin{thm}[Cauchy Convergence Criterion for Series]
-    If for any unbounded $N, M \in \hnats$, $\sum_{i=0}^N a_i \simeq \sum_{i=0}^M a_i$, then $\sum_{i=0}^\infty a_i$ converges.
+    If for any unlimited $N, M \in \hnats$, $\sum_{i=0}^N a_i \simeq \sum_{i=0}^M a_i$, then $\sum_{i=0}^\infty a_i$ converges.
 \end{thm}
 
 \begin{proof}[Proof adapted from \protect{\cite[thm.~6.5.2]{goldblatt1998}}]
-    The issue here is that $\sum_{i=0}^N a_i$ might be unbounded for all unbounded $N \in \hnats$. Let $s(n) = \sum_{i=0}^N a_i$. 
+    The issue here is that $\sum_{i=0}^N a_i$ might be unlimited for all unlimited $N \in \hnats$. Let $s(n) = \sum_{i=0}^N a_i$. 
     
-    First, assume that (in $\reals$) $\neg (\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. This says the sequence $s(n)$ is not bounded. By trasnfer, this is true in $\hreals$ as well. Take an unbounded $N \in \hnats$. Since $|s(n)|$ has no upper bound in $\hreals$, there is some $M \in \hnats$ such that $|s(N)| \leq 2 \cdot |s(N)| < |s(M)|$. Since $|s(N)| \simeq |s(M)|$, this implies $|s(N)| \simeq 2 \cdot |s(N)|$, implying $|s(N)| \simeq 0$, and so for any unbounded $M \in \hnats$ we have $|s(M)| \simeq |s(N)| \simeq 0$ and so $\sum_{i=0}^\infty a_i = 0$.
+    First, assume that (in $\reals$) $\neg (\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. This says the sequence $s(n)$ is not bounded. By trasnfer, this is true in $\hreals$ as well. Take an unlimited $N \in \hnats$. Since $|s(n)|$ has no upper bound in $\hreals$, there is some $M \in \hnats$ such that $|s(N)| \leq 2 \cdot |s(N)| < |s(M)|$. Since $|s(N)| \simeq |s(M)|$, this implies $|s(N)| \simeq 2 \cdot |s(N)|$, implying $|s(N)| \simeq 0$, and so for any unlimited $M \in \hnats$ we have $|s(M)| \simeq |s(N)| \simeq 0$ and so $\sum_{i=0}^\infty a_i = 0$.
 
-    Now, say $(\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. Whatever this $r$ is, call it $b$. Then $(\forall n \in \nats)(|s(n)| < b)$, and so by transfer $(\forall n \in \hnats)(|s(n)| < b)$. So if we take an unbounded $N \in \hnats$, we know $s(N)$ is bounded and hence $\sum_{i=0}^\infty a_i = \stp{s(N)}$.
+    Now, say $(\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. Whatever this $r$ is, call it $b$. Then $(\forall n \in \nats)(|s(n)| < b)$, and so by transfer $(\forall n \in \hnats)(|s(n)| < b)$. So if we take an unlimited $N \in \hnats$, we know $s(N)$ is bounded and hence $\sum_{i=0}^\infty a_i = \stp{s(N)}$.
 \end{proof}
 
 \begin{thm}[Geometric Series]\label{GeometricSeries}
@@ -94,7 +94,7 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
 \end{thm}
 
 \begin{proof}[Proof \protect{\cite[ex.~6.7]{goldblatt1998}}]
-    By difference of powers, we know that $1 - r^{n+1} = (1 + r + r^2 + \cdots + r^n)(1-r)$. So, we conclude that $\sum_{i=0}^n r^i = \dfrac{1-r^{n+1}}{1-r}$. Hence, by transfer, for any unbounded $N \in \hnats$ we have $\sum_{i=0}^N r^i = \dfrac{1-r^{N+1}}{1-r}$. 
+    By difference of powers, we know that $1 - r^{n+1} = (1 + r + r^2 + \cdots + r^n)(1-r)$. So, we conclude that $\sum_{i=0}^n r^i = \dfrac{1-r^{n+1}}{1-r}$. Hence, by transfer, for any unlimited $N \in \hnats$ we have $\sum_{i=0}^N r^i = \dfrac{1-r^{N+1}}{1-r}$. 
 
     Consider $r^{N}$. Assume for a contradiction $\stp{r^N} > 0$. Then as $0 < r < 1$, we have $r^{N+1} = r \cdot r^N \simeq r\cdot \stp{r^N} < \stp{r^N}$. Hence, in $\hreals$, $(\exists M \in \hnats)(r^M < \stp{r^N})$. By transfer, $(\exists m \in \nats)(r^m < \stp{r^N})$. But $r^m$ is real, so $r^m < r^N$, even though $0 < r < 1$ and $m < N$. This is a contradiction, so we find $\stp{r^N} \leq 0$, and since $0 < r < 1$ we conclude $\stp{r^N} = 0$. Hence, 
     \[\sum_{i=0}^\infty r^i = \stp{\sum_{i=0}^N r^i} = \stp{\frac{1-r^{N+1}}{1-r}} = \frac{1}{1-r}. \]
@@ -105,20 +105,20 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
 \end{thm}
 
 \begin{proof}
-    Take any two unbounded $N, M \in \hnats$, say $N > M$. In $\reals$, the triangle inequality implies \[(\forall n \in \nats)(\forall m \in \nats)\left(n > m \to \left|\sum_{i = m + 1}^n a_i \right| \leq \sum_{i = m + 1}^n  |a_i|\right),\]
+    Take any two unlimited $N, M \in \hnats$, say $N > M$. In $\reals$, the triangle inequality implies \[(\forall n \in \nats)(\forall m \in \nats)\left(n > m \to \left|\sum_{i = m + 1}^n a_i \right| \leq \sum_{i = m + 1}^n  |a_i|\right),\]
     and so this is true in $\hreals$ too. So, we have 
     \[0 < \left|\sum_{i=M+1}^N a_i\right| \leq \sum_{i=M+1}^N |a_i| \simeq 0,\]
     since $\sum_{i=0}^\infty |a_i|$ converges. This implies $\sum_{i=M+1}^N a_i \simeq 0$, so $\sum_{i=0}^\infty a_i$ converges.
 \end{proof}
 
 \begin{thm}[Ratio Test]\label{RatioTest}
-    Let $a_i: \nats \to \reals$ be a sequence. If for every unbounded $M \in \hnats$ we have $\left|\stp{\frac{a_{M+1}}{a_M}}\right| = L$ for some $L < 1$, then $\sum_{i=0}^\infty a_i$ converges.
+    Let $a_i: \nats \to \reals$ be a sequence. If for every unlimited $M \in \hnats$ we have $\left|\stp{\frac{a_{M+1}}{a_M}}\right| = L$ for some $L < 1$, then $\sum_{i=0}^\infty a_i$ converges.
 \end{thm}
 
 \begin{proof}[Proof \protect{\cite[ex.~6.8]{goldblatt1998}}]
-    Assume that $a_i \geq 0$---if not, apply the theorem to $|a_i|$ and use \autoref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unbounded hypernatural $M$.
+    Assume that $a_i \geq 0$---if not, apply the theorem to $|a_i|$ and use \autoref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unlimited hypernatural $M$.
 
-    Take any unbounded $N \in \hnats$. For any $M \in \hnats$, if $N \leq M$, then $M$ is also unbounded, and so $\frac{a_{M+1}}{a_M} < r$. So we have the sentence
+    Take any unlimited $N \in \hnats$. For any $M \in \hnats$, if $N \leq M$, then $M$ is also unlimited, and so $\frac{a_{M+1}}{a_M} < r$. So we have the sentence
     \[ 
     (\exists k \in \hnats)(\forall m \in \hnats)\left(n \leq m \to \frac{a_{m+1}}{a_m} < r\right). 
     \]
@@ -128,29 +128,29 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
     \[ 
     \sum_{i=k+m}^{k+n} a_i \leq \sum_{i=k+m}^{k+n} r^{i-k} a_k = \left(\sum_{i=m}^n r^i\right) a_k. 
     \]
-    Transferring this to the hyperreals, if we have two unbounded $N, M \in \hnats$ with $N > M$, we get
+    Transferring this to the hyperreals, if we have two unlimited $N, M \in \hnats$ with $N > M$, we get
     \[ 
     \sum_{i=M+1}^N a_i = \sum_{i=k+(M+1-k)}^{k+(N-k)} a_i \leq \left(\sum_{i=M+1-k}^{N-k} r^i \right) a_k. 
     \]
-    Note that $M=1-k$ and $N-k$ are both unbounded hyperreals, and so $\sum_{i=M+1-k}^{N-k} r^i$ is infinitesimal by \autoref{GeometricSeries} (as $\sum_{i=0}^{N-k} r^i \simeq \sum_{i=0}^{M+1-k} \simeq \frac{1}{1-r}$). Since $a_k$ is appreciable, this means the product is infinitesimal, hence $\sum_{i=M+1}^N a_i$ is infinitesimal, hence $\sum_{i=0}^\infty a_i$ converges.
+    Note that $M=1-k$ and $N-k$ are both unlimited hyperreals, and so $\sum_{i=M+1-k}^{N-k} r^i$ is infinitesimal by \autoref{GeometricSeries} (as $\sum_{i=0}^{N-k} r^i \simeq \sum_{i=0}^{M+1-k} \simeq \frac{1}{1-r}$). Since $a_k$ is appreciable, this means the product is infinitesimal, hence $\sum_{i=M+1}^N a_i$ is infinitesimal, hence $\sum_{i=0}^\infty a_i$ converges.
 \end{proof}
 
 \subsection{The \texorpdfstring{$\exp$}{exp} function}
 This entire section is individual work without the guidance of any texts. We define the exponential function \[\exp(x) = \sum_{i=0}^\infty \frac{x^i}{i!}.\]
 
-For convenience, we will write $e(x, k) = \sum_{i=0}^k \frac{x^i}{i!}$. For any unbounded $N \in \hnats$, we have $\exp(x) = \stp{e(x, N)}$.
+For convenience, we will write $e(x, k) = \sum_{i=0}^k \frac{x^i}{i!}$. For any unlimited $N \in \hnats$, we have $\exp(x) = \stp{e(x, N)}$.
 
 \begin{thm}\label{expExists}
     For any real $x$, $\exp(x)$ exists.
 \end{thm}
 
 \begin{proof}
-    We use the ratio test (\autoref{RatioTest}) to prove that $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges. Let $M$ be an unbounded hypernatural. Then 
+    We use the ratio test (\autoref{RatioTest}) to prove that $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges. Let $M$ be an unlimited hypernatural. Then 
     \[
         \frac{x^{M+1}}{(M+1)!} \  \div \  \frac{x^M}{M!} = \frac{x^{M+1}M!}{x^M (M+1)!} 
         = \frac{x}{M+1}.
     \]
-    Since $x$ is real and $M+1$ is unbounded, $\frac{x}{M+1}$ is infinitesimal, and hence has standard part $0$. Since $0 < 1$, and since this holds for any unbounded hypernnatural, the conditions of \autoref{RatioTest} are met and we are done.
+    Since $x$ is real and $M+1$ is unlimited, $\frac{x}{M+1}$ is infinitesimal, and hence has standard part $0$. Since $0 < 1$, and since this holds for any unlimited hypernnatural, the conditions of \autoref{RatioTest} are met and we are done.
 \end{proof}
 
 We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following lemma.
@@ -189,7 +189,7 @@ We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following 
     \[
     |R_k| \leq \sum_{q=0}^{k-2}\sum_{i=q+2}^k \frac{|x|^{q}\cdot |d|^{(i-q)}}{q!} = \sum_{q=0}^{k-2}\sum_{p=2}^{k-q} \frac{|x|^{q}\cdot |d|^{p}}{q!} = \sum_{q=0}^{k-2} \left( \frac{|x|^q}{q!} \cdot \sum_{p=2}^{k-q} |d|^{p}\right).
     \]
-    Since $|d| < 1$, \autoref{GeometricSeries} tells us that for any unbounded hypernatural $N$, $\sum_{p=0}^N |d|^p \simeq \frac{1}{1-|d|}$. Since each term of $|d|^p$ is positive, we have 
+    Since $|d| < 1$, \autoref{GeometricSeries} tells us that for any unlimited hypernatural $N$, $\sum_{p=0}^N |d|^p \simeq \frac{1}{1-|d|}$. Since each term of $|d|^p$ is positive, we have 
     \[
     \sum_{p=2}^{k-q} |d|^p = \sum_{p=0}^{k-q} |d|^p - \sum_{p=0}^{1} |d|^p \leq \frac{1}{1-|d|} - (1 + |d|) = \frac{1 - 1(1 - |d|) - |d|(1 - |d|)}{1 - |d|} = \frac{1 - 1 + |d| - |d| + |d|^2}{1 - |d|} = \frac{|d|^2}{1 - |d|}.
     \]
@@ -212,7 +212,7 @@ We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following 
     \[
     (\forall k \in \nats)\left(\left|\frac{e(x + d, k) - e(x, k)}{d} - e(x, k - 1)\right| \leq \frac{|d|}{1 - |d|} \cdot \exp(|x|)\right).
     \]
-    We then transfer this statement to $\hreals$, pick an unbounded $N \in \hnats$ to plug in for $k$, and we get
+    We then transfer this statement to $\hreals$, pick an unlimited $N \in \hnats$ to plug in for $k$, and we get
     \[
     \left|\frac{e(x + d, N) - e(x, N)}{d} - e(x, N - 1)\right| \leq \frac{|d|}{1-|d|} \cdot \exp(|x|).
     \]

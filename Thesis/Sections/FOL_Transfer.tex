@@ -55,6 +55,7 @@ While we will treat this language, rigorously defined, exactly as it is for the 
     \item We will omit outer parentheses and other parentheses not necessary to understand a wff, as in $\dot P(v_1) \lor \dot Q(v_1)$. We will also sometimes use $[$ and $]$ in place of $($ and $)$, respectively.
     \item We will write $x \in \dot A$ to mean $\dot A(x)$.
     \item We will write $\varphi \to \psi$ to mean $\neg \varphi \lor \psi$. Intuitively, this \textit{means} the same thing: if $\varphi$ implies $\psi$, then either $\varphi$ is false or $\varphi$, and thus $\psi$, are true. Similarly, if $\neg \varphi \lor \psi$, and $\varphi$ is true, then $\psi$ must be true.
+    \item We will write $\varphi \leftrightarrow \psi$ to mean $(\varphi \to \psi) \land (\psi \to \varphi)$.
     \item We will write $(\exists v_i) \varphi$ to mean $\neg (\forall v_i) \neg \varphi$. An example for why this makes sense: there exists a number greater than $5$ iff it's \textit{not} true that \textit{every} number is no greater than $5$. If it's not the case that $\neg \varphi$ for every $v_i$, then there must exist some counterexample for which $\varphi$.
     \item We will write $(\forall v_i \in \dot A)\varphi$ to mean $(\forall x)(x \in \dot A \to \varphi)$, and similarly for $\exists$.
     \item We will use infix notation for common relations and functions that usually do so, e.g. $\leq$, $\geq$, $=$, $+$, $\cdot$, etc.

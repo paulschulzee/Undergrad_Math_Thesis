@@ -1,1 +1,90 @@
 \section{Structure of \texorpdfstring{$\hreals$}{*R}}
+The goal of this section is to explore what $\hreals$ is ``like.'' To do this, we will use both work directly with the ultrapower definition of $\hreals$ and use the transfer principle.
+
+To start with, all of the field axioms can be written down in our language $\mathcal{L}_\mathfrak{R}$. For instance, the fact that addition is commutative is
+\[ (\forall x)(\forall y)(x + y = y + x), \]
+and the fact that multiplicative inverses exist is 
+\[ (\forall x)(x \neq 0 \to (\exists y)(x \cdot y = 1)). \]
+So, we transfer all of the field axioms to $\hreals$ and concldue $\hreals$ is a field. Throughout this paper we will make use of high-school-level algebraic properties to rearrange equations and such, even beyond the field axioms---unless otherwise noted, the relevant properties of $\hreals$ can be justified by a simple use of transfer.
+
+\subsection{Infinitesimal and Unlimited Hyperreals}
+
+\begin{defn}
+    A hyperreal $x \in \hreals$ is called
+    \begin{itemize}
+        \item \textit{infinitesimal} if $|x| < b$ for any $b \in \reals^+$.
+        \item \textit{unlimited} if $b < |x|$ for any $b \in \reals^+$, and \textit{limited} otherwise.
+        \item \textit{appreciable} if it is both limited and non-infinitesimal, i.e. if there are $b, c \in \reals^+$ such that $b \leq |x| \leq c$.
+    \end{itemize}
+\end{defn}
+
+There is exactly one real infinitesimal, $0$. In $\hreals$, there are many more. Consider for a start $\delta = [\delta_n] = [\langle 1, \frac{1}{2}, \frac{1}{3}, \ldots \rangle]$. For any $r \in \reals^+$, there is some $m \in \nats$ such that $\frac{1}{m} < r$. So the cofinite set $\{n \in \nats \sthat n \geq m\}$ is a subset of $[[\delta_n < r]]$, so $[[\delta_n < r]] \in \mathcal{F}$, and so $\delta < r$. However, $[[0 < \delta_n]] = \nats \in \mathcal{F}$, and so $0 < \delta$. So $0 < \delta < r$ for any $r \in \reals^+$, and $\delta$ is infinitesimal.
+
+Let $b \in \reals - \{0\}$. Now, in $\reals$, it's true that
+\[
+(\forall x)(\forall r)(|x| < \frac{r}{|b|} \to |b \cdot x| < r).
+\] 
+We can then transfer this to $\hreals$. With our abbreviations, we would write the sentence the exact same way, so we can say that this sentence is also true in $\hreals$. Now, if it's true for all $x$, then it must be true for $\delta$.
+\[
+(\forall r)(|\delta| < \frac{r}{|b|} \to |b \cdot \delta| < r)
+\]
+Let $r$ be any positive real number. Then $\frac{r}{|b|} \in \reals^+$, so $|\delta| < \frac{r}{|b|}$ (because $\delta$ is infinitesimal). Then, by applying our sentence, we know that $|b \cdot \delta| < r$. And this holds for any $r \in \reals^+$! So $b \cdot \delta$ is infinitesimal. Similarly, we know that
+\[
+(\forall x)(0 \neq x \to 0 \neq (b \cdot x))
+\]
+in $\reals$. So we transfer this $\hreals$, plug in $\delta$ for $x$, and since $0 \neq \delta$ we find $0 \neq (b \cdot x)$. Throughout this reasoning, we used the fact that $\delta$ was infinitesimal, but nothing else about it, so we conclude that if $\delta$ is any nonzero infinitesimal and $b \in \reals - \{0\}$, then $b \cdot \delta$ is a nonzero infinitesimal. Generalizing, we can conclude (with a little bit more work) that for any limited hyperreal $b$ and any infinitesimal $\delta$, we have $b \cdot \delta$ infinitesimal.
+
+Now consider unlimited hyperreals. There are no unlimited reals. The hyperreal $H = [n] = [\langle 1, 2, 3, 4, \ldots \rangle]$ is unlimited, however. For any $r \in \hreals$, there is $m \in \nats$ such that $r < n$ for all $n > m$, and so the cofinite set $[[r < n]] \in \mathcal{F}$ meaning $r < [n] = H$. This is true for every $r \in \hreals$.
+
+\begin{thm}[\protect{\cite[Chapter~5.2]{goldblatt1998}}]\label{arithmeticHyperreals}
+    If $\epsilon, \delta$ are infinitesimal, $b, c$ are appreciable, and $H, K$ are unlimited, we have:
+    \begin{itemize}
+        \item $-\epsilon$, $\epsilon + \delta$, $\epsilon \cdot \delta$, $\epsilon \cdot b$, and $\frac{1}{H}$ infinitesimal.
+        \item $-b$, $b + \epsilon$, $b \cdot c$, and $\frac{1}{b}$ appreciable.
+        \item $b + c$ limited (possibly infinitesimal, as in $(1 + \delta) + (-1)$).
+        \item $-H$, $H + \epsilon$, $H + b$, $b \cdot H$, $H \cdot K$, and $\frac{1}{\epsilon}$ (if $\epsilon \neq 0$) unlimited.
+    \end{itemize}
+\end{thm}
+
+\section{Infinite Closeness \& Standard Parts}
+\begin{defn}
+    We say that two hyperreals $x, y$ are \textit{infinitely close}, and write $x \simeq y$, if $x - y$ is infinitesimal.
+\end{defn}
+
+Note that $\simeq$ is an equivalence relation. $x - x = 0$ is infinitesimal, $x - y$ is infinitesimal iff $-(x - y) = y - x$ is, and whenever $x - y$ and $y - z$ are infinitesimal their sum $(x - y) + (y - z) = x - z$ is as well. Note also that $x$ is infinitesimal iff $x \simeq 0$, and $x \simeq y$ iff $|x - y| < r$ for any $r \in \reals^+$.
+
+\begin{thm}[\protect{\cite[Theorem~5.6.1]{goldblatt1998}}]
+    Every limited hyperreal $b$ is infinitely close to exactly one real number, called the \textit{standard part} of $b$, denoted by $\stp{b}$.
+\end{thm}
+
+So the limited hyperreals are broken up into disjoint ``halos'' around each real number. The standard part function also has the nice property of respecting most arithmetic functions. For instance, $\stp{b + c} \simeq b + c$ (by definition), and $b + c - (\stp{b} + \stp{c}) = (b - \stp{b}) + (c - \stp{c})$, which is infinitesimal (as the sum of two infinitesimals). So $b + c \simeq \stp{b} + \stp{c}$, and so by transitivity of $\simeq$ we have $\stp{b + c} \simeq \stp{b} + \stp{c}$. Since both $\stp{b + c}$ and $\stp{b} + \stp{c}$ are real, their difference $stp{b + c} - (\stp{b} + \stp{c})$ must be real, and since they are infinitely close, their difference must be infinitesimal. Since the only real infinitesimal is $0$, that means $\stp{b+c} = \stp{b}+\stp{c}$.
+
+That last move will be used frequently enough that it is worth stating as a theorem.
+\begin{thm}
+    If $a, b \in \reals$, and $a \simeq b$, then $a = b$.
+\end{thm}
+
+Also, since $\simeq$ is transitive, if $x, y \in \hreals$ are limited and $x \simeq y$, we have $stp{x} \simeq x \simeq y \simeq \stp{y}$ and therefore $\stp{x} = \stp{y}$. Similarly, if $\stp{x} = \stp{y}$, then $x \simeq \stp{x} = \stp{y} \simeq y$ and so $x \simeq y$.
+\begin{corollary}
+    If $x, y \in \hreals$ are both limited, then $x \simeq y$ if and only if $\stp{x} = \stp{y}$.
+\end{corollary}
+
+We can write similar proofs that $\st$ distributes over subtraction, multiplication, division, even absolute value ($\stp{|x|} = |\stp{x}|$) for limited values \cite[Theorem~5.6.2]{goldblatt1998}.
+
+\begin{thm}[\protect{\cite[Exercise~5.7(4)]{goldblatt1998}}]
+    Let $\mathbb{L}$ denote the ring of limited hyperreals, and $\mathbb{I}$ the ring of infinitesimals. Show that $\reals$ is isomorphic to the ring of limited hyperrations $\hr{\mathbb{Q}} \cap \mathbb{L}$ factored by its ideal $\hr{\mathbb{Q}} \cap \mathbb{I}$.
+\end{thm}
+
+\begin{proof}
+    Consider $\st: \hr{\mathbb{Q}} \cap \mathbb{L} \to \reals$. We want to use the first isomorphism theorem on rings, so we need to show that $\st$ is a ring homomorphism, its kernel is $\hr{\mathbb{Q}} \cap \mathbb{I}$, and its image is $\reals$. That $\st$ is a ring homorophism follows from the facts that $\stp{a \pm b} = \stp{a} \pm \stp{b}$ and $\stp{a \cdot b} = \stp{a} \cdot \stp{b}$ for any $a, b \in \hr{\mathbb{Q}} \cap \mathbb{L}$ because such $a, b$ are limited. $\stp{a} = 0$ iff $a \simeq 0$ iff $a$ is infinitesimal iff $a \in \hr{\mathbb{Q}} \cap \mathbb{I}$, so we conclude the kernel of $\st$ is $\hr{\mathbb{Q}} \cap \mathbb{I}$. 
+
+    Finally, take any $x \in \reals$. We have
+    \[ (\forall r \in \reals^+)(\exists q \in \mathbb{Q})(|x - q| < r). \]
+    If we transfer this, we get
+    \[ (\forall r \in \hr{\reals^+})(\exists q \in \hr{\mathbb{Q}})(|x - q| < r). \] 
+    What is $\hr{\reals^+}$? Well $(\forall y)(y \in \reals^+ \leftrightarrow 0 < y)$, so by transfer $(\forall y)(y \in \hr{\reals^+} \leftrightarrow 0 < y)$. So $\hr{\reals^+}$ is the set of positive hyperreals. Take that sentence and plug in some positive infinitesimal $\delta$ for $r$. Then we have
+    \[ (\exists q \in \hr{\mathbb{Q}})(|x - q| < \delta). \]
+    But if $|x - q| < \delta$, then $|x - q| < r$ for any $r \in \reals^+$, and so $x \simeq q$. Since $x \in \reals$, this implies $\stp{q} = x$, and thus that $x$ is in the image of $\st$. 
+    
+    This is true for any $x \in \reals$, so the image of $\st$ must be all of $\reals$. Thus, we can use the first isomorphism theorem on rings to conclude $\hr{\mathbb{Q}} \cap \mathbb{L} / \hr{\mathbb{Q}} \cap \mathbb{I} \cong \mathbb{R}$.
+\end{proof}

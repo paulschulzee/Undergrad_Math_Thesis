@@ -75,6 +75,8 @@ Now, we will form equivalence classes in $\reals^\nats$ based on this equivalenc
 \[ \hreals = \reals^\nats / I. \]
 We denote the equivalence class of an element $r = \langle r_n \rangle$ by $[r]$, $[\langle r_n \rangle]$, or just $[r_n]$ (ommitting the angled brackets).
 
+One might reasonably worry that we chose no particular ultrafilter $\mathcal{F}$ on $\nats$, and so $\hreals$ might not be unique. We can prove that $\hreals$ is unique if we assume the continuum hypothesis---otherwise, the uniqueness of $\hreals$ is indeterminate in ZFC \cite[33]{goldblatt1998}.
+
 \subsection{Extensions}\label{sec:extensions}
 
 For any function $f: \reals \to \reals$, we define $\hr{f}: \hreals \to \hreals$ by $\hr{f}([r_n]) = [f(r_n)]$. For example, if $f(x) = x^2$, then $f([\langle 1, 2, 3, \ldots \rangle]) = [\langle 1, 4, 9, 16, \ldots \rangle]$. $\hr{f}$ is well defined, as if $[r_n] = [s_n]$ then $[[r_n = s_n]] \in \mathcal{F}$, and so we have $[[r_n = s_n]] \subseteq [[f(r_n) = f(s_n)]] \in \mathcal{F}$ and so $\langle f(r_n) \rangle \equiv \langle f(s_n) \rangle$, i.e. $\hr{f}([r_n]) = [f(r_n)] = [f(s_n)] = \hr{f}([s_n])$.
