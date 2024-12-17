@@ -1,12 +1,12 @@
-\section{Integration}
+\section{Integration}\label{sec:Integration}
 
 
 \subsection{Integrability \& Integrals}
 If $f$ is a function bounded on $[a, b]$ and $P = \{x_0 = a, x_1, \ldots, x_n = b\}$ a partition on $[a, b]$, let $M_i$ and $m_i$ be the supremum and infimum respectively of $f$ on $[x_{i-1}, x_i]$, and $\Delta x_i = x_i - x_{i-1}$. We then define:
 \begin{itemize}
-    \item The upper Riemann sum $U_a^b(f, P) = \sum_{i=1}^n M_i\Delta x_i$
-    \item The lower Riemann sum $L_a^b(f, P) =\sum_{i=1}^n m_i\Delta x_i$
-    \item The ordinary Riemann sum $S_a^b(f, P) = \sum_{i=1}^n f(x_{i-1})\Delta x_i$
+    \item The upper Riemann sum $U_a^b(f, P) = \sum_{i=1}^n M_i\Delta x_i$.
+    \item The lower Riemann sum $L_a^b(f, P) =\sum_{i=1}^n m_i\Delta x_i$.
+    \item The ordinary Riemann sum $S_a^b(f, P) = \sum_{i=1}^n f(x_{i-1})\Delta x_i$.
 \end{itemize}
 For any positive real $\Delta x$, let $P_{\Delta x} = \{a, a+\frac{b-a}{\Delta x}, a + 2\frac{b-a}{\Delta x}, \ldots, a + n\frac{b-a}{\Delta x}, b\}$. Now, for any positive real $\Delta x$, let $U_a^b(f, \Delta x) = U_a^b(f, P_{\Delta x})$. Similarly for $L_a^b(f, \Delta x)$ and $S_a^b(f, \Delta x)$.
 
@@ -15,7 +15,7 @@ A function $f: \reals \to \reals$ is \textit{integrable} on $[a, b]$ if $L_a^b(f
 \begin{defn}
 If $f$ is integrable on $[a, b]$, then we define $\int_a^b f(x)\ dx = \stp{S_a^b(f, \Delta x)}$ for some positive infinitesimal $\Delta x$. 
 \end{defn}
-Note that we can't properly speaking extend $S_a^b$, as $S_a^b$ has a function as an argument and we can only extend functions that take in real numbers as arguments. Really, we're extending the funciton $g(x) = S_a^b (f, x)$, and writing $S_a^b (f, \Delta x) = \hr{g}(\Delta x)$. To show this is well-defined, we need a lemma.
+Note that we can't properly speaking extend $S_a^b$, as $S_a^b$ has a function as an argument and we can only extend functions that take in real numbers as arguments. Really, we're extending the function $g(x) = S_a^b (f, x)$, and writing $S_a^b (f, \Delta x) = \hr{g}(\Delta x)$. To show this is well-defined, we need a lemma.
 
 \begin{lemma}[\protect{\cite[106]{goldblatt1998}}]
     Let $f: \reals \to \reals$ and $[a, b] \subseteq \reals$. Given any two partitions $P_1$ and $P_2$ of $[a, b]$, we find $L_a^b(f, P_1) \leq U_a^b(f, P_2)$.
@@ -29,8 +29,8 @@ Note that we can't properly speaking extend $S_a^b$, as $S_a^b$ has a function a
     If $f$ is integrable on $[a, b]$, then $\int_a^b f(x)dx$ is well-defined.
 \end{thm}
 
-\begin{proof}[Proof adapted heavily from \protect{\cite[Chapter~9.2]{goldblatt1998}}]
-    The issue here is that $\int_a^b f(x)\ dx = \stp{S_a^b(f, \Delta x)}$ might depend on our choice of positive infintiesimal $\Delta x$. Let $\Delta x_1$ and $\Delta x_2$ be two positive infinitesimals. We want to show that $S_a^b(f, \Delta x_1) \simeq S_a^b(f, \Delta x_2)$.
+\begin{proof}[Proof adapted from \protect{\cite[Chapter~9.2]{goldblatt1998}}]
+    The issue here is that $\int_a^b f(x)\ dx = \stp{S_a^b(f, \Delta x)}$ might depend on our choice of positive infinitesimal $\Delta x$. Let $\Delta x_1$ and $\Delta x_2$ be two positive infinitesimals. We want to show that $S_a^b(f, \Delta x_1) \simeq S_a^b(f, \Delta x_2)$.
 
     Note that in the reals, $(\forall \Delta x)(S_a^b(f, \Delta x) \leq U_a^b(f, \Delta x))$. This is because $\sum_{i=0}^n f(a + (i-1)\frac{b-a}{\Delta x})\Delta x \leq \sum_{i=0}^n M_i \Delta x$, as $M_i$ is a maximum of $f$ on $[a + (i-1)\frac{b-a}{\Delta x},  + i\frac{b-a}{\Delta x}]$ and so $f(a + (i-1)\frac{b-a}{\Delta x}) \leq M_i$. We can transfer this statement to the hyperreals to conclude that 
     \[ 
@@ -40,8 +40,7 @@ Note that we can't properly speaking extend $S_a^b$, as $S_a^b$ has a function a
 
     Let $L_1 = L_a^b(f, \Delta x_1)$, $L_2 = L_a^b(f, \Delta x_2)$, and similarly for $U_1$ and $U_2$. We know by \autoref{lowerSumsLessThanUpperSumsWithNumbers} that $L_1, L_2 \leq U_1, U_2$, and so the possible orderings are $L_1 \leq L_2 \leq U_1 \leq U_2$, $L_1 \leq L_2 \leq U_2 \leq U_1$, or either of those with the indices swapped. In any case, the fact that $L_1 \simeq U_1$ and $L_2 \simeq U_2$ implies $L_1 \simeq L_2 \simeq U_1 \simeq U_2$. But we have $S_a^b(f, \Delta x_1) \simeq U_1 \simeq U_2 \simeq S_a^b(f, \Delta x_2)$, so we are done.
 \end{proof}
-
-We now state the Fundamental Thoerem of Calculus, proven for nonstandard objects in \cite[111-112]{goldblatt1998}. 
+We now state the Fundamental Theorem of Calculus, proven for nonstandard objects in \cite[111-112]{goldblatt1998}. 
 
 \begin{thm}[Fundamental Theorem of Calculus, \protect{\cite[Theorem~9.4.2]{goldblatt1998}}]\label{fundamentalTheoremCalculus}
     If a function $G$ has a continuous derivative $f$ on $[a, b]$, then $\int_a^b f(x) dx = G(b) - G(a)$.
@@ -50,20 +49,26 @@ We now state the Fundamental Thoerem of Calculus, proven for nonstandard objects
 
 \subsection{Improper Integrals}
 Say $f: [a, b) \to \reals$ is integrable on every interval $[a, c]$ for $a < c < b$. Standardly, we take the \textit{improper integral} (where defined) to be
-\[\int_a^b f(x)dx \coloneq \lim_{c \to b} \int_a^c f(x)dx\]
+\[
+\int_a^b f(x)dx \coloneq \lim_{c \to b} \int_a^c f(x)dx.
+\]
 Nonstandardly, we instead take
-\[\int_a^b f(x)dx = \stp{\hr{\int_a^\gamma f(x)dx}}\]
-Where $b \simeq \gamma < b$ and $\hr{\int_a^t f(x)dx}$ indicates the extension $\hr{g}(t)$ of $g(t) = \int_a^t f(x)dx$. Similarly, we have
-\[\int_a^\infty f(x)dx = \stp{\hr{\int_a^\kappa f(x)dx}}\]
-Where $\kappa$ is a positive unlimited hyperreal. To be clear, there is no guarantee that these standard parts exist, or that they are the same across all potential $\gamma$'s or $\kappa$'s---in those cases, the improper integral is undefined.
+\[
+\int_a^b f(x)dx = \stp{\hr{\int_a^\gamma f(x)dx}},
+\]
+where $b \simeq \gamma < b$ and $\hr{\int_a^t f(x)dx}$ indicates the extension $\hr{g}(t)$ of $g(t) = \int_a^t f(x)dx$. Similarly, we have
+\[
+\int_a^\infty f(x)dx = \stp{\hr{\int_a^N f(x)dx}}
+\]
+Where $N$ is a positive unlimited hyperreal. To be clear, there is no guarantee that these standard parts exist, or that they are the same across all potential $\gamma$'s or $N$'s---in those cases, the improper integral is undefined.
 
-Say we want to take $\int_0^1 \frac{1}{\sqrt{x}} dx$. Since $\frac{1}{\sqrt{x}}$ isn't bounded on $[0, 1]$, we can't take a proper integral. So we instead venture to take $\int_\delta^1 \frac{1}{\sqrt{x}} dx$ for some positive infinitesimal $\delta$. 
+Say we want to take $\int_0^1 \frac{1}{\sqrt{x}}\ dx$. Since $\frac{1}{\sqrt{x}}$ isn't bounded on $[0, 1]$, we can't take a proper integral. So we instead venture to take $\int_\delta^1 \frac{1}{\sqrt{x}}\ dx$ for some positive infinitesimal $\delta$. 
 
 By \ref{fundamentalTheoremCalculus}, we have the sentence
 \[
-(\forall a \in \reals)\left(0 < a < 1 \to \int_a^1 \frac{1}{\sqrt{x}} dx= 2 - 2 \sqrt{a}\right).
+(\forall a \in \reals)\left(0 < a < 1 \to \int_a^1 \frac{1}{\sqrt{x}}\ dx = 2 - 2 \sqrt{a}\right).
 \]
-This transfers to $\hreals$, and so we conclude $\int_\delta^1 \frac{1}{\sqrt{x}} dx = 2 - 2\sqrt{\delta}$. Then $\int_0^1 \frac{1}{\sqrt{x}} = \stp{2 - 2 \sqrt{\delta}} = 2 - 2 \cdot \stp{\sqrt{\delta}} = 2$.  
+This transfers to $\hreals$, so we conclude $\int_\delta^1 \frac{1}{\sqrt{x}}\ dx = 2 - 2\sqrt{\delta}$. Then $\int_0^1 \frac{1}{\sqrt{x}}\ dx = \stp{2 - 2 \sqrt{\delta}} = 2 - 2 \cdot \stp{\sqrt{\delta}} = 2$.  
 
 \subsection{Hyperfinite Sets \& Sums}
 \begin{defn}
@@ -77,7 +82,7 @@ The hyperfinite sets are ``internally finite.'' They share a lot of properties w
 \end{thm}
 
 \begin{proof}
-    Say $X = [A_n]$, with each $A_n$ finite. Then $[[\varphi(A_n)]] = \nats$, and so by transfer $\hr{\varphi}(X)$.
+    Say $X = [A_n]$, with each $A_n$ finite. Then $[[\varphi(A_n)]] = \nats$, and so by \L o\'s's Theorem $\hr{\varphi}(X)$.
 \end{proof}
 
 This lets us easily get a lot of nice properties about hyperfinite sets. For instance, $(\exists x \in A)(\forall y \in A) (x \geq y)$ ensures that every hyperfinite set has a maximum element.
@@ -102,13 +107,13 @@ Let $c_n$ denote the greatest element of $P_n$, the second-to-last element of ou
 \[ 
 S_a^b(f, \Delta x_n) = \sum_{x \in P_n} f(x) \Delta x_n + f(c_n) \cdot (r_n - \Delta x_n). 
 \]
-This is because $\sum_{x \in P_n} f(x) \Delta x_n$ includes a term corresponding to $f(c_n) \Delta x_n$, while $S_a^b(f, \Delta x_n) = \sum_{i=1}^n f(x_{i-1})\Delta x_i$ includes as a term $f(c_n) r_n$ (as the width of the segment of the partition from $c_n$ to $b$ is $r_n$).
+This is because $\sum_{x \in P_n} f(x) \Delta x_n$ has the term $f(c_n) \Delta x_n$, while $S_a^b(f, \Delta x_n)$ has the term $f(c_n) \cdot r_n$. This is because $S_a^b(f, \Delta x_n) = \sum_{i=1}^n f(x_{i-1})\Delta_i$, where $\Delta_i$ is the width of the $i$\textsuperscript{th} interval, and the width of the last interval is $r_n$.
 
 Now, let $P = [P_n]$ be our ``hyperfinite partition'' of $[a,b]$ into hyperfinitely many intervals of infinitesimal width $dx$. Intuitively, we would hope that $\int_a^b f(x)dx$ is equal to the hyperfinite ``Riemann sum'' over this partition, i.e.
 \[
 \stp{\sum_{x \in P} f(x) \cdot dx} = \int_a^b f(x)dx = \stp{S_a^b(f, dx)}.
 \]
-Note that we're taking the hyperfinite sum over the internal function $g(x) = f(x) \cdot dx$. This is internal because we let $g = [g_n]$, where $g_n(x) = f(x) \cdot \Delta x_n$. Then $g(x) = [f(x) \cdot \Delta x_n] = [f(x)] \cdot [\Delta x_n] = f(x) \cdot dx$. To show this, we can write (adapted from \cite[Chapter~12.7]{goldblatt1998}):
+(Note that we're taking the hyperfinite sum over the internal function $g(x) = f(x) \cdot dx$. This is internal because we let $g = [g_n]$, where $g_n(x) = f(x) \cdot \Delta x_n$. Then $g(x) = [f(x) \cdot \Delta x_n] = [f(x)] \cdot [\Delta x_n] = f(x) \cdot dx$.) To show this, we can write (adapted from \cite[Chapter~12.7]{goldblatt1998}):
 \[
 \stp{\sum_{x \in P} f(x) \cdot dx }= \stp{\left[\sum_{x \in P_n} f(x) \cdot \Delta x_n\right]} .
 \]
@@ -119,30 +124,29 @@ Now, letting $N_n$ be such that $a + N_n \frac{b-a}{\Delta x_n} = c_n$ and letti
     &= \stp{\left[ S_a^b(f, \Delta x_n) \right]} \\
     &= \stp{\hr{S}_a^b(f, dx)} = \int_a^b f(x)dx.
 \end{align*}
-Intuitively, this is enough to see that $\sum_{x \in P} f(x) \cdot dx$ and $hr{S}_a^b(f, dx)$ really are doing the same thing, in that they're taking the hyperreal corresponding to a sequences of real numbers that are closer and closer approximations of $\int_a^b f(x)dx$ by Riemann sums. 
+Intuitively, this is enough to see that $\sum_{x \in P} f(x) \cdot dx$ and $\hr{S}_a^b(f, dx)$ really are doing the same thing, in that they're taking the hyperreal corresponding to a sequence of real numbers that are closer and closer approximations of $\int_a^b f(x)dx$ by Riemann sums. 
 
 The issue here is that $\sum_{i=0}^{N_n+1} f(x_{i-1}) \cdot \Delta x_n$ isn't necessarily equal to $S_a^b(f, \Delta x_n)$, due to our concerns about the width of the final segment of our partition $r_n$. In order to make this reasoning rigorous, we need to deal with this ``last segment'' problem (not addressed in \cite{goldblatt1998}):
 
-\begin{lemma}
+\begin{thm}
     \[ \sum_{x \in P} f(x) \cdot dx \simeq S_a^b(f, dx) \]
-\end{lemma}
+\end{thm}
 
 \begin{proof}
     We have that 
     \[ 
-    \sum_{x \in P} f(x) \cdot dx - S_a^b(f, dx) = [\sum_{x \in P_n} \left(f(x) \cdot \Delta x_n\right) - S_a^b(f, \Delta x)]
+    \sum_{x \in P} f(x) \cdot dx - S_a^b(f, dx) = \left[\sum_{x \in P_n} \left(f(x) \cdot \Delta x_n\right) - S_a^b(f, \Delta x) \right]
     \]
     and our earlier observation that
     \[ 
-    S_a^b(f, \Delta x_n) = \sum_{x \in P_n} f(x) \Delta x_n + f(c_n) \cdot (r_n - \Delta x_n). 
+    S_a^b(f, \Delta x_n) = \sum_{x \in P_n} f(x) \Delta x_n + f(c_n) \cdot (r_n - \Delta x_n), 
     \]
     and so 
     \[ 
     \sum_{x \in P} f(x) \cdot dx - S_a^b(f, dx) = [f(c_n) \cdot (\Delta x_n - r_n)] = [f(c_n)] \cdot [\Delta x_n - r_n].
     \]
-    We want to show that this is infinitesimal. Now, $0 < r_n \leq \Delta x_n$, so $|[\Delta x_n - r_n]| = [|\Delta x_n - r_n|] \leq [|2 \cdot \Delta x_n] = 2 \cdot |[\Delta x_n] = 2 \cdot dx \simeq 0$, and so $[\Delta x_n - r_n]$ is infinitesimal. Since $f$ is integrable on $[a, b]$, it is (by definition) bounded on $[a, b]$, and so $[f(c_n)]$ is bounded. (We know that $(\forall x \in \reals)(a \leq x \leq b \to |f(x) < L)$ for some $L$, and so by transfer this holds in $\hreals$ too, and $a \leq c_n \leq b_n$. So $|f(c_n)| < L$ for all $n$, and so $|[f(c_n)]| < L$.) So since a bounded number times an infinitesimal is infinitesimal, $[f(c_n)] \cdot [\Delta x_n - r_n]$ is infinitesimal, and we're done.
+    We want to show that this is infinitesimal. Now, $0 < r_n \leq \Delta x_n$, so $0 \leq \Delta x_n - r_n < \Delta x_n$ and $0 \leq [\Delta x_n - r_n] < [\Delta x_n] = dx \simeq 0$. Hence $[\Delta x_n - r_n] \simeq 0$. Since $f$ is integrable on $[a, b]$, it is (by definition) bounded on $[a, b]$, and so $[f(c_n)]$ is limited. So since a limited number times an infinitesimal is infinitesimal, $[f(c_n)] \cdot [\Delta x_n - r_n]$ is infinitesimal, and we're done.
 \end{proof}
-
 With this lemma, we can write:
 \[
 \int_a^b f(x)dx = \stp{S_a^b(f, dx)} = \stp{\sum_{x \in P} f(x) \cdot dx}.

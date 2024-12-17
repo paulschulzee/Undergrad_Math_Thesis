@@ -1,50 +1,48 @@
-\section{Ultrafilters, Ultrapowers, \texorpdfstring{$\hreals$}{*R}}
-Our goal is to formulate a set of numbers, the hyperreals, denoted $\hreals$. We want this set to include both the real numbers $\reals$ \textit{and} some number of infinitesimal elements, elements that are ``infinitely close to'' a given real number $r$ but still not \textit{equal} to $r$. To do this, we will take an \textit{ultrapower} of $\reals$. This ultrapower will be a quotient ring of $\reals^\nats$, the ring of sequences of real numbers, divided by an equivalence relation. With our equivalence relation we hope to capture the idea that two sequences have the same values ``\textit{almost} everywhere.'' And to do this, we will need an \textit{ultrafilter} on $\nats$.
-
+\section{Ultrafilters, Ultrapowers, \texorpdfstring{$\hreals$}{*R}}\label{sec:Ultrapowers}
 \subsection{The Ultrafilter}
-The idea is that we will define an \textit{ultrafilter} $\mathcal{F} \subseteq \mathcal{P}(\nats)$ that includes all of the ``very large'' subsets of $\nats$, and then we will write $\langle r_n \rangle \equiv \langle s_n \rangle$ when $\{n \in \nats \sthat r_n = s_n\} \in \mathcal{F}$. Here are the criteria we will use:
+The idea behind the \textit{ultrafilter} $\mathcal{F} \subseteq \mathcal{P}(\nats)$ is that it should include all of the ``very large'' subsets of $\nats$. This is so that we can define an equivalence relation $\equiv$ on sequences of real numbers, so that $\langle r_n \rangle \equiv \langle s_n \rangle$ when they are the same ``almost everywhere,'' i.e. when $\{n \in \nats \sthat r_n = s_n \} \in \mathcal{F}$. We will use the following definition.
 
-\begin{defn}[\protect{\cite[18]{goldblatt1998}}]
-    $\mathcal{F} \subseteq \nats$ is a (non-principal) ultrafilter on $\nats$ if:
-    \begin{itemize}
+\begin{defn}
+    $\mathcal{F} \subseteq \nats$ is a (non-principal) ultrafilter on $\nats$:
+    \begin{enumerate}
         \item whenever $A, B \in \mathcal{F}$, we have $A \cap B \in \mathcal{F}$, and
         \item whenever $A \in \mathcal{F}$ and $A \subseteq B$, we have $B \in \mathcal{F}$, and
-        \item for any $A \in \mathcal{P}(\nats)$, \textit{either} $A$ or $A^c = \mathcal{P}(\nats) - A$ are in $\mathcal{F}$, and
+        \item for any $A \subseteq \nats$, \textit{either} $A$ or $A^c = \nats - A$ are in $\mathcal{F}$, and
         \item no finite set is in $\mathcal{F}$.
-    \end{itemize}
+    \end{enumerate}
 \end{defn}
 
-A subset of $\mathcal{P}(\nats)$ that satisfies the first two bullets is a \textit{filter}. For instance, $\mathcal{P}(\nats)$ is a filter on $\nats$, as is $\emptyset$. A \textit{proper} filter is one that does not contain $\emptyset$ (as if $\emptyset \in \mathcal{F}$, then $\mathcal{P}(\nats) = \mathcal{F}$ by the second bullet point). Stricly speaking, any proper filter that satisfies the third bullet point is an ultrafilter, but we will henceforth use ``ultrafilter'' to refer only to filters that satisfy all four bullets. 
+A subset of $\mathcal{P}(\nats)$ that satisfies 1 and 2 is a \textit{filter}. For instance, $\mathcal{P}(\nats)$ is a filter on $\nats$, as is $\emptyset$. A \textit{proper} filter is one that does not contain $\emptyset$ (as if $\emptyset \in \mathcal{F}$, then $\mathcal{P}(\nats) = \mathcal{F}$ by 2). Strictly speaking, any proper filter that satisfies 3 is an ultrafilter, but we will use ``ultrafilter'' to refer only to filters that satisfy 4 as well. 
 
-Call a set \textit{cofinite} if its complement is finite. Every cofinite subset of $\nats$ is in $\mathcal{F}$, by the second and third bullets. 
+Call a set \textit{cofinite} if its complement is finite. Every cofinite subset of $\nats$ is in $\mathcal{F}$, by 3 and 4. 
 
-If we think of $\mathcal{F}$ as being the subsets of $\nats$ that include ``almost all'' of the natural numbers, then these make intuitive sense. If $A$ and $B$ both include ``almost all'' of the natural numbers, then surely $A \cap B$ does too---``basically no'' elements are in $A - B$ or $B - A$ since ``basically no'' elements are outside $A$ or $B$. If $A$ includes ``almost all'' of $\nats$, and $A \subseteq B$, then surely $B$ includes ``almost all'' of $\nats$ too. Etc.
+If we think of $\mathcal{F}$ as being the subsets of $\nats$ that include ``almost all'' of the natural numbers, then these make intuitive sense. If $A$ and $B$ both include ``almost all'' of the natural numbers, then surely $A \cap B$ does too---``basically no'' elements are in $A - B$ or $B - A$ since ``basically no'' elements are outside $A$ or $B$. If $A$ includes ``almost all'' of $\nats$, and $A \subseteq B$, then surely $B$ includes ``almost all'' of $\nats$ too. Etc. Note also that by a simple induction on 1, $\mathcal{F}$ is closed under finite intersections.
 
-Of course, there are some unintuitive things about $\mathcal{F}$: it contains either the set of even numbers $2\nats$ or the set of odd numbers $2\nats + 1$, but not both, by the third bullet point, for example. 
+Of course, there are some unintuitive things about $\mathcal{F}$. By 3, it contains either the set of even numbers $2\nats$ or the set of odd numbers $2\nats + 1$, but not both.
 
-\begin{thm}[\protect{\cite[Corollary~2.6.2]{goldblatt1998}}]
+\begin{thm}
     There is at least one ultrafilter $\mathcal{F}$ on $\nats$.
 \end{thm}
 
 \begin{proof}[Proof adapted from \protect{\cite[20-21]{goldblatt1998}}]
     Let $\mathcal{F}^{co} \subset \mathcal{P}(\nats)$ denote the collection of cofinite subsets of $\nats$. Let $P$ denote the collection of all proper filters on $\nats$ that include $\mathcal{F}^{co}$. Since $\mathcal{F}^{co}$ is itself a filter, $P \neq \emptyset$. 
 
-    $P$ is partially ordered by $\subseteq$: our approach is to apply Zorn's Lemma. Let $T \subset P$ be totally ordered by $\subseteq$. Then $\cup T$ is clearly an upper bound of $T$, but we need to show that $\cup T$ is a filter (this is \cite[Example~2.4(4)]{goldblatt1998}, but is not proven). If $A, B \in \cup T$, then $A \in T_1$ and $B \in T_2$ for some $T_1, T_2 \in T$. Since $T$ is totally ordered by $\subseteq$, either $T_1 \subseteq T_2$ or $T_2 \subseteq T_1$. If $T_1 \subseteq T_2$, then $A \in T_2$, and so since $T_2$ is a filter $A \cap B \in T_2$ and thus $A \cap B \in \cup T$. The proof is similar if $T_2 \subseteq T_1$. Similarly, if $A \in \cup T$ and $A \subseteq B$, then $A \in T_1 \in T$ and so $B \in T_1$ since $T_1$ is  filter, and so $B \in \cup T$.
+    $P$ is partially ordered by $\subseteq$. Our approach is to apply Zorn's Lemma. Let $T \subset P$ be totally ordered by $\subseteq$. Then $\cup T$ is clearly an upper bound of $T$, but we need to show that $\cup T$ is a filter (this is stated but not proven as \cite[Example~2.4(4)]{goldblatt1998}). If $A, B \in \cup T$, then $A \in T_1$ and $B \in T_2$ for some $T_1, T_2 \in T$. Since $T$ is totally ordered by $\subseteq$, either $T_1 \subseteq T_2$ or $T_2 \subseteq T_1$. If $T_1 \subseteq T_2$, then $A \in T_2$, and so since $T_2$ is a filter $A \cap B \in T_2$ and thus $A \cap B \in \cup T$. The proof is similar if $T_2 \subseteq T_1$. Similarly, if $A \in \cup T$ and $A \subseteq B$, then $A \in T_1 \in \cup T$ and so $B \in T_1$ since $T_1$ is  filter. So $B \in \cup T$.
 
-    So, by Zorn's Lemma, $P$ has a maximal element---call it $\mathcal{F}$. We want to show $\mathcal{F}$ is an ultrafilter (this is \cite[Exercise~2.5(6)]{goldblatt1998}). By the definition of $P$, $\mathcal{F}$ is a proper filter. Since $\mathcal{F}^{co} \subseteq \mathcal{F}$, if we can show that for every $A \subseteq \nats$ either $A$ or $A^c$ is in $\mathcal{F}$ we will be done.
+    So any totally ordered subset $T \subset P$ has a maximal element. By Zorn's Lemma, $P$ has a maximal element---call it $\mathcal{F}$. We want to show $\mathcal{F}$ is an ultrafilter (this is \cite[Exercise~2.5(6)]{goldblatt1998}). By the definition of $P$, $\mathcal{F}$ is a proper filter. Since $\mathcal{F}^{co} \subseteq \mathcal{F}$, if we can show that for every $A \subseteq \nats$ either $A$ or $A^c$ is in $\mathcal{F}$ then we will be done.
 
-    Take $A \subseteq \nats$. We cannot have $A \in \mathcal{F}$ and $A^c \in \mathcal{F}$, for then we'd have $A \cap A^c = \emptyset \in \mathcal{F}$, which is impossible since $\mathcal{F}$ is proper. Now, assume for a contradiciton that $A \notin \mathcal{F}$ and $A^c \notin \mathcal{F}$. We will show that $\mathcal{F}$ can be extended by adding $A$ or $A^c$, showing that $\mathcal{F}$ is not a maximal element of $P$ and obtaining our contradiction. 
+    Take $A \subseteq \nats$. We cannot have $A \in \mathcal{F}$ and $A^c \in \mathcal{F}$, for then we'd have $A \cap A^c = \emptyset \in \mathcal{F}$, which is impossible since $\mathcal{F}$ is proper. Now, assume for a contradiction that $A \notin \mathcal{F}$ and $A^c \notin \mathcal{F}$. We will show that $\mathcal{F}$ can be extended by adding $A$ or $A^c$, showing that $\mathcal{F}$ is not a maximal element of $P$ and obtaining our contradiction. Then either $A \in \mathcal{F}$ or $A^c \in \mathcal{F}$, and since this will hold for any $A$ we will be done.
 
-    Let $\mathcal{F}'$ be the filter obtained by adding to $\mathcal{F}$ the the intersection $A \cap B$ for any $B \in \mathcal{F}$, and any superset of $A \cap B$ (this technique adapted from \cite[Appendix~A]{henle1979}). Note that $A = A \cap \nats$ and $\nats \in \mathcal{F}$, so $A \in \mathcal{F}'$. We will show that $\mathcal{F}' \in P$. First, for any $B \in \mathcal{F}$, we have $B \nsubseteq A^c$ (as $A^c \notin \mathcal{F}$) and so $A \cap B \neq \emptyset$, showing $\mathcal{F}'$ is proper. Next, if $X, Y \in \mathcal{F}' - \mathcal{F}$, where $A \cap B \subseteq X$ and $A \cap C \subseteq Y$, then $(A \cap B) \cap (A \cap C) = A \cap (B \cap C) \subseteq X \cap Y$, with $B \cap C \in \mathcal{F}$, so $X \cap Y \in \mathcal{F}'$. A similar proof shows that for any $X \in \mathcal{F}$ and $Y \in \mathcal{F}' - \mathcal{F}$, $X \cap Y = Y \cap X \in \mathcal{F}'$. Similarly, if $X \in \mathcal{F}'-\mathcal{F}$ and $X \subseteq Y$, where $A \cap B \subseteq X$, then $A \cap B \subseteq Y$ and so $Y \in \mathcal{F}'$. So $\mathcal{F}'$ is a proper filter, hence $\mathcal{F} \subseteq \mathcal{F}' \in P$, violating our assumption that $\mathcal{F}$ is maximal in $(P, \subseteq)$. Hence, our assumption that $A \notin \mathcal{F}$ and $A^c \notin \mathcal{F}$ is incorrect. Since we know from earlier that we can't have $A, A^c \in \mathcal{F}$, we conclude that either $A$ or $A^c$ is in $\mathcal{F}$. Since this holds for any $A \subseteq \nats$, we conclude $\mathcal{F}$ is an ultrafilter on $\nats$.
+    Let $\mathcal{F}'$ be the filter obtained by adding to $\mathcal{F}$ the the intersection $A \cap B$ for any $B \in \mathcal{F}$, and any superset of $A \cap B$ (this technique adapted from \cite[Appendix~A]{henle1979}). Note that $A = A \cap \nats$ and $\nats \in \mathcal{F}$, so $A \in \mathcal{F}'$. We will show that $\mathcal{F}' \in P$. First, for any $B \in \mathcal{F}$, we have $B \nsubseteq A^c$ (as $A^c \notin \mathcal{F}$) and so $A \cap B \neq \emptyset$, showing $\mathcal{F}'$ is proper. Next, if $X, Y \in \mathcal{F}' - \mathcal{F}$, where $A \cap B \subseteq X$ and $A \cap C \subseteq Y$, then $(A \cap B) \cap (A \cap C) = A \cap (B \cap C) \subseteq X \cap Y$, with $B \cap C \in \mathcal{F}$, so $X \cap Y \in \mathcal{F}'$. A similar proof shows that for any $X \in \mathcal{F}$ and $Y \in \mathcal{F}' - \mathcal{F}$, $X \cap Y = Y \cap X \in \mathcal{F}'$. Similarly, if $X \in \mathcal{F}'-\mathcal{F}$ and $X \subseteq Y$, where $A \cap B \subseteq X$, then $A \cap B \subseteq Y$ and so $Y \in \mathcal{F}'$. So $\mathcal{F}'$ is a proper filter, hence $\mathcal{F} \subset \mathcal{F}' \in P$, violating our assumption that $\mathcal{F}$ is maximal in $(P, \subseteq)$. So we have our contradiction and we are done.
 \end{proof}
 
-\begin{thm}[\protect{\cite[Exercise~2.5(4)]{goldblatt1998}}]\label{ultrafilterDisjointUnion}
+\begin{thm}\label{ultrafilterDisjointUnion}
     Let $\mathcal{F}$ be an ultrafilter and $\{A_1, \ldots, A_n\}$ a finite collection of pairwise disjoint sets such that 
     \[ A_1 \cup \cdots \cup A_n \in \mathcal{F} \]
     Then $A_i \in \mathcal{F}$ for \textit{exactly one} $i$ such that $1 \leq i \leq n$.
 \end{thm}
 
-\begin{proof}
+\begin{proof}[Proof \protect{\cite[Exercise~2.5(4)]{goldblatt1998}}]
     At most one of the $A_i$'s can be in $\mathcal{F}$, since if $A_i, A_j \in \mathcal{F}$ when $i \neq j$ then we'd have $A_i \cap A_j = \emptyset \in \mathcal{F}$, a contradiction.
 
     Assume for a contradiction that $A_i \notin \mathcal{F}$ for each $i$. Then $A_i^c \in \mathcal{F}$ for each $i$, and so since $\mathcal{F}$ is closed under finite intersections we find
@@ -59,19 +57,19 @@ Let $\reals^\nats$ denote the set of sequences in $\reals$. We will denote a mem
 
 Now, let $\equiv$ denote the relation such that $\langle r_n \rangle \equiv \langle s_n \rangle$ iff $\{n \in \nats \sthat r_n = s_n\} \in \mathcal{F}$. We will write $[[r_n = s_n]]$ to denote $\{n \in \nats \sthat r_n = s_n\}$. When $\langle r_n \rangle = \langle s_n \rangle$, we will write that $r_n = s_n$ $\mathcal{F}$-almost everywhere.
 
-\begin{thm}[\protect{\cite[Exercise~3.3(1)]{goldblatt1998}}]
+\begin{thm}
     $\equiv$ is an equiavlence relation on $\reals^\nats$
 \end{thm}
 
-\begin{proof}
+\begin{proof}[Proof \protect{\cite[Exercise~3.3(1)]{goldblatt1998}}]
     Clearly $\equiv$ is reflexive, since $[[r_n = r_n]] = \nats \in \mathcal{F}$ so $\langle r_n \rangle \equiv \langle r_n \rangle$.
     
     Similarly, $\equiv$ is symmetric because $[[r_n = s_n]] = [[s_n = r_n]]$, and so $[[r_n = s_n]] \in \mathcal{F}$ iff $[[s_n = r_n]] \in \mathcal{F}$, and so $\langle r_n \rangle \equiv \langle s_n \rangle$ iff $\langle s_n \rangle \equiv \langle r_n \rangle$.
 
-    Finally, $\equiv$ is transitive. Say $\langle r_n \rangle \equiv \langle s_n \rangle \equiv \langle t_n \rangle$. Then $[[r_n = s_n]] \in \mathcal{F}$ and $[[s_n = t_n]] \in \mathcal{F}$. Whenever $r_n = s_n$ and $s_n = t_n$, we have $r_n = t_n$, and so $[[r_n = s_n]] \cap [[s_n = t_n]] \subseteq [[r_n = t_n]]$. Since $\mathcal{F}$ is a filter, this implies $[[r_n = t_n]] \in \mathcal{F}$, and so $\langle r_n \rangle \equiv \langle s_n \rangle$.
+    Finally, $\equiv$ is transitive. Say $\langle r_n \rangle \equiv \langle s_n \rangle \equiv \langle t_n \rangle$. Then $[[r_n = s_n]] \in \mathcal{F}$ and $[[s_n = t_n]] \in \mathcal{F}$. Whenever $r_n = s_n$ and $s_n = t_n$, we have $r_n = t_n$, and so $[[r_n = s_n]] \cap [[s_n = t_n]] \subseteq [[r_n = t_n]]$. Since $\mathcal{F}$ is a filter, this implies $[[r_n = t_n]] \in \mathcal{F}$, and so $\langle r_n \rangle \equiv \langle t_n \rangle$.
 \end{proof}
 
-Now, we will form equivalence classes in $\reals^\nats$ based on this equivalence relation. Note that $[[r_n = s_n]] \in \mathcal{F}$ iff $[[r_n - s_n = 0]] \in \mathcal{F}$, and so if $I = \{\langle r_n \rangle \in \reals^\nats \sthat [[r_n = 0]] \in \mathcal{F}\}$ then $\langle r_n \rangle \equiv \langle s_n \rangle$ iff $\langle r_n \rangle \ominus \langle s_n \rangle \in I$. $I$ is an ideal, because it is closed under subtraction---$[[r_n - s_n = 0]] \supseteq [[r_n = 0]] \cap [[s_n = 0]]$, so if the latter two are in $\mathcal{F}$ so is the former---and for any $\langle r_n \rangle \in \reals^\nats$ and $\langle s_n \rangle \in I$, we have $[[r_n \cdot s_n = 0]] \supseteq [[s_n = 0]] \in \mathcal{F}$ and so $[[r_n \cdot s_n = 0]] \in \mathcal{F}$ and $\langle r_n \rangle \cdot \langle s_n \rangle \in I$. Then, we define the \textit{hyperreals}
+Now, we will form equivalence classes in $\reals^\nats$ based on this equivalence relation. Note that $[[r_n = s_n]] \in \mathcal{F}$ iff $[[r_n - s_n = 0]] \in \mathcal{F}$, and so if $I = \{\langle r_n \rangle \in \reals^\nats \sthat [[r_n = 0]] \in \mathcal{F}\}$ then $\langle r_n \rangle \equiv \langle s_n \rangle$ iff $\langle r_n \rangle \ominus \langle s_n \rangle \in I$. $I$ is closed under subtraction: if $\langle r_n \rangle, \langle s_n \rangle \in I$, then $[[r_n = 0]] \cap [[s_n = 0]] \subseteq [[r_n - s_n = 0]] \in \mathcal{F}$, so $\langle r_n \rangle - \langle s_n \rangle \in I$. Furthermore, for any $\langle r_n \rangle \in \reals^\nats$ and $\langle s_n \rangle \in I$, we have $[[r_n \cdot s_n = 0]] \supseteq [[s_n = 0]] \in \mathcal{F}$ and so $[[r_n \cdot s_n = 0]] \in \mathcal{F}$ and $\langle r_n \rangle \cdot \langle s_n \rangle \in I$. We conclude that $I$ is an ideal. Then, we define the \textit{hyperreals}
 \[ \hreals = \reals^\nats / I. \]
 We denote the equivalence class of an element $r = \langle r_n \rangle$ by $[r]$, $[\langle r_n \rangle]$, or just $[r_n]$ (ommitting the angled brackets).
 
@@ -81,7 +79,7 @@ One might reasonably worry that we chose no particular ultrafilter $\mathcal{F}$
 
 For any function $f: \reals \to \reals$, we define $\hr{f}: \hreals \to \hreals$ by $\hr{f}([r_n]) = [f(r_n)]$. For example, if $f(x) = x^2$, then $f([\langle 1, 2, 3, \ldots \rangle]) = [\langle 1, 4, 9, 16, \ldots \rangle]$. $\hr{f}$ is well defined, as if $[r_n] = [s_n]$ then $[[r_n = s_n]] \in \mathcal{F}$, and so we have $[[r_n = s_n]] \subseteq [[f(r_n) = f(s_n)]] \in \mathcal{F}$ and so $\langle f(r_n) \rangle \equiv \langle f(s_n) \rangle$, i.e. $\hr{f}([r_n]) = [f(r_n)] = [f(s_n)] = \hr{f}([s_n])$.
 
-Similarly, for any $k$-ary relation on the reals $R_k \subseteq \reals^k$, we define $\hr{R}_k \subseteq \hreals^k$ by setting $\hr{R}_k([r_n^1], [r_n^2], \ldots, [r_n^k])$ if $[[R_k(r_n^1, r_n^2, \ldots, r_n^k)]] \in \mathcal{F}$. This is well defined because if $[s_n^i] = [r_n^i]$ for any $1 \leq i \leq k$, then $[[s_n^i = r_n^i]] \in \mathcal{F}$ for any $i$, and so we find
+Similarly, for any $k$-ary relation on the reals $R_k \subseteq \reals^k$, we define $\hr{R}_k \subseteq \hreals^k$ by setting $\hr{R}_k([r_n^1], [r_n^2], \ldots, [r_n^k])$ if $[[R_k(r_n^1, r_n^2, \ldots, r_n^k)]] \in \mathcal{F}$. This is well defined because if $[s_n^i] = [r_n^i]$ for every $1 \leq i \leq k$, then $[[s_n^i = r_n^i]] \in \mathcal{F}$ for every $i$, and so we find
 \[
 \left([[R_k(r_n^1, \ldots, r_n^k)]] \cap \bigcap_{i = 1}^k [[r_n^i = s_n^i]]\right) \subseteq [[R_k(s_n^1, \ldots, s_n^k)]] \in \mathcal{F}
 \]
@@ -99,39 +97,39 @@ For any real number $b \in \reals$, we have $[b] = [\langle b, b, b, \ldots \ran
 \subsection{Internal Sets \& Functions}
 Not every subset of or function on $\hreals$ is represented by the extension of a subset of or function on $\reals$.
 
-\begin{thm}[\protect{\cite[Theorem~3.9.1]{goldblatt1998}}]
+\begin{thm}
     Let $S \subseteq \reals$. Then $\hr{S} - \reals \neq \emptyset$.
 \end{thm}
 
-\begin{proof}[Proof by Goldblatt]
+\begin{proof}[Proof from \protect{\cite[Theorem~3.9.1]{goldblatt1998}}]
     The theorem here is relying a bit on an abuse of notation, using $\reals$ in the first case to mean the real numbers and in the second case to mean the ``copy'' of the real numbers in $\hreals$.
 
     Let $s_1, s_2, \ldots \in S$ be a pairwise distinct sequence of elements of $S$. Then clearly $[s_n] \in \hr{S}$ as $[[s_n \in S]] = \nats \in \mathcal{F}$. But for any $x \in \reals$, we find $[[s_n = x]]$ is either $\emptyset$ or a singleton, since the $s_n$ are pairwise distinct. So $[[s_n = x]] \notin \mathcal{F}$, i.e. $[s_n] \neq x$.
 \end{proof}
 
-\begin{thm}[\protect{\cite[Exercise~3.10(1)]{goldblatt1998}}]
+\begin{thm}
     If $A$ is finite, then $\hr{A} = A$.
 \end{thm}
 
-\begin{proof}
+\begin{proof}[Proof \protect{\cite[Exercise~3.10(1)]{goldblatt1998}}]
     Let $[r_n] \in \hr{A}$. Then $[[r_n \in A]] \in \mathcal{F}$, and we have 
     \[ \bigcup_{b \in A} [[r_n = b]] = [[r_n \in A]] \in \mathcal{F}. \]
     Note that the $[[r_n = b]]$'s are pairwise disjoint. Then, by \autoref{ultrafilterDisjointUnion}, we know that $[[r_n = b]] \in \mathcal{F}$ for \textit{exactly one} $b$, and so we conclude $[r_n] = b$. So every element of $\hr{A}$ is an element of $A$. Furthermore, for any $b \in A$, we have $[[b \in A]] = \nats \in \mathcal{F}$, and so $b \in \hr{A}$. So by double inclusion, $\hr{A} = A$. 
 \end{proof}
 
-So the extension of any finite subset of $\reals$ is finite, and the extension of any infinite subset contains ``nonstandard'' elements. So if we consider $\nats$ \textit{as a subset of $\hreals$}, we find that it isn't the extension of anything: it's infinite, but it doesn't contain any nonreal elements.
+So the extension of any finite subset of $\reals$ is finite, and the extension of any infinite subset contains ``nonstandard'' elements not in $\reals$. So if we consider $\nats$ as a subset of $\hreals$, we find that it isn't the extension of anything: it's infinite, but it doesn't contain any non-real elements.
 
-So we can't use extensions to work with every possible subset of (or function on) $\hreals$. What we can do, though, is find ``well-behaved'' subsets or functions that we can extend our methods to. These subsets and functions are called \textit{internal}.
+So we can't use extensions to work with every possible subset of (or function on) $\hreals$. What we can do, though, is find ``well-behaved'' subsets or functions that we can extend our methods to. These well-behaved subsets and functions are called \textit{internal}.
 
 \begin{defn}
     If $A_1, A_2, A_3, \ldots$ is a sequence of subsets of $\reals$, we define the \textit{internal subset} $A \subseteq \hreals$, denoted $A = [A_n]$, by
     \[ [r_n] \in [A_n] \text{ iff } [[r_n \in A_n]] \in \mathcal{F}. \]
 \end{defn}
 
-Internal set membership is well-defined, as $[r_n] \in [A_n]$ implies $[[r_n \in A_n]] \in \mathcal{F}$, so if $[r_n] = [s_n]$ then $[[r_n \in A_n]] \cap [[r_n = s_n]] \subseteq [[s_n \in A_n]] \in \mathcal{F}$ and so $[s_n] \in [A_n]$. Any finite set of hyperreals is internal, as if $X = \{[r_n^1], \ldots, [r_n^k]\}$ then $X = [\{r_n^1, \ldots, r_n^k\}]$ \cite[126]{goldblatt1998}. A finite set of hyperreals is only the extension of a set of reals if it is itself also a set of reals, so any finite set of hyperreals that contains non-real elements is internal but not the extension of a set of reals. Internal functions are defined similarly to internal sets:
+Internal set membership is well-defined. If $[r_n] \in [A_n]$, then $[[r_n \in A_n]] \in \mathcal{F}$, so if $[r_n] = [s_n]$ then $[[r_n \in A_n]] \cap [[r_n = s_n]] \subseteq [[s_n \in A_n]] \in \mathcal{F}$ and so $[s_n] \in [A_n]$. Any finite set of hyperreals is internal, as if $X = \{[r_n^1], \ldots, [r_n^k]\}$ then $X = [\{r_n^1, \ldots, r_n^k\}]$ \cite[126]{goldblatt1998}. A finite set of hyperreals is only the extension of a set of reals if it is itself also a set of reals, so any finite set of hyperreals that contains non-real elements is internal but not the extension of a set of reals. Internal functions are defined similarly to internal sets:
 
 \begin{defn}
-    If $f_1, f_2, f_3, \ldots$ is a sequence of functions $f_i: \reals \to \reals$, we define the \textit{internal function} $f: \hreals \to \hreals$, denoted $f = [f_n]$, by
+    If $f_1, f_2, f_3, \ldots$ is a sequence of functions $f_n: D_n \to \reals$, we define the \textit{internal function} $f: [D_n] \to \hreals$, denoted $f = [f_n]$, by
     \[ [f_n]([r_n]) = [f_n(r_n)]. \]
 \end{defn}
 
