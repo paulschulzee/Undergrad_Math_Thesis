@@ -15,7 +15,7 @@ And we have our definition. Well, this might also not be well-defined: we get ar
 \end{thm}
 
 \begin{defn}
-    Given a function $f: \reals \to \reals$ and a real number $x$, we say that $f$ is \textit{differnetiable} at $x$ if there is some constant $f'(x)$ such that, for any nonzero infinitesimal $\Delta x$,
+    Given a function $f: \reals \to \reals$ and a real number $x$, we say that $f$ is \textit{differentiable} at $x$ if there is some constant $f'(x)$ such that, for any nonzero infinitesimal $\Delta x$,
     \[f'(x) = \stp{\frac{f(x + \Delta x) - f(x)}{\Delta x}}.\]
 \end{defn}
 
@@ -27,7 +27,7 @@ A number of proofs of basic calculus results can be easily accomplished by infin
     \[(f \circ g)'(x) = f'(g(x)) \cdot g'(x).\]
 \end{thm}
 
-\begin{proof}[Proof adapted from \protect{\cite[ch.~8.4]{goldblatt1998}}] 
+\begin{proof}[Proof adapted from \protect{\cite[Chapter~8.4]{goldblatt1998}}] 
     Let $\Delta x$ be any nonzero infinitesimal, and let $\Delta g = g(x + \Delta x) - g(x)$. If $\Delta g = 0$, then $g(x + \Delta x) = g(x)$, so $(f \circ g)'(x) = \stp{\dfrac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} = 0$ and clearly $g'(x) = \stp{\frac{\Delta g}{\Delta x}} = 0$, so we are done. If $\Delta g \neq 0$, then since $g'(x) = \stp{\frac{\Delta g}{\Delta x}}$ is defined, we conclude $\frac{\Delta g}{\Delta x}$ is limited and (since $\Delta x$ is infinitesimal) that $\Delta g$ is infinitesimal. Thus
 \begin{align*}
     (f \circ g)'(x) &= \stp{\frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}} \\
@@ -80,10 +80,10 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
     If for any unlimited $N, M \in \hnats$, $\sum_{i=0}^N a_i \simeq \sum_{i=0}^M a_i$, then $\sum_{i=0}^\infty a_i$ converges.
 \end{thm}
 
-\begin{proof}[Proof adapted from \protect{\cite[thm.~6.5.2]{goldblatt1998}}]
+\begin{proof}[Proof adapted from \protect{\cite[Theorem~6.5.2]{goldblatt1998}}]
     The issue here is that $\sum_{i=0}^N a_i$ might be unlimited for all unlimited $N \in \hnats$. Let $s(n) = \sum_{i=0}^N a_i$. 
     
-    First, assume that (in $\reals$) $\neg (\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. This says the sequence $s(n)$ is not bounded. By trasnfer, this is true in $\hreals$ as well. Take an unlimited $N \in \hnats$. Since $|s(n)|$ has no upper bound in $\hreals$, there is some $M \in \hnats$ such that $|s(N)| \leq 2 \cdot |s(N)| < |s(M)|$. Since $|s(N)| \simeq |s(M)|$, this implies $|s(N)| \simeq 2 \cdot |s(N)|$, implying $|s(N)| \simeq 0$, and so for any unlimited $M \in \hnats$ we have $|s(M)| \simeq |s(N)| \simeq 0$ and so $\sum_{i=0}^\infty a_i = 0$.
+    First, assume that (in $\reals$) $\neg (\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. This says the sequence $s(n)$ is not bounded. By transfer, this is true in $\hreals$ as well. Take an unlimited $N \in \hnats$. Since $|s(n)|$ has no upper bound in $\hreals$, there is some $M \in \hnats$ such that $|s(N)| \leq 2 \cdot |s(N)| < |s(M)|$. Since $|s(N)| \simeq |s(M)|$, this implies $|s(N)| \simeq 2 \cdot |s(N)|$, implying $|s(N)| \simeq 0$, and so for any unlimited $M \in \hnats$ we have $|s(M)| \simeq |s(N)| \simeq 0$ and so $\sum_{i=0}^\infty a_i = 0$.
 
     Now, say $(\exists r \in \reals) (\forall n \in \nats)(|s(n)| < r)$. Whatever this $r$ is, call it $b$. Then $(\forall n \in \nats)(|s(n)| < b)$, and so by transfer $(\forall n \in \hnats)(|s(n)| < b)$. So if we take an unlimited $N \in \hnats$, we know $s(N)$ is bounded and hence $\sum_{i=0}^\infty a_i = \stp{s(N)}$.
 \end{proof}
@@ -93,7 +93,7 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
     \[ \sum_{i = 0}^\infty r^i = \frac{1}{1-r}. \]
 \end{thm}
 
-\begin{proof}[Proof \protect{\cite[ex.~6.7]{goldblatt1998}}]
+\begin{proof}[Proof \protect{\cite[Exercise~6.7]{goldblatt1998}}]
     By difference of powers, we know that $1 - r^{n+1} = (1 + r + r^2 + \cdots + r^n)(1-r)$. So, we conclude that $\sum_{i=0}^n r^i = \dfrac{1-r^{n+1}}{1-r}$. Hence, by transfer, for any unlimited $N \in \hnats$ we have $\sum_{i=0}^N r^i = \dfrac{1-r^{N+1}}{1-r}$. 
 
     Consider $r^{N}$. Assume for a contradiction $\stp{r^N} > 0$. Then as $0 < r < 1$, we have $r^{N+1} = r \cdot r^N \simeq r\cdot \stp{r^N} < \stp{r^N}$. Hence, in $\hreals$, $(\exists M \in \hnats)(r^M < \stp{r^N})$. By transfer, $(\exists m \in \nats)(r^m < \stp{r^N})$. But $r^m$ is real, so $r^m < r^N$, even though $0 < r < 1$ and $m < N$. This is a contradiction, so we find $\stp{r^N} \leq 0$, and since $0 < r < 1$ we conclude $\stp{r^N} = 0$. Hence, 
@@ -115,8 +115,8 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
     Let $a_i: \nats \to \reals$ be a sequence. If for every unlimited $M \in \hnats$ we have $\left|\stp{\frac{a_{M+1}}{a_M}}\right| = L$ for some $L < 1$, then $\sum_{i=0}^\infty a_i$ converges.
 \end{thm}
 
-\begin{proof}[Proof \protect{\cite[ex.~6.8]{goldblatt1998}}]
-    Assume that $a_i \geq 0$---if not, apply the theorem to $|a_i|$ and use \autoref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unlimited hypernatural $M$.
+\begin{proof}[Proof \protect{\cite[Exercise~6.8]{goldblatt1998}}]
+    We wil prove the theorem assuming that $a_i \geq 0$. For other sequences, we can then apply our newly-proven theorem to $|a_i|$ and use \autoref{AbsoluteConvergenceImpliesConvergence}. Now, take $r \in \reals$ such that $L < r < 1$, so that $\left|\frac{a_{M+1}}{a_M}\right| < r < 1$ for any unlimited hypernatural $M$.
 
     Take any unlimited $N \in \hnats$. For any $M \in \hnats$, if $N \leq M$, then $M$ is also unlimited, and so $\frac{a_{M+1}}{a_M} < r$. So we have the sentence
     \[ 
@@ -132,7 +132,7 @@ When $n > m$, we write $\sum_{i=m}^n a_i$ to mean $\sum_{i=0}^n a_i - \sum_{i=0}
     \[ 
     \sum_{i=M+1}^N a_i = \sum_{i=k+(M+1-k)}^{k+(N-k)} a_i \leq \left(\sum_{i=M+1-k}^{N-k} r^i \right) a_k. 
     \]
-    Note that $M=1-k$ and $N-k$ are both unlimited hyperreals, and so $\sum_{i=M+1-k}^{N-k} r^i$ is infinitesimal by \autoref{GeometricSeries} (as $\sum_{i=0}^{N-k} r^i \simeq \sum_{i=0}^{M+1-k} \simeq \frac{1}{1-r}$). Since $a_k$ is appreciable, this means the product is infinitesimal, hence $\sum_{i=M+1}^N a_i$ is infinitesimal, hence $\sum_{i=0}^\infty a_i$ converges.
+    Note that $M=1-k$ and $N-k$ are both unlimited hyperreals, and so $\sum_{i=M+1-k}^{N-k} r^i$ is infinitesimal by \autoref{GeometricSeries} (since $\sum_{i=0}^{N-k} r^i \simeq \sum_{i=0}^{M+1-k} \simeq \frac{1}{1-r}$). Since $a_k$ is appreciable, this means the product is infinitesimal, hence $\sum_{i=M+1}^N a_i$ is infinitesimal, hence $\sum_{i=0}^\infty a_i$ converges.
 \end{proof}
 
 \subsection{The \texorpdfstring{$\exp$}{exp} function}
@@ -145,7 +145,7 @@ For convenience, we will write $e(x, k) = \sum_{i=0}^k \frac{x^i}{i!}$. For any 
 \end{thm}
 
 \begin{proof}
-    We use the ratio test (\autoref{RatioTest}) to prove that $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges. Let $M$ be an unlimited hypernatural. Then 
+    We use the Ratio Test (\autoref{RatioTest}) to prove that $\sum_{i=0}^\infty \frac{x^i}{i!}$ converges. Let $M$ be an unlimited hypernatural. Then 
     \[
         \frac{x^{M+1}}{(M+1)!} \  \div \  \frac{x^M}{M!} = \frac{x^{M+1}M!}{x^M (M+1)!} 
         = \frac{x}{M+1}.
@@ -172,9 +172,10 @@ We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following 
         &= d \cdot e(x, k-1) + \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!}.
     \end{align*}
     So we find that 
-    \[
-    R_k = \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!} = \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q d^{(i-q)}}{i!}.
-    \]
+    \begin{align*}
+    R_k &= \frac{d^2}{2!} + \frac{3xd^2 + d^3}{3!} + \cdots + \frac{\binom{k}{2} x^{k-2}d^2 + \cdots + d^{k}}{k!} \\
+        &= \sum_{i=1}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q d^{(i-q)}}{i!}.
+    \end{align*}
     Using the fact that $\binom{i}{q} = \dfrac{i!}{q!(i-q!)}$, we have
     \begin{align*}
     R_k &= \sum_{i=2}^k \sum_{q=0}^{i-2} \binom{i}{q} \frac{x^q d^{(i-q)}}{i!} \\
@@ -206,7 +207,7 @@ We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following 
 \begin{proof}
     By \autoref{expRemainderLemma}, we have that for any $k \in \nats$ and $x, d \in \reals$ with $|d| < 1$, we have
     \[ 
-    |e(x + d, k) - e(x, k) - d\cdot e(x, k-1)| \leq \frac{|d|^2}{1 - |d|} \cdot \exp(|x|), 
+    \left|e(x + d, k) - e(x, k) - d\cdot e(x, k-1)\right| \leq \frac{|d|^2}{1 - |d|} \cdot \exp(|x|), 
     \]
     and so
     \[
@@ -229,7 +230,7 @@ We now want to prove that $\exp'(x) = \exp(x)$. This will involve the following 
     \[
     \left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right| \leq \frac{|\delta|}{1-|\delta|} \cdot \exp(|x|).
     \]
-    The right side of this is infinitesimal, since $|\delta|$ is infinitesimal while $1 - |\delta|$ and $\exp(|x|)$ are appreciable (the latter by \autoref{expExists}). Hence $\left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right|$ is infinitesimal. Hence $\frac{\exp(x + \delta) - \exp(x)}{\delta} \simeq \exp(x)$. Since $\exp(x)$ is real, this implies
+    The right side of this is infinitesimal, since $|\delta|$ is infinitesimal while $1 - |\delta|$ and $\exp(|x|)$ are appreciable (the latter by \autoref{expExists}). Hence $\left|\frac{\exp(x + \delta) - \exp(x)}{\delta} - \exp(x)\right|$ is infinitesimal. Hence $\dfrac{\exp(x + \delta) - \exp(x)}{\delta} \simeq \exp(x)$. Since $\exp(x)$ is real, this implies
     \[
     \stp{\frac{\exp(x + \delta) - \exp(x)}{\delta}} = \exp'(x) = \exp(x).
     \]

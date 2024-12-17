@@ -46,7 +46,7 @@ Now consider unlimited hyperreals. There are no unlimited reals. The hyperreal $
     \end{itemize}
 \end{thm}
 
-\section{Infinite Closeness \& Standard Parts}
+\subsection{Infinite Closeness \& Standard Parts}
 \begin{defn}
     We say that two hyperreals $x, y$ are \textit{infinitely close}, and write $x \simeq y$, if $x - y$ is infinitesimal.
 \end{defn}
@@ -72,7 +72,7 @@ Also, since $\simeq$ is transitive, if $x, y \in \hreals$ are limited and $x \si
 We can write similar proofs that $\st$ distributes over subtraction, multiplication, division, even absolute value ($\stp{|x|} = |\stp{x}|$) for limited values \cite[Theorem~5.6.2]{goldblatt1998}.
 
 \begin{thm}[\protect{\cite[Exercise~5.7(4)]{goldblatt1998}}]
-    Let $\mathbb{L}$ denote the ring of limited hyperreals, and $\mathbb{I}$ the ring of infinitesimals. Show that $\reals$ is isomorphic to the ring of limited hyperrations $\hr{\mathbb{Q}} \cap \mathbb{L}$ factored by its ideal $\hr{\mathbb{Q}} \cap \mathbb{I}$.
+    Let $\mathbb{L}$ denote the ring of limited hyperreals, and $\mathbb{I}$ the ring of infinitesimals. Show that $\reals$ is isomorphic to the ring of limited hyperrationals $\hr{\mathbb{Q}} \cap \mathbb{L}$ factored by its ideal $\hr{\mathbb{Q}} \cap \mathbb{I}$.
 \end{thm}
 
 \begin{proof}
@@ -88,3 +88,43 @@ We can write similar proofs that $\st$ distributes over subtraction, multiplicat
     
     This is true for any $x \in \reals$, so the image of $\st$ must be all of $\reals$. Thus, we can use the first isomorphism theorem on rings to conclude $\hr{\mathbb{Q}} \cap \mathbb{L} / \hr{\mathbb{Q}} \cap \mathbb{I} \cong \mathbb{R}$.
 \end{proof}
+
+\subsection{Internal Structure of \texorpdfstring{$\hreals$}{*R}}
+If we want to know about the subsets of $\hreals$, we might hopethat we can generalize \autoref{LosTheorem} to even more powerful logics, such as second-order logic, adding quantifiers on sets to get sentences like $(\forall A)(A \neq \emptyset \to (\exists x)(x \in A))$. This is impossible. $\reals$ is Dedekind complete---every set that has an upper bound has a least upper bound. With second-order quantification, we can write
+\[ (\forall A)\big((\exists x)(\forall y \in A)(y \leq x) \to (\exists x)[(\forall y \in A)(y \leq x) \land (\forall z)(z < x \to (\exists y \in A)(z < y))]\big). \]
+The transfer of this is not true in $\hreals$.
+
+\begin{thm}\label{INoUpperBound}
+    The set $\mathbb{I}$ of infinitesimals has an upper bound, but no least upper bound.
+\end{thm}
+
+\begin{proof}
+    Any $r \in \reals^+$ is an upper bound on $\mathbb{I}$. Assume for contradiction $L$ is the least upper bound of $\mathbb{I}$. Surely $0 < L$, as there are infinitesimals greater than $0$. If $L$ is appreciable, then $\frac{L}{2}$ is appreciable (or unlimited), meaning it is an upper bound for $\mathbb{I}$ and thus that $L$ is not the least upper bound, contradiction. If $L$ is infinitesimal, though, then $2L$ is an infinitesimal with $L < 2L$, so $L$ is not an upper bound on $\mathbb{I}$, contradiction. So $L$ cannot be infinitesimal or non-infinitesimal, a contradiction.
+\end{proof}
+
+So, $\reals$ is Dedekind complete and $\hreals$ is not. However, we do get the following theorem as an easy consequence of \autoref{LosTheorem}.
+
+\begin{thm}
+    If $\varphi$ is a sentence of $\mathcal{L}_\mathfrak{R}$ and $\varphi(A)$ for every $A \subseteq \reals$, then $\hr{\varphi}(X)$ for every \textit{internal} subset $X \subseteq \hreals$.
+\end{thm}
+
+So, for any \textit{internal} subset $X \subseteq \hreals$, if $X$ has an upper bound, it has a least upper bound. This is proven as \cite[Theorem~11.5.1]{goldblatt1998} without using the above theorem. Goldblatt proves the above theorem in \cite[Theorem~13.12.1]{goldblatt1998}, although he's thinking about \textit{nonstandard frameworks}, a generalization of what we're doing here. Intuitively, the idea is that we're making a mistake when we try to transfer second-order sentences. In first order logic, if we write $(\forall v) \varphi$, we mean the same thing as $(\forall v \in \reals) \varphi$, and the appropriate transfer is $(\forall v \in \hreals) \varphi$. Similarly, if we write $(\forall A) \varphi$, this is equivalent to $(\forall A \in \mathcal{P}(\reals)) \varphi$, which transfers as $(\forall A \in \hr{\mathcal{P}(\reals)}) \varphi$, and $\hr{\mathcal{P}(\reals)} \neq \mathcal{P}(\hreals)$. Intuitively, the $\ast$-transform of $\mathcal{P}(\reals)$ should be all the sets $A = [A_n]$ such that $[[A_n \in \mathcal{P}(\reals)]] \in \mathcal{F}$, the internal sets. This is a reckless extension of concepts into undefined territory, and simplified to the point of falsehood---the rigorous details can be found in \cite[Chapter~13]{goldblatt1998}, specifically Theorem 13.12.1.
+
+\begin{thm}{\protect{\cite[Exercise~12.2(1)]{goldblatt1998}}}\label{imageInternalSetIsInternal}
+    If $f = [f_n]$ is an internal function, and $A = [A_n]$ is any internal subset of the domain $\dom f$, then the image set $f(A) = \{f(a) \sthat a \in A\}$ is the internal set $[f_n(A_n)]$
+\end{thm}
+
+\begin{proof}
+    Say $y \in f(A)$. Then there exists $x \in A$ such that $f(x) = y$. Say $x = [x_n]$. Then $y = f(x) = [f_n(x_n)]$, i.e. $[[y = f_n(x_n)]] \in \mathcal{F}$. Since $f_n(x_n) \in f_n(A_n)$ for every $n$, this means $[[y \in f_n(A_n)]] \in \mathcal{F}$, i.e. $y \in [f_n(A_n)]$. Conversely, if $y \in [f_n(A_n)]$, then $[[y \in f_n(A_n)]] \in \mathcal{F}$. FOr each $n \in [[y \in f_n(A_n)]]$, there is an $x_n \in A_n$ such that $y_n = f_n(x_n)$, so we can define a sequence with all the $x_n$'s (taking any value we'd like where $n \notin [[y \in f_n(A_n)]]$) and get $[[y_n = f_n(x_n)]] \in \mathcal{F}$, i.e. $y = f(x)$. Since $[[x_n \in A_n]] \in \mathcal{F}$, this means $x \in A$ and $y \in f(A)$.
+\end{proof}
+
+\begin{thm}[\protect{\cite[Exercise~12.2(7)]{goldblatt1998}}]
+    Let $f$ be an internal funciton such that $f(x) \simeq 0$ whenever $f$ is defined. Show that the range of of $f$ has an infinitesimal least upper bound.
+\end{thm}
+
+\begin{proof}
+    First, we will show that the range of $f$ is internal, and then we will apply the Dedekind completeness. To show the range of $f$ is internal, we will first show that the domain of $f$ (denoted $\dom f$) is internal. Let $f = [f_n]$. $f([x_n]) = [f_n(x_n)]$ is defined iff $f_n(x_n)$ is defined $\mathcal{F}$-almost everywhere iff $[[x_n \in \dom f_n]] \in \mathcal{F}$ iff $[x_n] \in [\dom f_n]$. So $\dom f = [\dom f_n]$. So $f$ is an internal funciton and $\dom f$ is an internal set, so the range $f(\dom f)$ is internal by \autoref{imageInternalSetIsInternal}. Now, $f(x) \simeq 0$ for all $x \in \dom f$, so $1$ is an upper bound for the range of $f$. Hence, by Dedekind completeness, there is a least upper bound $L$ on the range of $f$. If $L$ were appreciable (or unlimited), then it would be positive (as any negative appreciable number is less than every infinitesimal) and $\frac{L}{2}$ would be a lesser upper bound, contradicitng $L$ being the least upper bound. Hence $L$ is infinitesimal.
+\end{proof}
+
+A particularly weird consequence of this is that any countable sequence $s^1, s^2, \ldots$ of infinitesimals has an infinitesimal upper bound, despite there being arbitrarily large infinitesimals. If each $s^k = [s^k_n]$, we can define the internal function $f: \hnats \to \hreals$ by $f = [f_n]$ where $f_n(k) = s^k_n$ for any $k \in \nats$. Then $f(k) = [f_n(k)] = [s^k_n] = s^k$. So by the theorem, the range of $f$ has an infinitesimal upper bound, which is also a bound for the sequence $s^k = f(\nats)$. 
+
