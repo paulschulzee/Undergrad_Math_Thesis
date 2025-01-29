@@ -306,6 +306,42 @@ When $\Delta g = 0$, $f(g(x) + \Delta g) - f(g(x)) = 0$ and so $(f \circ g)'(x) 
 Further, $g'(x) = \stp{\frac{\Delta g}{\Delta x}} = 0$, so $f'(g(x)) \cdot g'(x) = 0$.
 \end{frame}
 
+\begin{frame}{Series}
+\begin{itemize}
+\item Recall there are unbounded hypernaturals like $[\langle 1, 2, 3, \ldots \rangle] \in \hnats$.
+\item We take infinite series by extending finite series.
+\item Say we have a sequences $\langle r_1, r_2, r_3, \ldots \rangle$, and we define $\sum_{i=0}^n r_i$ normally.
+\item Let $s:\nats \to \reals$ be defined by $s(n) = \sum_{i=0}^n r_i$. Extend $s$ to $\hr{s}:\hnats \to \hreals$.
+\item For any $M \in \hnats$, write $\sum_{i=0}^M r_i = s(M)$.
+\item If $\stp{\sum_{i=0}^M r_i} = L$ for all unbounded $M$, write $\sum_{i=0}^\infty r_i = L$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Geometric Series}
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+\item Say $0 < r < 1$. We want to evaluate $\sum_{i=0}^\infty r^i$.
+\item By difference of powers, $1 - r^{n+1} = (1 - r)(1 + r^2 + \cdots + r^n)$.
+\item So $(\forall n \in \nats)(\sum_{i=0}^n r^i = \frac{1-r^{n+1}}{1-r})$. Transfer this.
+\item Plug in an unbounded $M$. $\sum_{i=0}^M r^i = \frac{1-r^{M+1}}{1-r}$.
+\item So $\stp{\sum_{i=0}^M r^i} = \frac{\stp{1 - r^{M+1}}}{\stp{1-r}} = \frac{1 - \stp{r^{M+1}}}{1 - r} = \frac{1}{1-r}$.
+\item So $\sum_{i=0}^\infty r^i = \frac{1}{1-r}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{$\exp$}
+\begin{itemize}
+\item We define a function $\exp: \reals \to \reals$ by $\exp(x) = \sum_{i=0}^\infty \frac{x^i}{i!}$.
+\item We'd like to show that $\exp'(x) = \exp(x)$.
+\item In other words, that $\stp{\frac{\hr{\exp}(x + \Delta x) - \hr{\exp}(x)}{\Delta x}} = \exp(x)$ for any nonzero infinitesimal $\Delta x$.
+\item Since both sides are real, it suffices to show they are infinitely close, i.e. that
+\[ \left| \frac{\hr{\exp}(x + \Delta x) - \hr{\exp}(x)}{\Delta x} - \exp(x) \right| \text{ is infinitesimal}\]
+\item To show that, we will put a bound on
+\[ \left| \sum_{i=0}^k \frac{(x+d)^i}{i!} - \sum_{i=0}^k \frac{x^i}{i!} - d \cdot \sum_{i=0}^{k-1} \frac{x^i}{i!} \right| \]
+and apply transfer several times.
+\end{itemize}
+\end{frame}
+
 
 
 \end{document}
