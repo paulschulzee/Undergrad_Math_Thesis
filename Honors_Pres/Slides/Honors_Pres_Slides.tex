@@ -74,7 +74,12 @@
 \DeclareMathOperator{\st}{st}
 \DeclareMathOperator{\inx}{inx}
 
+\usepackage{biblatex}
+\addbibresource{Thesis_Bibliography.bib}
 
+\usepackage{graphicx}
+\graphicspath{ {./images/}}
+\usepackage{subcaption}
 
 
 % There are many different themes available for Beamer. A comprehensive
@@ -169,7 +174,32 @@
 \end{frame}
 	
 %\begin{frame} creates a slide. You put the slide title in {} directly after \begin{frame}.
-	
+
+\begin{frame}{History}
+\begin{itemize}
+	\item Newton \& Leibniz formulated calculus using the idea of \textit{infinitesimals}.
+	\item Infinitesimals are really really small, but not $0$.
+	\item Considered nonsensical, replaced with $\delta$-$\epsilon$.
+	\item Early 1960's: Abraham Robinson formalizes Nonstandard Analysis.
+	\item Our formulation of infinitesimals is based off work by Jerzy \L o\'s
+\end{itemize}
+\begin{figure}[h]
+	\begin{subfigure}{0.4\textwidth}
+		\centering
+		\includegraphics[width=0.4\linewidth]{Robinson}
+		\caption{Abraham Robinson}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\centering
+		\includegraphics[width=0.4\linewidth]{Los}
+		\caption{Jerzy \L o\'s}
+	\end{subfigure}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Basic Idea}
+\end{frame}
+
 \begin{frame}{Infinitesimals}
 \begin{itemize}
 	\item We construct a set of \textit{hyperreals} $\hreals \supseteq \reals$.
