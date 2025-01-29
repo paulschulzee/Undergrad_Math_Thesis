@@ -200,22 +200,21 @@
 \begin{frame}{Basic Idea}
 \begin{itemize}
 \setlength{\itemsep}{8pt}
-	\item We construct a set of \textit{hyperreals}, denoted $\hreals$
-	\item $\hreals$ includes $\reals$, along with (a lot of) hyperreals
+	\item We construct a set of \textit{hyperreals}, denoted $\hreals$.
+	\item $\hreals$ includes $\reals$, along with (a lot of) hyperreals.
 	\item We construct a language of mathematical logic, using symbols like $\neg$, $\land$, $\lor$, $\forall$, etc.
-	\item We show that any sentence of that language is true in $\reals$ iff it is true in $\hreals$ (transfer principle)
-	\item We use transfer to prove things about $\reals$
+	\item We show that any sentence of that language is true in $\reals$ iff it is true in $\hreals$ (transfer principle).
+	\item We use transfer to prove things about $\reals$.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Constructing $\hreals$}
 \begin{itemize}
 \setlength{\itemsep}{8pt}
-	\item We start with the ring $\reals^\infty$
-	\item Identify sequences that are the same ``almost everywhere,'' like $\langle 0, 1, 1, \ldots \rangle \sim \langle 1, 1, 1, \ldots \rangle$
-	\item Sequences are the same almost everywhere if the set of indices at which they are the same is ``big''
-	\item The set of ``big'' sets of natural numbers is an \textit{ultrafilter} $\mathcal{F} \subseteq \mathcal{P}(\mathbb{N})$
-	% Most set-theoretic properties of ultrafilter explained this way, but not A or A^c must be in F. Do example? 
+	\item We start with the ring $\reals^\infty$.
+	\item Identify sequences that are the same ``almost everywhere,'' like $\langle 0, 1, 1, \ldots \rangle \sim \langle 1, 1, 1, \ldots \rangle$.
+	\item Sequences are the same almost everywhere if the set of indices at which they are the same is ``big.''
+	\item The set of ``big'' sets of natural numbers is an \textit{ultrafilter} $\mathcal{F} \subseteq \mathcal{P}(\mathbb{N})$.
 \end{itemize}
 \end{frame}
 
@@ -223,83 +222,90 @@
 \begin{itemize}
 \setlength{\itemsep}{8pt}
 
-\item Now we can define our equivalence relation $\sim$ by saying that $\langle r_1, r_2, r_3, \ldots \rangle \sim \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n = s_n \} \in \mathcal{F}$ 
+\item Now we can define our equivalence relation $\sim$ by saying that $\langle r_1, r_2, r_3, \ldots \rangle \sim \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n = s_n \} \in \mathcal{F}$.
 
-\item Write the equivalence class $[\langle r_1, r_2, r_3, \ldots \rangle]$
+\item Write the equivalence class $[\langle r_1, r_2, r_3, \ldots \rangle]$.
 
-\item Define $\hreals$ as the quotient ring of $\reals^\infty$ under $\sim$, i.e. $\hreals = \{[\langle r_1, r_2, r_3, \ldots \rangle] \sthat \langle r_1, r_2, \ldots \rangle \in \reals^\infty\}$
+\item Define $\hreals$ as the quotient ring of $\reals^\infty$ under $\sim$, i.e. $\hreals = \{[\langle r_1, r_2, r_3, \ldots \rangle] \sthat \langle r_1, r_2, \ldots \rangle \in \reals^\infty\}$.
 
-\item Extend any function $f: \reals \to \reals$ to a new $\hr{f}: \hreals \to \hreals$
+\item Extend any function $f: \reals \to \reals$ to a new $\hr{f}: \hreals \to \hreals$.
 
-$\hr{f}([\langle r_1, r_2, r_3, \ldots \rangle]) = [\langle f(r_1), f(r_2), f(r_3), \ldots \rangle]$
+$\hr{f}([\langle r_1, r_2, r_3, \ldots \rangle]) = [\langle f(r_1), f(r_2), f(r_3), \ldots \rangle]$.
 
-\item We can also extend relations, like ``$\leq$'' 
+\item We can also extend relations, like ``$\leq$.'' 
 
-$\langle r_1, r_2, r_3, \ldots \rangle \leq \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n \leq s_n\} \in \mathcal{F}$
+$\langle r_1, r_2, r_3, \ldots \rangle \leq \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n \leq s_n\} \in \mathcal{F}$.
 
-\item For any $x \in \reals$, we can take $x \in \hreals$ to mean $[\langle x, x, x, \ldots \rangle]$
+\item For any $x \in \reals$, we can take $x \in \hreals$ to mean $[\langle x, x, x, \ldots \rangle]$.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Transfer Principle}
 \begin{itemize}
+\setlength{\itemsep}{8pt}
 \item Our language is made up of:
 	\begin{itemize}
-	\item logical connectives $\land$, $\lor$, $\to$, $\leftrightarrow$, and $\neg$
-	\item quantifiers $\forall$, $\exists$
-	\item parenthesis $($ and $)$
-	\item variables $v_1, v_2, v_3, \ldots$
-	\item symbols for every element of $\reals$, every relation on $\reals$, and every function on $\reals$
+	\item logical connectives $\land$, $\lor$, $\to$, $\leftrightarrow$, and $\neg$,
+	\item quantifiers $\forall$, $\exists$,
+	\item parenthesis $($ and $)$,
+	\item variables $x, y, z, \ldots$, and
+	\item symbols for every element of $\reals$, every relation on $\reals$, and every function on $\reals$.
 	\end{itemize}
-\item Recursive definition of sentence. $(\forall x \in \reals)(x < x + 1)$ vs. $))5+\leq v_1 \leftrightarrow \neg \land 64$
-\item If $\varphi$ is a sentence that ``talks about'' $\reals$, we can obtain $\hr{\varphi}$ by replacing each function and relation with its extension in $\hreals$
-\item \textbf{Transfer Principle:} Any sentence $\varphi$ is true iff $\hr{\varphi}$ is true
+\item Sentences are defined recursively. 
+
+$(\forall x \in \reals)(x < x + 1)$ vs. $))5+\leq v_1 \leftrightarrow \neg \land 64$
+\item If $\varphi$ is a sentence that ``talks about'' $\reals$, we can obtain $\hr{\varphi}$ by replacing each function and relation with its extension in $\hreals$.
+\item \textbf{Transfer Principle:} Any sentence $\varphi$ is true iff $\hr{\varphi}$ is true.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Infinitesimals}
-
-\end{frame}
-
-
-\begin{frame}{$\exp$}
-\end{frame}
-
-\begin{frame}{Infinitesimals}
+\begin{frame}{Structure of $\hreals$}
 \begin{itemize}
-	\item We construct a set of \textit{hyperreals} $\hreals \supseteq \reals$.
-	\item $\hreals$ is ``like'' $\reals$, but it includes \textit{infinitesimals}, elements $\delta$ such that $\delta \neq 0$ but $|\delta| < r$ for every $r \in \reals^+$.
-	\item We can add these infinitesimals to other numbers to get things like $1 + \delta$, a number that is ``infinitely close to'' $1$ but not $1$. 
-	\item If $|x - y|$ is infinitesimal or $0$, we say $x \simeq y$
-	\item If $x \in \hreals$, we denote by $\st(x)$ the \textit{standard part of} $x$, the unique real number that is infinitely close to $x$. $\st(1 + \delta) = 1$. 
-	\item We can also take the recipricals of these infinitesimals to get \textit{unbounded} hyperreals, like $\frac{1}{\delta}$. These have no standard part.
-	\item We can of course combine all these elements however we'd like. If $\delta$ and $\gamma$ are infinitesimals, we have $\frac{1}{\delta} + 4 + \pi + \gamma \in \hreals$.
+\setlength{\itemsep}{10pt}
+\item We call an element $x \in \hreals$:
+	\begin{itemize}
+	\item \textit{infinitesimal} if $|x| < r$ for any $r \in \reals^+$,
+	\item \textit{unbounded} if $r < |x|$ for any $r \in \reals^+$, and
+	\item \textit{appreciable} if it is neither infinitesimal nor unbounded.
+	\end{itemize}
+\item Arithmetic properties of hyperreals are mostly intuitive.
+\item We say two elements $x, y \in \hreals$ are \textit{infinitely close}, and write $x \simeq y$, if $|x - y|$ is infinitesimal. $\simeq$ is an equivalence relation.
+\item Any bounded hyperreal $x$ is infinitely close to a unique real number, called its \textit{standard part} and denoted $\stp{x}$.
+\item $\st$ has most of the nice properties you'd like it to: $\stp{x + y} = \stp{x} + \stp{y}$, etc.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Derivatives, the way Leibniz intended}
+
+\begin{frame}{Derivatives}
 \begin{itemize}
-	\item Say $f: \reals \to \reals$. We``extend'' $f$ to $\hr{f}: \hreals \to \hreals$.
-	\item Fix $b \in \reals$. Let $\Delta x$ be infinitesimal, and let $\Delta f$ be $\hr{f}(b + \Delta x) - \hr{f}(b)$.
-	\item Then define $f'(b) = \stp{\frac{\Delta f}{\Delta x}}$. So $f'(b) \simeq \frac{\Delta f}{\Delta x}$.
-	\item \textbf{Example:} Say $f(x) = x^2$. Then we have 
-	\begin{align*}
-	f'(3) &\simeq \frac{(3 + \Delta x)^2 - 3^2}{\Delta x} = \frac{9 + 6 \Delta x + (\Delta x)^2 - 9}{\Delta x} \\
-		&= \frac{6 \Delta x + (\Delta x)^2}{\Delta x} = 6 + \Delta x \simeq 6
-	\end{align*}
-	\item So $f'(3) \simeq 6$. But these are both real numbers, so their difference can't be infinitesimal. Hence $f'(3) = 6$.
+\item Say $f: \reals \to \reals$. Extend $f$ to $\hr{f}: \hreals \to \hreals$
+\item Fix $b \in \reals$. Let $\Delta x$ be infinitesimal, and let $\Delta f$ be $\hr{f}(b + \Delta x) - \hr{f}(b)$.
+\item Then define $f'(b) = \stp{\frac{\Delta f}{\Delta x}}$. So $f'(b) \simeq \frac{\Delta f}{\Delta x}$
+\item \textbf{Example:} Say $f(x) = x^2$. Then we have 
+\begin{align*}
+f'(3) &\simeq \frac{(3 + \Delta x)^2 - 3^2}{\Delta x} = \frac{9 + 6 \Delta x + (\Delta x)^2 - 9}{\Delta x} \\
+	&= \frac{6 \Delta x + (\Delta x)^2}{\Delta x} = 6 + \Delta x \simeq 6
+\end{align*}
+\item So $f'(3) \simeq 6$. But these are both real numbers, so their difference is real. Hence $f'(3) = 6$.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Proof: Chain Rule}
-Let $f,g: \reals \to \reals$ be differentiable. Let $\Delta x$ be any infinitesimal, and $\Delta g = g(x + \Delta x) - g(x)$. Since $g'(x) = \st(\Delta g / \Delta x)$ is defined, $\Delta g$ must be infinitesimal. Then
+Let $f,g: \reals \to \reals$ be differentiable. Let $\Delta x$ be any nonzero infinitesimal, and $\Delta g = g(x + \Delta x) - g(x)$. Then
 \begin{align*}
 (f \circ g)'(x) &\simeq \frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}  \\
 	&= \frac{f(g(x) + \Delta g) - f(g(x))}{\Delta g} \cdot \frac{\Delta g}{\Delta x} \\ 
 	&\simeq f'(g(x))\cdot g'(x)
 \end{align*}
-So $(f \circ g)'(x) \simeq f'(g(x)) \cdot g'(x)$. But since both of these numbers are real, they must be identical. \newline
+So $(f \circ g)'(x) \simeq f'(g(x)) \cdot g'(x)$. But since both of these numbers are real, they must be identical.
+\vspace{2mm}
 
-In the case where $\Delta g = 0$, we clearly have $f(g(x) + \Delta g) - f(g(x)) = 0$ and so $(f \circ g)'(x) = 0$.
+When $\Delta g = 0$, $f(g(x) + \Delta g) - f(g(x)) = 0$ and so $(f \circ g)'(x) = 0$. 
+\vspace{1mm}
+
+Further, $g'(x) = \stp{\frac{\Delta g}{\Delta x}} = 0$, so $f'(g(x)) \cdot g'(x) = 0$.
 \end{frame}
+
+
+
 \end{document}

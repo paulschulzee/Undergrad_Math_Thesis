@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.5)  29 JAN 2025 10:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.5)  29 JAN 2025 11:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1142,14 +1142,6 @@ Package pdftex.def Info: ./images/Los.jpeg  used on input line 198.
 [9
 
 ]
-
-[10
-
-]
-
-[11
-
-]
 \tf@nav=\write7
 \openout7 = `Honors_Pres_Slides.nav'.
 
@@ -1171,17 +1163,17 @@ Package logreq Info: Writing requests to 'Honors_Pres_Slides.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34170 strings out of 473702
- 681917 string characters out of 5719914
- 1467789 words of memory out of 5000000
- 56628 multiletter control sequences out of 15000+600000
- 571219 words of font info for 83 fonts, out of 8000000 for 9000
+ 34165 strings out of 473702
+ 681879 string characters out of 5719914
+ 1467787 words of memory out of 5000000
+ 56627 multiletter control sequences out of 15000+600000
+ 571575 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,12n,123p,768b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss9.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Honors_Pres_Slides.pdf (11 pages, 180420 bytes).
+<C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss9.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/paul/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Honors_Pres_Slides.pdf (9 pages, 170032 bytes).
 PDF statistics:
- 152 PDF objects out of 1000 (max. 8388607)
- 23 named destinations out of 1000 (max. 500000)
+ 137 PDF objects out of 1000 (max. 8388607)
+ 19 named destinations out of 1000 (max. 500000)
  53 words of extra memory for PDF output out of 10000 (max. 10000000)
 
