@@ -25,7 +25,7 @@
 \usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{hyperref}
-\usepackage{tikz}
+%\usepackage{enumitem}
 %\usepackage{stmaryrd}
 \usepackage{color}
 \usepackage{wrapfig}
@@ -199,6 +199,7 @@
 
 \begin{frame}{Basic Idea}
 \begin{itemize}
+\setlength{\itemsep}{8pt}
 	\item We construct a set of \textit{hyperreals}, denoted $\hreals$
 	\item $\hreals$ includes $\reals$, along with (a lot of) hyperreals
 	\item We construct a language of mathematical logic, using symbols like $\neg$, $\land$, $\lor$, $\forall$, etc.
@@ -208,8 +209,51 @@
 \end{frame}
 
 \begin{frame}{Constructing $\hreals$}
-
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+	\item We start with the ring $\reals^\infty$
+	\item Identify sequences that are the same ``almost everywhere,'' like $\langle 0, 1, 1, \ldots \rangle \sim \langle 1, 1, 1, \ldots \rangle$
+	\item Sequences are the same almost everywhere if the set of indices at which they are the same is ``big''
+	\item The set of ``big'' sets of natural numbers is an \textit{ultrafilter} $\mathcal{F} \subseteq \mathcal{P}(\mathbb{N})$
+	% Most set-theoretic properties of ultrafilter explained this way, but not A or A^c must be in F. Do example? 
+\end{itemize}
 \end{frame}
+
+\begin{frame}{Constructing $\hreals$}
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+
+\item Now we can define our equivalence relation $\sim$ by saying that $\langle r_1, r_2, r_3, \ldots \rangle \sim \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n = s_n \} \in \mathcal{F}$ 
+
+\item Write the equivalence class $[\langle r_1, r_2, r_3, \ldots \rangle]$
+
+\item Define $\hreals$ as the quotient ring of $\reals^\infty$ under $\sim$, i.e. $\hreals = \{[\langle r_1, r_2, r_3, \ldots \rangle] \sthat \langle r_1, r_2, \ldots \rangle \in \reals^\infty\}$
+
+\item Extend any function $f: \reals \to \reals$ to a new $\hr{f}: \hreals \to \hreals$
+
+$\hr{f}([\langle r_1, r_2, r_3, \ldots \rangle]) = [\langle f(r_1), f(r_2), f(r_3), \ldots \rangle]$
+
+\item We can also extend relations, like ``$\leq$'' 
+
+$\langle r_1, r_2, r_3, \ldots \rangle \leq \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n \leq s_n\} \in \mathcal{F}$
+
+\item For any $x \in \reals$, we can take $x \in \hreals$ to mean $[\langle x, x, x, \ldots \rangle]$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Transfer Principle---Language}
+\begin{itemize}
+\item Our language is made up of:
+	\begin{itemize}
+	\item logical connectives $\land$, $\lor$, $\to$, $\leftrightarrow$, and $\neg$
+	\item quantifiers $\forall$, $\exists$
+	\item parenthesis $($ and $)$
+	\item variables $v_1, v_2, v_3, \ldots$
+	\item symbols for every element of $\reals$, every relation on $\reals$, and every function on $\reals$
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}{$\exp$}
 \end{frame}
