@@ -177,11 +177,11 @@
 
 \begin{frame}{History}
 \begin{itemize}
-	\item Newton \& Leibniz formulated calculus using the idea of \textit{infinitesimals}
-	\item Infinitesimals are really really small, but not $0$
-	\item Considered nonsensical, replaced with $\delta$-$\epsilon$
-	\item Early 1960's: Abraham Robinson formalizes Nonstandard Analysis
-	\item Our formulation of infinitesimals is based off work by Jerzy \L o\'s
+	\item Newton \& Leibniz formulated calculus using the idea of \textit{infinitesimals}.
+	\item Infinitesimals are really really small, but not $0$.
+	\item Considered nonsensical, replaced with $\delta$-$\epsilon$.
+	\item Early 1960's: Abraham Robinson formalizes Nonstandard Analysis.
+	\item Our formulation of infinitesimals is based off work by Jerzy \L o\'s.
 \end{itemize}
 \begin{figure}[h]
 	\begin{subfigure}{0.4\textwidth}
@@ -201,7 +201,7 @@
 \begin{itemize}
 \setlength{\itemsep}{8pt}
 	\item We construct a set of \textit{hyperreals}, denoted $\hreals$.
-	\item $\hreals$ includes $\reals$, along with (a lot of) hyperreals.
+	\item $\hreals$ includes $\reals$, along with (a lot of) infinitesimals.
 	\item We construct a language of mathematical logic, using symbols like $\neg$, $\land$, $\lor$, $\forall$, etc.
 	\item We show that any sentence of that language is true in $\reals$ iff it is true in $\hreals$ (transfer principle).
 	\item We use transfer to prove things about $\reals$.
@@ -211,18 +211,10 @@
 \begin{frame}{Constructing $\hreals$}
 \begin{itemize}
 \setlength{\itemsep}{8pt}
-	\item We start with the ring $\reals^\infty$.
-	\item Identify sequences that are the same ``almost everywhere,'' like $\langle 0, 1, 1, \ldots \rangle \sim \langle 1, 1, 1, \ldots \rangle$.
-	\item Sequences are the same almost everywhere if the set of indices at which they are the same is ``big.''
-	\item The set of ``big'' sets of natural numbers is an \textit{ultrafilter} $\mathcal{F} \subseteq \mathcal{P}(\mathbb{N})$.
-\end{itemize}
-\end{frame}
 
-\begin{frame}{Constructing $\hreals$}
-\begin{itemize}
-\setlength{\itemsep}{8pt}
+\item Start with $\reals^\infty$, the ring of countable sequences of real numbers.
 
-\item Now we can define our equivalence relation $\sim$ by saying that $\langle r_1, r_2, r_3, \ldots \rangle \sim \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n = s_n \} \in \mathcal{F}$.
+\item Define our equivalence relation $\sim$ by saying that $\langle r_1, r_2, r_3, \ldots \rangle \sim \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n = s_n \}$ is ``big.''
 
 \item Write the equivalence class $[\langle r_1, r_2, r_3, \ldots \rangle]$.
 
@@ -234,7 +226,7 @@ $\hr{f}([\langle r_1, r_2, r_3, \ldots \rangle]) = [\langle f(r_1), f(r_2), f(r_
 
 \item We can also extend relations, like ``$\leq$.'' 
 
-$\langle r_1, r_2, r_3, \ldots \rangle \leq \langle s_1, s_2, s_3, \ldots \rangle$ iff $\{n \in \nats \sthat r_n \leq s_n\} \in \mathcal{F}$.
+$[\langle r_1, r_2, r_3, \ldots \rangle] \leq [\langle s_1, s_2, s_3, \ldots \rangle]$ iff $\{n \in \nats \sthat r_n \leq s_n\}$ is big.
 
 \item For any $x \in \reals$, we can take $x \in \hreals$ to mean $[\langle x, x, x, \ldots \rangle]$.
 \end{itemize}
@@ -310,7 +302,7 @@ Further, $g'(x) = \stp{\frac{\Delta g}{\Delta x}} = 0$, so $f'(g(x)) \cdot g'(x)
 \begin{itemize}
 \item Recall there are unbounded hypernaturals like $[\langle 1, 2, 3, \ldots \rangle] \in \hnats$.
 \item We take infinite series by extending finite series.
-\item Say we have a sequences $\langle r_1, r_2, r_3, \ldots \rangle$, and we define $\sum_{i=0}^n r_i$ normally.
+\item Say we have a sequence $\langle r_1, r_2, r_3, \ldots \rangle$, and we define $\sum_{i=0}^n r_i$ normally.
 \item Let $s:\nats \to \reals$ be defined by $s(n) = \sum_{i=0}^n r_i$. Extend $s$ to $\hr{s}:\hnats \to \hreals$.
 \item For any $M \in \hnats$, write $\sum_{i=0}^M r_i = s(M)$.
 \item If $\stp{\sum_{i=0}^M r_i} = L$ for all unbounded $M$, write $\sum_{i=0}^\infty r_i = L$.
