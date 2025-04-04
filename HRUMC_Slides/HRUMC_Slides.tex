@@ -198,9 +198,9 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Hyperreals}
-We construct a set of \textit{hyperreals}, call it $\hreals$, such that we know three things:
-\begin{enumerate}
+\begin{frame}{Hyperreals} 
+We construct a set of \textit{hyperreals}, call it $\hreals$, such that we know three things: \vspace{4pt}
+\begin{enumerate} \itemsep = 6pt
 	\item $\reals \subseteq \hreals$
 	\item $\hreals$ contains at least one infinitesimal $\delta$, such that $0 < \delta$ but $\delta < r$ for any positive real number $r$
 	\item Any sentence of first-order logic is true in $\reals$ iff it is true* in $\hreals$
@@ -208,6 +208,25 @@ We construct a set of \textit{hyperreals}, call it $\hreals$, such that we know 
 \end{frame}
 
 \begin{frame}{First-Order Logic}
+\begin{itemize} \itemsep = 6pt
+	\item Our logical language has the following logical symbols:
+	\begin{itemize}
+		\item $\&$ for ``and''
+		\item $\lor$ for ``or''
+		\item $\to$ for ``if\ldots then\ldots''
+		\item $\leftrightarrow$ for ``if and only if''
+		\item $\forall$ for ``for all''
+		\item $\exists$ for ``there exists''
+		\item $\in$ for set membership
+	\end{itemize} 
+	\item $5 + 3 = 8 \;\&\; 2^3 = 8$
+	\item $1 + 1 = 1 \text{ or } 5 + 7 = 12$
+	\item $(\forall x \in \reals)(\exists y \in \nats)(x < y)$
+	\item $(\forall x \in \reals)(\forall n \in \nats)(x < \frac{1}{n} \to n < \frac{1}{x})$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Transfer Principle}
 
 \end{frame}
 
