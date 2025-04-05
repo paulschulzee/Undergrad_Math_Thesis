@@ -227,39 +227,48 @@ We construct a set of \textit{hyperreals}, call it $\hreals$, such that we know 
 \end{frame}
 
 \begin{frame}{Transfer Principle}
-Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modified to be talking about $\hreals$. For instance:
-\begin{itemize}
+Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modified to be talking about $\hreals$. For instance: \vspace{4pt}
+\begin{itemize} \itemsep = 6pt
 	\item $(\forall x \in \hreals)(\forall y \in \hreals)(x + y = y + x)$, i.e. addition is commutative
 	\begin{itemize}
 		\item We can similarly prove other arithmetic properties, so we can do algebra as normal in $\hreals$
 	\end{itemize}
-	\item $(\forall x \in hreals)(\exists y \in \hreals)(x \neq 0 \to x \cdot y = 1)$, i.e. for any $x$ there exists a multiplicative inverse $\frac{1}{x}$
+	\item $(\forall x \in \hreals)\left(x \neq 0 \to (\exists y \in \hreals)(x \cdot y = 1)\right)$, i.e. for any nonzero $x$ there exists a multiplicative inverse $\frac{1}{x}$
 	\begin{itemize}
-		\item So if $\delta$ is an infinitesimal, then $\frac{1}{\delta}$ has to exist
+		\item So even if $\delta$ is an infinitesimal, we know $\frac{1}{\delta}$ has to exist
 	\end{itemize}
-	\item 
+	\item $(\forall x \in \hreals)(\exists y \in \hnats)(x < y)$
+	\begin{itemize}
+		\item So $\hnats$ has to contain ``infinite'' elements, and thus $\hnats \neq \nats$
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
-
-
-\begin{frame}{Infinitesimals}
+\begin{frame}{What is $\hreals$ like?}\itemsep = 6pt
 \begin{itemize}
-	\item We construct a set of \textit{hyperreals} $\hreals \supseteq \reals$.
-	\item $\hreals$ is ``like'' $\reals$, but it includes \textit{infinitesimals}, elements $\delta$ such that $\delta \neq 0$ but $|\delta| < r$ for every $r \in \reals^+$.
-	\item We can add these infinitesimals to other numbers to get things like $1 + \delta$, a number that is ``infinitely close to'' $1$ but not $1$. 
-	\item If $|x - y|$ is infinitesimal or $0$, we say $x \simeq y$
-	\item If $x \in \hreals$, we denote by $\st(x)$ the \textit{standard part of} $x$, the unique real number that is infinitely close to $x$. $\st(1 + \delta) = 1$. 
-	\item We can also take the recipricals of these infinitesimals to get \textit{unbounded} hyperreals, like $\frac{1}{\delta}$. These have no standard part.
-	\item We can of course combine all these elements however we'd like. If $\delta$ and $\gamma$ are infinitesimals, we have $\frac{1}{\delta} + 4 + \pi + \gamma \in \hreals$.
+\item Call a hyperreal $x$ \textit{infinitesimal} when $|x| < r$ for every positive real $r$. 
+	\begin{itemize}
+	\item There's exactly one real infinitesimal: $0$
+	\item We know some nonzero infinitesimal $\delta$ exists by our construction of $\hreals$
+	\item $r \cdot \delta$ is infinitesimal for any real $\delta$---so there are a bunch of infinitesimals!
+	\end{itemize}
+\item There are ``infinite'' hyperreals---take any nonzero infinitesimal $\delta$, and $\frac{1}{\delta}$ is greater than any real number
+\item Two hyperreals $x$ and $y$ are \textit{infinitely close}, denoted $x \simeq y$, when their difference $x - y$ is infinitesimal
+\item Any finite hyperreal $x$ is infinitely close to exactly one real number, called its \textit{standard part} $\stp{x}$
+	\begin{itemize}
+	\item For instance, $\stp{1 + \delta} = 1$
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Derivatives, the way Leibniz intended}
 \begin{itemize}
-	\item Say $f: \reals \to \reals$. We``extend'' $f$ to $\hr{f}: \hreals \to \hreals$.
-	\item Fix $b \in \reals$. Let $\Delta x$ be infinitesimal, and let $\Delta f$ be $\hr{f}(b + \Delta x) - \hr{f}(b)$.
-	\item Then define $f'(b) = \stp{\frac{\Delta f}{\Delta x}}$. So $f'(b) \simeq \frac{\Delta f}{\Delta x}$.
+	\item Say $f: \reals \to \reals$
+	\item Fix $b \in \reals$, and let $\Delta x$ be infinitesimal. Then 
+	\begin{align*}
+	f'(b) = \stp{\frac{f(b + \Delta x) - f(b)}{\Delta x}}
+	\end{align*}
+	so that $f'(b) \simeq \frac{f(b + \Delta x) - f(b)}{\Delta x}$.
 	\item \textbf{Example:} Say $f(x) = x^2$. Then we have 
 	\begin{align*}
 	f'(3) &\simeq \frac{(3 + \Delta x)^2 - 3^2}{\Delta x} = \frac{9 + 6 \Delta x + (\Delta x)^2 - 9}{\Delta x} \\
@@ -268,6 +277,9 @@ Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modif
 	\item So $f'(3) \simeq 6$. But these are both real numbers, so their difference can't be infinitesimal. Hence $f'(3) = 6$.
 \end{itemize}
 \end{frame}
+
+
+
 
 \begin{frame}{Proof: Chain Rule}
 Let $f,g: \reals \to \reals$ be differentiable. Let $\Delta x$ be any infinitesimal, and $\Delta g = g(x + \Delta x) - g(x)$. Since $g'(x) = \st(\Delta g / \Delta x)$ is defined, $\Delta g$ must be infinitesimal. Then
