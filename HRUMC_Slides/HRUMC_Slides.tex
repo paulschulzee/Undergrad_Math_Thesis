@@ -249,11 +249,12 @@ Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modif
 \item Call a hyperreal $x$ \textit{infinitesimal} when $|x| < r$ for every positive real $r$. 
 	\begin{itemize}
 	\item There's exactly one real infinitesimal: $0$
-	\item We know some nonzero infinitesimal $\delta$ exists by our construction of $\hreals$
-	\item $r \cdot \delta$ is infinitesimal for any real $\delta$---so there are a bunch of infinitesimals!
 	\end{itemize}
 \item There are ``infinite'' hyperreals---take any nonzero infinitesimal $\delta$, and $\frac{1}{\delta}$ is greater than any real number
 \item Two hyperreals $x$ and $y$ are \textit{infinitely close}, denoted $x \simeq y$, when their difference $x - y$ is infinitesimal
+	\begin{itemize}
+	\item No two distinct real numbers are infinitely close to each other
+	\end{itemize}
 \item Any finite hyperreal $x$ is infinitely close to exactly one real number, called its \textit{standard part} $\stp{x}$
 	\begin{itemize}
 	\item For instance, $\stp{1 + \delta} = 1$
@@ -264,7 +265,7 @@ Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modif
 \begin{frame}{Derivatives, the way Leibniz intended}
 \begin{itemize}
 	\item Say $f: \reals \to \reals$
-	\item Fix $b \in \reals$, and let $\Delta x$ be infinitesimal. Then 
+	\item Fix $b \in \reals$, and let $\Delta x$ be a nonzero infinitesimal. Then 
 	\begin{align*}
 	f'(b) = \stp{\frac{f(b + \Delta x) - f(b)}{\Delta x}}
 	\end{align*}
@@ -274,12 +275,9 @@ Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modif
 	f'(3) &\simeq \frac{(3 + \Delta x)^2 - 3^2}{\Delta x} = \frac{9 + 6 \Delta x + (\Delta x)^2 - 9}{\Delta x} \\
 		&= \frac{6 \Delta x + (\Delta x)^2}{\Delta x} = 6 + \Delta x \simeq 6
 	\end{align*}
-	\item So $f'(3) \simeq 6$. But these are both real numbers, so their difference can't be infinitesimal. Hence $f'(3) = 6$.
+	\item So $f'(3) \simeq 6$, so their difference is infinitesimal. But they're both \textit{real numbers}, so their difference has to be real. The only real infinitesimal is $0$, so their difference is $0$. Thus $f'(3) = 6$.
 \end{itemize}
 \end{frame}
-
-
-
 
 \begin{frame}{Proof: Chain Rule}
 Let $f,g: \reals \to \reals$ be differentiable. Let $\Delta x$ be any infinitesimal, and $\Delta g = g(x + \Delta x) - g(x)$. Since $g'(x) = \st(\Delta g / \Delta x)$ is defined, $\Delta g$ must be infinitesimal. Then
@@ -293,3 +291,11 @@ So $(f \circ g)'(x) \simeq f'(g(x)) \cdot g'(x)$. But since both of these number
 In the case where $\Delta g = 0$, we clearly have $f(g(x) + \Delta g) - f(g(x)) = 0$ and so $(f \circ g)'(x) = 0$.
 \end{frame}
 \end{document}
+
+\begin{frame}{Continuity}
+Call $f(x)$ \textit{continuous} at a point $c$ if for every hyperreal $x \simeq c$, we have $f(x) \simeq c$.
+\begin{theorem}
+	If $f(x)$ is differentiable at $c$, then it is continuous at $c$.
+\end{theorem}
+For any $x \simeq c$, we have $x - c$ infinitesimal. Then $f'(c) = \stp{\frac{f(x) - f(c)}{x - c}}$. If $f(x) - f(c)$ wasn't infinitesimal, then since $x - c$ is infinitesimal, $\frac{f(x) - f(c)}{x-c}$ would be ``infinite'' and there would be no standard part. Hence $f(x) - f(c)$ is infinitesimal, hence $f(x) \simeq f(c)$.
+\end{frame}
