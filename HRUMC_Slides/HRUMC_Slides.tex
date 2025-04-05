@@ -158,9 +158,9 @@
 
 \definecolor{myGreen}{rgb}{0.09, 0.45, 0.27}
 %\usecolortheme[named=myGreen]{structure}
-
+ 
 %you can put the title, author, and date here
-\title{Infinitesimal Calculus}
+\title{Nonstandard Analysis}
 
 \author{Paul Schulze}
 
@@ -203,32 +203,30 @@ We construct a set of \textit{hyperreals}, call it $\hreals$, such that we know 
 \begin{enumerate} \itemsep = 6pt
 	\item $\reals \subseteq \hreals$
 	\item $\hreals$ contains at least one infinitesimal $\delta$, such that $0 < \delta$ but $\delta < r$ for any positive real number $r$
-	\item Any sentence of first-order logic is true in $\reals$ iff it is true* in $\hreals$
+	\item \textbf{Transfer Principle:} Any sentence of first-order logic is true in $\reals$ iff it is true* in $\hreals$
 \end{enumerate}
 \end{frame}
 
 \begin{frame}{First-Order Logic}
 \begin{itemize} \itemsep = 6pt
-	\item Our logical language has the following logical symbols:
+	\item Our logical language has, in addition to symbols for numbers, sets, and functions on real numbers, the following logical symbols:
 	\begin{itemize}
-		\item $\&$ for ``and''
-		\item $\lor$ for ``or''
+		\item $\neg$ for ``not''
 		\item $\to$ for ``if\ldots then\ldots''
-		\item $\leftrightarrow$ for ``if and only if''
 		\item $\forall$ for ``for all''
 		\item $\exists$ for ``there exists''
 		\item $\in$ for set membership
 	\end{itemize} 
-	\item $5 + 3 = 8 \;\&\; 2^3 = 8$
-	\item $1 + 1 = 1 \lor 5 + 7 = 12$
+	\item $5 + 3 = 8$
+	\item $(\forall x \in \reals)(5 + x = 8 \to x = 3)$
 	\item $(\forall x \in \reals)(\exists y \in \nats)(x < y)$
 	\item $(\forall x \in \reals)(\forall n \in \nats)(x < \frac{1}{n} \to n < \frac{1}{x})$
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Transfer Principle}
-Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modified to be talking about $\hreals$. For instance: \vspace{4pt}
-\begin{itemize} \itemsep = 6pt
+Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modified to be talking about $\hreals$. For instance: \vspace{6pt}
+\begin{itemize} \itemsep = 8pt
 	\item $(\forall x \in \hreals)(\forall y \in \hreals)(x + y = y + x)$, i.e. addition is commutative
 	\begin{itemize}
 		\item We can similarly prove other arithmetic properties, so we can do algebra as normal in $\hreals$
@@ -237,15 +235,11 @@ Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modif
 	\begin{itemize}
 		\item So even if $\delta$ is an infinitesimal, we know $\frac{1}{\delta}$ has to exist
 	\end{itemize}
-	\item $(\forall x \in \hreals)(\exists y \in \hnats)(x < y)$
-	\begin{itemize}
-		\item So $\hnats$ has to contain ``infinite'' elements, and thus $\hnats \neq \nats$
-	\end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{What is $\hreals$ like?}\itemsep = 6pt
-\begin{itemize}
+\begin{frame}{What is $\hreals$ like?} 
+\begin{itemize} \itemsep = 8pt
 \item Call a hyperreal $x$ \textit{infinitesimal} when $|x| < r$ for every positive real $r$. 
 	\begin{itemize}
 	\item There's exactly one real infinitesimal: $0$
@@ -254,6 +248,7 @@ Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modif
 \item Two hyperreals $x$ and $y$ are \textit{infinitely close}, denoted $x \simeq y$, when their difference $x - y$ is infinitesimal
 	\begin{itemize}
 	\item No two distinct real numbers are infinitely close to each other
+	\item Transitive: if $x \simeq y$ and $y \simeq z$, then $x \simeq z$
 	\end{itemize}
 \item Any finite hyperreal $x$ is infinitely close to exactly one real number, called its \textit{standard part} $\stp{x}$
 	\begin{itemize}
@@ -273,10 +268,22 @@ Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modif
 	\item \textbf{Example:} Say $f(x) = x^2$. Then we have 
 	\begin{align*}
 	f'(3) &\simeq \frac{(3 + \Delta x)^2 - 3^2}{\Delta x} = \frac{9 + 6 \Delta x + (\Delta x)^2 - 9}{\Delta x} \\
-		&= \frac{6 \Delta x + (\Delta x)^2}{\Delta x} = 6 + \Delta x \simeq 6
+		&= \frac{6 \Delta x + (\Delta x)^2}{\Delta x} = 6 + \Delta x \simeq 6.
 	\end{align*}
-	\item So $f'(3) \simeq 6$, so their difference is infinitesimal. But they're both \textit{real numbers}, so their difference has to be real. The only real infinitesimal is $0$, so their difference is $0$. Thus $f'(3) = 6$.
+	\item So $f'(3) \simeq 6$, so their difference is infinitesimal. But they're both \textit{real numbers}, so $f'(3) = 6$.
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Continuity}
+	We call $f(x)$ \textit{continuous} at a point $c$ if for every hyperreal $x \simeq c$, we have $f(x) \simeq f(c)$.
+	\begin{theorem}
+		The composition of continuous functions is continuous.
+	\end{theorem}
+	\begin{proof}
+		Let $c$ be some real number, and let $x \simeq c$. We want to show $(f \circ g)(x) \simeq (f \circ g)(c)$, given that $g$ is continuous at $c$ and $f$ is continuous at $g(c)$. 
+		
+		Since $g$ is continuous at $c$, $g(x) \simeq g(c)$. Since $f$ is continuous at $g(c)$, we have $f(g(x)) \simeq f(g(c))$.
+	\end{proof}
 \end{frame}
 
 \begin{frame}{Proof: Chain Rule}
@@ -290,12 +297,8 @@ So $(f \circ g)'(x) \simeq f'(g(x)) \cdot g'(x)$. But since both of these number
 
 In the case where $\Delta g = 0$, we clearly have $f(g(x) + \Delta g) - f(g(x)) = 0$ and so $(f \circ g)'(x) = 0$.
 \end{frame}
-\end{document}
 
-\begin{frame}{Continuity}
-Call $f(x)$ \textit{continuous} at a point $c$ if for every hyperreal $x \simeq c$, we have $f(x) \simeq c$.
-\begin{theorem}
-	If $f(x)$ is differentiable at $c$, then it is continuous at $c$.
-\end{theorem}
-For any $x \simeq c$, we have $x - c$ infinitesimal. Then $f'(c) = \stp{\frac{f(x) - f(c)}{x - c}}$. If $f(x) - f(c)$ wasn't infinitesimal, then since $x - c$ is infinitesimal, $\frac{f(x) - f(c)}{x-c}$ would be ``infinite'' and there would be no standard part. Hence $f(x) - f(c)$ is infinitesimal, hence $f(x) \simeq f(c)$.
-\end{frame}
+
+
+
+\end{document}
