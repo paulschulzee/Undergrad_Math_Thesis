@@ -178,11 +178,11 @@
 	
 \begin{frame}{History}
 	\begin{itemize}
-		\item Newton \& Leibniz formulated calculus using the idea of \textit{infinitesimals}.
-		\item Infinitesimals are really really small, but not $0$.
-		\item Considered nonsensical, replaced with $\delta$-$\epsilon$.
-		\item Early 1960's: Abraham Robinson formalizes Nonstandard Analysis.
-		\item Most modern formulations are based on work by Jerzy \L o\'s.
+		\item Newton \& Leibniz formulated calculus using the idea of \textit{infinitesimals}
+		\item Infinitesimals are really really small, but not $0$
+		\item Considered nonsensical, replaced with $\delta$-$\epsilon$
+		\item 1960s: Abraham Robinson formalizes Nonstandard Analysis
+		\item Most modern formulations are based on work by Jerzy \L o\'s
 	\end{itemize}
 	\begin{figure}[h]
 		\begin{subfigure}{0.4\textwidth}
@@ -219,7 +219,7 @@ We construct a set of \textit{hyperreals}, call it $\hreals$, such that we know 
 	\end{itemize} 
 	\item $5 + 3 = 8$
 	\item $(\forall x \in \reals)(5 + x = 8 \to x = 3)$
-	\item $(\forall x \in \reals)(\exists y \in \nats)(x < y)$
+	\item $(\forall x \in \reals)(\exists n \in \nats)(x < y)$
 	\item $(\forall x \in \reals)(\forall n \in \nats)(x < \frac{1}{n} \to n < \frac{1}{x})$
 \end{itemize}
 \end{frame}
@@ -244,7 +244,7 @@ Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modif
 	\begin{itemize}
 	\item There's exactly one real infinitesimal: $0$
 	\end{itemize}
-\item There are ``infinite'' hyperreals---take any nonzero infinitesimal $\delta$, and $\frac{1}{\delta}$ is greater than any real number
+\item There are ``infinite'' hyperreals---take any positive infinitesimal $\delta$, and $\frac{1}{\delta}$ is greater than any real number
 \item Two hyperreals $x$ and $y$ are \textit{infinitely close}, denoted $x \simeq y$, when their difference $x - y$ is infinitesimal
 	\begin{itemize}
 	\item No two distinct real numbers are infinitely close to each other
