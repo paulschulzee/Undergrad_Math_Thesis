@@ -220,14 +220,25 @@ We construct a set of \textit{hyperreals}, call it $\hreals$, such that we know 
 		\item $\in$ for set membership
 	\end{itemize} 
 	\item $5 + 3 = 8 \;\&\; 2^3 = 8$
-	\item $1 + 1 = 1 \text{ or } 5 + 7 = 12$
+	\item $1 + 1 = 1 \lor 5 + 7 = 12$
 	\item $(\forall x \in \reals)(\exists y \in \nats)(x < y)$
 	\item $(\forall x \in \reals)(\forall n \in \nats)(x < \frac{1}{n} \to n < \frac{1}{x})$
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Transfer Principle}
-
+Every sentence that's true in $\reals$ is also ``true in $\hreals$,'' when modified to be talking about $\hreals$. For instance:
+\begin{itemize}
+	\item $(\forall x \in \hreals)(\forall y \in \hreals)(x + y = y + x)$, i.e. addition is commutative
+	\begin{itemize}
+		\item We can similarly prove other arithmetic properties, so we can do algebra as normal in $\hreals$
+	\end{itemize}
+	\item $(\forall x \in hreals)(\exists y \in \hreals)(x \neq 0 \to x \cdot y = 1)$, i.e. for any $x$ there exists a multiplicative inverse $\frac{1}{x}$
+	\begin{itemize}
+		\item So if $\delta$ is an infinitesimal, then $\frac{1}{\delta}$ has to exist
+	\end{itemize}
+	\item 
+\end{itemize}
 \end{frame}
 
 
